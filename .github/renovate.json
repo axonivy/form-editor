@@ -3,8 +3,7 @@
   "extends": [
     "local>axonivy/renovate-config:npm",
     "group:allNonMajor",
-    "npm:unpublishSafe",
-    "schedule:earlyMondays"
+    "npm:unpublishSafe"
   ],
   "rebaseWhen": "conflicted"
 }
