@@ -177,7 +177,7 @@
       "description": "Verlinkung einer anderen Seite",
       "name": "Verknüpfung",
       "property": {
-        "href": "Link URL"
+        "href": "URL"
       }
     },
     "panel": {
