@@ -139,7 +139,7 @@
       "datePlaceholder": " z. B. dd.MM.yyyy",
       "description": "Ein Datumswähler mit Beschriftung für Datum oder Datum-Zeit",
       "label": "Datumsauswahl",
-      "name": "Datumauswahl",
+      "name": "Datum Picker",
       "property": {
         "datePattern": "Datumsformat",
         "timePattern": "Zeitformat"
@@ -147,7 +147,7 @@
       "timePlaceholder": "z. B. HH:mm"
     },
     "dialog": {
-      "description": "Flexibles Layout",
+      "description": "Ein flexibles Layout",
       "name": "Dialog"
     },
     "fieldset": {
@@ -312,7 +312,7 @@
     "itemValue": "Elementwert",
     "label": "Beschriftung",
     "linkedComponent": "Verknüpfte Komponente",
-    "name": "Anzeigename",
+    "name": "Text anzeigen",
     "number": "Zahl",
     "objectBoundColumns": "Objektgebundene Spalten",
     "option1": "Option 1",
