@@ -59,17 +59,17 @@
     "button": {
       "confirm": {
         "confirmDialogHeader": "Löschbestätigung",
-        "confirmDialogMessage": "Möchten Sie die folgende Zeile wirklich löschen: #{row}?",
+        "confirmDialogMessage": "Möchten Sie die Zeile #{row} wirklich löschen ?",
         "no": "Nein",
         "yes": "Ja"
       },
-      "description": "Ein Knopf zum Auslösen von Aktionen",
+      "description": "Schaltfläche zum Auslösen von Aktionen",
       "fieldType": {
         "delete": "Löschen",
         "edit": "Bearbeiten",
         "generic": "Generisch"
       },
-      "name": "Knopf",
+      "name": "Schaltfläche",
       "property": {
         "cancelButton": "Abbrechen-Button Wert",
         "confirmButton": "Bestätigungs-Button Wert",
@@ -100,7 +100,7 @@
       "name": "Checkbox"
     },
     "combobox": {
-      "addDropdown": "Dropdown-Knopf zur Kombobox hinzufügen",
+      "addDropdown": "Dropdown zur Kombobox hinzufügen",
       "description": "Eine Autovervollständigungs-Kombobox mit Beschriftung",
       "name": "Kombobox"
     },
@@ -116,7 +116,7 @@
       "description": "Eine Datentabelle-Komponente",
       "name": "Datentabelle",
       "property": {
-        "addButton": "Knopf hinzufügen",
+        "addButton": "Schaltfläche hinzufügen",
         "colBoundByAttr": "Spalte ist an ein Objektattribut gebunden",
         "editable": "Bearbeitbar",
         "editDialog": "Dialog bearbeiten",
@@ -139,7 +139,7 @@
       "datePlaceholder": " z. B. dd.MM.yyyy",
       "description": "Ein Datumswähler mit Beschriftung für Datum oder Datum-Zeit",
       "label": "Datumsauswahl",
-      "name": "Datumsauswahl",
+      "name": "Datum Picker",
       "property": {
         "datePattern": "Datumsformat",
         "timePattern": "Zeitformat"
@@ -177,7 +177,7 @@
       "description": "Verlinkung einer anderen Seite",
       "name": "Verknüpfung",
       "property": {
-        "href": "Href"
+        "href": "URL"
       }
     },
     "panel": {
@@ -239,7 +239,7 @@
     "component": "Komponente",
     "composites": "Komposite",
     "createActionCol": "Aktionsspalte erstellen",
-    "createActionColBtn": "Aktionsspalten-Knopf erstellen",
+    "createActionColBtn": "Aktions-Schaltfläche erstellen",
     "createBtns": "Fortfahren- und Abbrechen-Knöpfe erstellen",
     "createCol": "Spalte erstellen",
     "createFrom": "Erstellen aus {{component}}",
@@ -247,7 +247,7 @@
     "data": "Daten",
     "deviceModeParam": "Gerätemodus {{mode}} ({{hotkey}})",
     "disable": "Deaktivieren",
-    "dragFirstButton": "Ersten Knopf in den {{type}} ziehen",
+    "dragFirstButton": "Eine Schaltfläche in den {{type}} ziehen",
     "duplicate": "Duplizieren (M)",
     "enableReqProjects": "Erforderliche Projekte aktivieren",
     "extractComponent": "Als eigene Ivy-Komponente extrahieren (E)",
@@ -312,7 +312,7 @@
     "itemValue": "Elementwert",
     "label": "Beschriftung",
     "linkedComponent": "Verknüpfte Komponente",
-    "name": "Name",
+    "name": "Text anzeigen",
     "number": "Zahl",
     "objectBoundColumns": "Objektgebundene Spalten",
     "option1": "Option 1",
