@@ -26,13 +26,6 @@ type ComponentConfigWithoutType = Omit<ComponentConfig<any, any>, 'type'>;
 
 export type ComponentByName = (name: AutoCompleteWithString<ComponentType>) => ComponentConfigWithoutType;
 
-export type ComponentForType = (type: AutoCompleteWithString<ComponentType>) =>
-  | {
-      component: ComponentConfigWithoutType;
-      defaultProps?: object | undefined;
-    }
-  | undefined;
-
 export const useComponentsInit = () => {
   const componentByElement = (element: ComponentData, data: Array<ComponentData>) => {
     const component = componentByName(element.type);
@@ -63,34 +56,6 @@ export const useComponentsInit = () => {
         .filter(component => component.category !== 'Hidden'),
       item => item.category
     );
-  };
-
-  const componentForType: ComponentForType = type => {
-    if (type.startsWith('List<') && type.endsWith('>')) {
-      return { component: config.components.DataTable };
-    }
-
-    switch (type) {
-      case 'String':
-        return { component: config.components.Input };
-      case 'Number':
-      case 'Byte':
-      case 'Short':
-      case 'Integer':
-      case 'Long':
-      case 'Float':
-      case 'Double':
-      case 'BigDecimal':
-        return { component: config.components.Input, defaultProps: { type: 'NUMBER' } };
-      case 'Boolean':
-        return { component: config.components.Checkbox };
-      case 'Date':
-      case 'DateTime':
-      case 'java.util.Date':
-        return { component: config.components.DatePicker };
-      default:
-        return undefined;
-    }
   };
 
   const { InputComponent } = useInputComponent();
@@ -138,7 +103,6 @@ export const useComponentsInit = () => {
     componentByElement,
     componentByName,
     componentsByCategory,
-    allComponentsByCategory,
-    componentForType
+    allComponentsByCategory
   };
 };

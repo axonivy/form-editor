@@ -72,7 +72,7 @@ const DataClassSelect = ({
   const [tree, setTree] = useState<Array<BrowserNode<Variable>>>([]);
   const [workflowButtons, setWorkflowButtons] = useState(showWorkflowButtonsCheckbox ? workflowButtonsInit : false);
   const dataClass = useMeta('meta/data/attributes', context, { types: {}, variables: [] }).data;
-  const { componentForType, componentByName } = useComponents();
+  const { componentByName } = useComponents();
 
   useEffect(() => {
     if (onlyAttributs) {
@@ -123,7 +123,7 @@ const DataClassSelect = ({
     setData(data => {
       const creates = table
         .getSelectedRowModel()
-        .flatRows.map(r => rowToCreateData(r, componentForType, showRootNode, prefix))
+        .flatRows.map(r => rowToCreateData(r, showRootNode, prefix))
         .filter(create => create !== undefined);
       return createInitForm(data, creates, workflowButtons, componentByName, creationTargetId(data.components, creationTarget));
     });
