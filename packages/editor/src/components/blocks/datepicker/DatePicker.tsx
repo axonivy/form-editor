@@ -1,4 +1,4 @@
-import type { DatePicker, Prettify } from '@axonivy/form-editor-protocol';
+import { type DatePicker, type Prettify } from '@axonivy/form-editor-protocol';
 import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
 import './DatePicker.css';
 import { useBase } from '../base';
@@ -10,20 +10,10 @@ import { useTranslation } from 'react-i18next';
 type DatePickerProps = Prettify<DatePicker>;
 
 export const useDatePickerComponent = () => {
-  const { baseComponentFields, behaviourComponentFields, defaultBaseComponent, defaultBehaviourComponent } = useBase();
+  const { baseComponentFields, behaviourComponentFields } = useBase();
   const { t } = useTranslation();
 
   const DatePickerComponent = useMemo(() => {
-    const defaultDatePickerProps: DatePicker = {
-      label: t('components.datePicker.label'),
-      value: '',
-      datePattern: 'dd.MM.yyyy',
-      timePattern: 'HH:mm',
-      showTime: false,
-      ...defaultBehaviourComponent,
-      ...defaultBaseComponent
-    } as const;
-
     const DatePickerComponent: ComponentConfig<DatePickerProps> = {
       name: 'DatePicker',
       displayName: t('components.datePicker.name'),
@@ -31,9 +21,7 @@ export const useDatePickerComponent = () => {
       subcategory: 'Input',
       icon: <IconSvg />,
       description: t('components.datePicker.description'),
-      defaultProps: defaultDatePickerProps,
       render: props => <UiBlock {...props} />,
-      create: ({ label, value, ...defaultProps }) => ({ ...defaultDatePickerProps, label, value, ...defaultProps }),
       outlineInfo: component => component.label,
       fields: {
         ...baseComponentFields,
@@ -69,7 +57,7 @@ export const useDatePickerComponent = () => {
     };
 
     return DatePickerComponent;
-  }, [baseComponentFields, behaviourComponentFields, defaultBaseComponent, defaultBehaviourComponent, t]);
+  }, [baseComponentFields, behaviourComponentFields, t]);
 
   return {
     DatePickerComponent

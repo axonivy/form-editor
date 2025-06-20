@@ -23,7 +23,7 @@ import { useMemo } from 'react';
 type DataTableColumnProps = Prettify<DataTableColumn>;
 
 export const useDataTableColumnComponent = () => {
-  const { baseComponentFields, defaultVisibleComponent, visibleComponentField } = useBase();
+  const { baseComponentFields, visibleComponentField } = useBase();
   const { t } = useTranslation();
 
   const DataTableColumnComponent: ComponentConfig<DataTableColumnProps> = useMemo(() => {
@@ -33,18 +33,6 @@ export const useDataTableColumnComponent = () => {
       { label: t('align.bottom'), value: 'END', icon: { icon: IvyIcons.AlignRight } }
     ] as const;
 
-    const defaultDataTableColumnProps: DataTableColumn = {
-      header: 'header',
-      value: '',
-      components: [],
-      asActionColumn: false,
-      actionColumnAsMenu: false,
-      sortable: false,
-      filterable: false,
-      actionButtonAlignment: 'END',
-      ...defaultVisibleComponent
-    } as const;
-
     const component: ComponentConfig<DataTableColumnProps> = {
       name: 'DataTableColumn',
       displayName: t('components.dataTableColumn.name'),
@@ -52,9 +40,7 @@ export const useDataTableColumnComponent = () => {
       subcategory: 'Input',
       icon: '',
       description: t('components.dataTableColumn.description'),
-      defaultProps: defaultDataTableColumnProps,
       render: props => <UiBlock {...props} />,
-      create: ({ label, value, defaultProps }) => ({ ...defaultDataTableColumnProps, header: label, value, ...defaultProps }),
       outlineInfo: component => component.header,
       fields: {
         ...baseComponentFields,
@@ -107,7 +93,7 @@ export const useDataTableColumnComponent = () => {
     };
 
     return component;
-  }, [baseComponentFields, defaultVisibleComponent, t, visibleComponentField]);
+  }, [baseComponentFields, t, visibleComponentField]);
 
   return {
     DataTableColumnComponent
@@ -151,7 +137,10 @@ const UiBlock = ({
           </Flex>
         </Flex>
       </div>
-      <div className='block-column__body' style={asActionColumn ? { justifySelf: actionButtonAlignment.toLowerCase() } : undefined}>
+      <div
+        className='block-column__body'
+        style={asActionColumn && components.length > 0 ? { justifySelf: actionButtonAlignment.toLowerCase() } : undefined}
+      >
         {asActionColumn ? (
           components.length > 0 ? (
             actionColumnAsMenu ? (

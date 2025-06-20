@@ -9,7 +9,7 @@ import {
   type InscriptionTabProps
 } from '@axonivy/ui-components';
 import { useData } from '../../data/data';
-import type { ConfigData, FormType } from '@axonivy/form-editor-protocol';
+import type { FormType } from '@axonivy/form-editor-protocol';
 import { usePropertySubSectionControl } from './PropertySubSectionControl';
 import { useTranslation } from 'react-i18next';
 import { useBase } from '../../components/blocks/base';
@@ -21,6 +21,7 @@ import { useState } from 'react';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { getTabState, validationsForPaths } from '../../context/useValidation';
 import { useAppContext } from '../../context/AppContext';
+import { addDefaults } from '../../components/component-factory';
 
 export const Properties = () => {
   const { categoryTranslations: CategoryTranslations } = useBase();
@@ -32,8 +33,8 @@ export const Properties = () => {
     return <FormPropertySection />;
   }
   const propertyConfig = componentByElement(element, data.components);
-  const elementConfig = { ...propertyConfig.defaultProps, ...element.config };
-  const fields = visibleFields(propertyConfig.fields, elementConfig);
+  const elementConfig = addDefaults(element.type, element.config);
+  const fields = visibleFields(propertyConfig.fields, { ...elementConfig });
   const sections = visibleSections(fields, parent);
 
   const tabs: InscriptionTabProps[] = [...sections].map(([, { section, fields }]) => {
@@ -86,7 +87,7 @@ const PropertySubSection = ({ title, fields }: { title: string; fields: VisibleF
               value={value}
               onChange={change => {
                 setElement(element => {
-                  (element.config as ConfigData)[key] = change;
+                  element.config = { ...element.config, [key]: change };
                   return element;
                 });
               }}

@@ -1,8 +1,7 @@
 import { customRenderHook } from 'test-utils';
 import { useEditableDataTableField } from './useEditableDataTableField';
-import type { ComponentData, FormData, TableConfig, VariableInfo } from '@axonivy/form-editor-protocol';
+import type { ComponentData, DeepPartial, FormData, TableConfig, VariableInfo } from '@axonivy/form-editor-protocol';
 import { waitFor } from '@testing-library/react';
-import type { DeepPartial } from '../../../../types/types';
 
 const variable: DeepPartial<VariableInfo> = {
   variables: [
@@ -133,7 +132,7 @@ const data = {
       }
     }
   ]
-} as FormData;
+} as DeepPartial<FormData> as FormData;
 
 test('useEditableDataTableField createComponentData', async () => {
   const newData = [] as FormData[];

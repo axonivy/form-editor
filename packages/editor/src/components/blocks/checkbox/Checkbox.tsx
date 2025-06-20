@@ -1,4 +1,4 @@
-import type { Checkbox, Prettify } from '@axonivy/form-editor-protocol';
+import { type Checkbox, type Prettify } from '@axonivy/form-editor-protocol';
 import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
 import './Checkbox.css';
 import { useBase } from '../base';
@@ -13,17 +13,7 @@ type CheckboxProps = Prettify<Checkbox>;
 
 export const useCheckboxComponent = () => {
   const { t } = useTranslation();
-  const { baseComponentFields, defaultBaseComponent, defaultDisabledComponent, disabledComponentFields } = useBase();
-
-  const defaultCheckboxProps: Checkbox = useMemo(() => {
-    return {
-      label: t('property.label'),
-      selected: 'true',
-      ...defaultDisabledComponent,
-      updateOnChange: false,
-      ...defaultBaseComponent
-    } as const;
-  }, [defaultBaseComponent, defaultDisabledComponent, t]);
+  const { baseComponentFields, updateOnChangeComponentFields } = useBase();
 
   const CheckboxComponent: ComponentConfig<CheckboxProps> = useMemo(() => {
     const component: ComponentConfig<CheckboxProps> = {
@@ -33,9 +23,7 @@ export const useCheckboxComponent = () => {
       subcategory: 'Selection',
       icon: <IconSvg />,
       description: t('components.checkbox.description'),
-      defaultProps: defaultCheckboxProps,
       render: props => <UiBlock {...props} />,
-      create: ({ label, value, ...defaultProps }) => ({ ...defaultCheckboxProps, label, selected: value, ...defaultProps }),
       outlineInfo: component => component.label,
       fields: {
         ...baseComponentFields,
@@ -51,17 +39,15 @@ export const useCheckboxComponent = () => {
           type: 'textBrowser',
           browsers: [{ type: 'ATTRIBUTE' }]
         },
-        ...disabledComponentFields,
-        updateOnChange: { subsection: 'Behaviour', label: t('label.updateFormChange'), type: 'checkbox' }
+        ...updateOnChangeComponentFields
       },
       quickActions: DEFAULT_QUICK_ACTIONS
     };
 
     return component;
-  }, [baseComponentFields, defaultCheckboxProps, disabledComponentFields, t]);
+  }, [baseComponentFields, updateOnChangeComponentFields, t]);
 
   return {
-    defaultCheckboxProps,
     CheckboxComponent
   };
 };

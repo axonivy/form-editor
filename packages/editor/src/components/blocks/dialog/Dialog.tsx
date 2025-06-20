@@ -17,17 +17,10 @@ import { useMemo } from 'react';
 type DialogProps = Prettify<Dialog>;
 
 export const useDialogComponent = () => {
-  const { defaultBaseComponent, baseComponentFields } = useBase();
+  const { baseComponentFields } = useBase();
   const { t } = useTranslation();
 
   const DialogComponent: ComponentConfig<DialogProps> = useMemo(() => {
-    const defaultDialogProps: DialogProps = {
-      components: [],
-      header: '',
-      linkedComponent: '',
-      ...defaultBaseComponent
-    };
-
     const DialogComponent: ComponentConfig<DialogProps> = {
       name: 'Dialog',
       displayName: t('components.dialog.name'),
@@ -35,9 +28,7 @@ export const useDialogComponent = () => {
       subcategory: 'General',
       icon: <IconSvg />,
       description: t('components.dialog.description'),
-      defaultProps: defaultDialogProps,
       render: props => <DialogUiBlock {...props} />,
-      create: ({ label, value, defaultProps }) => ({ ...defaultDialogProps, header: label, linkedComponent: value, ...defaultProps }),
       outlineInfo: component => component.header,
       fields: {
         ...baseComponentFields,
@@ -54,7 +45,7 @@ export const useDialogComponent = () => {
     };
 
     return DialogComponent;
-  }, [baseComponentFields, defaultBaseComponent, t]);
+  }, [baseComponentFields, t]);
 
   return {
     DialogComponent

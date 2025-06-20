@@ -13,14 +13,11 @@ import { MasterPart } from './MasterPart';
 import { Sidebar } from './sidebar/Sidebar';
 import { useTranslation } from 'react-i18next';
 import { ComponentsProvider } from '../context/ComponentsContext';
-import { useComponentsInit } from '../components/components';
 
 export type FormEditorProps = { context: FormContext; directSave?: boolean };
 
 export const Editor = (props: FormEditorProps) => {
   const { t } = useTranslation();
-  const components = useComponentsInit();
-  const { componentByName } = components;
   const [context, setContext] = useState(props.context);
   const [directSave, setDirectSave] = useState(props.directSave);
   const [selectedElement, setSelectedElement] = useState<string>();
@@ -125,8 +122,8 @@ export const Editor = (props: FormEditorProps) => {
       <link rel='stylesheet' href='/dev-workflow-ui/webjars/font-awesome/6.1.0/css/all.min.css' />
       <link rel='stylesheet' href='/dev-workflow-ui/webjars/streamline-icons/StreamlineIcons.css' />
       <link rel='stylesheet' href='/dev-workflow-ui/faces/javax.faces.resource/primeicons/primeicons.css?ln=primefaces' />
-      <ComponentsProvider components={components}>
-        <DndContext componentByName={componentByName}>
+      <ComponentsProvider>
+        <DndContext>
           <ResizablePanelGroup direction='horizontal' autoSaveId='form-editor-resize'>
             <MasterPart />
             {ui.properties && (

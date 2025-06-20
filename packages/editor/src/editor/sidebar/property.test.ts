@@ -1,3 +1,4 @@
+import type { ConfigData } from '@axonivy/form-editor-protocol';
 import type { Fields } from '../../types/config';
 import { groupFieldsBySubsection, visibleFields, visibleSections, type VisibleFields } from './property';
 
@@ -36,13 +37,21 @@ describe('visibleSections', () => {
 
   test('parent is grid layout', () => {
     expect(
-      visibleSections(visibleFields, { cid: 'grid-layout', type: 'Layout', config: { gridVariant: 'GRID1', type: 'GRID', components: [] } })
+      visibleSections(visibleFields, {
+        cid: 'grid-layout',
+        type: 'Layout',
+        config: { gridVariant: 'GRID1', type: 'GRID', components: [] } as unknown as ConfigData
+      })
     ).toEqual(new Map([['Properties', { section: { name: 'Properties', icon: 'list' }, fields: [visibleFields[0], visibleFields[1]] }]]));
   });
 
   test('parent is free layout', () => {
     expect(
-      visibleSections(visibleFields, { cid: 'free-layout', type: 'Layout', config: { gridVariant: 'FREE', type: 'GRID', components: [] } })
+      visibleSections(visibleFields, {
+        cid: 'free-layout',
+        type: 'Layout',
+        config: { gridVariant: 'FREE', type: 'GRID', components: [] } as unknown as ConfigData
+      })
     ).toEqual(
       new Map([
         ['Properties', { section: { name: 'Properties', icon: 'list' }, fields: [visibleFields[0], visibleFields[1]] }],

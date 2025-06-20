@@ -43,7 +43,7 @@ test('dataTableColumn', async ({ page }) => {
   const value = content.input({ label: 'Value' });
   const behaviour = properties.behaviour();
 
-  await header.expectValue('header');
+  await header.expectValue('Header');
   await value.expectValue('');
   await header.fill('new header');
   await value.fill('title');
@@ -68,7 +68,7 @@ test('edit column and update table', async ({ page }) => {
   const header = columnSection.input({ label: 'Header' });
   const value = contentSection.input({ label: 'Value' });
 
-  await header.expectValue('header');
+  await header.expectValue('Header');
   await value.expectValue('');
   await header.fill('new header');
   await value.fill('title');
@@ -117,7 +117,6 @@ test('columns from attribute', async ({ page }) => {
   await columnFirstNameNew.expectBound(true);
 
   await listOfObjects.fill('#{data.data.strings}');
-  await columnsSection.toggleControl();
   await columnsSection.toggleControl();
   await columnsSection.expectListItems(4);
   const columnString = columnsSection.listItem({ label: 'strings' });

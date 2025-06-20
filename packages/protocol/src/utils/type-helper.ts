@@ -18,3 +18,5 @@ export type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) ex
 export type Prettify<T> = {
   [K in keyof T]: T[K];
 } & {};
+
+export type DeepPartial<T> = T extends Array<infer U> ? Array<DeepPartial<U>> : { [A in keyof T]?: DeepPartial<T[A]> };

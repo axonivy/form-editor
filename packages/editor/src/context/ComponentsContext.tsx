@@ -5,7 +5,8 @@ type ComponentsContextValue = ReturnType<typeof useComponentsInit>;
 
 const ComponentsContext = createContext<ComponentsContextValue | null>(null);
 
-export const ComponentsProvider = ({ components, children }: { components: ReturnType<typeof useComponentsInit>; children: ReactNode }) => {
+export const ComponentsProvider = ({ children }: { children: ReactNode }) => {
+  const components = useComponentsInit();
   return <ComponentsContext.Provider value={components}>{children}</ComponentsContext.Provider>;
 };
 

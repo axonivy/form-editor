@@ -2,8 +2,7 @@ import { expect } from 'vitest';
 import { filterNodesWithChildren, getApplyModifierValue } from './useAttributeBrowser';
 import type { Row } from '@tanstack/react-table';
 import type { BrowserNode } from '@axonivy/ui-components';
-import type { Variable } from '@axonivy/form-editor-protocol';
-import type { DeepPartial } from '../../../types/types';
+import type { DeepPartial, Variable } from '@axonivy/form-editor-protocol';
 
 const row = {
   original: { value: 'country', info: 'String' },

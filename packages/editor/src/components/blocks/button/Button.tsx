@@ -25,7 +25,7 @@ export const hideButtonField = <T,>(obj: T): boolean => {
 };
 
 export const useButtonComponent = () => {
-  const { baseComponentFields, defaultBaseComponent, defaultDisabledComponent, disabledComponentFields } = useBase();
+  const { baseComponentFields, disabledComponentFields } = useBase();
   const { t } = useTranslation();
 
   const ButtonComponent: ComponentConfig<ButtonProps> = useMemo(() => {
@@ -52,25 +52,6 @@ export const useButtonComponent = () => {
       { label: t('components.button.severity.error'), value: 'ERROR' }
     ] as const;
 
-    const defaultButtonProps: Button = {
-      name: t('property.action'),
-      action: '',
-      variant: 'PRIMARY',
-      style: 'SOLID',
-      rounded: false,
-      type: 'BUTTON',
-      icon: '',
-      processOnlySelf: false,
-      confirmDialog: false,
-      confirmMessage: '',
-      confirmHeader: '',
-      confirmSeverity: 'WARN',
-      confirmCancelValue: '',
-      confirmOkValue: '',
-      ...defaultDisabledComponent,
-      ...defaultBaseComponent
-    } as const;
-
     const component: ComponentConfig<ButtonProps> = {
       name: 'Button',
       displayName: t('components.button.name'),
@@ -78,9 +59,7 @@ export const useButtonComponent = () => {
       subcategory: 'General',
       icon: <IconSvg />,
       description: t('components.button.description'),
-      defaultProps: defaultButtonProps,
       render: props => <UiBlock {...props} />,
-      create: ({ label, value, defaultProps }) => ({ ...defaultButtonProps, name: label, action: value, ...defaultProps }),
       outlineInfo: component => component.name,
       fields: {
         ...baseComponentFields,
@@ -182,7 +161,7 @@ export const useButtonComponent = () => {
     };
 
     return component;
-  }, [baseComponentFields, defaultBaseComponent, defaultDisabledComponent, disabledComponentFields, t]);
+  }, [baseComponentFields, disabledComponentFields, t]);
 
   return {
     ButtonComponent

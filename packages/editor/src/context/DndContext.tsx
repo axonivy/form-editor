@@ -14,9 +14,17 @@ import {
 import { useState, type ReactNode } from 'react';
 import { findComponentElement, modifyData, useData } from '../data/data';
 import { ItemDragOverlay } from '../editor/ItemDragOverlay';
-import { isCreateComponentData, type CreateComponentData } from '../types/config';
 import { useAppContext } from './AppContext';
-import type { ComponentByName } from '../components/components';
+import type { CreateData } from '../components/component-factory';
+import type { ComponentType } from '@axonivy/form-editor-protocol';
+
+export type CreateComponentData<TType extends ComponentType = ComponentType> = {
+  componentName: TType;
+  targetId?: string;
+} & CreateData<TType>;
+
+export const isCreateComponentData = <TType extends ComponentType>(data: unknown): data is CreateComponentData<TType> =>
+  typeof data === 'object' && data !== null && 'componentName' in data;
 
 const ownCollisionDetection: CollisionDetection = ({ droppableContainers, ...args }) => {
   const rectIntersectionCollisions = rectIntersection({
@@ -32,7 +40,7 @@ const ownCollisionDetection: CollisionDetection = ({ droppableContainers, ...arg
   return pointerWithin({ droppableContainers, ...args });
 };
 
-export const DndContext = ({ componentByName, children }: { componentByName: ComponentByName; children: ReactNode }) => {
+export const DndContext = ({ children }: { children: ReactNode }) => {
   const { ui } = useAppContext();
   const { data, setData, setSelectedElement } = useData();
   const [activeId, setActiveId] = useState<string | undefined>();
@@ -42,14 +50,10 @@ export const DndContext = ({ componentByName, children }: { componentByName: Com
     const targetId = event.over?.id as string | undefined;
     if (targetId && activeId) {
       setData(oldData => {
-        const modifiedData = modifyData(
-          oldData,
-          {
-            type: 'dnd',
-            data: { activeId: createData?.componentName ?? activeId, targetId, create: createData }
-          },
-          componentByName
-        );
+        const modifiedData = modifyData(oldData, {
+          type: 'dnd',
+          data: { activeId: createData?.componentName ?? activeId, targetId, create: createData }
+        });
         const newData = modifiedData.newData;
         const newComponentId = modifiedData.newComponentId;
         setSelectedElement(newComponentId ?? activeId);

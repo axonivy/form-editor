@@ -2,6 +2,7 @@ import type {
   EditorFileContent,
   FormActionArgs,
   FormClient,
+  FormData,
   FormEditor,
   FormMetaRequestTypes,
   FormSaveData,
@@ -20,7 +21,7 @@ export class FormClientMock implements FormClient {
       context: { app: 'mock', pmv: 'mock', file: 'mock.f.json' },
       readonly: false,
       defaults: {},
-      data: datatable ? dataDataTable : data,
+      data: (datatable ? dataDataTable : data) as FormData,
       helpUrl: 'https://dev.axonivy.com',
       previewUrl: '',
       namespace: ''

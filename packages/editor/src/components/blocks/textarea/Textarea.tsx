@@ -1,4 +1,4 @@
-import type { Textarea, Prettify } from '@axonivy/form-editor-protocol';
+import { type Textarea, type Prettify } from '@axonivy/form-editor-protocol';
 import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
 import './Textarea.css';
 import { useBase } from '../base';
@@ -10,19 +10,10 @@ import { useMemo } from 'react';
 type TextareaProps = Prettify<Textarea>;
 
 export const useTextareaComponent = () => {
-  const { baseComponentFields, behaviourComponentFields, defaultBaseComponent, defaultBehaviourComponent } = useBase();
+  const { baseComponentFields, behaviourComponentFields } = useBase();
   const { t } = useTranslation();
 
   const TextareaComponent = useMemo(() => {
-    const defaultInputProps: Textarea = {
-      label: t('components.textarea.name'),
-      value: '',
-      rows: '5',
-      autoResize: true,
-      ...defaultBehaviourComponent,
-      ...defaultBaseComponent
-    } as const;
-
     const TextareaComponent: ComponentConfig<TextareaProps> = {
       name: 'Textarea',
       displayName: t('components.textarea.name'),
@@ -30,9 +21,7 @@ export const useTextareaComponent = () => {
       subcategory: 'Input',
       icon: <IconSvg />,
       description: t('components.textarea.description'),
-      defaultProps: defaultInputProps,
       render: props => <UiBlock {...props} />,
-      create: ({ label, value, ...defaultProps }) => ({ ...defaultInputProps, label, value, ...defaultProps }),
       outlineInfo: component => component.label,
       fields: {
         ...baseComponentFields,
@@ -51,7 +40,7 @@ export const useTextareaComponent = () => {
     };
 
     return TextareaComponent;
-  }, [baseComponentFields, behaviourComponentFields, defaultBaseComponent, defaultBehaviourComponent, t]);
+  }, [baseComponentFields, behaviourComponentFields, t]);
 
   return {
     TextareaComponent

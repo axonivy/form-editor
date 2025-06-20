@@ -1,4 +1,4 @@
-import type { Prettify, Radio, OrientationType } from '@axonivy/form-editor-protocol';
+import { type Prettify, type Radio, type OrientationType } from '@axonivy/form-editor-protocol';
 import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type FieldOption, type UiComponentProps } from '../../../types/config';
 import './Radio.css';
 import { useBase } from '../base';
@@ -11,8 +11,7 @@ import { useMemo } from 'react';
 type RadioProps = Prettify<Radio>;
 
 export const useRadioComponent = () => {
-  const { baseComponentFields, behaviourComponentFields, defaultBaseComponent, defaultBehaviourComponent, selectItemsComponentFields } =
-    useBase();
+  const { baseComponentFields, behaviourComponentFields, selectItemsComponentFields } = useBase();
   const { t } = useTranslation();
 
   const RadioComponent = useMemo(() => {
@@ -21,21 +20,6 @@ export const useRadioComponent = () => {
       { label: t('property.vertical'), value: 'vertical' }
     ] as const;
 
-    const defaultInputProps: Radio = {
-      label: t('components.radio.name'),
-      orientation: 'horizontal',
-      value: '',
-      staticItems: [
-        { label: t('property.option1'), value: 'Option 1' },
-        { label: t('property.option2'), value: 'Option 2' }
-      ],
-      dynamicItemsList: '',
-      dynamicItemsLabel: '#{item}',
-      dynamicItemsValue: '#{item}',
-      ...defaultBehaviourComponent,
-      ...defaultBaseComponent
-    } as const;
-
     const RadioComponent: ComponentConfig<RadioProps> = {
       name: 'Radio',
       displayName: t('components.radio.name'),
@@ -43,9 +27,7 @@ export const useRadioComponent = () => {
       subcategory: 'Selection',
       icon: <IconSvg />,
       description: t('components.radio.description'),
-      defaultProps: defaultInputProps,
       render: props => <UiBlock {...props} />,
-      create: ({ label, value, ...defaultProps }) => ({ ...defaultInputProps, label, value, ...defaultProps }),
       outlineInfo: component => component.label,
       fields: {
         ...baseComponentFields,
@@ -62,7 +44,7 @@ export const useRadioComponent = () => {
     };
 
     return RadioComponent;
-  }, [baseComponentFields, behaviourComponentFields, defaultBaseComponent, defaultBehaviourComponent, selectItemsComponentFields, t]);
+  }, [baseComponentFields, behaviourComponentFields, selectItemsComponentFields, t]);
 
   return {
     RadioComponent

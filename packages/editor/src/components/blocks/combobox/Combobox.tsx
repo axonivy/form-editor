@@ -1,4 +1,4 @@
-import type { Combobox, Prettify } from '@axonivy/form-editor-protocol';
+import { type Combobox, type Prettify } from '@axonivy/form-editor-protocol';
 import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
 import './Combobox.css';
 import { useBase } from '../base';
@@ -12,20 +12,10 @@ import { useMemo } from 'react';
 type ComboboxProps = Prettify<Combobox>;
 
 export const useComboboxComponent = () => {
-  const { baseComponentFields, behaviourComponentFields, defaultBaseComponent, defaultBehaviourComponent } = useBase();
+  const { baseComponentFields, behaviourComponentFields } = useBase();
   const { t } = useTranslation();
 
   const ComboboxComponent: ComponentConfig<ComboboxProps> = useMemo(() => {
-    const defaultComboboxProps: Combobox = {
-      label: t('components.combobox.name'),
-      value: '',
-      completeMethod: '',
-      itemLabel: '',
-      itemValue: '',
-      withDropdown: false,
-      ...defaultBehaviourComponent,
-      ...defaultBaseComponent
-    } as const;
     const component: ComponentConfig<ComboboxProps> = {
       name: 'Combobox',
       displayName: t('components.combobox.name'),
@@ -33,9 +23,7 @@ export const useComboboxComponent = () => {
       subcategory: 'Input',
       icon: <IconSvg />,
       description: t('components.combobox.description'),
-      defaultProps: defaultComboboxProps,
       render: props => <UiBlock {...props} />,
-      create: ({ label, value, ...defaultProps }) => ({ ...defaultComboboxProps, label, value, ...defaultProps }),
       outlineInfo: component => component.label,
       fields: {
         ...baseComponentFields,
@@ -75,7 +63,7 @@ export const useComboboxComponent = () => {
       quickActions: DEFAULT_QUICK_ACTIONS
     };
     return component;
-  }, [baseComponentFields, behaviourComponentFields, defaultBaseComponent, defaultBehaviourComponent, t]);
+  }, [baseComponentFields, behaviourComponentFields, t]);
 
   return {
     ComboboxComponent

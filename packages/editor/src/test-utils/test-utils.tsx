@@ -16,7 +16,6 @@ import { ComponentsProvider } from '../context/ComponentsContext';
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import enMessages from '../translation/form-editor/en.json';
-import { useComponentsInit } from '../components/components';
 
 type ContextHelperProps = {
   appContext?: {
@@ -50,7 +49,6 @@ const initTranslation = () => {
 };
 
 const ContextHelper = ({ appContext, meta, children }: ContextHelperProps & { children: ReactNode }) => {
-  const components = useComponentsInit();
   const data = appContext?.data ?? ({} as FormData);
   const client: ClientContext = {
     // @ts-ignore
@@ -88,7 +86,7 @@ const ContextHelper = ({ appContext, meta, children }: ContextHelperProps & { ch
             namespace: ''
           }}
         >
-          <ComponentsProvider components={components}>{children}</ComponentsProvider>
+          <ComponentsProvider>{children}</ComponentsProvider>
         </AppProvider>
       </QueryClientProvider>
     </ClientContextProvider>

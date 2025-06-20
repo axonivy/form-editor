@@ -4,11 +4,12 @@ import { IvyIcons } from '@axonivy/ui-icons';
 import { useMeta } from '../../../context/useMeta';
 import { useCallback, useEffect, useState } from 'react';
 import {
+  isColumn,
+  isDialog,
   isTable,
   type ComponentData,
-  type ConfigData,
-  type Dialog,
   type FormData,
+  type SelectItemsProps,
   type Variable,
   type VariableInfo
 } from '@axonivy/form-editor-protocol';
@@ -92,22 +93,22 @@ const determineTreeData = (
   const parentComponent = getParentComponent(data.components, element.cid);
   switch (options?.attribute?.onlyAttributes) {
     case 'DYNAMICLIST':
-      return findAttributesOfType(variableInfo, (element.config as ConfigData).dynamicItemsList as string);
+      return findAttributesOfType(variableInfo, (element.config as SelectItemsProps).dynamicItemsList as string);
     case 'COLUMN':
       if (parentComponent && isTable(parentComponent)) {
         return findAttributesOfType(variableInfo, parentComponent.config.value || '', 10, 'row');
       }
       break;
     default:
-      if (parentComponent?.type === 'DataTableColumn') {
+      if (isColumn(parentComponent)) {
         const parentTableComponent = getParentComponent(data.components, parentComponent.cid);
         return [
-          ...findAttributesOfType(variableInfo, isTable(parentTableComponent) ? parentComponent.config.value : '', 10, 'row'),
+          ...findAttributesOfType(variableInfo, isTable(parentTableComponent) ? parentComponent.config?.value : '', 10, 'row'),
           ...variableTreeData().of(variableInfo)
         ];
-      } else if (parentComponent?.type === 'Dialog') {
+      } else if (isDialog(parentComponent)) {
         setComponentInDialog?.(true);
-        const dataTable = findComponentDeep(data.components, (parentComponent.config as unknown as Dialog)?.linkedComponent);
+        const dataTable = findComponentDeep(data.components, parentComponent.config?.linkedComponent);
         const table = dataTable ? dataTable.data[dataTable.index] : undefined;
         if (table && isTable(table)) {
           return findAttributesOfType(variableInfo, stripELExpression(table.config.value), 10, 'currentRow');

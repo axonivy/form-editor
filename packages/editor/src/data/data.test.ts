@@ -2,26 +2,20 @@ import {
   EMPTY_FORM,
   type FormData,
   type LayoutConfig,
-  type ConfigData,
   type TableConfig,
   type ComponentData,
   type TableComponent,
   type ActionColumnComponent,
   isTable,
-  isColumn
+  isColumn,
+  type DataTable,
+  type Text,
+  type DeepPartial,
+  type Component,
+  type Input,
+  type Layout
 } from '@axonivy/form-editor-protocol';
-import {
-  createInitForm,
-  creationTargetId,
-  DELETE_DROPZONE_ID,
-  findComponentElement,
-  getParentComponent,
-  isEditableTable,
-  modifyData
-} from './data';
-import type { DeepPartial } from '../types/types';
-import { renderHook } from '@testing-library/react';
-import { useComponentsInit } from '../components/components';
+import { creationTargetId, DELETE_DROPZONE_ID, findComponentElement, getParentComponent, isEditableTable, modifyData } from './data';
 
 describe('findComponentElement', () => {
   test('find', () => {
@@ -47,18 +41,13 @@ describe('findComponentElement', () => {
 });
 
 describe('modifyData', () => {
-  const { result: componentsResult } = renderHook(() => useComponentsInit());
-  const { componentByName } = componentsResult.current;
-
   describe('drag and drop', () => {
     test('add unknown', () => {
-      expect(modifyData(emptyData(), { type: 'dnd', data: { activeId: 'unknown', targetId: '' } }, componentByName).newData).to.deep.equals(
-        emptyData()
-      );
+      expect(modifyData(emptyData(), { type: 'dnd', data: { activeId: 'unknown', targetId: '' } }).newData).to.deep.equals(emptyData());
     });
 
     test('add one', () => {
-      const data = modifyData(emptyData(), { type: 'dnd', data: { activeId: 'Input', targetId: '' } }, componentByName).newData;
+      const data = modifyData(emptyData(), { type: 'dnd', data: { activeId: 'Input', targetId: '' } }).newData;
       expect(data).to.not.deep.equals(emptyData);
       expect(data.components).to.have.length(1);
       expect(data.components[0].cid).toEqual('input1');
@@ -67,25 +56,23 @@ describe('modifyData', () => {
     });
 
     test('add two', () => {
-      let data = modifyData(emptyData(), { type: 'dnd', data: { activeId: 'Input', targetId: '' } }, componentByName).newData;
-      data = modifyData(data, { type: 'dnd', data: { activeId: 'Button', targetId: '' } }, componentByName).newData;
+      let data = modifyData(emptyData(), { type: 'dnd', data: { activeId: 'Input', targetId: '' } }).newData;
+      data = modifyData(data, { type: 'dnd', data: { activeId: 'Button', targetId: '' } }).newData;
       expect(data).to.not.deep.equals(emptyData());
       expect(data.components).to.have.length(2);
       expect(data.components[1].type).to.equals('Button');
     });
 
     test('add deep', () => {
-      let data = modifyData(emptyData(), { type: 'dnd', data: { activeId: 'Layout', targetId: '' } }, componentByName).newData;
-      data = modifyData(
-        data,
-        { type: 'dnd', data: { activeId: 'Button', targetId: `layout-${data.components[0].cid}` } },
-        componentByName
-      ).newData;
-      data = modifyData(
-        data,
-        { type: 'dnd', data: { activeId: 'Text', targetId: `layout-${data.components[0].cid}` } },
-        componentByName
-      ).newData;
+      let data = modifyData(emptyData(), { type: 'dnd', data: { activeId: 'Layout', targetId: '' } }).newData;
+      data = modifyData(data, {
+        type: 'dnd',
+        data: { activeId: 'Button', targetId: `layout-${data.components[0].cid}` }
+      }).newData;
+      data = modifyData(data, {
+        type: 'dnd',
+        data: { activeId: 'Text', targetId: `layout-${data.components[0].cid}` }
+      }).newData;
       expect(data).to.not.deep.equals(emptyData());
       expect(data.components).to.have.length(1);
       const layoutData = (data.components[0] as LayoutConfig).config.components;
@@ -96,101 +83,60 @@ describe('modifyData', () => {
 
     test('move down', () => {
       const data = filledData();
-      expectOrder(modifyData(data, { type: 'dnd', data: { activeId: '1', targetId: '2' } }, componentByName).newData, [
-        '1',
-        '2',
-        '3',
-        '4',
-        '5'
-      ]);
-      expectOrder(modifyData(data, { type: 'dnd', data: { activeId: '1', targetId: '3' } }, componentByName).newData, [
-        '2',
-        '1',
-        '3',
-        '4',
-        '5'
-      ]);
-      expectOrder(modifyData(data, { type: 'dnd', data: { activeId: '1', targetId: '4' } }, componentByName).newData, [
-        '2',
-        '3',
-        '1',
-        '4',
-        '5'
-      ]);
+      expectOrder(modifyData(data, { type: 'dnd', data: { activeId: '1', targetId: '2' } }).newData, ['1', '2', '3', '4', '5']);
+      expectOrder(modifyData(data, { type: 'dnd', data: { activeId: '1', targetId: '3' } }).newData, ['2', '1', '3', '4', '5']);
+      expectOrder(modifyData(data, { type: 'dnd', data: { activeId: '1', targetId: '4' } }).newData, ['2', '3', '1', '4', '5']);
     });
 
     test('move down deep', () => {
-      const data = modifyData(filledData(), { type: 'dnd', data: { activeId: '31', targetId: '33' } }, componentByName).newData;
+      const data = modifyData(filledData(), { type: 'dnd', data: { activeId: '31', targetId: '33' } }).newData;
       expectOrder(data, ['1', '2', '3', '4', '5']);
       expectOrderDeep(data, '3', ['32', '31', '33']);
     });
 
     test('move up', () => {
       const data = filledData();
-      expectOrder(modifyData(data, { type: 'dnd', data: { activeId: '3', targetId: '3' } }, componentByName).newData, [
-        '1',
-        '2',
-        '4',
-        '5',
-        '3'
-      ]);
-      expectOrder(modifyData(data, { type: 'dnd', data: { activeId: '3', targetId: '2' } }, componentByName).newData, [
-        '1',
-        '3',
-        '2',
-        '4',
-        '5'
-      ]);
-      expectOrder(modifyData(data, { type: 'dnd', data: { activeId: '3', targetId: '1' } }, componentByName).newData, [
-        '3',
-        '1',
-        '2',
-        '4',
-        '5'
-      ]);
+      expectOrder(modifyData(data, { type: 'dnd', data: { activeId: '3', targetId: '3' } }).newData, ['1', '2', '4', '5', '3']);
+      expectOrder(modifyData(data, { type: 'dnd', data: { activeId: '3', targetId: '2' } }).newData, ['1', '3', '2', '4', '5']);
+      expectOrder(modifyData(data, { type: 'dnd', data: { activeId: '3', targetId: '1' } }).newData, ['3', '1', '2', '4', '5']);
     });
 
     test('move up deep', () => {
-      const data = modifyData(filledData(), { type: 'dnd', data: { activeId: '33', targetId: '32' } }, componentByName).newData;
+      const data = modifyData(filledData(), { type: 'dnd', data: { activeId: '33', targetId: '32' } }).newData;
       expectOrder(data, ['1', '2', '3', '4', '5']);
       expectOrderDeep(data, '3', ['31', '33', '32']);
     });
 
     test('move down to deep', () => {
-      const data = modifyData(filledData(), { type: 'dnd', data: { activeId: '1', targetId: '32' } }, componentByName).newData;
+      const data = modifyData(filledData(), { type: 'dnd', data: { activeId: '1', targetId: '32' } }).newData;
       expectOrder(data, ['2', '3', '4', '5']);
       expectOrderDeep(data, '3', ['31', '1', '32', '33']);
     });
 
     test('move up from deep', () => {
-      const data = modifyData(filledData(), { type: 'dnd', data: { activeId: '32', targetId: '2' } }, componentByName).newData;
+      const data = modifyData(filledData(), { type: 'dnd', data: { activeId: '32', targetId: '2' } }).newData;
       expectOrder(data, ['1', '32', '2', '3', '4', '5']);
       expectOrderDeep(data, '3', ['31', '33']);
     });
 
     test('move to delete', () => {
       const data = filledData();
-      expectOrder(modifyData(data, { type: 'dnd', data: { activeId: '1', targetId: DELETE_DROPZONE_ID } }, componentByName).newData, [
-        '2',
-        '3',
-        '4',
-        '5'
-      ]);
+      expectOrder(modifyData(data, { type: 'dnd', data: { activeId: '1', targetId: DELETE_DROPZONE_ID } }).newData, ['2', '3', '4', '5']);
     });
   });
 
   describe('remove', () => {
     test('remove', () => {
       const data = filledData();
-      expectOrder(modifyData(data, { type: 'remove', data: { id: '1' } }, componentByName).newData, ['2', '3', '4', '5']);
-      expectOrder(modifyData(data, { type: 'remove', data: { id: '2' } }, componentByName).newData, ['1', '3', '4', '5']);
-      expectOrder(modifyData(data, { type: 'remove', data: { id: '3' } }, componentByName).newData, ['1', '2', '4', '5']);
-      expectOrder(modifyData(data, { type: 'remove', data: { id: '4' } }, componentByName).newData, ['1', '2', '3', '5']);
-      expectOrder(modifyData(data, { type: 'remove', data: { id: '5' } }, componentByName).newData, ['1', '2', '3', '4']);
+      expectOrder(modifyData(data, { type: 'remove', data: { id: '1' } }).newData, ['2', '3', '4', '5']);
+      expectOrder(modifyData(data, { type: 'remove', data: { id: '2' } }).newData, ['1', '3', '4', '5']);
+      expectOrder(modifyData(data, { type: 'remove', data: { id: '3' } }).newData, ['1', '2', '4', '5']);
+      expectOrder(modifyData(data, { type: 'remove', data: { id: '4' } }).newData, ['1', '2', '3', '5']);
+      expectOrder(modifyData(data, { type: 'remove', data: { id: '5' } }).newData, ['1', '2', '3', '4']);
     });
 
     test('remove deep', () => {
-      const removeDeep = modifyData(filledData(), { type: 'remove', data: { id: '32' } }, componentByName).newData;
+      const removeDeep = modifyData(filledData(), { type: 'remove', data: { id: '32' } }).newData;
       expectOrder(removeDeep, ['1', '2', '3', '4', '5']);
       expectOrderDeep(removeDeep, '3', ['31', '33']);
     });
@@ -198,42 +144,30 @@ describe('modifyData', () => {
 
   describe('add', () => {
     test('normal', () => {
-      const data = modifyData(
-        emptyData(),
-        {
-          type: 'add',
-          data: { componentName: 'Input', create: { label: 'Age', value: 'age' } }
-        },
-        componentByName
-      ).newData;
+      const data = modifyData(emptyData(), {
+        type: 'add',
+        data: { componentType: 'Input', create: { label: 'Age', value: 'age' } }
+      }).newData;
       expect(data).not.toEqual(emptyData());
       expect(data.components).toHaveLength(1);
       expect(data.components[0].type).to.equals('Input');
     });
 
     test('add to structure', () => {
-      const data = modifyData(
-        filledData(),
-        {
-          type: 'add',
-          data: { componentName: 'Input', create: { label: 'Age', value: 'age' }, targetId: '31' }
-        },
-        componentByName
-      ).newData;
+      const data = modifyData(filledData(), {
+        type: 'add',
+        data: { componentType: 'Input', create: { label: 'Age', value: 'age' }, targetId: '31' }
+      }).newData;
       expect(data).not.toEqual(filledData());
       expectOrder(data, ['1', '2', '3', '4', '5']);
       expectOrderDeep(data, '3', ['input54', '31', '32', '33']);
     });
 
     test('add to datatable is not possible', () => {
-      const data = modifyData(
-        tableData(),
-        {
-          type: 'add',
-          data: { componentName: 'Input', create: { label: 'Age', value: 'age' }, targetId: '11' }
-        },
-        componentByName
-      ).newData;
+      const data = modifyData(tableData(), {
+        type: 'add',
+        data: { componentType: 'Input', create: { label: 'Age', value: 'age' }, targetId: '11' }
+      }).newData;
       expect(data).toEqual(tableData());
       expectOrder(data, ['1']);
       expectOrderDeep(data, '1', ['11', '12', '13']);
@@ -243,11 +177,10 @@ describe('modifyData', () => {
   describe('paste', () => {
     test('duplicate', () => {
       const copy = findComponentElement(filledData(), '1')!.element;
-      const data = modifyData(
-        filledData(),
-        { type: 'paste', data: { componentName: copy.type, clipboard: copy.config, targetId: '1' } },
-        componentByName
-      ).newData;
+      const data = modifyData(filledData(), {
+        type: 'paste',
+        data: { componentType: copy.type, clipboard: copy.config, targetId: '1' }
+      }).newData;
       expect(data).not.toEqual(filledData());
       expect(data.components).toHaveLength(6);
       expectOrder(data, ['input54', '1', '2', '3', '4', '5']);
@@ -255,11 +188,10 @@ describe('modifyData', () => {
 
     test('paste', () => {
       const copy = findComponentElement(filledData(), '1')!.element;
-      const data = modifyData(
-        filledData(),
-        { type: 'paste', data: { componentName: copy.type, clipboard: copy.config, targetId: '4' } },
-        componentByName
-      ).newData;
+      const data = modifyData(filledData(), {
+        type: 'paste',
+        data: { componentType: copy.type, clipboard: copy.config, targetId: '4' }
+      }).newData;
       expect(data).not.toEqual(filledData());
       expect(data.components).toHaveLength(6);
       expectOrder(data, ['1', '2', '3', 'input54', '4', '5']);
@@ -267,11 +199,10 @@ describe('modifyData', () => {
 
     test('paste datatable column', () => {
       const copy = findComponentElement(tableData(), '11')!.element;
-      const data = modifyData(
-        tableData(),
-        { type: 'paste', data: { componentName: copy.type, clipboard: copy.config, targetId: '11' } },
-        componentByName
-      ).newData;
+      const data = modifyData(tableData(), {
+        type: 'paste',
+        data: { componentType: copy.type, clipboard: copy.config, targetId: '11' }
+      }).newData;
       expect(data).not.toEqual(tableData());
       expect(data.components).toHaveLength(1);
       const component = data.components.find(c => c.cid === '1') as TableConfig;
@@ -281,14 +212,10 @@ describe('modifyData', () => {
 
     test('paste datatable action column', () => {
       const copy = findComponentElement(tableData(), '13')!.element;
-      const data = modifyData(
-        tableData(),
-        {
-          type: 'paste',
-          data: { componentName: copy.type, clipboard: copy.config, targetId: '13' }
-        },
-        componentByName
-      ).newData;
+      const data = modifyData(tableData(), {
+        type: 'paste',
+        data: { componentType: copy.type, clipboard: copy.config, targetId: '13' }
+      }).newData;
       expect(data).not.toEqual(tableData());
       expect(data.components).toHaveLength(1);
       const component = data.components.find(c => c.cid === '1') as TableConfig;
@@ -299,11 +226,10 @@ describe('modifyData', () => {
 
     test('paste other things into datatable is not possible', () => {
       const originalData = tableData();
-      const data = modifyData(
-        originalData,
-        { type: 'paste', data: { componentName: 'Button', clipboard: {}, targetId: '11' } },
-        componentByName
-      ).newData;
+      const data = modifyData(originalData, {
+        type: 'paste',
+        data: { componentType: 'Button', clipboard: {}, targetId: '11' }
+      }).newData;
       expect(data).toEqual(originalData);
       expectOrder(data, ['1']);
       expectOrderDeep(data, '1', ['11', '12', '13']);
@@ -311,51 +237,47 @@ describe('modifyData', () => {
 
     test('paste datatable column outside of datatable is not possible', () => {
       const copy = findComponentElement(tableData(), '11')!.element;
-      const data = modifyData(
-        tableData(),
-        { type: 'paste', data: { componentName: copy.type, clipboard: copy.config, targetId: '1' } },
-        componentByName
-      ).newData;
+      const data = modifyData(tableData(), {
+        type: 'paste',
+        data: { componentType: copy.type, clipboard: copy.config, targetId: '1' }
+      }).newData;
       expect(data).toEqual(tableData());
     });
 
     test('duplicate deep', () => {
       const copy = findComponentElement(filledData(), '31')!.element;
-      const data = modifyData(
-        filledData(),
-        { type: 'paste', data: { componentName: copy.type, clipboard: copy.config, targetId: '31' } },
-        componentByName
-      ).newData;
+      const data = modifyData(filledData(), {
+        type: 'paste',
+        data: { componentType: copy.type, clipboard: copy.config, targetId: '31' }
+      }).newData;
       expect(data.components).toHaveLength(5);
       const component = data.components.find(c => c.cid === '3') as LayoutConfig;
       expect(component.config.components).toHaveLength(4);
       expect(component.config.components[0].cid).toEqual('text54');
-      expect((component.config.components[0].config as ConfigData).content).toEqual('Hello');
+      expect((component.config.components[0].config as Text).content).toEqual('Hello');
     });
 
     test('duplicate layout', () => {
       const copy = findComponentElement(filledData(), '3')!.element;
-      const data = modifyData(
-        filledData(),
-        { type: 'paste', data: { componentName: copy.type, clipboard: copy.config, targetId: '3' } },
-        componentByName
-      ).newData;
+      const data = modifyData(filledData(), {
+        type: 'paste',
+        data: { componentType: copy.type, clipboard: copy.config, targetId: '3' }
+      }).newData;
       expect(data.components).toHaveLength(6);
       const component = data.components.find(c => c.cid === 'layout54') as LayoutConfig;
       expect(component.config.components).toHaveLength(3);
       expect(component.config.components[0].cid).toEqual('text55');
-      expect((component.config.components[0].config as ConfigData).content).toEqual('Hello');
+      expect((component.config.components[0].config as Text).content).toEqual('Hello');
       expect(component.config.components[1].cid).toEqual('button56');
       expect(component.config.components[2].cid).toEqual('input57');
     });
 
     test('duplicate table', () => {
       const copy = findComponentElement(tableData(), '1')!.element;
-      const data = modifyData(
-        tableData(),
-        { type: 'paste', data: { componentName: copy.type, clipboard: copy.config, targetId: '1' } },
-        componentByName
-      ).newData;
+      const data = modifyData(tableData(), {
+        type: 'paste',
+        data: { componentType: copy.type, clipboard: copy.config, targetId: '1' }
+      }).newData;
       expect(data.components).toHaveLength(2);
       const component = data.components.find(c => c.cid === 'datatable15') as TableConfig;
       expect(component.config.components).toHaveLength(3);
@@ -367,11 +289,10 @@ describe('modifyData', () => {
 
     test('duplicate table column', () => {
       const copy = findComponentElement(tableData(), '11')!.element;
-      const data = modifyData(
-        tableData(),
-        { type: 'paste', data: { componentName: copy.type, clipboard: copy.config, targetId: '11' } },
-        componentByName
-      ).newData;
+      const data = modifyData(tableData(), {
+        type: 'paste',
+        data: { componentType: copy.type, clipboard: copy.config, targetId: '11' }
+      }).newData;
       expectOrder(data, ['1']);
       expectOrderDeep(data, '1', ['datatablecolumn15', '11', '12', '13']);
     });
@@ -380,31 +301,32 @@ describe('modifyData', () => {
   describe('move', () => {
     test('down', () => {
       const data = filledData();
-      expectOrder(modifyData(data, { type: 'moveDown', data: { id: '2' } }, componentByName).newData, ['1', '3', '2', '4', '5']);
+      expectOrder(modifyData(data, { type: 'moveDown', data: { id: '2' } }).newData, ['1', '3', '2', '4', '5']);
     });
 
     test('down deep', () => {
       const data = filledData();
-      expectOrderDeep(modifyData(data, { type: 'moveDown', data: { id: '31' } }, componentByName).newData, '3', ['32', '31', '33']);
+      expectOrderDeep(modifyData(data, { type: 'moveDown', data: { id: '31' } }).newData, '3', ['32', '31', '33']);
     });
 
     test('up', () => {
       const data = filledData();
-      expectOrder(modifyData(data, { type: 'moveUp', data: { id: '2' } }, componentByName).newData, ['2', '1', '3', '4', '5']);
+      expectOrder(modifyData(data, { type: 'moveUp', data: { id: '2' } }).newData, ['2', '1', '3', '4', '5']);
     });
 
     test('up deep', () => {
       const data = filledData();
-      expectOrderDeep(modifyData(data, { type: 'moveUp', data: { id: '33' } }, componentByName).newData, '3', ['31', '33', '32']);
+      expectOrderDeep(modifyData(data, { type: 'moveUp', data: { id: '33' } }).newData, '3', ['31', '33', '32']);
     });
 
     test('first and last', () => {
       const data = filledData();
-      expectOrder(modifyData(data, { type: 'moveUp', data: { id: '1' } }, componentByName).newData, ['1', '2', '3', '4', '5']);
-      expectOrder(modifyData(data, { type: 'moveDown', data: { id: '3' } }, componentByName).newData, ['1', '2', '4', '3', '5']);
+      expectOrder(modifyData(data, { type: 'moveUp', data: { id: '1' } }).newData, ['1', '2', '3', '4', '5']);
+      expectOrder(modifyData(data, { type: 'moveDown', data: { id: '3' } }).newData, ['1', '2', '4', '3', '5']);
     });
   });
 });
+
 describe('findParentTableComponent', () => {
   const but1: DeepPartial<ActionColumnComponent> = {
     cid: 'but1',
@@ -424,18 +346,18 @@ describe('findParentTableComponent', () => {
     type: 'DataTableColumn'
   };
 
-  const data: ComponentData[] = [
+  const data: Component[] = [
     {
       cid: '3',
       type: 'DataTable',
-      config: { components: [col1, col2] }
+      config: { components: [col1, col2] } as DataTable
     },
     {
       cid: '4',
       type: 'Layout',
       config: {
-        components: [{ cid: 'input1', type: 'Input', config: {} }]
-      }
+        components: [{ cid: 'input1', type: 'Input', config: {} as Input }]
+      } as Layout
     }
   ];
 
@@ -461,31 +383,6 @@ describe('findParentTableComponent', () => {
   test('return undefined if is no component', () => {
     const parent = getParentComponent(data, 'notexistent');
     expect(parent).toEqual(undefined);
-  });
-});
-
-describe('createInitForm', () => {
-  const { result: componentsResult } = renderHook(() => useComponentsInit());
-  const { componentByName } = componentsResult.current;
-  test('create', () => {
-    const data = createInitForm(emptyData(), [{ componentName: 'Input', label: 'Age', value: 'age' }], false, componentByName);
-    expect(data).not.toEqual(emptyData());
-    expect(data.components).toHaveLength(1);
-    expect(data.components[0].type).toEqual('Input');
-  });
-
-  test('create with workflow buttons', () => {
-    const data = createInitForm(emptyData(), [{ componentName: 'Input', label: 'Age', value: 'age' }], true, componentByName);
-    expect(data).not.toEqual(emptyData());
-    expect(data.components).toHaveLength(2);
-    expect(data.components[0].type).toEqual('Input');
-    const layout = data.components[1] as LayoutConfig;
-    expect(layout.type).toEqual('Layout');
-    expect(layout.config.components).toHaveLength(2);
-    expect((layout.config.components[0].config as ConfigData).action).toEqual('#{ivyWorkflowView.cancel()}');
-    expect((layout.config.components[0].config as ConfigData).type).toEqual('BUTTON');
-    expect((layout.config.components[1].config as ConfigData).action).toEqual('#{logic.close}');
-    expect((layout.config.components[1].config as ConfigData).type).toEqual('SUBMIT');
   });
 });
 
@@ -526,7 +423,7 @@ const filledData = () => {
         config: {
           legend: 'Legend',
           collapsible: true,
-          disabled: false,
+          disabled: 'false',
           collapsed: false,
           components: [
             { cid: '41', type: 'Text', config: { content: 'Hello' } },
@@ -592,7 +489,7 @@ describe('isEditableTable', () => {
     const table: ComponentData = {
       cid: 'table1',
       type: 'DataTable',
-      config: { isEditable: true, components: [] }
+      config: { isEditable: true, components: [] } as unknown as DataTable
     };
     expect(isEditableTable([table], table)).toBe(true);
   });
@@ -601,7 +498,7 @@ describe('isEditableTable', () => {
     const table: ComponentData = {
       cid: 'table2',
       type: 'DataTable',
-      config: { isEditable: false, components: [] }
+      config: { isEditable: false, components: [] } as unknown as DataTable
     };
     expect(isEditableTable([table], table)).toBe(false);
   });

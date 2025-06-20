@@ -260,6 +260,7 @@ export class Input {
     await this.focus();
     await this.clear();
     await this.inputLocator.fill(value);
+    await this.inputLocator.blur();
   }
 
   async openBrowser() {

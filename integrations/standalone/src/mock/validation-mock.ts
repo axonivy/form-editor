@@ -1,4 +1,4 @@
-import type { ComponentData, FormData, ValidationResult } from '@axonivy/form-editor-protocol';
+import type { ComponentData, FormData, Input, Select, ValidationResult } from '@axonivy/form-editor-protocol';
 
 export const validateMock = (data: FormData): Array<ValidationResult> => {
   const validations: Array<ValidationResult> = [];
@@ -13,12 +13,14 @@ const validateDeep = (components: Array<ComponentData>, validations: Array<Valid
       validateDeep(c.config.components as Array<ComponentData>, validations);
     }
     if (c.type === 'Input') {
-      if (c.config.value === undefined || (c.config.value as string).length === 0) {
+      const config = c.config as Input;
+      if (config.value === undefined || (config.value as string).length === 0) {
         validations.push({ path: `${c.cid}.value`, message: 'Value is required', severity: 'ERROR' });
       }
     }
     if (c.type === 'Select') {
-      if (c.config.value === undefined || (c.config.value as string).length === 0) {
+      const config = c.config as Select;
+      if (config.value === undefined || (config.value as string).length === 0) {
         validations.push({ path: `${c.cid}.value`, message: 'Value is required', severity: 'WARNING' });
       }
     }

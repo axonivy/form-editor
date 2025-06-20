@@ -1,4 +1,4 @@
-import type { Prettify, Select } from '@axonivy/form-editor-protocol';
+import { type Prettify, type Select } from '@axonivy/form-editor-protocol';
 import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
 import './Select.css';
 import { useBase } from '../base';
@@ -12,22 +12,10 @@ import { useMemo } from 'react';
 type SelectProps = Prettify<Select>;
 
 export const useSelectComponent = () => {
-  const { baseComponentFields, behaviourComponentFields, defaultBaseComponent, defaultBehaviourComponent, selectItemsComponentFields } =
-    useBase();
+  const { baseComponentFields, behaviourComponentFields, selectItemsComponentFields } = useBase();
   const { t } = useTranslation();
 
   const SelectComponent = useMemo(() => {
-    const defaultInputProps: Select = {
-      label: t('components.select.name'),
-      value: '',
-      staticItems: [],
-      dynamicItemsList: '',
-      dynamicItemsLabel: '#{item}',
-      dynamicItemsValue: '#{item}',
-      ...defaultBehaviourComponent,
-      ...defaultBaseComponent
-    } as const;
-
     const SelectComponent: ComponentConfig<SelectProps> = {
       name: 'Select',
       displayName: t('components.select.name'),
@@ -35,9 +23,7 @@ export const useSelectComponent = () => {
       subcategory: 'Selection',
       icon: <IconSvg />,
       description: t('components.select.description'),
-      defaultProps: defaultInputProps,
       render: props => <UiBlock {...props} />,
-      create: ({ label, value, ...defaultProps }) => ({ ...defaultInputProps, label, value, ...defaultProps }),
       outlineInfo: component => component.label,
       fields: {
         ...baseComponentFields,
@@ -48,7 +34,7 @@ export const useSelectComponent = () => {
     };
 
     return SelectComponent;
-  }, [baseComponentFields, behaviourComponentFields, defaultBaseComponent, defaultBehaviourComponent, selectItemsComponentFields, t]);
+  }, [baseComponentFields, behaviourComponentFields, selectItemsComponentFields, t]);
 
   return {
     SelectComponent
