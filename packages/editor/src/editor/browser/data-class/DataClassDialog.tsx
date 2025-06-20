@@ -24,11 +24,12 @@ import { useAppContext } from '../../../context/AppContext';
 import { useCallback, useEffect, useState, type ReactNode } from 'react';
 import type { Variable } from '@axonivy/form-editor-protocol';
 import { flexRender, getCoreRowModel, getFilteredRowModel, useReactTable, type ColumnDef, type Row } from '@tanstack/react-table';
-import { createInitForm, creationTargetId } from '../../../data/data';
+import { creationTargetId } from '../../../data/data';
 import { useKnownHotkeys } from '../../../utils/hotkeys';
 import { useTranslation } from 'react-i18next';
 import { findAttributesOfType, variableTreeData, rowToCreateData } from './variable-tree-data';
 import { useComponents } from '../../../context/ComponentsContext';
+import { createInitForm } from './create-init-form';
 
 type DataClassDialogProps = {
   showWorkflowButtonsCheckbox?: boolean;
