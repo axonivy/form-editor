@@ -21,6 +21,7 @@ import { useState } from 'react';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { getTabState, validationsForPaths } from '../../context/useValidation';
 import { useAppContext } from '../../context/AppContext';
+import { addDefaults } from '../../components/component-factory';
 
 export const Properties = () => {
   const { categoryTranslations: CategoryTranslations } = useBase();
@@ -32,7 +33,7 @@ export const Properties = () => {
     return <FormPropertySection />;
   }
   const propertyConfig = componentByElement(element, data.components);
-  const elementConfig = { ...propertyConfig.defaultProps, ...element.config };
+  const elementConfig = addDefaults(element.type);
   const fields = visibleFields(propertyConfig.fields, elementConfig);
   const sections = visibleSections(fields, parent);
 

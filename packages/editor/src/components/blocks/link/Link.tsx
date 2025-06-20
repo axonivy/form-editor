@@ -1,4 +1,4 @@
-import { LINK_DEFAULTS, type Link, type Prettify } from '@axonivy/form-editor-protocol';
+import { type Link, type Prettify } from '@axonivy/form-editor-protocol';
 import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
 import './Link.css';
 import { useBase } from '../base';
@@ -21,9 +21,7 @@ export const useLinkComponent = () => {
       subcategory: 'General',
       icon: <IconSvg />,
       description: t('components.link.description'),
-      defaultProps: LINK_DEFAULTS,
       render: props => <UiBlock {...props} />,
-      create: () => LINK_DEFAULTS,
       outlineInfo: component => component.name,
       fields: {
         ...baseComponentFields,

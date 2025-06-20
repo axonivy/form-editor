@@ -1,4 +1,4 @@
-import { type Textarea, type Prettify, TEXTAREA_DEFAULTS } from '@axonivy/form-editor-protocol';
+import { type Textarea, type Prettify } from '@axonivy/form-editor-protocol';
 import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
 import './Textarea.css';
 import { useBase } from '../base';
@@ -21,9 +21,7 @@ export const useTextareaComponent = () => {
       subcategory: 'Input',
       icon: <IconSvg />,
       description: t('components.textarea.description'),
-      defaultProps: TEXTAREA_DEFAULTS,
       render: props => <UiBlock {...props} />,
-      create: ({ label, value, ...defaultProps }) => ({ ...TEXTAREA_DEFAULTS, label, value, ...defaultProps }),
       outlineInfo: component => component.label,
       fields: {
         ...baseComponentFields,

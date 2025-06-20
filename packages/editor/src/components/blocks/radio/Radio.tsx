@@ -1,4 +1,4 @@
-import { type Prettify, type Radio, type OrientationType, RADIO_DEFAULTS } from '@axonivy/form-editor-protocol';
+import { type Prettify, type Radio, type OrientationType } from '@axonivy/form-editor-protocol';
 import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type FieldOption, type UiComponentProps } from '../../../types/config';
 import './Radio.css';
 import { useBase } from '../base';
@@ -27,9 +27,7 @@ export const useRadioComponent = () => {
       subcategory: 'Selection',
       icon: <IconSvg />,
       description: t('components.radio.description'),
-      defaultProps: RADIO_DEFAULTS,
       render: props => <UiBlock {...props} />,
-      create: ({ label, value, ...defaultProps }) => ({ ...RADIO_DEFAULTS, label, value, ...defaultProps }),
       outlineInfo: component => component.label,
       fields: {
         ...baseComponentFields,

@@ -1,4 +1,4 @@
-import { DATATABLE_DEFAULTS, type DataTable, type Prettify, type TableComponent } from '@axonivy/form-editor-protocol';
+import { type DataTable, type Prettify, type TableComponent } from '@axonivy/form-editor-protocol';
 import type { ComponentConfig, UiComponentProps } from '../../../types/config';
 import './DataTable.css';
 import { useBase } from '../base';
@@ -35,9 +35,7 @@ export const useDataTableComponent = () => {
       subcategory: 'Input',
       icon: <IconSvg />,
       description: t('components.dataTable.description'),
-      defaultProps: DATATABLE_DEFAULTS,
       render: props => <UiBlock {...props} />,
-      create: ({ label, value, ...defaultProps }) => ({ ...DATATABLE_DEFAULTS, label, value, ...defaultProps }),
       outlineInfo: component => component.value,
       fields: {
         ...baseComponentFields,

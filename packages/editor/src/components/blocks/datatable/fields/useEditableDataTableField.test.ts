@@ -133,7 +133,7 @@ const data = {
       }
     }
   ]
-} as FormData;
+} as DeepPartial<FormData>;
 
 test('useEditableDataTableField createComponentData', async () => {
   const newData = [] as FormData[];

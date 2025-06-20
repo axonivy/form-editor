@@ -1,4 +1,4 @@
-import { INPUT_DEFAULTS, type Input, type InputType, type Prettify, type SymbolPosition } from '@axonivy/form-editor-protocol';
+import { type Input, type InputType, type Prettify, type SymbolPosition } from '@axonivy/form-editor-protocol';
 import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type FieldOption, type UiComponentProps } from '../../../types/config';
 import './Input.css';
 import { useBase } from '../base';
@@ -33,9 +33,7 @@ export const useInputComponent = () => {
       subcategory: 'Input',
       icon: <IconSvg />,
       description: t('components.input.description'),
-      defaultProps: INPUT_DEFAULTS,
       render: props => <UiBlock {...props} />,
-      create: ({ label, value, ...defaultProps }) => ({ ...INPUT_DEFAULTS, label, value, ...defaultProps }),
       outlineInfo: component => component.label,
       fields: {
         ...baseComponentFields,

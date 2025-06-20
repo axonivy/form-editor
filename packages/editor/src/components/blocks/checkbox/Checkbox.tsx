@@ -1,4 +1,4 @@
-import { CHECKBOX_DEFAULTS, type Checkbox, type Prettify } from '@axonivy/form-editor-protocol';
+import { type Checkbox, type Prettify } from '@axonivy/form-editor-protocol';
 import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
 import './Checkbox.css';
 import { useBase } from '../base';
@@ -23,9 +23,7 @@ export const useCheckboxComponent = () => {
       subcategory: 'Selection',
       icon: <IconSvg />,
       description: t('components.checkbox.description'),
-      defaultProps: CHECKBOX_DEFAULTS,
       render: props => <UiBlock {...props} />,
-      create: ({ label, value, ...defaultProps }) => ({ ...CHECKBOX_DEFAULTS, label, selected: value, ...defaultProps }),
       outlineInfo: component => component.label,
       fields: {
         ...baseComponentFields,

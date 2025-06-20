@@ -1,6 +1,6 @@
-import type { FormData } from '@axonivy/form-editor-protocol';
+import type { DeepPartial, FormData } from '@axonivy/form-editor-protocol';
 
-export const dataDataTable: FormData = {
+export const dataDataTable: DeepPartial<FormData> = {
   id: 'a5c1d16e-1d08-4e1f-a9f0-436c553a3881',
   config: {
     renderer: 'JSF',

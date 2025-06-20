@@ -1,4 +1,4 @@
-import { SELECT_DEFAULTS, type Prettify, type Select } from '@axonivy/form-editor-protocol';
+import { type Prettify, type Select } from '@axonivy/form-editor-protocol';
 import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
 import './Select.css';
 import { useBase } from '../base';
@@ -23,9 +23,7 @@ export const useSelectComponent = () => {
       subcategory: 'Selection',
       icon: <IconSvg />,
       description: t('components.select.description'),
-      defaultProps: SELECT_DEFAULTS,
       render: props => <UiBlock {...props} />,
-      create: ({ label, value, ...defaultProps }) => ({ ...SELECT_DEFAULTS, label, value, ...defaultProps }),
       outlineInfo: component => component.label,
       fields: {
         ...baseComponentFields,

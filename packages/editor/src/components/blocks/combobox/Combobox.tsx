@@ -1,4 +1,4 @@
-import { COMBOBOX_DEFAULTS, type Combobox, type Prettify } from '@axonivy/form-editor-protocol';
+import { type Combobox, type Prettify } from '@axonivy/form-editor-protocol';
 import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
 import './Combobox.css';
 import { useBase } from '../base';
@@ -23,9 +23,7 @@ export const useComboboxComponent = () => {
       subcategory: 'Input',
       icon: <IconSvg />,
       description: t('components.combobox.description'),
-      defaultProps: COMBOBOX_DEFAULTS,
       render: props => <UiBlock {...props} />,
-      create: ({ label, value, ...defaultProps }) => ({ ...COMBOBOX_DEFAULTS, label, value, ...defaultProps }),
       outlineInfo: component => component.label,
       fields: {
         ...baseComponentFields,

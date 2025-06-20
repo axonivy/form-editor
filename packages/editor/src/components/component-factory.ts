@@ -1,18 +1,23 @@
-import {
-  CONFIG_DEFAULTS,
-  type Component,
-  type ComponentConfigs,
-  type ComponentType,
-  type DataTableColumn
-} from '@axonivy/form-editor-protocol';
+import { CONFIG_DEFAULTS, type ComponentConfigs, type ComponentData, type ComponentType } from '@axonivy/form-editor-protocol';
 
 export const addDefaults = <TType extends ComponentType>(type: TType, config?: Partial<ComponentConfigs[TType]>) => {
-  const defaults: Component['config'] | DataTableColumn = CONFIG_DEFAULTS[type];
+  const defaults: ComponentData['config'] = CONFIG_DEFAULTS[type];
   return { ...defaults, ...config } as ComponentConfigs[TType];
 };
 
-export const createComponent = <TType extends ComponentType>(type: TType, initProps?: ComponentConfigs[TType]) => {
-  return addDefaults(type, initProps);
+export type CreateData<TType extends ComponentType = ComponentType> = {
+  label?: string;
+  value?: string;
+  config?: Partial<ComponentConfigs[TType]>;
+};
+
+export const createComponent = <TType extends ComponentType>(type: TType, createData?: CreateData<TType>) => {
+  const config = addDefaults(type, createData?.config);
+  switch (type) {
+    case 'Button':
+      return { ...config, name: createData?.label, action: createData?.value };
+  }
+  return config;
 };
 
 export const componentForDataType = (

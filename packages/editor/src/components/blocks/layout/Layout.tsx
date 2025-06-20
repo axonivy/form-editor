@@ -1,7 +1,6 @@
 import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type FieldOption, type UiComponentProps } from '../../../types/config';
 import './Layout.css';
 import {
-  LAYOUT_DEFAULTS,
   type Layout,
   type LayoutGridVariant,
   type LayoutJustifyContent,
@@ -50,9 +49,7 @@ export const useLayoutComponent = () => {
       subcategory: 'General',
       icon: <IconSvg />,
       description: t('components.layout.description'),
-      defaultProps: LAYOUT_DEFAULTS,
       render: props => <UiBlock {...props} />,
-      create: ({ defaultProps }) => ({ ...LAYOUT_DEFAULTS, ...defaultProps }),
       outlineInfo: component => component.type,
       fields: {
         ...baseComponentFields,

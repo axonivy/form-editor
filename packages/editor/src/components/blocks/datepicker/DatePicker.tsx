@@ -1,4 +1,4 @@
-import { DATEPICKER_DEFAULTS, type DatePicker, type Prettify } from '@axonivy/form-editor-protocol';
+import { type DatePicker, type Prettify } from '@axonivy/form-editor-protocol';
 import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
 import './DatePicker.css';
 import { useBase } from '../base';
@@ -21,9 +21,7 @@ export const useDatePickerComponent = () => {
       subcategory: 'Input',
       icon: <IconSvg />,
       description: t('components.datePicker.description'),
-      defaultProps: DATEPICKER_DEFAULTS,
       render: props => <UiBlock {...props} />,
-      create: ({ label, value, ...defaultProps }) => ({ ...DATEPICKER_DEFAULTS, label, value, ...defaultProps }),
       outlineInfo: component => component.label,
       fields: {
         ...baseComponentFields,

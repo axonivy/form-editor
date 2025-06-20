@@ -1,4 +1,4 @@
-import { PANEL_DEFAULTS, type Panel, type Prettify } from '@axonivy/form-editor-protocol';
+import { type Panel, type Prettify } from '@axonivy/form-editor-protocol';
 import { useBase } from '../base';
 import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
 import IconSvg from './Panel.svg?react';
@@ -25,10 +25,8 @@ export const usePanelComponent = () => {
       subcategory: 'General',
       icon: <IconSvg />,
       description: t('components.panel.description'),
-      defaultProps: PANEL_DEFAULTS,
       quickActions: [...DEFAULT_QUICK_ACTIONS, 'EXTRACTINTOCOMPONENT'],
       render: props => <UiBlock {...props} />,
-      create: ({ defaultProps }) => ({ ...PANEL_DEFAULTS, ...defaultProps }),
       outlineInfo: component => component.title,
       fields: {
         ...baseComponentFields,

@@ -1,5 +1,5 @@
 import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
-import { DIALOG_DEFAULTS, isTable, type Dialog, type Prettify } from '@axonivy/form-editor-protocol';
+import { isTable, type Dialog, type Prettify } from '@axonivy/form-editor-protocol';
 import { useBase } from '../base';
 import IconSvg from './Dialog.svg?react';
 import { ComponentBlock } from '../../../editor/canvas/ComponentBlock';
@@ -28,9 +28,7 @@ export const useDialogComponent = () => {
       subcategory: 'General',
       icon: <IconSvg />,
       description: t('components.dialog.description'),
-      defaultProps: DIALOG_DEFAULTS,
       render: props => <DialogUiBlock {...props} />,
-      create: ({ label, value, defaultProps }) => ({ ...DIALOG_DEFAULTS, header: label, linkedComponent: value, ...defaultProps }),
       outlineInfo: component => component.header,
       fields: {
         ...baseComponentFields,

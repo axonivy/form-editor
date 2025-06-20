@@ -1,4 +1,4 @@
-import { FIELDSET_DEFAULTS, type Fieldset, type Prettify } from '@axonivy/form-editor-protocol';
+import { type Fieldset, type Prettify } from '@axonivy/form-editor-protocol';
 import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
 import { ComponentBlock } from '../../../editor/canvas/ComponentBlock';
 import IconSvg from './Fieldset.svg?react';
@@ -24,10 +24,8 @@ export const useFieldsetComponent = () => {
       subcategory: 'General',
       icon: <IconSvg />,
       description: t('components.fieldset.description'),
-      defaultProps: FIELDSET_DEFAULTS,
       quickActions: [...DEFAULT_QUICK_ACTIONS, 'EXTRACTINTOCOMPONENT'],
       render: props => <UiBlock {...props} />,
-      create: ({ defaultProps }) => ({ ...FIELDSET_DEFAULTS, ...defaultProps }),
       outlineInfo: component => component.legend,
       fields: {
         ...baseComponentFields,

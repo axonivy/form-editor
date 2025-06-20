@@ -37,12 +37,11 @@ export type PrimitiveValue = string | boolean | number | any[] | Record<string, 
 
 export type ConfigData = Record<string, PrimitiveValue | Array<ComponentData>>;
 
-export type ComponentData =
-  | (Omit<Component, 'config'> & {
-      config: ConfigData;
-    })
-  | TableComponent
-  | ActionColumnComponent;
+export type ComponentData = {
+  cid: string;
+  type: ComponentType;
+  config: Component['config'] | DataTableColumn;
+};
 
 export type TableConfig = ComponentData & { config: Omit<DataTable, 'components'> & { components: Array<TableComponent> } };
 
@@ -72,7 +71,7 @@ export const isColumn = (component?: Component | ComponentData): component is Co
   return component !== undefined && component.type === 'DataTableColumn' && 'components' in component.config;
 };
 
-export const isButton = (component?: Component | ComponentData): component is Component => {
+export const isButton = (component?: Component | ComponentData): component is { cid: string; type: 'Button'; config: Button } => {
   return component !== undefined && component.type === 'Button' && 'type' in component.config && 'action' in component.config;
 };
 

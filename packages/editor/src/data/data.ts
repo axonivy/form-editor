@@ -1,4 +1,4 @@
-import type { ComponentConfig, CreateComponentData, CreateData } from '../types/config';
+import type { ComponentConfig } from '../types/config';
 import { type ComponentByName } from '../components/components';
 import { add, remove } from '../utils/array';
 import {
@@ -14,6 +14,8 @@ import {
 } from '@axonivy/form-editor-protocol';
 import { useAppContext } from '../context/AppContext';
 import type { UpdateConsumer } from '../types/types';
+import { createComponent, type CreateData } from '../components/component-factory';
+import type { CreateComponentData } from '../context/DndContext';
 
 export const CANVAS_DROPZONE_ID = 'canvas';
 export const DELETE_DROPZONE_ID = 'delete';
@@ -155,7 +157,7 @@ const moveComponent = (data: Array<ComponentData>, id: string, indexMove: number
   return;
 };
 
-type ModifyAction =
+type ModifyAction<TType extends ComponentType = ComponentType> =
   | {
       type: 'dnd';
       data: {
@@ -165,12 +167,12 @@ type ModifyAction =
         create?: CreateData;
       };
     }
-  | { type: 'add'; data: { componentName: ComponentType; componentByName: ComponentByName; create?: CreateData; targetId?: string } }
+  | { type: 'add'; data: { componentName: TType; componentByName: ComponentByName; create?: CreateData<TType>; targetId?: string } }
   | { type: 'remove' | 'moveUp' | 'moveDown'; data: { id: string } }
   | {
       type: 'paste';
       data: {
-        componentName: ComponentType;
+        componentName: TType;
         clipboard: Component['config'] | ComponentData['config'];
         targetId: string;
         componentByName: ComponentByName;
@@ -184,7 +186,7 @@ const dndModify = (
 ) => {
   const component = componentByName(action.activeId);
   if (component) {
-    return addComponent(data, createComponentData(data, component, action.create), action.targetId);
+    return addComponent(data, createComponentData(data, component.name, action.create), action.targetId);
   } else {
     const removed = removeComponent(data, action.activeId);
     if (removed && action.targetId !== DELETE_DROPZONE_ID) {
@@ -194,17 +196,17 @@ const dndModify = (
   }
 };
 
-const createComponentData = (data: Array<ComponentData>, config: ComponentConfig, createData?: CreateData): ComponentData => ({
-  cid: createId(data, config.name),
-  type: config.name,
-  config: (createData ? config.create(createData) : structuredClone(config.defaultProps)) as Extract<ComponentData, 'config'>
+const createComponentData = (data: Array<ComponentData>, type: ComponentType, createData?: CreateData): ComponentData => ({
+  cid: createId(data, type),
+  type,
+  config: createComponent(type, createData)
 });
 
-const createId = (components: Array<ComponentData>, name: ComponentType) => {
+const createId = (components: Array<ComponentData>, type: ComponentType) => {
   const ids = allCids(components);
-  const nextId = `${name}${highestIdNumber(ids) + 1}`.toLowerCase();
+  const nextId = `${type}${highestIdNumber(ids) + 1}`.toLowerCase();
   if (ids.has(nextId)) {
-    return createId(components, name);
+    return createId(components, type);
   }
   return nextId;
 };
@@ -230,13 +232,8 @@ const allCids = (components: Array<ComponentData>) => {
   return ids;
 };
 
-const pasteComponent = (
-  data: FormData,
-  config: ComponentConfig,
-  clipboard: Component['config'] | ComponentData['config'],
-  targetId: string
-) => {
-  const newComponent = createComponentData(data.components, config);
+const pasteComponent = (data: FormData, config: ComponentConfig, clipboard: ComponentData['config'], targetId: string) => {
+  const newComponent = createComponentData(data.components, config.name);
   newComponent.cid = 'copy';
   newComponent.config = { ...newComponent.config, ...clipboard };
   if (newComponent) {
@@ -256,7 +253,7 @@ const defineNewCid = (components: Array<ComponentData>, component: ComponentData
   }
 };
 
-export const modifyData = (data: FormData, action: ModifyAction) => {
+export const modifyData = <TType extends ComponentType>(data: FormData, action: ModifyAction<TType>) => {
   const newData = structuredClone(data);
   let newComponentId;
   switch (action.type) {
@@ -266,7 +263,7 @@ export const modifyData = (data: FormData, action: ModifyAction) => {
     case 'add':
       newComponentId = addComponent(
         newData.components,
-        createComponentData(newData.components, action.data.componentByName(action.data.componentName), action.data.create),
+        createComponentData(newData.components, action.data.componentByName(action.data.componentName).name, action.data.create),
         action.data.targetId ?? CANVAS_DROPZONE_ID
       );
       break;
@@ -312,7 +309,7 @@ export const createInitForm = (
       type: 'add',
       data: {
         componentName: 'Layout',
-        create: { label: '', value: '', defaultProps: { type: 'FLEX', justifyContent: 'END' } },
+        create: { label: '', value: '', config: { type: 'FLEX', justifyContent: 'END' } },
         targetId: selectedElementId,
         componentByName
       }
@@ -325,7 +322,7 @@ export const createInitForm = (
         create: {
           label: 'Cancel',
           value: '#{ivyWorkflowView.cancel()}',
-          defaultProps: { variant: 'SECONDARY', processOnlySelf: true, style: 'FLAT' }
+          config: { variant: 'SECONDARY', processOnlySelf: true, style: 'FLAT' }
         },
         targetId: layoutId,
         componentByName
@@ -338,7 +335,7 @@ export const createInitForm = (
         create: {
           label: 'Proceed',
           value: '#{logic.close}',
-          defaultProps: { variant: 'PRIMARY', type: 'SUBMIT', icon: 'si si-check-1' }
+          config: { variant: 'PRIMARY', type: 'SUBMIT', icon: 'si si-check-1' }
         },
         targetId: layoutId,
         componentByName

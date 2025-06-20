@@ -1,6 +1,6 @@
-import type { FormData } from '@axonivy/form-editor-protocol';
+import type { DeepPartial, FormData } from '@axonivy/form-editor-protocol';
 
-export const data: FormData = {
+export const data: DeepPartial<FormData> = {
   id: 'a5c1d16e-1d08-4e1f-a9f0-436c553a3881',
   config: {
     renderer: 'JSF',
@@ -19,7 +19,7 @@ export const data: FormData = {
             config: {
               label: 'Firstname',
               value: 'data.value',
-              required: true,
+              required: 'true',
               type: 'TEXT',
               mdSpan: '6',
               lgSpan: '8'
@@ -31,7 +31,7 @@ export const data: FormData = {
             config: {
               label: 'Lastname',
               value: 'data.value',
-              required: false,
+              required: 'false',
               type: 'TEXT',
               mdSpan: '6',
               lgSpan: '4'
@@ -59,7 +59,7 @@ export const data: FormData = {
             config: {
               label: 'State',
               value: 'data.value',
-              required: false,
+              required: 'false',
               type: 'TEXT',
               mdSpan: '4',
               lgSpan: '4'
@@ -71,7 +71,7 @@ export const data: FormData = {
             config: {
               label: 'Zip',
               value: 'data.value',
-              required: false,
+              required: 'false',
               type: 'TEXT',
               lgSpan: '2',
               mdSpan: '4'
@@ -118,7 +118,7 @@ export const data: FormData = {
       config: {
         legend: 'Legend',
         collapsible: true,
-        disabled: false,
+        disabled: 'false',
         collapsed: false,
         components: [
           {
@@ -127,7 +127,7 @@ export const data: FormData = {
             config: {
               label: 'Title',
               value: 'data.value',
-              required: true,
+              required: 'true',
               type: 'TEXT',
               mdSpan: '6',
               lgSpan: '8'

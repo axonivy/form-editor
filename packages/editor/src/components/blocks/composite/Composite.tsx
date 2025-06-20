@@ -1,4 +1,4 @@
-import { COMPOSITE_DEFAULTS, type Component, type ComponentData, type Composite, type Prettify } from '@axonivy/form-editor-protocol';
+import { type Component, type ComponentData, type Composite, type Prettify } from '@axonivy/form-editor-protocol';
 import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
 import './Composite.css';
 import { useBase } from '../base';
@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { useAppContext } from '../../../context/AppContext';
 import { useMeta } from '../../../context/useMeta';
 import { useComponents } from '../../../context/ComponentsContext';
+import { addDefaults } from '../../component-factory';
 
 type CompositeProps = Prettify<Composite>;
 
@@ -28,9 +29,7 @@ export const useCompositeComponent = () => {
       subcategory: 'General',
       icon: <IconSvg />,
       description: t('components.composite.description'),
-      defaultProps: COMPOSITE_DEFAULTS,
       render: props => <UiBlock {...props} />,
-      create: ({ label, defaultProps }) => ({ ...COMPOSITE_DEFAULTS, name: label, ...defaultProps }),
       outlineInfo: component => component.name,
       fields: {
         ...baseComponentFields,
@@ -90,7 +89,7 @@ const CompositeRenderer = ({ name }: { name: string }) => {
   return content && content.data.$schema !== 'default' ? (
     content.data.components.map(component => {
       const config = componentByName(component.type);
-      const elementConfig = { ...config.defaultProps, ...component.config };
+      const elementConfig = addDefaults('Composite', component.config);
       return <React.Fragment key={component.cid}>{config.render({ ...elementConfig, id: component.cid })}</React.Fragment>;
     })
   ) : (

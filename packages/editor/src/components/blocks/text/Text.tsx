@@ -1,4 +1,4 @@
-import { TEXT_DEFAULTS, type Prettify, type Text } from '@axonivy/form-editor-protocol';
+import { type Prettify, type Text } from '@axonivy/form-editor-protocol';
 import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
 import './Text.css';
 import { useBase } from '../base';
@@ -23,9 +23,7 @@ export const useTextComponent = () => {
       subcategory: 'Text',
       icon: <IconSvg />,
       description: t('components.text.description'),
-      defaultProps: TEXT_DEFAULTS,
       render: props => <UiBlock {...props} />,
-      create: ({ value }) => ({ ...TEXT_DEFAULTS, content: value }),
       outlineInfo: component => component.content,
       fields: {
         ...baseComponentFields,

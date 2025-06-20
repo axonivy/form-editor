@@ -1,6 +1,5 @@
 import './DataTableColumn.css';
 import {
-  DATATABLECOLUMN_DEFAULTS,
   isTable,
   type ActionButtonAlignment,
   type ActionColumnComponent,
@@ -41,9 +40,7 @@ export const useDataTableColumnComponent = () => {
       subcategory: 'Input',
       icon: '',
       description: t('components.dataTableColumn.description'),
-      defaultProps: DATATABLECOLUMN_DEFAULTS,
       render: props => <UiBlock {...props} />,
-      create: ({ label, value, defaultProps }) => ({ ...DATATABLECOLUMN_DEFAULTS, header: label, value, ...defaultProps }),
       outlineInfo: component => component.header,
       fields: {
         ...baseComponentFields,

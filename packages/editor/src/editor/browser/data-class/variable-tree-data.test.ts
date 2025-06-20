@@ -157,9 +157,11 @@ test('fullVariablePath dontShowRootNode', () => {
 test('rowToCreateData', () => {
   expect(rowToCreateData({ original: { value: 'country', info: 'java.util.List' } } as Row<BrowserNode>)).toEqual(undefined);
   expect(rowToCreateData(row)).toEqual({
-    componentName: 'Input',
-    label: 'Country',
-    value: '#{data.address.location.country}'
+    type: 'Input',
+    config: {
+      label: 'Country',
+      value: '#{data.address.location.country}'
+    }
   });
 });
 

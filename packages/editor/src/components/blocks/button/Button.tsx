@@ -1,11 +1,4 @@
-import {
-  BUTTON_DEFAULTS,
-  type Button,
-  type ButtonStyle,
-  type ButtonVariant,
-  type ConfirmDialogSeverity,
-  type Prettify
-} from '@axonivy/form-editor-protocol';
+import type { Button, ButtonStyle, ButtonVariant, ConfirmDialogSeverity, Prettify } from '@axonivy/form-editor-protocol';
 import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type FieldOption, type UiComponentProps } from '../../../types/config';
 import './Button.css';
 import { useBase } from '../base';
@@ -66,9 +59,7 @@ export const useButtonComponent = () => {
       subcategory: 'General',
       icon: <IconSvg />,
       description: t('components.button.description'),
-      defaultProps: BUTTON_DEFAULTS,
       render: props => <UiBlock {...props} />,
-      create: ({ label, value, defaultProps }) => ({ ...BUTTON_DEFAULTS, name: label, action: value, ...defaultProps }),
       outlineInfo: component => component.name,
       fields: {
         ...baseComponentFields,

@@ -22,7 +22,7 @@ import { useDialogComponent } from './blocks/dialog/Dialog';
 import { groupBy } from '@axonivy/ui-components';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type ComponentConfigWithoutType = Omit<ComponentConfig<any, any>, 'type'>;
+type ComponentConfigWithoutType = Omit<ComponentConfig<any>, 'type'>;
 
 export type ComponentByName = (name: AutoCompleteWithString<ComponentType>) => ComponentConfigWithoutType;
 

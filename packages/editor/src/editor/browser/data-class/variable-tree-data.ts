@@ -1,11 +1,10 @@
-import type { Variable, VariableInfo } from '@axonivy/form-editor-protocol';
+import type { ComponentType, Variable, VariableInfo } from '@axonivy/form-editor-protocol';
 import { labelText, type BrowserNode } from '@axonivy/ui-components';
 import { IvyIcons } from '@axonivy/ui-icons';
 import type { Row } from '@tanstack/react-table';
-import type { CreateComponentData } from '../../../types/config';
 import { stripELExpression } from '../../../utils/string';
 import { filterNodesWithChildren } from './useAttributeBrowser';
-import { componentForDataType } from '../../../components/component-factory';
+import { componentForDataType, type CreateData } from '../../../components/component-factory';
 
 export const variableTreeData = () => {
   const of = (paramInfo: VariableInfo): Array<BrowserNode<Variable>> => {
@@ -89,7 +88,11 @@ export const fullVariablePath = (row: Row<BrowserNode>, showRootNode: boolean = 
   return parentPath ? `${parentPath}.${row.original.value}` : row.original.value;
 };
 
-export const rowToCreateData = (row: Row<BrowserNode>, showRootNode: boolean = true, prefix?: string): CreateComponentData | undefined => {
+export const rowToCreateData = (
+  row: Row<BrowserNode>,
+  showRootNode: boolean = true,
+  prefix?: string
+): { type: ComponentType; config: CreateData } | undefined => {
   const node = row.original;
   const { type, config } = componentForDataType(node.info);
   if (type === undefined) {
@@ -99,10 +102,12 @@ export const rowToCreateData = (row: Row<BrowserNode>, showRootNode: boolean = t
 
   const value = formatVariableValue(variablePath, prefix);
   return {
-    componentName: type,
-    label: labelText(node.value),
-    value,
-    ...config
+    type,
+    config: {
+      label: labelText(node.value),
+      value,
+      ...config
+    }
   };
 };
 

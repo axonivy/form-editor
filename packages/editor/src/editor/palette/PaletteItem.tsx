@@ -1,10 +1,10 @@
 import { Flex, type PaletteItemConfig, type PaletteItemProps, cn } from '@axonivy/ui-components';
 import { useDraggable } from '@dnd-kit/core';
 import { useComponents } from '../../context/ComponentsContext';
-import type { CreateComponentData } from '../../types/config';
-import type { AutoCompleteWithString } from '../../types/types';
 import type { ComponentType } from '@axonivy/form-editor-protocol';
 import './PaletteItem.css';
+import { createComponent } from '../../components/component-factory';
+import type { CreateComponentData } from '../../context/DndContext';
 
 export type FormPaletteItemConfig = Omit<PaletteItemConfig, 'icon'> & {
   displayName: string;
@@ -43,14 +43,14 @@ export const FormPaletteItem = ({
   );
 };
 
-type PaletteItemOverlayProps = { name: AutoCompleteWithString<ComponentType>; data?: CreateComponentData };
+type PaletteItemOverlayProps = { name: ComponentType; data?: CreateComponentData };
 
 export const PaletteItemOverlay = ({ name, data }: PaletteItemOverlayProps) => {
   const { componentByName } = useComponents();
   const component = componentByName(data?.componentName ?? name);
   return (
     <div className='draggable dragging' style={{ width: 400 }}>
-      {component.render(data ? component.create(data) : component.defaultProps)}
+      {component.render(createComponent(name, data))}
     </div>
   );
 };
