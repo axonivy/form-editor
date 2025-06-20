@@ -1,8 +1,9 @@
-import type { BaseProps, DisableProps, RequireProps, UpdateProps, VisibleProps } from '..';
+import type { BaseProps, ComponentType, DisableProps, RequireProps, UpdateProps, VisibleProps } from '..';
 import type {
   Button,
   Checkbox,
   Combobox,
+  Component,
   Composite,
   DataTable,
   DataTableColumn,
@@ -220,7 +221,7 @@ export const TEXTAREA_DEFAULTS: Textarea = {
   ...BASE_DEFAULTS
 } as const;
 
-export const CONFIG_DEFAULTS = {
+export const CONFIG_DEFAULTS: Record<ComponentType, Component['config'] | DataTableColumn> = {
   Button: BUTTON_DEFAULTS,
   Checkbox: CHECKBOX_DEFAULTS,
   Combobox: COMBOBOX_DEFAULTS,
@@ -238,4 +239,4 @@ export const CONFIG_DEFAULTS = {
   Select: SELECT_DEFAULTS,
   Text: TEXT_DEFAULTS,
   Textarea: TEXTAREA_DEFAULTS
-} as const;
+};

@@ -24,6 +24,7 @@ import type {
   Select,
   SelectItem,
   TableComponent,
+  Text,
   Textarea
 } from './form';
 
