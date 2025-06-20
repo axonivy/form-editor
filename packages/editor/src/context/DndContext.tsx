@@ -42,14 +42,10 @@ export const DndContext = ({ componentByName, children }: { componentByName: Com
     const targetId = event.over?.id as string | undefined;
     if (targetId && activeId) {
       setData(oldData => {
-        const modifiedData = modifyData(
-          oldData,
-          {
-            type: 'dnd',
-            data: { activeId: createData?.componentName ?? activeId, targetId, create: createData }
-          },
-          componentByName
-        );
+        const modifiedData = modifyData(oldData, {
+          type: 'dnd',
+          data: { activeId: createData?.componentName ?? activeId, targetId, create: createData, componentByName }
+        });
         const newData = modifiedData.newData;
         const newComponentId = modifiedData.newComponentId;
         setSelectedElement(newComponentId ?? activeId);

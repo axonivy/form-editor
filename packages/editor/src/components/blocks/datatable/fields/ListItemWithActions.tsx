@@ -2,7 +2,6 @@ import { Button, Flex, Label } from '@axonivy/ui-components';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { modifyData, useData } from '../../../../data/data';
 import { useTranslation } from 'react-i18next';
-import { useComponents } from '../../../../context/ComponentsContext';
 
 type ListItemWithActionsProps = {
   componentCid: string;
@@ -13,7 +12,6 @@ type ListItemWithActionsProps = {
 
 export const ListItemWithActions = ({ componentCid, label, icon, isBound }: ListItemWithActionsProps) => {
   const { t } = useTranslation();
-  const { componentByName } = useComponents();
   const { setData, setSelectedElement } = useData();
   return (
     <Flex
@@ -36,7 +34,7 @@ export const ListItemWithActions = ({ componentCid, label, icon, isBound }: List
 
       <Flex direction='row' alignItems='center' gap={1}>
         <Button
-          onClick={() => setData(oldData => modifyData(oldData, { type: 'remove', data: { id: componentCid } }, componentByName).newData)}
+          onClick={() => setData(oldData => modifyData(oldData, { type: 'remove', data: { id: componentCid } }).newData)}
           icon={IvyIcons.Trash}
           variant='outline'
         />

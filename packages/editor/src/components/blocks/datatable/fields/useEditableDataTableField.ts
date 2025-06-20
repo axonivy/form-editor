@@ -20,18 +20,15 @@ export const useEditableDataTableField = () => {
           if (existingActionColumn !== undefined && create.componentName === 'DataTableColumn') {
             return updatedData;
           }
-          const data = modifyData(
-            updatedData,
-            {
-              type: 'add',
-              data: {
-                componentName: create.componentName,
-                create,
-                targetId: create.componentName === 'Button' ? COLUMN_DROPZONE_ID_PREFIX + actionColumnId : create.targetId
-              }
-            },
-            componentByName
-          );
+          const data = modifyData(updatedData, {
+            type: 'add',
+            data: {
+              componentName: create.componentName,
+              create,
+              targetId: create.componentName === 'Button' ? COLUMN_DROPZONE_ID_PREFIX + actionColumnId : create.targetId,
+              componentByName
+            }
+          });
           if (create.componentName === 'Dialog' && data.newComponentId) {
             dialogId = data.newComponentId;
           }
@@ -61,14 +58,10 @@ export const useEditableDataTableField = () => {
       );
       setData(data => {
         return deleteIds.reduce((updatedData, id) => {
-          return modifyData(
-            updatedData,
-            {
-              type: 'remove',
-              data: { id: id }
-            },
-            componentByName
-          ).newData;
+          return modifyData(updatedData, {
+            type: 'remove',
+            data: { id: id }
+          }).newData;
         }, data);
       });
 

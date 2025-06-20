@@ -1,4 +1,12 @@
-import type { LayoutAlignItems, SelectItem } from '@axonivy/form-editor-protocol';
+import type {
+  BaseProps,
+  DisableProps,
+  LayoutAlignItems,
+  RequireProps,
+  SelectItemsProps,
+  UpdateProps,
+  VisibleProps
+} from '@axonivy/form-editor-protocol';
 import type { FieldOption, Fields, GenericFieldProps, ItemCategory, ItemSubcategory, Subsection } from '../../types/config';
 import { BasicField, Input } from '@axonivy/ui-components';
 import { useAppContext } from '../../context/AppContext';
@@ -38,43 +46,7 @@ export const useBase = () => {
     [t]
   );
 
-  type BaseComponentProps = { id: string; alignSelf: LayoutAlignItems; lgSpan: string; mdSpan: string };
-  type SelectItemsProps = {
-    label: string;
-    value: string;
-    staticItems: SelectItem[];
-    dynamicItemsLabel: string;
-    dynamicItemsList: string;
-    dynamicItemsValue: string;
-  };
-  type VisibleItemProps = { visible: string };
-  type DisabledItemProps = VisibleItemProps & { disabled: string };
-  type BehaviourItemProps = DisabledItemProps & { required: string; requiredMessage: string; updateOnChange: boolean };
-
-  const defaultVisibleComponent: VisibleItemProps = {
-    visible: ''
-  } as const;
-
-  const defaultDisabledComponent: DisabledItemProps = {
-    ...defaultVisibleComponent,
-    disabled: ''
-  } as const;
-
-  const defaultBehaviourComponent: BehaviourItemProps = {
-    ...defaultDisabledComponent,
-    required: '',
-    requiredMessage: '',
-    updateOnChange: false
-  } as const;
-
-  const defaultBaseComponent: BaseComponentProps = {
-    id: '',
-    alignSelf: 'START',
-    lgSpan: '6',
-    mdSpan: '12'
-  } as const;
-
-  const baseComponentFields: Fields<BaseComponentProps> = useMemo(() => {
+  const baseComponentFields: Fields<BaseProps> = useMemo(() => {
     const alignItemsOptions: FieldOption<LayoutAlignItems>[] = [
       { label: t('align.top'), value: 'START', icon: { icon: IvyIcons.AlignRight, rotate: 270 } },
       { label: t('align.center'), value: 'CENTER', icon: { icon: IvyIcons.AlignHorizontal, rotate: 180 } },
@@ -116,7 +88,7 @@ export const useBase = () => {
     };
   }, [t]);
 
-  const visibleComponentField: Fields<VisibleItemProps> = useMemo(() => {
+  const visibleComponentField: Fields<VisibleProps> = useMemo(() => {
     return {
       visible: {
         subsection: 'Behaviour',
@@ -128,7 +100,7 @@ export const useBase = () => {
     };
   }, [t]);
 
-  const disabledComponentFields: Fields<DisabledItemProps> = useMemo(() => {
+  const disabledComponentFields: Fields<DisableProps> = useMemo(() => {
     return {
       ...visibleComponentField,
       disabled: {
@@ -141,9 +113,20 @@ export const useBase = () => {
     };
   }, [t, visibleComponentField]);
 
-  const behaviourComponentFields: Fields<BehaviourItemProps> = useMemo(() => {
+  const updateOnChangeComponentFields: Fields<UpdateProps> = useMemo(() => {
     return {
       ...disabledComponentFields,
+      updateOnChange: {
+        subsection: 'Behaviour',
+        label: t('label.updateFormChange'),
+        type: 'checkbox'
+      }
+    };
+  }, [disabledComponentFields, t]);
+
+  const behaviourComponentFields: Fields<RequireProps> = useMemo(() => {
+    return {
+      ...updateOnChangeComponentFields,
       required: {
         subsection: 'Behaviour',
         label: t('label.required'),
@@ -156,10 +139,9 @@ export const useBase = () => {
         type: 'textBrowser',
         browsers: [{ type: 'CMS', options: { overrideSelection: true } }],
         hide: data => data.required.length === 0
-      },
-      updateOnChange: { subsection: 'Behaviour', label: t('label.updateFormChange'), type: 'checkbox' }
+      }
     };
-  }, [disabledComponentFields, t]);
+  }, [t, updateOnChangeComponentFields]);
 
   const selectItemsComponentFields: Fields<SelectItemsProps> = useMemo(() => {
     return {
@@ -213,13 +195,10 @@ export const useBase = () => {
 
   return {
     categoryTranslations,
-    defaultVisibleComponent,
-    defaultDisabledComponent,
-    defaultBehaviourComponent,
     baseComponentFields,
-    defaultBaseComponent,
     visibleComponentField,
     disabledComponentFields,
+    updateOnChangeComponentFields,
     behaviourComponentFields,
     selectItemsComponentFields
   };

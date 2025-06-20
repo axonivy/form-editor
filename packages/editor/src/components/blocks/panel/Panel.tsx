@@ -1,4 +1,4 @@
-import type { Panel, Prettify } from '@axonivy/form-editor-protocol';
+import { PANEL_DEFAULTS, type Panel, type Prettify } from '@axonivy/form-editor-protocol';
 import { useBase } from '../base';
 import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
 import IconSvg from './Panel.svg?react';
@@ -14,19 +14,10 @@ import { useMemo } from 'react';
 type PanelProps = Prettify<Panel>;
 
 export const usePanelComponent = () => {
-  const { baseComponentFields, defaultBaseComponent, defaultVisibleComponent, visibleComponentField } = useBase();
+  const { baseComponentFields, visibleComponentField } = useBase();
   const { t } = useTranslation();
 
   const PanelComponent: ComponentConfig<PanelProps> = useMemo(() => {
-    const defaultPanelProps: PanelProps = {
-      components: [],
-      title: t('property.title'),
-      collapsible: false,
-      collapsed: false,
-      ...defaultVisibleComponent,
-      ...defaultBaseComponent
-    };
-
     const PanelComponent: ComponentConfig<PanelProps> = {
       name: 'Panel',
       displayName: t('components.panel.name'),
@@ -34,10 +25,10 @@ export const usePanelComponent = () => {
       subcategory: 'General',
       icon: <IconSvg />,
       description: t('components.panel.description'),
-      defaultProps: defaultPanelProps,
+      defaultProps: PANEL_DEFAULTS,
       quickActions: [...DEFAULT_QUICK_ACTIONS, 'EXTRACTINTOCOMPONENT'],
       render: props => <UiBlock {...props} />,
-      create: ({ defaultProps }) => ({ ...defaultPanelProps, ...defaultProps }),
+      create: ({ defaultProps }) => ({ ...PANEL_DEFAULTS, ...defaultProps }),
       outlineInfo: component => component.title,
       fields: {
         ...baseComponentFields,
@@ -64,7 +55,7 @@ export const usePanelComponent = () => {
     };
 
     return PanelComponent;
-  }, [baseComponentFields, defaultBaseComponent, defaultVisibleComponent, t, visibleComponentField]);
+  }, [baseComponentFields, t, visibleComponentField]);
 
   return {
     PanelComponent

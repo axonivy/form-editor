@@ -1,4 +1,4 @@
-import type { DataTable, Prettify, TableComponent } from '@axonivy/form-editor-protocol';
+import { DATATABLE_DEFAULTS, type DataTable, type Prettify, type TableComponent } from '@axonivy/form-editor-protocol';
 import type { ComponentConfig, UiComponentProps } from '../../../types/config';
 import './DataTable.css';
 import { useBase } from '../base';
@@ -7,8 +7,7 @@ import { ComponentBlock } from '../../../editor/canvas/ComponentBlock';
 import { useAppContext } from '../../../context/AppContext';
 import { Button, cn, Flex, Message } from '@axonivy/ui-components';
 import { useMeta } from '../../../context/useMeta';
-import { type ComponentByName } from '../../components';
-import { createInitTableColumns, findComponentDeep, modifyData } from '../../../data/data';
+import { findComponentDeep, modifyData } from '../../../data/data';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { UiBlockHeader } from '../../UiBlockHeader';
 import { ColumnControl } from './controls/ColumnControl';
@@ -18,28 +17,17 @@ import { useTranslation } from 'react-i18next';
 import { findAttributesOfType } from '../../../editor/browser/data-class/variable-tree-data';
 import { useMemo } from 'react';
 import { useComponents } from '../../../context/ComponentsContext';
+import { createInitTableColumns } from './create-init-columns';
 
 type DataTableProps = Prettify<DataTable>;
 
 const DIALOG_TYPE = 'Dialog';
 
-export const useDataTableComponent = (componentByName: ComponentByName) => {
-  const { baseComponentFields, defaultBaseComponent, defaultVisibleComponent, visibleComponentField } = useBase();
+export const useDataTableComponent = () => {
+  const { baseComponentFields, visibleComponentField } = useBase();
   const { t } = useTranslation();
 
   const DataTableComponent = useMemo(() => {
-    const defaultDataTableProps: DataTable = {
-      components: [],
-      value: '',
-      isEditable: false,
-      addButton: false,
-      editDialogId: '',
-      paginator: false,
-      maxRows: '10',
-      ...defaultVisibleComponent,
-      ...defaultBaseComponent
-    } as const;
-
     const component: ComponentConfig<DataTableProps> = {
       name: 'DataTable',
       displayName: t('components.dataTable.name'),
@@ -47,9 +35,9 @@ export const useDataTableComponent = (componentByName: ComponentByName) => {
       subcategory: 'Input',
       icon: <IconSvg />,
       description: t('components.dataTable.description'),
-      defaultProps: defaultDataTableProps,
+      defaultProps: DATATABLE_DEFAULTS,
       render: props => <UiBlock {...props} />,
-      create: ({ label, value, ...defaultProps }) => ({ ...defaultDataTableProps, label, value, ...defaultProps }),
+      create: ({ label, value, ...defaultProps }) => ({ ...DATATABLE_DEFAULTS, label, value, ...defaultProps }),
       outlineInfo: component => component.value,
       fields: {
         ...baseComponentFields,
@@ -91,13 +79,13 @@ export const useDataTableComponent = (componentByName: ComponentByName) => {
       subSectionControls: (props, subSection) => (subSection === 'Columns' ? <ColumnControl {...props} /> : null),
       onDelete: (component, setData) => {
         if (component.editDialogId.length > 0) {
-          setData(oldData => modifyData(oldData, { type: 'remove', data: { id: component.editDialogId } }, componentByName).newData);
+          setData(oldData => modifyData(oldData, { type: 'remove', data: { id: component.editDialogId } }).newData);
         }
       }
     };
 
     return component;
-  }, [baseComponentFields, componentByName, defaultBaseComponent, defaultVisibleComponent, t, visibleComponentField]);
+  }, [baseComponentFields, t, visibleComponentField]);
 
   return { DataTableComponent };
 };

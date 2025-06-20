@@ -1,15 +1,30 @@
 import type { KeysOfUnion } from '../utils/type-helper';
 import type {
   ActionColumnComponent,
+  Button,
+  Checkbox,
+  Combobox,
   Component,
+  Composite,
   DataTable,
   DataTableColumn,
+  DatePicker,
+  Dialog,
   Fieldset,
   Form,
   FormEditorData,
+  FormExpression,
   FormSaveDataArgs,
+  Input,
   Layout,
-  TableComponent
+  LayoutAlignItems,
+  Link,
+  Panel,
+  Radio,
+  Select,
+  SelectItem,
+  TableComponent,
+  Textarea
 } from './form';
 
 export type ComponentType = Component['type'] | 'DataTableColumn';
@@ -79,4 +94,38 @@ export type FormEditor = Omit<FormEditorData, 'data'> & {
 export type FormSaveData = Omit<FormSaveDataArgs, 'data'> & {
   data: FormData;
   directSave?: boolean;
+};
+
+export type BaseProps = { id: string; alignSelf: LayoutAlignItems; lgSpan: string; mdSpan: string };
+export type SelectItemsProps = {
+  label: string;
+  value: string;
+  staticItems: SelectItem[];
+  dynamicItemsLabel: string;
+  dynamicItemsList: string;
+  dynamicItemsValue: string;
+};
+export type VisibleProps = { visible: FormExpression };
+export type DisableProps = VisibleProps & { disabled: string };
+export type UpdateProps = DisableProps & { updateOnChange: boolean };
+export type RequireProps = UpdateProps & { required: string; requiredMessage: string };
+
+export type ComponentConfigs = {
+  Button: Button;
+  Checkbox: Checkbox;
+  Combobox: Combobox;
+  Composite: Composite;
+  DataTable: DataTable;
+  DataTableColumn: DataTableColumn;
+  DatePicker: DatePicker;
+  Dialog: Dialog;
+  Fieldset: Fieldset;
+  Input: Input;
+  Layout: Layout;
+  Link: Link;
+  Panel: Panel;
+  Radio: Radio;
+  Select: Select;
+  Text: Text;
+  Textarea: Textarea;
 };

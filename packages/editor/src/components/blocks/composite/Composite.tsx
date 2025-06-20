@@ -1,4 +1,4 @@
-import type { Component, ComponentData, Composite, Prettify } from '@axonivy/form-editor-protocol';
+import { COMPOSITE_DEFAULTS, type Component, type ComponentData, type Composite, type Prettify } from '@axonivy/form-editor-protocol';
 import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
 import './Composite.css';
 import { useBase } from '../base';
@@ -17,17 +17,10 @@ export const useCompositeComponent = () => {
   const isComposite = (component?: Component | ComponentData): component is ComponentData & { config: Composite } => {
     return component !== undefined && component.type === 'Composite' && 'name' in component.config && 'startMethod' in component.config;
   };
-  const { baseComponentFields, defaultBaseComponent } = useBase();
+  const { baseComponentFields } = useBase();
   const { t } = useTranslation();
 
   const CompositeComponent: ComponentConfig<CompositeProps> = useMemo(() => {
-    const defaultCompositeProps: Composite = {
-      name: '',
-      startMethod: '',
-      parameters: {},
-      ...defaultBaseComponent
-    } as const;
-
     const CompositeComponent: ComponentConfig<CompositeProps> = {
       name: 'Composite',
       displayName: t('components.composite.name'),
@@ -35,9 +28,9 @@ export const useCompositeComponent = () => {
       subcategory: 'General',
       icon: <IconSvg />,
       description: t('components.composite.description'),
-      defaultProps: defaultCompositeProps,
+      defaultProps: COMPOSITE_DEFAULTS,
       render: props => <UiBlock {...props} />,
-      create: ({ label, defaultProps }) => ({ ...defaultCompositeProps, name: label, ...defaultProps }),
+      create: ({ label, defaultProps }) => ({ ...COMPOSITE_DEFAULTS, name: label, ...defaultProps }),
       outlineInfo: component => component.name,
       fields: {
         ...baseComponentFields,
@@ -54,7 +47,7 @@ export const useCompositeComponent = () => {
     } as const;
 
     return CompositeComponent;
-  }, [baseComponentFields, defaultBaseComponent, t]);
+  }, [baseComponentFields, t]);
 
   return {
     isComposite,

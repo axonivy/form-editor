@@ -14,7 +14,7 @@ export const useCopyPaste = (data?: Component | ComponentData) => {
       if (data === undefined) {
         return;
       }
-      setData(old => modifyData(old, { type: 'remove', data: { id: data.cid } }, componentByName).newData);
+      setData(old => modifyData(old, { type: 'remove', data: { id: data.cid } }).newData);
     },
     onPaste: async items => {
       if (readonly) {
@@ -27,14 +27,10 @@ export const useCopyPaste = (data?: Component | ComponentData) => {
       }
       setData(
         old =>
-          modifyData(
-            old,
-            {
-              type: 'paste',
-              data: { componentName: component.type, clipboard: component.config, targetId: data?.cid ?? CANVAS_DROPZONE_ID }
-            },
-            componentByName
-          ).newData
+          modifyData(old, {
+            type: 'paste',
+            data: { componentName: component.type, clipboard: component.config, targetId: data?.cid ?? CANVAS_DROPZONE_ID, componentByName }
+          }).newData
       );
     }
   });

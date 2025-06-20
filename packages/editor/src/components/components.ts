@@ -104,7 +104,7 @@ export const useComponentsInit = () => {
   const { ButtonComponent } = useButtonComponent();
   const { LinkComponent } = useLinkComponent();
   const { LayoutComponent } = useLayoutComponent();
-  const { DataTableComponent } = useDataTableComponent(componentByName);
+  const { DataTableComponent } = useDataTableComponent();
   const { DataTableColumnComponent } = useDataTableColumnComponent();
   const { FieldsetComponent } = useFieldsetComponent();
   const { PanelComponent } = usePanelComponent();

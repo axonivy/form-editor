@@ -11,14 +11,10 @@ export const ContentControls = (props: CollapsibleControlProps) => {
   const createActionButton = () => {
     setData(
       oldData =>
-        modifyData(
-          oldData,
-          {
-            type: 'add',
-            data: { componentName: 'Button', targetId: COLUMN_DROPZONE_ID_PREFIX + element?.cid }
-          },
-          componentByName
-        ).newData
+        modifyData(oldData, {
+          type: 'add',
+          data: { componentName: 'Button', targetId: COLUMN_DROPZONE_ID_PREFIX + element?.cid, componentByName }
+        }).newData
     );
   };
 

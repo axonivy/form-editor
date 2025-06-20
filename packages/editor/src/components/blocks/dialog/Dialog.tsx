@@ -1,5 +1,5 @@
 import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
-import { isTable, type Dialog, type Prettify } from '@axonivy/form-editor-protocol';
+import { DIALOG_DEFAULTS, isTable, type Dialog, type Prettify } from '@axonivy/form-editor-protocol';
 import { useBase } from '../base';
 import IconSvg from './Dialog.svg?react';
 import { ComponentBlock } from '../../../editor/canvas/ComponentBlock';
@@ -17,17 +17,10 @@ import { useMemo } from 'react';
 type DialogProps = Prettify<Dialog>;
 
 export const useDialogComponent = () => {
-  const { defaultBaseComponent, baseComponentFields } = useBase();
+  const { baseComponentFields } = useBase();
   const { t } = useTranslation();
 
   const DialogComponent: ComponentConfig<DialogProps> = useMemo(() => {
-    const defaultDialogProps: DialogProps = {
-      components: [],
-      header: '',
-      linkedComponent: '',
-      ...defaultBaseComponent
-    };
-
     const DialogComponent: ComponentConfig<DialogProps> = {
       name: 'Dialog',
       displayName: t('components.dialog.name'),
@@ -35,9 +28,9 @@ export const useDialogComponent = () => {
       subcategory: 'General',
       icon: <IconSvg />,
       description: t('components.dialog.description'),
-      defaultProps: defaultDialogProps,
+      defaultProps: DIALOG_DEFAULTS,
       render: props => <DialogUiBlock {...props} />,
-      create: ({ label, value, defaultProps }) => ({ ...defaultDialogProps, header: label, linkedComponent: value, ...defaultProps }),
+      create: ({ label, value, defaultProps }) => ({ ...DIALOG_DEFAULTS, header: label, linkedComponent: value, ...defaultProps }),
       outlineInfo: component => component.header,
       fields: {
         ...baseComponentFields,
@@ -54,7 +47,7 @@ export const useDialogComponent = () => {
     };
 
     return DialogComponent;
-  }, [baseComponentFields, defaultBaseComponent, t]);
+  }, [baseComponentFields, t]);
 
   return {
     DialogComponent

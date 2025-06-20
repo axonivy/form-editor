@@ -161,12 +161,21 @@ type ModifyAction =
       data: {
         activeId: string;
         targetId: string;
+        componentByName: ComponentByName;
         create?: CreateData;
       };
     }
-  | { type: 'add'; data: { componentName: ComponentType; create?: CreateData; targetId?: string } }
+  | { type: 'add'; data: { componentName: ComponentType; componentByName: ComponentByName; create?: CreateData; targetId?: string } }
   | { type: 'remove' | 'moveUp' | 'moveDown'; data: { id: string } }
-  | { type: 'paste'; data: { componentName: ComponentType; clipboard: Component['config'] | ComponentData['config']; targetId: string } };
+  | {
+      type: 'paste';
+      data: {
+        componentName: ComponentType;
+        clipboard: Component['config'] | ComponentData['config'];
+        targetId: string;
+        componentByName: ComponentByName;
+      };
+    };
 
 const dndModify = (
   data: Array<ComponentData>,
@@ -247,22 +256,22 @@ const defineNewCid = (components: Array<ComponentData>, component: ComponentData
   }
 };
 
-export const modifyData = (data: FormData, action: ModifyAction, componentByName: ComponentByName) => {
+export const modifyData = (data: FormData, action: ModifyAction) => {
   const newData = structuredClone(data);
   let newComponentId;
   switch (action.type) {
     case 'dnd':
-      newComponentId = dndModify(newData.components, action.data, componentByName);
+      newComponentId = dndModify(newData.components, action.data, action.data.componentByName);
       break;
     case 'add':
       newComponentId = addComponent(
         newData.components,
-        createComponentData(newData.components, componentByName(action.data.componentName), action.data.create),
+        createComponentData(newData.components, action.data.componentByName(action.data.componentName), action.data.create),
         action.data.targetId ?? CANVAS_DROPZONE_ID
       );
       break;
     case 'paste':
-      pasteComponent(newData, componentByName(action.data.componentName), action.data.clipboard, action.data.targetId);
+      pasteComponent(newData, action.data.componentByName(action.data.componentName), action.data.clipboard, action.data.targetId);
       break;
     case 'remove':
       removeComponent(newData.components, action.data.id);
@@ -285,25 +294,6 @@ export const findComponentElement = (data: FormData, id: string) => {
   return;
 };
 
-export const createInitTableColumns = (
-  id: string,
-  data: FormData,
-  creates: Array<CreateComponentData>,
-  componentByName: ComponentByName
-) => {
-  creates.forEach(create => {
-    data = modifyData(
-      data,
-      {
-        type: 'add',
-        data: { componentName: 'DataTableColumn', targetId: TABLE_DROPZONE_ID_PREFIX + id, create }
-      },
-      componentByName
-    ).newData;
-  });
-  return data;
-};
-
 export const createInitForm = (
   data: FormData,
   creates: Array<CreateComponentData>,
@@ -312,58 +302,48 @@ export const createInitForm = (
   selectedElementId?: string
 ) => {
   creates.forEach(create => {
-    data = modifyData(
-      data,
-      { type: 'add', data: { componentName: create.componentName, create, targetId: selectedElementId } },
-      componentByName
-    ).newData;
+    data = modifyData(data, {
+      type: 'add',
+      data: { componentName: create.componentName, create, targetId: selectedElementId, componentByName }
+    }).newData;
   });
   if (workflowButtons) {
-    const { newData, newComponentId } = modifyData(
-      data,
-      {
-        type: 'add',
-        data: {
-          componentName: 'Layout',
-          create: { label: '', value: '', defaultProps: { type: 'FLEX', justifyContent: 'END' } },
-          targetId: selectedElementId
-        }
-      },
-      componentByName
-    );
+    const { newData, newComponentId } = modifyData(data, {
+      type: 'add',
+      data: {
+        componentName: 'Layout',
+        create: { label: '', value: '', defaultProps: { type: 'FLEX', justifyContent: 'END' } },
+        targetId: selectedElementId,
+        componentByName
+      }
+    });
     const layoutId = `${STRUCTURE_DROPZONE_ID_PREFIX}${newComponentId}`;
-    data = modifyData(
-      newData,
-      {
-        type: 'add',
-        data: {
-          componentName: 'Button',
-          create: {
-            label: 'Cancel',
-            value: '#{ivyWorkflowView.cancel()}',
-            defaultProps: { variant: 'SECONDARY', processOnlySelf: true, style: 'FLAT' }
-          },
-          targetId: layoutId
-        }
-      },
-      componentByName
-    ).newData;
-    data = modifyData(
-      data,
-      {
-        type: 'add',
-        data: {
-          componentName: 'Button',
-          create: {
-            label: 'Proceed',
-            value: '#{logic.close}',
-            defaultProps: { variant: 'PRIMARY', type: 'SUBMIT', icon: 'si si-check-1' }
-          },
-          targetId: layoutId
-        }
-      },
-      componentByName
-    ).newData;
+    data = modifyData(newData, {
+      type: 'add',
+      data: {
+        componentName: 'Button',
+        create: {
+          label: 'Cancel',
+          value: '#{ivyWorkflowView.cancel()}',
+          defaultProps: { variant: 'SECONDARY', processOnlySelf: true, style: 'FLAT' }
+        },
+        targetId: layoutId,
+        componentByName
+      }
+    }).newData;
+    data = modifyData(data, {
+      type: 'add',
+      data: {
+        componentName: 'Button',
+        create: {
+          label: 'Proceed',
+          value: '#{logic.close}',
+          defaultProps: { variant: 'PRIMARY', type: 'SUBMIT', icon: 'si si-check-1' }
+        },
+        targetId: layoutId,
+        componentByName
+      }
+    }).newData;
   }
   return data;
 };

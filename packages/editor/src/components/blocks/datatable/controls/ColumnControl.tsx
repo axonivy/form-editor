@@ -1,11 +1,12 @@
 import { Button, Flex, type CollapsibleControlProps } from '@axonivy/ui-components';
-import { createInitTableColumns, useData } from '../../../../data/data';
+import { useData } from '../../../../data/data';
 import { useDataTableColumns } from '../fields/useDataTableColumns';
 import { IvyIcons } from '@axonivy/ui-icons';
 import type { CreateComponentData } from '../../../../types/config';
 import { isTable } from '@axonivy/form-editor-protocol';
 import { useTranslation } from 'react-i18next';
 import { useComponents } from '../../../../context/ComponentsContext';
+import { createInitTableColumns } from '../create-init-columns';
 
 export const ColumnControl = (props: CollapsibleControlProps) => {
   const { element, setData } = useData();

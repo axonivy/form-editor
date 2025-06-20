@@ -4,7 +4,6 @@ import { renderHook, waitFor } from '@testing-library/react';
 import type { Component, FormData } from '@axonivy/form-editor-protocol';
 import { useDataTableComponent } from '../../components/blocks/datatable/DataTable';
 import type { ComponentConfig } from '../../types/config';
-import { useComponentsInit } from '../../components/components';
 
 const data = {
   id: 'a5c1d16e-1d08-4e1f-a9f0-436c553a3881',
@@ -42,10 +41,7 @@ const data = {
 test('delete datatable also deletes dialog', async () => {
   const newData = [] as FormData[];
   const compData = { cid: 'datatable1', config: { editDialogId: 'dialog3' } } as Component;
-  const { result: componentsHook } = renderHook(() => useComponentsInit());
-  const { componentByName } = componentsHook.current;
-
-  const { result: dataTableHook } = renderHook(() => useDataTableComponent(componentByName));
+  const { result: dataTableHook } = renderHook(() => useDataTableComponent());
   const { DataTableComponent } = dataTableHook.current;
 
   const view = customRenderHook(
