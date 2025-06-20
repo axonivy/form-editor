@@ -3,13 +3,19 @@ import {
   EMPTY_FORM,
   type FormData,
   type LayoutConfig,
-  type ConfigData,
   type TableConfig,
   type ComponentData,
   type TableComponent,
   type ActionColumnComponent,
   isTable,
-  isColumn
+  isColumn,
+  type DataTable,
+  type Button,
+  type Text,
+  type DeepPartial,
+  type Component,
+  type Input,
+  type Layout
 } from '@axonivy/form-editor-protocol';
 import {
   createInitForm,
@@ -20,7 +26,6 @@ import {
   isEditableTable,
   modifyData
 } from './data';
-import type { DeepPartial } from '../types/types';
 import { renderHook } from '@testing-library/react';
 import { useComponentsInit } from '../components/components';
 
@@ -307,7 +312,7 @@ describe('modifyData', () => {
       const component = data.components.find(c => c.cid === '3') as LayoutConfig;
       expect(component.config.components).toHaveLength(4);
       expect(component.config.components[0].cid).toEqual('text54');
-      expect((component.config.components[0].config as ConfigData).content).toEqual('Hello');
+      expect((component.config.components[0].config as Text).content).toEqual('Hello');
     });
 
     test('duplicate layout', () => {
@@ -320,7 +325,7 @@ describe('modifyData', () => {
       const component = data.components.find(c => c.cid === 'layout54') as LayoutConfig;
       expect(component.config.components).toHaveLength(3);
       expect(component.config.components[0].cid).toEqual('text55');
-      expect((component.config.components[0].config as ConfigData).content).toEqual('Hello');
+      expect((component.config.components[0].config as Text).content).toEqual('Hello');
       expect(component.config.components[1].cid).toEqual('button56');
       expect(component.config.components[2].cid).toEqual('input57');
     });
@@ -398,18 +403,18 @@ describe('findParentTableComponent', () => {
     type: 'DataTableColumn'
   };
 
-  const data: ComponentData[] = [
+  const data: Component[] = [
     {
       cid: '3',
       type: 'DataTable',
-      config: { components: [col1, col2] }
+      config: { components: [col1, col2] } as DataTable
     },
     {
       cid: '4',
       type: 'Layout',
       config: {
-        components: [{ cid: 'input1', type: 'Input', config: {} }]
-      }
+        components: [{ cid: 'input1', type: 'Input', config: {} as Input }]
+      } as Layout
     }
   ];
 
@@ -442,24 +447,24 @@ describe('createInitForm', () => {
   const { result: componentsResult } = renderHook(() => useComponentsInit());
   const { componentByName } = componentsResult.current;
   test('create', () => {
-    const data = createInitForm(emptyData(), [{ componentName: 'Input', label: 'Age', value: 'age' }], false, componentByName);
+    const data = createInitForm(emptyData(), [{ type: 'Input', config: { label: 'Age', value: 'age' } }], false, componentByName);
     expect(data).not.toEqual(emptyData());
     expect(data.components).toHaveLength(1);
     expect(data.components[0].type).toEqual('Input');
   });
 
   test('create with workflow buttons', () => {
-    const data = createInitForm(emptyData(), [{ componentName: 'Input', label: 'Age', value: 'age' }], true, componentByName);
+    const data = createInitForm(emptyData(), [{ type: 'Input', config: { label: 'Age', value: 'age' } }], true, componentByName);
     expect(data).not.toEqual(emptyData());
     expect(data.components).toHaveLength(2);
     expect(data.components[0].type).toEqual('Input');
     const layout = data.components[1] as LayoutConfig;
     expect(layout.type).toEqual('Layout');
     expect(layout.config.components).toHaveLength(2);
-    expect((layout.config.components[0].config as ConfigData).action).toEqual('#{ivyWorkflowView.cancel()}');
-    expect((layout.config.components[0].config as ConfigData).type).toEqual('BUTTON');
-    expect((layout.config.components[1].config as ConfigData).action).toEqual('#{logic.close}');
-    expect((layout.config.components[1].config as ConfigData).type).toEqual('SUBMIT');
+    expect((layout.config.components[0].config as Button).action).toEqual('#{ivyWorkflowView.cancel()}');
+    expect((layout.config.components[0].config as Button).type).toEqual('BUTTON');
+    expect((layout.config.components[1].config as Button).action).toEqual('#{logic.close}');
+    expect((layout.config.components[1].config as Button).type).toEqual('SUBMIT');
   });
 });
 
@@ -500,7 +505,7 @@ const filledData = () => {
         config: {
           legend: 'Legend',
           collapsible: true,
-          disabled: false,
+          disabled: 'false',
           collapsed: false,
           components: [
             { cid: '41', type: 'Text', config: { content: 'Hello' } },
@@ -566,7 +571,7 @@ describe('isEditableTable', () => {
     const table: ComponentData = {
       cid: 'table1',
       type: 'DataTable',
-      config: { isEditable: true, components: [] }
+      config: { isEditable: true, components: [] } as unknown as DataTable
     };
     expect(isEditableTable([table], table)).toBe(true);
   });
@@ -575,7 +580,7 @@ describe('isEditableTable', () => {
     const table: ComponentData = {
       cid: 'table2',
       type: 'DataTable',
-      config: { isEditable: false, components: [] }
+      config: { isEditable: false, components: [] } as unknown as DataTable
     };
     expect(isEditableTable([table], table)).toBe(false);
   });

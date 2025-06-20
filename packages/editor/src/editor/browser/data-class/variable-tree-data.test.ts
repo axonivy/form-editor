@@ -1,4 +1,4 @@
-import type { Variable, VariableInfo } from '@axonivy/form-editor-protocol';
+import type { DeepPartial, Variable, VariableInfo } from '@axonivy/form-editor-protocol';
 import type { BrowserNode } from '@axonivy/ui-components';
 import type { Row } from '@tanstack/react-table';
 import {
@@ -9,7 +9,6 @@ import {
   rowToCreateData,
   variableTreeData
 } from './variable-tree-data';
-import type { DeepPartial } from '../../../types/types';
 
 // Needs because 'renderHook' is imported
 

@@ -1,8 +1,8 @@
 import { isTable, type ButtonType, type ComponentData, type DataTable, type TableComponent } from '@axonivy/form-editor-protocol';
 import { COLUMN_DROPZONE_ID_PREFIX, modifyData, TABLE_DROPZONE_ID_PREFIX, useData } from '../../../../data/data';
-import type { CreateComponentData } from '../../../../types/config';
 import { useTranslation } from 'react-i18next';
 import { useComponents } from '../../../../context/ComponentsContext';
+import type { CreateComponentData } from '../../../../context/DndContext';
 
 export const useEditableDataTableField = () => {
   const { element, setData, setElement } = useData();

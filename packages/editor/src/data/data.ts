@@ -6,16 +6,15 @@ import {
   isColumn,
   isStructure,
   isTable,
-  type Component,
   type ComponentData,
   type ComponentType,
+  type ConfigData,
   type FormData,
   type TableConfig
 } from '@axonivy/form-editor-protocol';
 import { useAppContext } from '../context/AppContext';
 import type { UpdateConsumer } from '../types/types';
 import { createComponent, type CreateData } from '../components/component-factory';
-import type { CreateComponentData } from '../context/DndContext';
 
 export const CANVAS_DROPZONE_ID = 'canvas';
 export const DELETE_DROPZONE_ID = 'delete';
@@ -173,7 +172,7 @@ type ModifyAction<TType extends ComponentType = ComponentType> =
       type: 'paste';
       data: {
         componentName: TType;
-        clipboard: Component['config'] | ComponentData['config'];
+        clipboard: Partial<ConfigData>; //Component['config'] | ComponentData['config'];
         targetId: string;
         componentByName: ComponentByName;
       };
@@ -232,10 +231,9 @@ const allCids = (components: Array<ComponentData>) => {
   return ids;
 };
 
-const pasteComponent = (data: FormData, config: ComponentConfig, clipboard: ComponentData['config'], targetId: string) => {
-  const newComponent = createComponentData(data.components, config.name);
+const pasteComponent = (data: FormData, config: ComponentConfig, clipboard: Partial<ComponentData['config']>, targetId: string) => {
+  const newComponent = createComponentData(data.components, config.name, { config: clipboard });
   newComponent.cid = 'copy';
-  newComponent.config = { ...newComponent.config, ...clipboard };
   if (newComponent) {
     const added = addComponent(data.components, newComponent, targetId);
     defineNewCid(data.components, newComponent);
@@ -293,7 +291,7 @@ export const findComponentElement = (data: FormData, id: string) => {
 
 export const createInitForm = (
   data: FormData,
-  creates: Array<CreateComponentData>,
+  creates: Array<{ type: ComponentType; config: CreateData }>,
   workflowButtons: boolean,
   componentByName: ComponentByName,
   selectedElementId?: string
@@ -301,7 +299,7 @@ export const createInitForm = (
   creates.forEach(create => {
     data = modifyData(data, {
       type: 'add',
-      data: { componentName: create.componentName, create, targetId: selectedElementId, componentByName }
+      data: { componentName: create.type, create, targetId: selectedElementId, componentByName }
     }).newData;
   });
   if (workflowButtons) {

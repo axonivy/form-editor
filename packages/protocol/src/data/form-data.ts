@@ -35,12 +35,12 @@ export type ComponentConfigKeys = KeysOfUnion<Component['config']>;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type PrimitiveValue = string | boolean | number | any[] | Record<string, string>;
 
-export type ConfigData = Record<string, PrimitiveValue | Array<ComponentData>>;
+export type ConfigData = Component['config'] | DataTableColumn; //Record<string, PrimitiveValue | Array<ComponentData>>;
 
 export type ComponentData = {
   cid: string;
   type: ComponentType;
-  config: Component['config'] | DataTableColumn;
+  config: ConfigData;
 };
 
 export type TableConfig = ComponentData & { config: Omit<DataTable, 'components'> & { components: Array<TableComponent> } };

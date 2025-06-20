@@ -3,7 +3,7 @@ import { useDraggable } from '@dnd-kit/core';
 import { useComponents } from '../../context/ComponentsContext';
 import type { ComponentType } from '@axonivy/form-editor-protocol';
 import './PaletteItem.css';
-import { createComponent } from '../../components/component-factory';
+import { createComponent, type CreateData } from '../../components/component-factory';
 import type { CreateComponentData } from '../../context/DndContext';
 
 export type FormPaletteItemConfig = Omit<PaletteItemConfig, 'icon'> & {
@@ -43,14 +43,14 @@ export const FormPaletteItem = ({
   );
 };
 
-type PaletteItemOverlayProps = { name: ComponentType; data?: CreateComponentData };
+type PaletteItemOverlayProps = { type: ComponentType; createData?: CreateData };
 
-export const PaletteItemOverlay = ({ name, data }: PaletteItemOverlayProps) => {
+export const PaletteItemOverlay = ({ type, createData }: PaletteItemOverlayProps) => {
   const { componentByName } = useComponents();
-  const component = componentByName(data?.componentName ?? name);
+  const component = componentByName(type);
   return (
     <div className='draggable dragging' style={{ width: 400 }}>
-      {component.render(createComponent(name, data))}
+      {component.render(createComponent(type, createData))}
     </div>
   );
 };

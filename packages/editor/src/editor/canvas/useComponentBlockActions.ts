@@ -6,6 +6,8 @@ import { useReadonly } from '@axonivy/ui-components';
 import { useAction } from '../../context/useAction';
 import { useComponents } from '../../context/ComponentsContext';
 import type { Dispatch, SetStateAction } from 'react';
+import { addDefaults } from '../../components/component-factory';
+import type { DefaultComponentProps } from '../../types/config';
 
 export const useComponentBlockActions = ({
   config,
@@ -18,10 +20,10 @@ export const useComponentBlockActions = ({
   const { setData } = useData();
   const isDataTableEditableButtons =
     data.type === 'Button' && ((data.config as Button).type === 'EDIT' || (data.config as Button).type === 'DELETE');
-  const elementConfig = { ...config.defaultProps, ...data.config };
+  const elementConfig = addDefaults(data.type, data.config);
   const deleteElement = () => {
     setData(oldData => modifyData(oldData, { type: 'remove', data: { id: data.cid } }).newData);
-    config.onDelete?.(elementConfig, setData);
+    config.onDelete?.(elementConfig as unknown as DefaultComponentProps, setData);
     setSelectedElement(undefined);
   };
 
@@ -61,7 +63,7 @@ export const useComponentBlockActions = ({
             create: {
               label: 'Actions',
               value: '',
-              defaultProps: {
+              config: {
                 asActionColumn: true
               }
             },

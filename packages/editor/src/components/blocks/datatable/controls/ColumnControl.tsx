@@ -2,7 +2,6 @@ import { Button, Flex, type CollapsibleControlProps } from '@axonivy/ui-componen
 import { useData } from '../../../../data/data';
 import { useDataTableColumns } from '../fields/useDataTableColumns';
 import { IvyIcons } from '@axonivy/ui-icons';
-import type { CreateComponentData } from '../../../../types/config';
 import { isTable } from '@axonivy/form-editor-protocol';
 import { useTranslation } from 'react-i18next';
 import { useComponents } from '../../../../context/ComponentsContext';
@@ -18,8 +17,7 @@ export const ColumnControl = (props: CollapsibleControlProps) => {
     if (isTable(element)) {
       setData(data => {
         const creates = boundInactiveColumns
-          .map<CreateComponentData>(column => ({
-            componentName: 'DataTableColumn',
+          .map(column => ({
             label: column.value.length > 0 ? column.value : column.header,
             value: column.value
           }))

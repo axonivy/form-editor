@@ -3,6 +3,7 @@ import { COLUMN_DROPZONE_ID_PREFIX, modifyData, useData } from '../../../../data
 import { IvyIcons } from '@axonivy/ui-icons';
 import { useTranslation } from 'react-i18next';
 import { useComponents } from '../../../../context/ComponentsContext';
+import type { DataTableColumn } from '@axonivy/form-editor-protocol';
 
 export const ContentControls = (props: CollapsibleControlProps) => {
   const { element, setData } = useData();
@@ -20,7 +21,7 @@ export const ContentControls = (props: CollapsibleControlProps) => {
 
   return (
     element?.type === 'DataTableColumn' &&
-    element.config.asActionColumn && (
+    (element.config as DataTableColumn).asActionColumn && (
       <Button icon={IvyIcons.Plus} onClick={createActionButton} size='small' title={t('label.addNewActionCol')} {...props} />
     )
   );

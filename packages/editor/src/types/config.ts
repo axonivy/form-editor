@@ -1,4 +1,4 @@
-import type { ComponentType, ConfigData, FormData, PrimitiveValue } from '@axonivy/form-editor-protocol';
+import type { ComponentData, ComponentType, FormData, PrimitiveValue } from '@axonivy/form-editor-protocol';
 import type React from 'react';
 import type { ReactNode } from 'react';
 import type { FormBrowser } from '../editor/browser/Browser';
@@ -8,7 +8,7 @@ import { IvyIcons } from '@axonivy/ui-icons';
 
 export type UiComponentProps<Props extends DefaultComponentProps = DefaultComponentProps> = Props & { id: string };
 
-export type DefaultComponentProps = ConfigData;
+export type DefaultComponentProps = Record<string, PrimitiveValue | Array<ComponentData>>;
 
 type UiComponent<Props extends DefaultComponentProps = DefaultComponentProps> = (props: UiComponentProps<Props>) => React.JSX.Element;
 

@@ -154,17 +154,10 @@ const EmptyDataTableColumn = ({ id, initValue }: { id: string; initValue: string
     const mappableBrowserNode = isLeafNode ? tree : tree[0].children;
     setData(data => {
       const creates = mappableBrowserNode
-        .map(attribute => {
-          const component = componentByName('DataTableColumn');
-          if (component === undefined) {
-            return undefined;
-          }
-          return {
-            componentName: component.name,
-            label: isLeafNode && attribute.data ? attribute.data.attribute : attribute.value,
-            value: isLeafNode ? '' : attribute.value
-          };
-        })
+        .map(attribute => ({
+          label: isLeafNode && attribute.data ? attribute.data.attribute : attribute.value,
+          value: isLeafNode ? '' : attribute.value
+        }))
         .filter(create => create !== undefined);
       return createInitTableColumns(id, data, creates, componentByName);
     });

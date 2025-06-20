@@ -6,9 +6,10 @@ import { useCallback, useEffect, useState } from 'react';
 import {
   isTable,
   type ComponentData,
-  type ConfigData,
+  type DataTableColumn,
   type Dialog,
   type FormData,
+  type SelectItemsProps,
   type Variable,
   type VariableInfo
 } from '@axonivy/form-editor-protocol';
@@ -92,7 +93,7 @@ const determineTreeData = (
   const parentComponent = getParentComponent(data.components, element.cid);
   switch (options?.attribute?.onlyAttributes) {
     case 'DYNAMICLIST':
-      return findAttributesOfType(variableInfo, (element.config as ConfigData).dynamicItemsList as string);
+      return findAttributesOfType(variableInfo, (element.config as SelectItemsProps).dynamicItemsList as string);
     case 'COLUMN':
       if (parentComponent && isTable(parentComponent)) {
         return findAttributesOfType(variableInfo, parentComponent.config.value || '', 10, 'row');
@@ -102,7 +103,12 @@ const determineTreeData = (
       if (parentComponent?.type === 'DataTableColumn') {
         const parentTableComponent = getParentComponent(data.components, parentComponent.cid);
         return [
-          ...findAttributesOfType(variableInfo, isTable(parentTableComponent) ? parentComponent.config.value : '', 10, 'row'),
+          ...findAttributesOfType(
+            variableInfo,
+            isTable(parentTableComponent) ? (parentComponent.config as DataTableColumn).value : '',
+            10,
+            'row'
+          ),
           ...variableTreeData().of(variableInfo)
         ];
       } else if (parentComponent?.type === 'Dialog') {

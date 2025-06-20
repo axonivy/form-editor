@@ -1,7 +1,7 @@
 import { customRenderHook } from 'test-utils';
 import { useComponentBlockActions } from './useComponentBlockActions';
 import { renderHook, waitFor } from '@testing-library/react';
-import type { Component, FormData } from '@axonivy/form-editor-protocol';
+import type { Component, DeepPartial, FormData } from '@axonivy/form-editor-protocol';
 import { useDataTableComponent } from '../../components/blocks/datatable/DataTable';
 import type { ComponentConfig } from '../../types/config';
 
@@ -36,7 +36,7 @@ const data = {
       type: 'Dialog'
     }
   ]
-} as FormData;
+} as DeepPartial<FormData> as FormData;
 
 test('delete datatable also deletes dialog', async () => {
   const newData = [] as FormData[];
