@@ -26,13 +26,13 @@ import { addDefaults } from '../../components/component-factory';
 export const Properties = () => {
   const { categoryTranslations: CategoryTranslations } = useBase();
   const { componentByElement } = useComponents();
-  const { element, data, parent } = useData();
+  const { element, parent } = useData();
   const { validations } = useAppContext();
   const [value, setValue] = useState('Properties');
   if (element === undefined) {
     return <FormPropertySection />;
   }
-  const propertyConfig = componentByElement(element, data.components);
+  const propertyConfig = componentByElement(element);
   const elementConfig = addDefaults(element.type, element.config);
   const fields = visibleFields(propertyConfig.fields, { ...elementConfig });
   const sections = visibleSections(fields, parent);

@@ -10,8 +10,6 @@ import {
   variableTreeData
 } from './variable-tree-data';
 
-// Needs because 'renderHook' is imported
-
 const variableInfo: VariableInfo = {
   variables: [
     {

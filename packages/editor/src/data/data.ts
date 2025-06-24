@@ -170,7 +170,7 @@ type ModifyAction<TType extends ComponentType = ComponentType> =
       type: 'paste';
       data: {
         componentType: TType;
-        clipboard: Partial<ConfigData>; //Component['config'] | ComponentData['config'];
+        clipboard: Partial<ConfigData>;
         targetId: string;
       };
     };

@@ -6,7 +6,7 @@ import type { CreateData } from '../components/component-factory';
 
 export const ItemDragOverlay = ({ activeId, createData }: { activeId?: string; createData?: CreateData }) => {
   const { componentByElement, componentByName } = useComponents();
-  const { element, data } = useData();
+  const { element } = useData();
   if (!activeId) {
     return null;
   }
@@ -15,7 +15,7 @@ export const ItemDragOverlay = ({ activeId, createData }: { activeId?: string; c
     return <PaletteItemOverlay type={component.name} createData={createData} />;
   }
   if (element) {
-    const component = componentByElement(element, data.components);
+    const component = componentByElement(element);
     return <ComponentBlockOverlay config={component} data={element} />;
   }
   return null;

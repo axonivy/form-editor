@@ -6,7 +6,7 @@ import { useLinkComponent } from './blocks/link/Link';
 import { useTextComponent } from './blocks/text/Text';
 import { useCheckboxComponent } from './blocks/checkbox/Checkbox';
 import { useSelectComponent } from './blocks/select/Select';
-import { isTable, type ComponentData, type ComponentType } from '@axonivy/form-editor-protocol';
+import { type ComponentData, type ComponentType } from '@axonivy/form-editor-protocol';
 import type { AutoCompleteWithString } from '../types/types';
 import { useComboboxComponent } from './blocks/combobox/Combobox';
 import { useRadioComponent } from './blocks/radio/Radio';
@@ -16,19 +16,13 @@ import { useDataTableComponent } from './blocks/datatable/DataTable';
 import { useDataTableColumnComponent } from './blocks/datatablecolumn/DataTableColumn';
 import { useFieldsetComponent } from './blocks/fieldset/Fieldset';
 import { usePanelComponent } from './blocks/panel/Panel';
-import { getParentComponent } from '../data/data';
 import { useCompositeComponent } from './blocks/composite/Composite';
 import { useDialogComponent } from './blocks/dialog/Dialog';
 import { groupBy } from '@axonivy/ui-components';
 
 export const useComponentsInit = () => {
-  const componentByElement = (element: ComponentData, data: Array<ComponentData>) => {
-    const component = componentByName(element.type);
-    //still needed?
-    if (component === undefined && isTable(getParentComponent(data, element.cid))) {
-      return componentByName('DataTableColumn');
-    }
-    return component;
+  const componentByElement = (element: ComponentData) => {
+    return componentByName(element.type);
   };
 
   const componentByName = (type: AutoCompleteWithString<ComponentType>): ComponentConfig => {
@@ -41,11 +35,8 @@ export const useComponentsInit = () => {
   };
 
   const allComponentsByCategory = () => {
-    // Provisional: Filter out undefined components before checking category
     return groupBy(
-      Object.values(config.components)
-        .filter(component => component !== undefined)
-        .filter(component => component.category !== 'Hidden'),
+      Object.values(config.components).filter(component => component?.category !== 'Hidden'),
       item => item.category
     );
   };
