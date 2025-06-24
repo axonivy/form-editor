@@ -5,6 +5,7 @@ import {
   Button,
   DialogTrigger,
   ExpandableCell,
+  Flex,
   MessageRow,
   SelectRow,
   Table,
@@ -58,7 +59,7 @@ export const DataClassDialog = ({ children, ...props }: DataClassDialogProps & {
       open={open}
       onOpenChange={setOpen}
       title={t('label.createFromData')}
-      description={t('label.createFromData')}
+      description={t('label.selectAttributes')}
       buttonCustom={
         <Button variant='primary' onClick={currentCreateForm || undefined} disabled={isCreateButtonDisabled}>
           {t('common.label.create')}
@@ -156,28 +157,31 @@ const DataClassSelect = ({
 
   return (
     <>
-      <Table>
-        <TableBody>
-          {table.getRowModel().flatRows.length ? (
-            table.getRowModel().rows.map(row => (
-              <SelectRow key={row.id} row={row}>
-                {row.getVisibleCells().map(cell => (
-                  <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
-                ))}
-              </SelectRow>
-            ))
-          ) : (
-            <MessageRow message={{ message: t('message.noData'), variant: 'info' }} columnCount={1} />
-          )}
-        </TableBody>
-      </Table>
-      {showWorkflowButtonsCheckbox && (
-        <BasicCheckbox
-          checked={workflowButtons}
-          onCheckedChange={change => setWorkflowButtons(Boolean(change))}
-          label={t('label.createBtns')}
-        />
-      )}
+      <Flex direction='column' gap={4}>
+        <Table>
+          <TableBody>
+            {table.getRowModel().flatRows.length ? (
+              table.getRowModel().rows.map(row => (
+                <SelectRow key={row.id} row={row}>
+                  {row.getVisibleCells().map(cell => (
+                    <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
+                  ))}
+                </SelectRow>
+              ))
+            ) : (
+              <MessageRow message={{ message: t('message.noData'), variant: 'info' }} columnCount={1} />
+            )}
+          </TableBody>
+        </Table>
+
+        {showWorkflowButtonsCheckbox && (
+          <BasicCheckbox
+            checked={workflowButtons}
+            onCheckedChange={change => setWorkflowButtons(Boolean(change))}
+            label={t('label.createBtns')}
+          />
+        )}
+      </Flex>
     </>
   );
 };
