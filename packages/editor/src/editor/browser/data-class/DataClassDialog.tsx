@@ -58,14 +58,16 @@ export const DataClassDialog = ({ children, ...props }: DataClassDialogProps & {
     <BasicDialog
       open={open}
       onOpenChange={setOpen}
-      title={t('label.createFromData')}
-      description={t('label.selectAttributes')}
-      buttonCustom={
-        <Button variant='primary' onClick={currentCreateForm || undefined} disabled={isCreateButtonDisabled}>
-          {t('common.label.create')}
-        </Button>
-      }
-      buttonClose={t('common.label.cancel')}
+      contentProps={{
+        title: t('label.createFromData'),
+        description: t('label.selectAttributes'),
+        buttonCustom: (
+          <Button variant='primary' onClick={currentCreateForm || undefined} disabled={isCreateButtonDisabled}>
+            {t('common.label.create')}
+          </Button>
+        ),
+        buttonClose: t('common.label.cancel')
+      }}
       dialogTrigger={<DialogTrigger asChild>{children}</DialogTrigger>}
     >
       <div onClick={e => e.stopPropagation()}>

@@ -1,15 +1,13 @@
+import type { Component, ComponentData, Layout, Variable } from '@axonivy/form-editor-protocol';
 import {
+  BasicDialogContent,
   BasicField,
   Button,
   Dialog,
   DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
   DialogTrigger,
   Flex,
   Input,
-  Message,
   Select,
   SelectContent,
   SelectGroup,
@@ -19,18 +17,17 @@ import {
   toast,
   type BrowserNode
 } from '@axonivy/ui-components';
-import type { Component, ComponentData, Layout, Variable } from '@axonivy/form-editor-protocol';
+import { IvyIcons } from '@axonivy/ui-icons';
+import { useQueryClient } from '@tanstack/react-query';
 import { useMemo, useState, type Dispatch, type ReactNode, type SetStateAction } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAppContext } from '../../../context/AppContext';
-import { useQueryClient } from '@tanstack/react-query';
-import { genQueryKey } from '../../../query/query-client';
 import { useFunction } from '../../../context/useFunction';
 import { useMeta } from '../../../context/useMeta';
+import { genQueryKey } from '../../../query/query-client';
+import { Browser } from '../Browser';
 import { collectNodesWithChildren, variableTreeData } from '../data-class/variable-tree-data';
 import { useExtractFieldValidation } from './useExtractFieldValidation';
-import { IvyIcons } from '@axonivy/ui-icons';
-import { Browser } from '../Browser';
 type ExtractComponentDialogProps = {
   children: ReactNode;
   data: Component | ComponentData;
@@ -41,23 +38,7 @@ type ExtractComponentDialogProps = {
 export const ExtractComponentDialog = ({ children, data, openDialog, setOpenDialog }: ExtractComponentDialogProps) => {
   const { t } = useTranslation();
   const layoutId = (data.config as Layout)?.id?.length > 0 ? (data.config as Layout).id : data.cid;
-
-  return (
-    <Dialog open={openDialog} onOpenChange={setOpenDialog}>
-      <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent onClick={e => e.stopPropagation()}>
-        <DialogHeader>
-          <DialogTitle>{t('dialog.extractComponent', { component: layoutId })}</DialogTitle>
-        </DialogHeader>
-        <ExtractComponentDialogContent data={data} layoutId={layoutId} />
-      </DialogContent>
-    </Dialog>
-  );
-};
-
-const ExtractComponentDialogContent = ({ data, layoutId }: { data: Component | ComponentData; layoutId: string }) => {
   const { context, namespace } = useAppContext();
-  const { t } = useTranslation();
   const queryClient = useQueryClient();
   const { validateComponentName, validateComponentNamespace } = useExtractFieldValidation();
   const variableInfo = useMeta('meta/data/attributes', context, { types: {}, variables: [] }).data;
@@ -106,53 +87,13 @@ const ExtractComponentDialogContent = ({ data, layoutId }: { data: Component | C
   );
 
   return (
-    <>
-      <Flex direction='column' gap={2}>
-        <BasicField className='extract-dialog-name' label={t('dialog.componentName')} message={nameValidation}>
-          <Input value={name} onChange={event => setName(event.target.value)} placeholder={layoutId} />
-        </BasicField>
-        <BasicField className='extract-dialog-namespace' label={t('dialog.nameSpace')} message={namespaceValidation}>
-          <Input value={nameSpace} onChange={event => setNameSpace(event.target.value)} placeholder={namespace} />
-        </BasicField>
-        <Dialog open={open} onOpenChange={setOpen}>
-          <BasicField className='extract-dialog-dataclass' label={t('dialog.dataClass')}>
-            <Flex alignItems='center' gap={2}>
-              <Select value={field} onValueChange={setField} defaultValue={field}>
-                <SelectTrigger>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    {dataClassItems.map(item => (
-                      <SelectItem key={item.value} value={item.value}>
-                        <>
-                          {item.value}
-                          <span style={{ color: 'var(--N500)' }}> {item.info}</span>
-                        </>
-                      </SelectItem>
-                    ))}
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-              <DialogTrigger asChild>
-                <Button icon={IvyIcons.ListSearch} aria-label={t('label.browser')} />
-              </DialogTrigger>
-            </Flex>
-          </BasicField>
-          <DialogContent style={{ height: '80vh' }}>
-            <Browser
-              activeBrowsers={[{ type: 'ATTRIBUTE', options: { withoutEl: true, attribute: { onlyObjects: true } } }]}
-              close={() => setOpen(false)}
-              value={field}
-              onChange={setField}
-            />
-          </DialogContent>
-        </Dialog>
-        <Message variant='info' message={t('dialog.logicWarning', { component: layoutId })} />
-      </Flex>
-
-      <DialogFooter>
-        <Flex direction='column' gap={2}>
+    <Dialog open={openDialog} onOpenChange={setOpenDialog}>
+      <DialogTrigger asChild>{children}</DialogTrigger>
+      <BasicDialogContent
+        title={t('dialog.extractComponent', { component: layoutId })}
+        description={t('dialog.logicWarning', { component: layoutId })}
+        onClick={e => e.stopPropagation()}
+        buttonCustom={
           <Button
             variant='primary'
             size='large'
@@ -170,8 +111,51 @@ const ExtractComponentDialogContent = ({ data, layoutId }: { data: Component | C
           >
             {t('dialog.applyExtract')}
           </Button>
+        }
+      >
+        <Flex direction='column' gap={2}>
+          <BasicField className='extract-dialog-name' label={t('dialog.componentName')} message={nameValidation}>
+            <Input value={name} onChange={event => setName(event.target.value)} placeholder={layoutId} />
+          </BasicField>
+          <BasicField className='extract-dialog-namespace' label={t('dialog.nameSpace')} message={namespaceValidation}>
+            <Input value={nameSpace} onChange={event => setNameSpace(event.target.value)} placeholder={namespace} />
+          </BasicField>
+          <Dialog open={open} onOpenChange={setOpen}>
+            <BasicField className='extract-dialog-dataclass' label={t('dialog.dataClass')}>
+              <Flex alignItems='center' gap={2}>
+                <Select value={field} onValueChange={setField} defaultValue={field}>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      {dataClassItems.map(item => (
+                        <SelectItem key={item.value} value={item.value}>
+                          <>
+                            {item.value}
+                            <span style={{ color: 'var(--N500)' }}> {item.info}</span>
+                          </>
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+                <DialogTrigger asChild>
+                  <Button icon={IvyIcons.ListSearch} aria-label={t('label.browser')} />
+                </DialogTrigger>
+              </Flex>
+            </BasicField>
+            <DialogContent style={{ height: '80vh' }}>
+              <Browser
+                activeBrowsers={[{ type: 'ATTRIBUTE', options: { withoutEl: true, attribute: { onlyObjects: true } } }]}
+                close={() => setOpen(false)}
+                value={field}
+                onChange={setField}
+              />
+            </DialogContent>
+          </Dialog>
         </Flex>
-      </DialogFooter>
-    </>
+      </BasicDialogContent>
+    </Dialog>
   );
 };
