@@ -1,12 +1,8 @@
+import type { Variable } from '@axonivy/form-editor-protocol';
 import {
   BasicCheckbox,
+  BasicDialog,
   Button,
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
   DialogTrigger,
   ExpandableCell,
   MessageRow,
@@ -19,16 +15,15 @@ import {
   useTableSelect,
   type BrowserNode
 } from '@axonivy/ui-components';
-import { useMeta } from '../../../context/useMeta';
-import { useAppContext } from '../../../context/AppContext';
-import { useCallback, useEffect, useState, type ReactNode } from 'react';
-import type { Variable } from '@axonivy/form-editor-protocol';
 import { flexRender, getCoreRowModel, getFilteredRowModel, useReactTable, type ColumnDef, type Row } from '@tanstack/react-table';
+import { useCallback, useEffect, useState, type ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useAppContext } from '../../../context/AppContext';
+import { useComponents } from '../../../context/ComponentsContext';
+import { useMeta } from '../../../context/useMeta';
 import { createInitForm, creationTargetId } from '../../../data/data';
 import { useKnownHotkeys } from '../../../utils/hotkeys';
-import { useTranslation } from 'react-i18next';
-import { findAttributesOfType, variableTreeData, rowToCreateData } from './variable-tree-data';
-import { useComponents } from '../../../context/ComponentsContext';
+import { findAttributesOfType, rowToCreateData, variableTreeData } from './variable-tree-data';
 
 type DataClassDialogProps = {
   showWorkflowButtonsCheckbox?: boolean;
@@ -40,21 +35,42 @@ type DataClassDialogProps = {
   prefix?: string;
 };
 
+type DataClassSelectProps = DataClassDialogProps & {
+  onFormCreate: (createFunc: () => void, isCreateDisabled: boolean) => void;
+};
+
 export const DataClassDialog = ({ children, ...props }: DataClassDialogProps & { children: ReactNode }) => {
   const [open, setOpen] = useState(false);
   const { createFromData: shortcut } = useKnownHotkeys();
   useHotkeys(shortcut.hotkey, () => setOpen(true), { scopes: ['global'] });
   const { t } = useTranslation();
+
+  const [currentCreateForm, setCurrentCreateForm] = useState<(() => void) | null>(null);
+  const [isCreateButtonDisabled, setIsCreateButtonDisabled] = useState(true);
+
+  const handleFormCreate = useCallback((createFunc: () => void, isDisabled: boolean) => {
+    setCurrentCreateForm(() => createFunc);
+    setIsCreateButtonDisabled(isDisabled);
+  }, []);
+
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent onClick={e => e.stopPropagation()}>
-        <DialogHeader>
-          <DialogTitle>{t('label.createFromData')}</DialogTitle>
-        </DialogHeader>
-        <DataClassSelect {...props} />
-      </DialogContent>
-    </Dialog>
+    <BasicDialog
+      open={open}
+      onOpenChange={setOpen}
+      title={t('label.createFromData')}
+      description={t('label.createFromData')}
+      buttonCustom={
+        <Button variant='primary' onClick={currentCreateForm || undefined} disabled={isCreateButtonDisabled}>
+          {t('common.label.create')}
+        </Button>
+      }
+      buttonClose={t('common.label.cancel')}
+      dialogTrigger={<DialogTrigger asChild>{children}</DialogTrigger>}
+    >
+      <div onClick={e => e.stopPropagation()}>
+        <DataClassSelect {...props} onFormCreate={handleFormCreate} />
+      </div>
+    </BasicDialog>
   );
 };
 
@@ -65,8 +81,9 @@ const DataClassSelect = ({
   parentName,
   onlyAttributs,
   showRootNode,
-  prefix
-}: DataClassDialogProps) => {
+  prefix,
+  onFormCreate
+}: DataClassSelectProps) => {
   const { context, setData } = useAppContext();
   const { t } = useTranslation();
   const [tree, setTree] = useState<Array<BrowserNode<Variable>>>([]);
@@ -81,10 +98,12 @@ const DataClassSelect = ({
       setTree(variableTreeData().of(dataClass));
     }
   }, [dataClass, onlyAttributs, parentName]);
+
   const loadChildren = useCallback<(row: Row<BrowserNode>) => void>(
     row => setTree(tree => variableTreeData().loadChildrenFor(dataClass, row.original.info, tree)),
     [dataClass, setTree]
   );
+
   const columns: ColumnDef<BrowserNode, string>[] = [
     {
       accessorKey: 'value',
@@ -100,6 +119,7 @@ const DataClassSelect = ({
       )
     }
   ];
+
   const [filter, setFilter] = useState('');
   const expanded = useTableExpand<BrowserNode>({ '0': true });
   const select = useTableSelect<BrowserNode>();
@@ -119,7 +139,8 @@ const DataClassSelect = ({
       ...select.tableState
     }
   });
-  const createForm = () => {
+
+  const createForm = useCallback(() => {
     setData(data => {
       const creates = table
         .getSelectedRowModel()
@@ -127,7 +148,12 @@ const DataClassSelect = ({
         .filter(create => create !== undefined);
       return createInitForm(data, creates, workflowButtons, componentByName, creationTargetId(data.components, creationTarget));
     });
-  };
+  }, [table, componentForType, showRootNode, prefix, setData, workflowButtons, componentByName, creationTarget]);
+
+  useEffect(() => {
+    onFormCreate(createForm, tree.length === 0);
+  }, [onFormCreate, createForm, tree.length]);
+
   return (
     <>
       <Table>
@@ -152,16 +178,6 @@ const DataClassSelect = ({
           label={t('label.createBtns')}
         />
       )}
-      <DialogFooter>
-        <DialogClose asChild>
-          <Button variant='primary' onClick={createForm} disabled={tree.length === 0}>
-            {t('common.label.create')}
-          </Button>
-        </DialogClose>
-        <DialogClose asChild>
-          <Button variant='outline'>{t('common.label.cancel')}</Button>
-        </DialogClose>
-      </DialogFooter>
     </>
   );
 };
