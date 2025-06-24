@@ -1,4 +1,4 @@
-import type { Variable, VariableInfo } from '@axonivy/form-editor-protocol';
+import type { DeepPartial, Variable, VariableInfo } from '@axonivy/form-editor-protocol';
 import type { BrowserNode } from '@axonivy/ui-components';
 import type { Row } from '@tanstack/react-table';
 import {
@@ -9,12 +9,6 @@ import {
   rowToCreateData,
   variableTreeData
 } from './variable-tree-data';
-import { renderHook } from '@testing-library/react';
-import { useComponentsInit } from '../../../components/components';
-import type { DeepPartial } from '../../../types/types';
-
-// Needs because 'renderHook' is imported
-/* eslint-disable testing-library/no-node-access */
 
 const variableInfo: VariableInfo = {
   variables: [
@@ -158,15 +152,13 @@ test('fullVariablePath dontShowRootNode', () => {
 });
 
 test('rowToCreateData', () => {
-  const { result: componentsResult } = renderHook(() => useComponentsInit());
-  const { componentForType } = componentsResult.current;
-  expect(rowToCreateData({ original: { value: 'country', info: 'java.util.List' } } as Row<BrowserNode>, componentForType)).toEqual(
-    undefined
-  );
-  expect(rowToCreateData(row, componentForType)).toEqual({
-    componentName: 'Input',
-    label: 'Country',
-    value: '#{data.address.location.country}'
+  expect(rowToCreateData({ original: { value: 'country', info: 'java.util.List' } } as Row<BrowserNode>)).toEqual(undefined);
+  expect(rowToCreateData(row)).toEqual({
+    type: 'Input',
+    config: {
+      label: 'Country',
+      value: '#{data.address.location.country}'
+    }
   });
 });
 

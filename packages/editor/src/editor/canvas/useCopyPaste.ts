@@ -2,19 +2,17 @@ import type { Component, ComponentData, ComponentType, ConfigData } from '@axoni
 import { useClipboard, type TextDropItem } from 'react-aria';
 import { CANVAS_DROPZONE_ID, modifyData, useData } from '../../data/data';
 import { useReadonly } from '@axonivy/ui-components';
-import { useComponents } from '../../context/ComponentsContext';
 
 export const useCopyPaste = (data?: Component | ComponentData) => {
   const { setData } = useData();
   const readonly = useReadonly();
-  const { componentByName } = useComponents();
   const { clipboardProps } = useClipboard({
     getItems: data ? () => [{ 'text/plain': JSON.stringify(data, undefined, 2) }] : undefined,
     onCut: () => {
       if (data === undefined) {
         return;
       }
-      setData(old => modifyData(old, { type: 'remove', data: { id: data.cid } }, componentByName).newData);
+      setData(old => modifyData(old, { type: 'remove', data: { id: data.cid } }).newData);
     },
     onPaste: async items => {
       if (readonly) {
@@ -27,14 +25,10 @@ export const useCopyPaste = (data?: Component | ComponentData) => {
       }
       setData(
         old =>
-          modifyData(
-            old,
-            {
-              type: 'paste',
-              data: { componentName: component.type, clipboard: component.config, targetId: data?.cid ?? CANVAS_DROPZONE_ID }
-            },
-            componentByName
-          ).newData
+          modifyData(old, {
+            type: 'paste',
+            data: { componentType: component.type, clipboard: component.config, targetId: data?.cid ?? CANVAS_DROPZONE_ID }
+          }).newData
       );
     }
   });

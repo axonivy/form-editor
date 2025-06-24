@@ -1,7 +1,6 @@
-import type { FormData } from '@axonivy/form-editor-protocol';
+import type { DeepPartial, FormData } from '@axonivy/form-editor-protocol';
 import { dragData, isDropZoneDisabled, type DragData } from './drag-data';
 import type { Active } from '@dnd-kit/core';
-import type { DeepPartial } from '../../types/types';
 import { COLUMN_DROPZONE_ID_PREFIX, STRUCTURE_DROPZONE_ID_PREFIX, TABLE_DROPZONE_ID_PREFIX } from '../../data/data';
 
 describe('dragData', () => {
@@ -101,7 +100,7 @@ const filledData = () => {
         config: {
           legend: 'Legend',
           collapsible: true,
-          disabled: false,
+          disabled: 'false',
           collapsed: false,
           components: [
             { cid: '41', type: 'Text', config: { content: 'Hello' } },

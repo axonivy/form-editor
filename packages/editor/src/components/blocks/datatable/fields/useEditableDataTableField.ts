@@ -1,12 +1,10 @@
 import { isTable, type ButtonType, type ComponentData, type DataTable, type TableComponent } from '@axonivy/form-editor-protocol';
 import { COLUMN_DROPZONE_ID_PREFIX, modifyData, TABLE_DROPZONE_ID_PREFIX, useData } from '../../../../data/data';
-import type { CreateComponentData } from '../../../../types/config';
 import { useTranslation } from 'react-i18next';
-import { useComponents } from '../../../../context/ComponentsContext';
+import type { CreateComponentData } from '../../../../context/DndContext';
 
 export const useEditableDataTableField = () => {
   const { element, setData, setElement } = useData();
-  const { componentByName } = useComponents();
   const { t } = useTranslation();
 
   const createEditComponents = () => {
@@ -20,18 +18,14 @@ export const useEditableDataTableField = () => {
           if (existingActionColumn !== undefined && create.componentName === 'DataTableColumn') {
             return updatedData;
           }
-          const data = modifyData(
-            updatedData,
-            {
-              type: 'add',
-              data: {
-                componentName: create.componentName,
-                create,
-                targetId: create.componentName === 'Button' ? COLUMN_DROPZONE_ID_PREFIX + actionColumnId : create.targetId
-              }
-            },
-            componentByName
-          );
+          const data = modifyData(updatedData, {
+            type: 'add',
+            data: {
+              componentType: create.componentName,
+              create,
+              targetId: create.componentName === 'Button' ? COLUMN_DROPZONE_ID_PREFIX + actionColumnId : create.targetId
+            }
+          });
           if (create.componentName === 'Dialog' && data.newComponentId) {
             dialogId = data.newComponentId;
           }
@@ -61,14 +55,10 @@ export const useEditableDataTableField = () => {
       );
       setData(data => {
         return deleteIds.reduce((updatedData, id) => {
-          return modifyData(
-            updatedData,
-            {
-              type: 'remove',
-              data: { id: id }
-            },
-            componentByName
-          ).newData;
+          return modifyData(updatedData, {
+            type: 'remove',
+            data: { id: id }
+          }).newData;
         }, data);
       });
 
@@ -81,7 +71,7 @@ export const useEditableDataTableField = () => {
     }
   };
 
-  const createComponentData: (element: ComponentData) => CreateComponentData[] = element => [
+  const createComponentData = (element: ComponentData): CreateComponentData[] => [
     {
       componentName: 'Dialog',
       targetId: 'canvas',
@@ -93,7 +83,7 @@ export const useEditableDataTableField = () => {
       targetId: TABLE_DROPZONE_ID_PREFIX + element.cid,
       label: t('property.actions'),
       value: '',
-      defaultProps: {
+      config: {
         asActionColumn: true
       }
     },
@@ -101,13 +91,13 @@ export const useEditableDataTableField = () => {
       componentName: 'Button',
       label: '',
       value: 'editRow', // just placeholder, will be set from backend
-      defaultProps: { type: 'EDIT', icon: 'pi pi-pencil', variant: 'PRIMARY', confirmDialog: false }
+      config: { type: 'EDIT', icon: 'pi pi-pencil', variant: 'PRIMARY', confirmDialog: false }
     },
     {
       componentName: 'Button',
       label: '',
       value: 'deleteRow', // just placeholder, will be set from backend
-      defaultProps: {
+      config: {
         type: 'DELETE',
         icon: 'pi pi-trash',
         variant: 'DANGER',

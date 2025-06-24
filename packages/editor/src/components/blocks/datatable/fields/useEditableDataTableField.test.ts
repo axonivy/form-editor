@@ -1,8 +1,7 @@
 import { customRenderHook } from 'test-utils';
 import { useEditableDataTableField } from './useEditableDataTableField';
-import type { ComponentData, FormData, TableConfig, VariableInfo } from '@axonivy/form-editor-protocol';
+import type { Button, ComponentDataHelper, DeepPartial, Dialog, FormData, TableConfig, VariableInfo } from '@axonivy/form-editor-protocol';
 import { waitFor } from '@testing-library/react';
-import type { DeepPartial } from '../../../../types/types';
 
 const variable: DeepPartial<VariableInfo> = {
   variables: [
@@ -35,7 +34,7 @@ const variable: DeepPartial<VariableInfo> = {
   }
 };
 
-const dialog: ComponentData = {
+const dialog: ComponentDataHelper<'Dialog', Dialog> = {
   cid: 'dialog3',
   config: {
     alignSelf: 'START',
@@ -48,7 +47,7 @@ const dialog: ComponentData = {
   },
   type: 'Dialog'
 };
-const editButton: ComponentData = {
+const editButton: ComponentDataHelper<'Button', Button> = {
   cid: 'button5',
   config: {
     action: 'editRow', // just placeholder, will be set from backend
@@ -75,7 +74,7 @@ const editButton: ComponentData = {
   type: 'Button'
 };
 
-const deleteButton: ComponentData = {
+const deleteButton: ComponentDataHelper<'Button', Button> = {
   cid: 'button6',
   config: {
     action: 'deleteRow', // just placeholder, will be set from backend
@@ -133,7 +132,7 @@ const data = {
       }
     }
   ]
-} as FormData;
+} as DeepPartial<FormData> as FormData;
 
 test('useEditableDataTableField createComponentData', async () => {
   const newData = [] as FormData[];

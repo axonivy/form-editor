@@ -1,4 +1,4 @@
-import type { ComponentType, ConfigData, FormData, PrimitiveValue } from '@axonivy/form-editor-protocol';
+import type { ComponentData, ComponentType, FormData, PrimitiveValue } from '@axonivy/form-editor-protocol';
 import type React from 'react';
 import type { ReactNode } from 'react';
 import type { FormBrowser } from '../editor/browser/Browser';
@@ -8,9 +8,9 @@ import { IvyIcons } from '@axonivy/ui-icons';
 
 export type UiComponentProps<Props extends DefaultComponentProps = DefaultComponentProps> = Props & { id: string };
 
-export type DefaultComponentProps = ConfigData;
+export type DefaultComponentProps = Record<string, PrimitiveValue | Array<ComponentData>>;
 
-type UiComponent<Props extends DefaultComponentProps = DefaultComponentProps> = (props: UiComponentProps<Props>) => React.JSX.Element;
+type UiComponent<Props extends DefaultComponentProps = DefaultComponentProps> = (props: UiComponentProps<Props>) => ReactNode;
 
 export type FieldOptionValues<TOptions extends Readonly<FieldOption[]>> = TOptions[number]['value'];
 
@@ -19,12 +19,6 @@ export type FieldOption<TValue = PrimitiveValue> = {
   value: TValue;
   icon?: IvyIconProps;
 };
-
-export type CreateData = { label: string; value: string; defaultProps?: Record<string, unknown> };
-export type CreateComponentData = { componentName: ComponentType; targetId?: string } & CreateData;
-
-export const isCreateComponentData = (data: unknown): data is CreateComponentData =>
-  typeof data === 'object' && data !== null && 'componentName' in data;
 
 export type Subsection =
   | 'General'
@@ -112,7 +106,7 @@ export type Fields<ComponentProps extends DefaultComponentProps = DefaultCompone
 export type ItemCategory = 'Elements' | 'Structures' | 'Actions' | 'Hidden';
 export type ItemSubcategory = 'General' | 'Input' | 'Selection' | 'Text';
 
-export type ComponentConfig<ComponentProps extends DefaultComponentProps = DefaultComponentProps, DefaultProps = ComponentProps> = {
+export type ComponentConfig<ComponentProps extends DefaultComponentProps = DefaultComponentProps> = {
   name: ComponentType;
   displayName: string;
   category: ItemCategory;
@@ -120,9 +114,7 @@ export type ComponentConfig<ComponentProps extends DefaultComponentProps = Defau
   icon: ReactNode;
   description: string;
   render: UiComponent<ComponentProps>;
-  create: (data: CreateData) => DefaultProps;
   outlineInfo: (data: ComponentProps) => string | undefined;
-  defaultProps: DefaultProps;
   fields: Fields<ComponentProps>;
   quickActions: QuickAction[];
   subSectionControls?: (props: CollapsibleControlProps, subSection: Subsection) => ReactNode;
@@ -132,7 +124,7 @@ export type ComponentConfig<ComponentProps extends DefaultComponentProps = Defau
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type Config<Props extends { [key: string]: any } = { [key: string]: any }> = {
   components: {
-    [ComponentName in keyof Props]: Omit<ComponentConfig<Props[ComponentName], Props[ComponentName]>, 'type'>;
+    [ComponentName in keyof Props]: Omit<ComponentConfig<Props[ComponentName]>, 'type'>;
   };
 };
 

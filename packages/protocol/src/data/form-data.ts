@@ -1,74 +1,111 @@
 import type { KeysOfUnion } from '../utils/type-helper';
 import type {
-  ActionColumnComponent,
+  Button,
   Component,
   DataTable,
   DataTableColumn,
+  Dialog,
   Fieldset,
   Form,
   FormEditorData,
+  FormExpression,
   FormSaveDataArgs,
   Layout,
-  TableComponent
+  LayoutAlignItems,
+  Panel,
+  SelectItem
 } from './form';
 
 export type ComponentType = Component['type'] | 'DataTableColumn';
+
+const ComponentTypes = [
+  'Button',
+  'Checkbox',
+  'Combobox',
+  'Composite',
+  'DataTable',
+  'DataTableColumn',
+  'DatePicker',
+  'Dialog',
+  'Fieldset',
+  'Input',
+  'Layout',
+  'Link',
+  'Panel',
+  'Radio',
+  'Select',
+  'Text',
+  'Textarea'
+] as const satisfies Array<ComponentType>;
+
+export const isComponentType = (type: string): type is ComponentType => {
+  return Object.values(ComponentTypes).includes(type as ComponentType);
+};
 
 export type ComponentConfigKeys = KeysOfUnion<Component['config']>;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type PrimitiveValue = string | boolean | number | any[] | Record<string, string>;
 
-export type ConfigData = Record<string, PrimitiveValue | Array<ComponentData>>;
+export type ConfigData = Component['config'] | DataTableColumn;
 
-export type ComponentData =
-  | (Omit<Component, 'config'> & {
-      config: ConfigData;
-    })
-  | TableComponent
-  | ActionColumnComponent;
+export type ComponentData = {
+  cid: string;
+  type: ComponentType;
+  config: ConfigData;
+};
 
-export type TableConfig = ComponentData & { config: Omit<DataTable, 'components'> & { components: Array<TableComponent> } };
+export type ComponentDataHelper<TType extends ComponentType, TConfig extends ConfigData> = Omit<ComponentData, 'type' | 'config'> & {
+  type: TType;
+  config: TConfig;
+};
 
-export type ColumnConfig = ComponentData & { config: Omit<DataTableColumn, 'components'> & { components: Array<ActionColumnComponent> } };
-
-export type LayoutConfig = ComponentData & { config: Omit<Layout, 'components'> & { components: Array<ComponentData> } };
-
-export type FieldsetConfig = ComponentData & { config: Omit<Fieldset, 'components'> & { components: Array<ComponentData> } };
+export type TableConfig = ComponentDataHelper<'DataTable', DataTable>;
+export type ColumnConfig = ComponentDataHelper<'DataTableColumn', DataTableColumn>;
+export type LayoutConfig = ComponentDataHelper<'Layout', Omit<Layout, 'components' & { components: Array<ComponentData> }>>;
+export type FieldsetConfig = ComponentDataHelper<'Fieldset', Omit<Fieldset, 'components' & { components: Array<ComponentData> }>>;
+export type PanelConfig = ComponentDataHelper<'Panel', Omit<Panel, 'components' & { components: Array<ComponentData> }>>;
+export type DialogConfig = ComponentDataHelper<'Dialog', Omit<Dialog, 'components' & { components: Array<ComponentData> }>>;
 
 export type FormData = Omit<Form, 'components' | '$schema'> & {
   components: Array<ComponentData>;
 };
 
-export const isStructure = (component?: Component | ComponentData): component is LayoutConfig | FieldsetConfig => {
+export const isStructure = (
+  component?: Component | ComponentData
+): component is LayoutConfig | FieldsetConfig | PanelConfig | DialogConfig => {
   return (
     component !== undefined &&
-    (component.type === 'Layout' || component.type === 'Fieldset' || component.type == 'Panel' || component.type == 'Dialog') &&
+    (component.type === 'Layout' || component.type === 'Fieldset' || component.type === 'Panel' || component.type === 'Dialog') &&
     'components' in component.config
   );
 };
 
-export const isTable = (component?: Component | ComponentData): component is TableConfig => {
+export const isTable = (component?: ComponentData): component is TableConfig => {
   return component !== undefined && component.type === 'DataTable' && 'components' in component.config;
 };
 
-export const isColumn = (component?: Component | ComponentData): component is ColumnConfig => {
+export const isColumn = (component?: ComponentData): component is ColumnConfig => {
   return component !== undefined && component.type === 'DataTableColumn' && 'components' in component.config;
 };
 
-export const isButton = (component?: Component | ComponentData): component is Component => {
+export const isDialog = (component?: ComponentData): component is DialogConfig => {
+  return component !== undefined && component.type === 'Dialog' && 'components' in component.config;
+};
+
+export const isButton = (component?: ComponentData): component is { cid: string; type: 'Button'; config: Button } => {
   return component !== undefined && component.type === 'Button' && 'type' in component.config && 'action' in component.config;
 };
 
-const isLayout = (component?: Component | ComponentData): component is LayoutConfig => {
+const isLayout = (component?: ComponentData): component is LayoutConfig => {
   return isStructure(component) && component.type === 'Layout';
 };
 
-export const isAlignSelfLayout = (component?: Component | ComponentData): component is LayoutConfig => {
+export const isAlignSelfLayout = (component?: ComponentData): component is LayoutConfig => {
   return isLayout(component) && !(component.config.type === 'GRID' && component.config.gridVariant === 'GRID1');
 };
 
-export const isFreeLayout = (component?: Component | ComponentData): component is LayoutConfig => {
+export const isFreeLayout = (component?: ComponentData): component is LayoutConfig => {
   return isLayout(component) && component.config.type === 'GRID' && component.config.gridVariant === 'FREE';
 };
 
@@ -80,3 +117,17 @@ export type FormSaveData = Omit<FormSaveDataArgs, 'data'> & {
   data: FormData;
   directSave?: boolean;
 };
+
+export type BaseProps = { id: string; alignSelf: LayoutAlignItems; lgSpan: string; mdSpan: string };
+export type SelectItemsProps = {
+  label: string;
+  value: string;
+  staticItems: SelectItem[];
+  dynamicItemsLabel: string;
+  dynamicItemsList: string;
+  dynamicItemsValue: string;
+};
+export type VisibleProps = { visible: FormExpression };
+export type DisableProps = VisibleProps & { disabled: string };
+export type UpdateProps = DisableProps & { updateOnChange: boolean };
+export type RequireProps = UpdateProps & { required: string; requiredMessage: string };

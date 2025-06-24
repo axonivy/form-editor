@@ -1,4 +1,4 @@
-import type { Link, Prettify } from '@axonivy/form-editor-protocol';
+import { type Link, type Prettify } from '@axonivy/form-editor-protocol';
 import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
 import './Link.css';
 import { useBase } from '../base';
@@ -10,17 +10,10 @@ import { useTranslation } from 'react-i18next';
 type LinkProps = Prettify<Link>;
 
 export const useLinkComponent = () => {
-  const { baseComponentFields, defaultBaseComponent, defaultVisibleComponent, visibleComponentField } = useBase();
+  const { baseComponentFields, visibleComponentField } = useBase();
   const { t } = useTranslation();
 
   const LinkComponent = useMemo(() => {
-    const defaultLinkProps: LinkProps = {
-      name: t('components.link.name'),
-      href: '',
-      ...defaultVisibleComponent,
-      ...defaultBaseComponent
-    } as const;
-
     const LinkComponent: ComponentConfig<LinkProps> = {
       name: 'Link',
       displayName: t('components.link.name'),
@@ -28,9 +21,7 @@ export const useLinkComponent = () => {
       subcategory: 'General',
       icon: <IconSvg />,
       description: t('components.link.description'),
-      defaultProps: defaultLinkProps,
       render: props => <UiBlock {...props} />,
-      create: () => defaultLinkProps,
       outlineInfo: component => component.name,
       fields: {
         ...baseComponentFields,
@@ -47,7 +38,7 @@ export const useLinkComponent = () => {
     };
 
     return LinkComponent;
-  }, [baseComponentFields, defaultBaseComponent, defaultVisibleComponent, t, visibleComponentField]);
+  }, [baseComponentFields, t, visibleComponentField]);
 
   return {
     LinkComponent

@@ -1,4 +1,4 @@
-import type { DataTable, Prettify, TableComponent } from '@axonivy/form-editor-protocol';
+import { type DataTable, type Prettify, type TableComponent } from '@axonivy/form-editor-protocol';
 import type { ComponentConfig, UiComponentProps } from '../../../types/config';
 import './DataTable.css';
 import { useBase } from '../base';
@@ -7,8 +7,7 @@ import { ComponentBlock } from '../../../editor/canvas/ComponentBlock';
 import { useAppContext } from '../../../context/AppContext';
 import { Button, cn, Flex, Message } from '@axonivy/ui-components';
 import { useMeta } from '../../../context/useMeta';
-import { type ComponentByName } from '../../components';
-import { createInitTableColumns, findComponentDeep, modifyData } from '../../../data/data';
+import { findComponentDeep, modifyData } from '../../../data/data';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { UiBlockHeader } from '../../UiBlockHeader';
 import { ColumnControl } from './controls/ColumnControl';
@@ -18,28 +17,17 @@ import { useTranslation } from 'react-i18next';
 import { findAttributesOfType } from '../../../editor/browser/data-class/variable-tree-data';
 import { useMemo } from 'react';
 import { useComponents } from '../../../context/ComponentsContext';
+import { createInitTableColumns } from './create-init-columns';
 
 type DataTableProps = Prettify<DataTable>;
 
 const DIALOG_TYPE = 'Dialog';
 
-export const useDataTableComponent = (componentByName: ComponentByName) => {
-  const { baseComponentFields, defaultBaseComponent, defaultVisibleComponent, visibleComponentField } = useBase();
+export const useDataTableComponent = () => {
+  const { baseComponentFields, visibleComponentField } = useBase();
   const { t } = useTranslation();
 
   const DataTableComponent = useMemo(() => {
-    const defaultDataTableProps: DataTable = {
-      components: [],
-      value: '',
-      isEditable: false,
-      addButton: false,
-      editDialogId: '',
-      paginator: false,
-      maxRows: '10',
-      ...defaultVisibleComponent,
-      ...defaultBaseComponent
-    } as const;
-
     const component: ComponentConfig<DataTableProps> = {
       name: 'DataTable',
       displayName: t('components.dataTable.name'),
@@ -47,9 +35,7 @@ export const useDataTableComponent = (componentByName: ComponentByName) => {
       subcategory: 'Input',
       icon: <IconSvg />,
       description: t('components.dataTable.description'),
-      defaultProps: defaultDataTableProps,
       render: props => <UiBlock {...props} />,
-      create: ({ label, value, ...defaultProps }) => ({ ...defaultDataTableProps, label, value, ...defaultProps }),
       outlineInfo: component => component.value,
       fields: {
         ...baseComponentFields,
@@ -91,13 +77,13 @@ export const useDataTableComponent = (componentByName: ComponentByName) => {
       subSectionControls: (props, subSection) => (subSection === 'Columns' ? <ColumnControl {...props} /> : null),
       onDelete: (component, setData) => {
         if (component.editDialogId.length > 0) {
-          setData(oldData => modifyData(oldData, { type: 'remove', data: { id: component.editDialogId } }, componentByName).newData);
+          setData(oldData => modifyData(oldData, { type: 'remove', data: { id: component.editDialogId } }).newData);
         }
       }
     };
 
     return component;
-  }, [baseComponentFields, componentByName, defaultBaseComponent, defaultVisibleComponent, t, visibleComponentField]);
+  }, [baseComponentFields, t, visibleComponentField]);
 
   return { DataTableComponent };
 };
@@ -154,7 +140,6 @@ const UiBlock = ({ id, components, value, paginator, maxRows, visible, editDialo
 
 const EmptyDataTableColumn = ({ id, initValue }: { id: string; initValue: string }) => {
   const { t } = useTranslation();
-  const { componentByName } = useComponents();
   const { context, setData } = useAppContext();
   const dataClass = useMeta('meta/data/attributes', context, { types: {}, variables: [] }).data;
 
@@ -168,19 +153,12 @@ const EmptyDataTableColumn = ({ id, initValue }: { id: string; initValue: string
     const mappableBrowserNode = isLeafNode ? tree : tree[0].children;
     setData(data => {
       const creates = mappableBrowserNode
-        .map(attribute => {
-          const component = componentByName('DataTableColumn');
-          if (component === undefined) {
-            return undefined;
-          }
-          return {
-            componentName: component.name,
-            label: isLeafNode && attribute.data ? attribute.data.attribute : attribute.value,
-            value: isLeafNode ? '' : attribute.value
-          };
-        })
+        .map(attribute => ({
+          label: isLeafNode && attribute.data ? attribute.data.attribute : attribute.value,
+          value: isLeafNode ? '' : attribute.value
+        }))
         .filter(create => create !== undefined);
-      return createInitTableColumns(id, data, creates, componentByName);
+      return createInitTableColumns(id, data, creates);
     });
   };
 

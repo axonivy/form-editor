@@ -1,4 +1,4 @@
-import type { Prettify, Text } from '@axonivy/form-editor-protocol';
+import { type Prettify, type Text } from '@axonivy/form-editor-protocol';
 import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
 import './Text.css';
 import { useBase } from '../base';
@@ -12,19 +12,10 @@ import { useTranslation } from 'react-i18next';
 type TextProps = Prettify<Text>;
 
 export const useTextComponent = () => {
-  const { baseComponentFields, defaultBaseComponent, defaultVisibleComponent, visibleComponentField } = useBase();
+  const { baseComponentFields, visibleComponentField } = useBase();
   const { t } = useTranslation();
 
   const TextComponent = useMemo(() => {
-    const defaultTextProps: TextProps = {
-      icon: '',
-      content: t('components.text.placeholder'),
-      type: 'RAW',
-      iconStyle: 'INLINE',
-      ...defaultVisibleComponent,
-      ...defaultBaseComponent
-    } as const;
-
     const TextComponent: ComponentConfig<TextProps> = {
       name: 'Text',
       displayName: t('components.text.name'),
@@ -32,9 +23,7 @@ export const useTextComponent = () => {
       subcategory: 'Text',
       icon: <IconSvg />,
       description: t('components.text.description'),
-      defaultProps: defaultTextProps,
       render: props => <UiBlock {...props} />,
-      create: ({ value }) => ({ ...defaultTextProps, content: value }),
       outlineInfo: component => component.content,
       fields: {
         ...baseComponentFields,
@@ -48,7 +37,7 @@ export const useTextComponent = () => {
     };
 
     return TextComponent;
-  }, [baseComponentFields, defaultBaseComponent, defaultVisibleComponent, t, visibleComponentField]);
+  }, [baseComponentFields, t, visibleComponentField]);
   return {
     TextComponent
   };

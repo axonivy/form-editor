@@ -2,7 +2,7 @@ import { renderHook } from '@testing-library/react';
 import { useComponentsInit } from './components';
 describe('Component hooks', () => {
   const { result: componentsResult } = renderHook(() => useComponentsInit());
-  const { componentForType, componentByName, componentsByCategory, allComponentsByCategory, config } = componentsResult.current;
+  const { componentByName, componentsByCategory, allComponentsByCategory, config } = componentsResult.current;
 
   test('componentByName', () => {
     expect(componentByName('unknown')).toEqual(undefined);
@@ -25,16 +25,5 @@ describe('Component hooks', () => {
     expect(result.Actions).toHaveLength(2);
     expect(result.Elements).toHaveLength(9);
     expect(result.Structures).toHaveLength(3);
-  });
-
-  test('componentForType', () => {
-    expect(componentForType('String')).toEqual({ component: config.components.Input });
-    expect(componentForType('Number')).toEqual({ component: config.components.Input, defaultProps: { type: 'NUMBER' } });
-    expect(componentForType('Boolean')).toEqual({ component: config.components.Checkbox });
-    expect(componentForType('Date')).toEqual({ component: config.components.DatePicker });
-    expect(componentForType('DateTime')).toEqual({ component: config.components.DatePicker });
-    expect(componentForType('java.util.Date')).toEqual({ component: config.components.DatePicker });
-    expect(componentForType('Time')).toEqual(undefined);
-    expect(componentForType('File')).toEqual(undefined);
   });
 });

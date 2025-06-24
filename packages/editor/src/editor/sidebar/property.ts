@@ -1,11 +1,11 @@
-import { isAlignSelfLayout, isFreeLayout, type ComponentData, type ConfigData } from '@axonivy/form-editor-protocol';
-import { sections, type Field, type Fields, type HiddenField, type Section } from '../../types/config';
+import { isAlignSelfLayout, isFreeLayout, type ComponentData } from '@axonivy/form-editor-protocol';
+import { sections, type DefaultComponentProps, type Field, type Fields, type HiddenField, type Section } from '../../types/config';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { groupBy } from '@axonivy/ui-components';
 
 export type VisibleFields = ReturnType<typeof visibleFields>;
 
-export const visibleFields = (fields: Fields, elementConfig: ConfigData) => {
+export const visibleFields = (fields: Fields, elementConfig: DefaultComponentProps) => {
   return Object.entries(fields)
     .filter(([, field]) => isNotHiddenField(field))
     .filter(([, field]) => field.hide === undefined || !field.hide(elementConfig))

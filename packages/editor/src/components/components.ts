@@ -6,7 +6,7 @@ import { useLinkComponent } from './blocks/link/Link';
 import { useTextComponent } from './blocks/text/Text';
 import { useCheckboxComponent } from './blocks/checkbox/Checkbox';
 import { useSelectComponent } from './blocks/select/Select';
-import { isTable, type ComponentData, type ComponentType } from '@axonivy/form-editor-protocol';
+import { type ComponentData, type ComponentType } from '@axonivy/form-editor-protocol';
 import type { AutoCompleteWithString } from '../types/types';
 import { useComboboxComponent } from './blocks/combobox/Combobox';
 import { useRadioComponent } from './blocks/radio/Radio';
@@ -16,81 +16,29 @@ import { useDataTableComponent } from './blocks/datatable/DataTable';
 import { useDataTableColumnComponent } from './blocks/datatablecolumn/DataTableColumn';
 import { useFieldsetComponent } from './blocks/fieldset/Fieldset';
 import { usePanelComponent } from './blocks/panel/Panel';
-import { getParentComponent } from '../data/data';
 import { useCompositeComponent } from './blocks/composite/Composite';
 import { useDialogComponent } from './blocks/dialog/Dialog';
 import { groupBy } from '@axonivy/ui-components';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type ComponentConfigWithoutType = Omit<ComponentConfig<any, any>, 'type'>;
-
-export type ComponentByName = (name: AutoCompleteWithString<ComponentType>) => ComponentConfigWithoutType;
-
-export type ComponentForType = (type: AutoCompleteWithString<ComponentType>) =>
-  | {
-      component: ComponentConfigWithoutType;
-      defaultProps?: object | undefined;
-    }
-  | undefined;
-
 export const useComponentsInit = () => {
-  const componentByElement = (element: ComponentData, data: Array<ComponentData>) => {
-    const component = componentByName(element.type);
-    if (component === undefined && isTable(getParentComponent(data, element.cid))) {
-      return componentByName('DataTableColumn');
-    }
-    return component;
+  const componentByElement = (element: ComponentData) => {
+    return componentByName(element.type);
   };
 
-  const componentByName: ComponentByName = name => {
-    return config.components[name];
+  const componentByName = (type: AutoCompleteWithString<ComponentType>): ComponentConfig => {
+    return config.components[type];
   };
 
   const componentsByCategory = (category: ItemCategory) => {
-    // Provisional: Filter out undefined components before checking category
-    const filteredComponents = Object.values(config.components)
-      .filter(component => component !== undefined)
-      .filter(component => component.category === category);
-
+    const filteredComponents = Object.values(config.components).filter(component => component.category === category);
     return groupBy(Object.values(filteredComponents), item => item.subcategory);
   };
 
   const allComponentsByCategory = () => {
-    // Provisional: Filter out undefined components before checking category
     return groupBy(
-      Object.values(config.components)
-        .filter(component => component !== undefined)
-        .filter(component => component.category !== 'Hidden'),
+      Object.values(config.components).filter(component => component?.category !== 'Hidden'),
       item => item.category
     );
-  };
-
-  const componentForType: ComponentForType = type => {
-    if (type.startsWith('List<') && type.endsWith('>')) {
-      return { component: config.components.DataTable };
-    }
-
-    switch (type) {
-      case 'String':
-        return { component: config.components.Input };
-      case 'Number':
-      case 'Byte':
-      case 'Short':
-      case 'Integer':
-      case 'Long':
-      case 'Float':
-      case 'Double':
-      case 'BigDecimal':
-        return { component: config.components.Input, defaultProps: { type: 'NUMBER' } };
-      case 'Boolean':
-        return { component: config.components.Checkbox };
-      case 'Date':
-      case 'DateTime':
-      case 'java.util.Date':
-        return { component: config.components.DatePicker };
-      default:
-        return undefined;
-    }
   };
 
   const { InputComponent } = useInputComponent();
@@ -104,7 +52,7 @@ export const useComponentsInit = () => {
   const { ButtonComponent } = useButtonComponent();
   const { LinkComponent } = useLinkComponent();
   const { LayoutComponent } = useLayoutComponent();
-  const { DataTableComponent } = useDataTableComponent(componentByName);
+  const { DataTableComponent } = useDataTableComponent();
   const { DataTableColumnComponent } = useDataTableColumnComponent();
   const { FieldsetComponent } = useFieldsetComponent();
   const { PanelComponent } = usePanelComponent();
@@ -138,7 +86,6 @@ export const useComponentsInit = () => {
     componentByElement,
     componentByName,
     componentsByCategory,
-    allComponentsByCategory,
-    componentForType
+    allComponentsByCategory
   };
 };

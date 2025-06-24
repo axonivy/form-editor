@@ -1,6 +1,12 @@
 import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type FieldOption, type UiComponentProps } from '../../../types/config';
 import './Layout.css';
-import type { Layout, LayoutGridVariant, LayoutJustifyContent, LayoutType, Prettify } from '@axonivy/form-editor-protocol';
+import {
+  type Layout,
+  type LayoutGridVariant,
+  type LayoutJustifyContent,
+  type LayoutType,
+  type Prettify
+} from '@axonivy/form-editor-protocol';
 import { useAppContext } from '../../../context/AppContext';
 import { useBase } from '../base';
 import IconSvg from './Layout.svg?react';
@@ -14,7 +20,7 @@ import { useTranslation } from 'react-i18next';
 type LayoutProps = Prettify<Layout>;
 
 export const useLayoutComponent = () => {
-  const { defaultBaseComponent, baseComponentFields, defaultVisibleComponent, visibleComponentField } = useBase();
+  const { baseComponentFields, visibleComponentField } = useBase();
   const { t } = useTranslation();
 
   const LayoutComponent = useMemo(() => {
@@ -36,15 +42,6 @@ export const useLayoutComponent = () => {
       { label: t('components.layout.right'), value: 'END', icon: { icon: IvyIcons.AlignRight } }
     ] as const;
 
-    const defaultLayoutProps: LayoutProps = {
-      components: [],
-      type: 'GRID',
-      justifyContent: 'NORMAL',
-      gridVariant: 'GRID2',
-      ...defaultVisibleComponent,
-      ...defaultBaseComponent
-    };
-
     const LayoutComponent: ComponentConfig<LayoutProps> = {
       name: 'Layout',
       displayName: t('components.layout.name'),
@@ -52,9 +49,7 @@ export const useLayoutComponent = () => {
       subcategory: 'General',
       icon: <IconSvg />,
       description: t('components.layout.description'),
-      defaultProps: defaultLayoutProps,
       render: props => <UiBlock {...props} />,
-      create: ({ defaultProps }) => ({ ...defaultLayoutProps, ...defaultProps }),
       outlineInfo: component => component.type,
       fields: {
         ...baseComponentFields,
@@ -81,7 +76,7 @@ export const useLayoutComponent = () => {
     };
 
     return LayoutComponent;
-  }, [baseComponentFields, defaultBaseComponent, defaultVisibleComponent, t, visibleComponentField]);
+  }, [baseComponentFields, t, visibleComponentField]);
 
   return {
     LayoutComponent

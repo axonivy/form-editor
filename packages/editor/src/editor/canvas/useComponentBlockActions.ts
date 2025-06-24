@@ -4,8 +4,8 @@ import { COLUMN_DROPZONE_ID_PREFIX, creationTargetId, modifyData, TABLE_DROPZONE
 import type { DraggableProps } from './ComponentBlock';
 import { useReadonly } from '@axonivy/ui-components';
 import { useAction } from '../../context/useAction';
-import { useComponents } from '../../context/ComponentsContext';
 import type { Dispatch, SetStateAction } from 'react';
+import { addDefaults } from '../../components/component-factory';
 
 export const useComponentBlockActions = ({
   config,
@@ -13,15 +13,14 @@ export const useComponentBlockActions = ({
   setShowExtractDialog
 }: DraggableProps & { setShowExtractDialog: Dispatch<SetStateAction<boolean>> }) => {
   const { setSelectedElement, setUi } = useAppContext();
-  const { componentByName } = useComponents();
   const readonly = useReadonly();
   const { setData } = useData();
   const isDataTableEditableButtons =
     data.type === 'Button' && ((data.config as Button).type === 'EDIT' || (data.config as Button).type === 'DELETE');
-  const elementConfig = { ...config.defaultProps, ...data.config };
+  const elementConfig = addDefaults(data.type, data.config);
   const deleteElement = () => {
-    setData(oldData => modifyData(oldData, { type: 'remove', data: { id: data.cid } }, componentByName).newData);
-    config.onDelete?.(elementConfig, setData);
+    setData(oldData => modifyData(oldData, { type: 'remove', data: { id: data.cid } }).newData);
+    config.onDelete?.({ ...elementConfig }, setData);
     setSelectedElement(undefined);
   };
 
@@ -29,77 +28,63 @@ export const useComponentBlockActions = ({
   const duplicateElement = () => {
     setData(
       oldData =>
-        modifyData(
-          oldData,
-          { type: 'paste', data: { componentName: data.type, clipboard: data.config, targetId: data.cid } },
-          componentByName
-        ).newData
+        modifyData(oldData, {
+          type: 'paste',
+          data: { componentType: data.type, clipboard: data.config, targetId: data.cid }
+        }).newData
     );
   };
 
   const createColumn = () => {
     setData(
       oldData =>
-        modifyData(
-          oldData,
-          {
-            type: 'add',
-            data: {
-              componentName: 'DataTableColumn',
-              targetId: TABLE_DROPZONE_ID_PREFIX + data.cid
-            }
-          },
-          componentByName
-        ).newData
+        modifyData(oldData, {
+          type: 'add',
+          data: {
+            componentType: 'DataTableColumn',
+            targetId: TABLE_DROPZONE_ID_PREFIX + data.cid
+          }
+        }).newData
     );
   };
 
   const createActionColumn = () => {
     setData(
       oldData =>
-        modifyData(
-          oldData,
-          {
-            type: 'add',
-            data: {
-              componentName: 'DataTableColumn',
-              targetId: TABLE_DROPZONE_ID_PREFIX + data.cid,
-              create: {
-                label: 'Actions',
-                value: '',
-                defaultProps: {
-                  asActionColumn: true
-                }
+        modifyData(oldData, {
+          type: 'add',
+          data: {
+            componentType: 'DataTableColumn',
+            targetId: TABLE_DROPZONE_ID_PREFIX + data.cid,
+            create: {
+              label: 'Actions',
+              value: '',
+              config: {
+                asActionColumn: true
               }
             }
-          },
-          componentByName
-        ).newData
+          }
+        }).newData
     );
   };
 
   const createActionButton = () => {
     setData(
       oldData =>
-        modifyData(
-          oldData,
-          {
-            type: 'add',
-            data: { componentName: 'Button', targetId: COLUMN_DROPZONE_ID_PREFIX + data.cid }
-          },
-          componentByName
-        ).newData
+        modifyData(oldData, {
+          type: 'add',
+          data: { componentType: 'Button', targetId: COLUMN_DROPZONE_ID_PREFIX + data.cid }
+        }).newData
     );
   };
 
   const createElement = (name: ComponentType) => {
     setData(
       oldData =>
-        modifyData(
-          oldData,
-          { type: 'add', data: { componentName: name, targetId: creationTargetId(oldData.components, data.cid) } },
-          componentByName
-        ).newData
+        modifyData(oldData, {
+          type: 'add',
+          data: { componentType: name, targetId: creationTargetId(oldData.components, data.cid) }
+        }).newData
     );
   };
 
@@ -116,11 +101,11 @@ export const useComponentBlockActions = ({
     }
     if (e.key === 'ArrowUp' && !isDataTableEditableButtons) {
       e.stopPropagation();
-      setData(oldData => modifyData(oldData, { type: 'moveUp', data: { id: data.cid } }, componentByName).newData);
+      setData(oldData => modifyData(oldData, { type: 'moveUp', data: { id: data.cid } }).newData);
     }
     if (e.key === 'ArrowDown' && !isDataTableEditableButtons) {
       e.stopPropagation();
-      setData(oldData => modifyData(oldData, { type: 'moveDown', data: { id: data.cid } }, componentByName).newData);
+      setData(oldData => modifyData(oldData, { type: 'moveDown', data: { id: data.cid } }).newData);
     }
     if (e.code === 'KeyM' && !isDataTableEditableButtons) {
       e.stopPropagation();

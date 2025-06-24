@@ -1,4 +1,11 @@
-import type { Button as ButtonType, Component, ComponentData, ComponentType, Composite } from '@axonivy/form-editor-protocol';
+import type {
+  Button as ButtonType,
+  Component,
+  ComponentData,
+  ComponentType,
+  Composite,
+  DataTableColumn
+} from '@axonivy/form-editor-protocol';
 import { useAppContext } from '../../context/AppContext';
 import type { ComponentConfig } from '../../types/config';
 import './ComponentBlock.css';
@@ -17,6 +24,7 @@ import { useTranslation } from 'react-i18next';
 import { useComponents } from '../../context/ComponentsContext';
 import { ExtractComponentDialog } from '../browser/extract/ExtractComponentDialog';
 import { useCopyPaste } from './useCopyPaste';
+import { addDefaults } from '../../components/component-factory';
 
 type ComponentBlockProps = Omit<DropZoneProps, 'id'> & {
   component: ComponentData | Component;
@@ -50,7 +58,7 @@ const Draggable = ({ config, data }: DraggableProps) => {
   });
   const { selectedElement, setSelectedElement } = useAppContext();
   const isSelected = selectedElement === data.cid;
-  const elementConfig = { ...config.defaultProps, ...data.config };
+  const elementConfig = addDefaults(data.type, data.config);
   const [showExtractDialog, setShowExtractDialog] = useState(false);
   const { createElement, duplicateElement, openComponent, onKeyDown, deleteElement, createActionButton, createActionColumn, createColumn } =
     useComponentBlockActions({ config, data, setShowExtractDialog });
@@ -111,7 +119,9 @@ const Draggable = ({ config, data }: DraggableProps) => {
         createColumnAction={config.quickActions.includes('CREATECOLUMN') ? createColumn : undefined}
         createActionColumnAction={config.quickActions.includes('CREATEACTIONCOLUMN') ? createActionColumn : undefined}
         createActionColumnButtonAction={
-          config.quickActions.includes('CREATEACTIONCOLUMNBUTTON') && data.type === 'DataTableColumn' && data.config.asActionColumn
+          config.quickActions.includes('CREATEACTIONCOLUMNBUTTON') &&
+          data.type === 'DataTableColumn' &&
+          (data.config as DataTableColumn).asActionColumn
             ? createActionButton
             : undefined
         }
@@ -121,7 +131,7 @@ const Draggable = ({ config, data }: DraggableProps) => {
 };
 
 export const ComponentBlockOverlay = ({ config, data }: DraggableProps) => {
-  const elementConfig = { ...config.defaultProps, ...data.config };
+  const elementConfig = addDefaults(data.type, data.config);
   return <div className='draggable dragging'>{config.render({ ...elementConfig, id: data.cid })}</div>;
 };
 

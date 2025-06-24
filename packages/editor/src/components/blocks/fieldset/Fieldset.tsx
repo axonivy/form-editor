@@ -1,4 +1,4 @@
-import type { Fieldset, Prettify } from '@axonivy/form-editor-protocol';
+import { type Fieldset, type Prettify } from '@axonivy/form-editor-protocol';
 import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
 import { ComponentBlock } from '../../../editor/canvas/ComponentBlock';
 import IconSvg from './Fieldset.svg?react';
@@ -13,19 +13,10 @@ import { useTranslation } from 'react-i18next';
 type FieldsetProps = Prettify<Fieldset>;
 
 export const useFieldsetComponent = () => {
-  const { defaultBaseComponent, baseComponentFields, defaultVisibleComponent, visibleComponentField } = useBase();
+  const { baseComponentFields, visibleComponentField } = useBase();
   const { t } = useTranslation();
 
   const FieldsetComponent: ComponentConfig<FieldsetProps> = useMemo(() => {
-    const defaultFieldsetProps: FieldsetProps = {
-      components: [],
-      legend: t('property.title'),
-      collapsible: false,
-      collapsed: false,
-      ...defaultVisibleComponent,
-      ...defaultBaseComponent
-    };
-
     const FieldsetComponent: ComponentConfig<FieldsetProps> = {
       name: 'Fieldset',
       displayName: t('components.fieldset.name'),
@@ -33,10 +24,8 @@ export const useFieldsetComponent = () => {
       subcategory: 'General',
       icon: <IconSvg />,
       description: t('components.fieldset.description'),
-      defaultProps: defaultFieldsetProps,
       quickActions: [...DEFAULT_QUICK_ACTIONS, 'EXTRACTINTOCOMPONENT'],
       render: props => <UiBlock {...props} />,
-      create: ({ defaultProps }) => ({ ...defaultFieldsetProps, ...defaultProps }),
       outlineInfo: component => component.legend,
       fields: {
         ...baseComponentFields,
@@ -62,7 +51,7 @@ export const useFieldsetComponent = () => {
     };
 
     return FieldsetComponent;
-  }, [baseComponentFields, defaultBaseComponent, defaultVisibleComponent, t, visibleComponentField]);
+  }, [baseComponentFields, t, visibleComponentField]);
 
   return {
     FieldsetComponent
