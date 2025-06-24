@@ -244,6 +244,7 @@
     "createCol": "Spalte erstellen",
     "createFrom": "Erstellen aus {{component}}",
     "createFromData": "Aus Daten erstellen",
+    "selectAttributes": "Markiere die Attribute welche hinzugefügt werden sollen",
     "data": "Daten",
     "deviceModeParam": "Gerätemodus {{mode}} ({{hotkey}})",
     "disable": "Deaktivieren",
