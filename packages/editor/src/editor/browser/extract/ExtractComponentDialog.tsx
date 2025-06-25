@@ -20,7 +20,7 @@ import {
   type BrowserNode
 } from '@axonivy/ui-components';
 import type { Component, ComponentData, Layout, Variable } from '@axonivy/form-editor-protocol';
-import { useMemo, useState, type Dispatch, type ReactNode, type SetStateAction } from 'react';
+import { useMemo, useState, type ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAppContext } from '../../../context/AppContext';
 import { useQueryClient } from '@tanstack/react-query';
@@ -35,11 +35,12 @@ type ExtractComponentDialogProps = {
   children: ReactNode;
   data: Component | ComponentData;
   openDialog: boolean;
-  setOpenDialog: Dispatch<SetStateAction<boolean>>;
+  setOpenDialog: (open: boolean) => void;
 };
 
 export const ExtractComponentDialog = ({ children, data, openDialog, setOpenDialog }: ExtractComponentDialogProps) => {
   const { t } = useTranslation();
+
   const layoutId = (data.config as Layout)?.id?.length > 0 ? (data.config as Layout).id : data.cid;
 
   return (

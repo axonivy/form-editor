@@ -4,14 +4,13 @@ import { COLUMN_DROPZONE_ID_PREFIX, creationTargetId, modifyData, TABLE_DROPZONE
 import type { DraggableProps } from './ComponentBlock';
 import { useReadonly } from '@axonivy/ui-components';
 import { useAction } from '../../context/useAction';
-import type { Dispatch, SetStateAction } from 'react';
 import { addDefaults } from '../../components/component-factory';
 
 export const useComponentBlockActions = ({
   config,
   data,
   setShowExtractDialog
-}: DraggableProps & { setShowExtractDialog: Dispatch<SetStateAction<boolean>> }) => {
+}: DraggableProps & { setShowExtractDialog: (open: boolean) => void }) => {
   const { setSelectedElement, setUi } = useAppContext();
   const readonly = useReadonly();
   const { setData } = useData();
@@ -117,7 +116,9 @@ export const useComponentBlockActions = ({
     }
     if (e.code === 'KeyE' && config.quickActions.find(q => q === 'EXTRACTINTOCOMPONENT')) {
       e.stopPropagation();
-      setTimeout(() => setShowExtractDialog(true), 0);
+      setTimeout(() => {
+        setShowExtractDialog(true);
+      }, 0);
     }
   };
   return {
