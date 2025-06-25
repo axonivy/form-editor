@@ -5,13 +5,12 @@ import type { DraggableProps } from './ComponentBlock';
 import { useReadonly } from '@axonivy/ui-components';
 import { useAction } from '../../context/useAction';
 import { useComponents } from '../../context/ComponentsContext';
-import type { Dispatch, SetStateAction } from 'react';
 
 export const useComponentBlockActions = ({
   config,
   data,
   setShowExtractDialog
-}: DraggableProps & { setShowExtractDialog: Dispatch<SetStateAction<boolean>> }) => {
+}: DraggableProps & { setShowExtractDialog: (open: boolean) => void }) => {
   const { setSelectedElement, setUi } = useAppContext();
   const { componentByName } = useComponents();
   const readonly = useReadonly();
