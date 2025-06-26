@@ -12,9 +12,20 @@ import './ComponentBlock.css';
 import { useDraggable } from '@dnd-kit/core';
 import { getParentComponent, useData } from '../../data/data';
 import { dragData } from './drag-data';
-import { Button, cn, evalDotState, Flex, Popover, PopoverAnchor, PopoverContent, Separator, useReadonly } from '@axonivy/ui-components';
+import {
+  Button,
+  cn,
+  evalDotState,
+  Flex,
+  Popover,
+  PopoverAnchor,
+  PopoverContent,
+  Separator,
+  useHotkeyLocalScopes,
+  useReadonly
+} from '@axonivy/ui-components';
 import { IvyIcons } from '@axonivy/ui-icons';
-import { useState, type Dispatch, type SetStateAction } from 'react';
+import { useState } from 'react';
 import { FormPalette } from '../palette/Palette';
 import { DropZone, type DropZoneProps } from './DropZone';
 import { useValidations } from '../../context/useValidation';
@@ -59,9 +70,18 @@ const Draggable = ({ config, data }: DraggableProps) => {
   const { selectedElement, setSelectedElement } = useAppContext();
   const isSelected = selectedElement === data.cid;
   const elementConfig = addDefaults(data.type, data.config);
+  const { activateLocalScopes, restoreLocalScopes } = useHotkeyLocalScopes(['extractDialog']);
   const [showExtractDialog, setShowExtractDialog] = useState(false);
+  const onOpenExtractDialogChange = (open: boolean) => {
+    setShowExtractDialog(open);
+    if (open) {
+      activateLocalScopes();
+    } else {
+      restoreLocalScopes();
+    }
+  };
   const { createElement, duplicateElement, openComponent, onKeyDown, deleteElement, createActionButton, createActionColumn, createColumn } =
-    useComponentBlockActions({ config, data, setShowExtractDialog });
+    useComponentBlockActions({ config, data, setShowExtractDialog: onOpenExtractDialogChange });
   const validations = useValidations(data.cid);
   const clipboardProps = useCopyPaste(data);
   const parentComponent = getParentComponent(formData.components, data.cid);
@@ -113,7 +133,7 @@ const Draggable = ({ config, data }: DraggableProps) => {
         }
         extractIntoComponent={
           config.quickActions.includes('EXTRACTINTOCOMPONENT')
-            ? { data, openDialog: showExtractDialog, setOpenDialog: setShowExtractDialog }
+            ? { data, openDialog: showExtractDialog, setOpenDialog: onOpenExtractDialogChange }
             : undefined
         }
         createColumnAction={config.quickActions.includes('CREATECOLUMN') ? createColumn : undefined}
@@ -140,7 +160,7 @@ type QuickbarProps = {
   duplicateAction?: () => void;
   createAction?: (name: ComponentType) => void;
   openComponentAction?: () => void;
-  extractIntoComponent?: { data: Component | ComponentData; openDialog: boolean; setOpenDialog: Dispatch<SetStateAction<boolean>> };
+  extractIntoComponent?: { data: Component | ComponentData; openDialog: boolean; setOpenDialog: (open: boolean) => void };
   createColumnAction?: () => void;
   createActionColumnAction?: () => void;
   createActionColumnButtonAction?: () => void;
