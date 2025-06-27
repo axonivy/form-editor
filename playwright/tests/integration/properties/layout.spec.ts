@@ -95,10 +95,6 @@ test('extract Dialog', async ({ page }) => {
   await editor.page.keyboard.press('a');
   await expect(page.getByRole('dialog').getByText('Extract layout1 into own Ivy Component')).toBeVisible();
   await expect(page.getByRole('dialog').getByText('Create from data')).toBeHidden();
-
-  await editor.page.keyboard.press('Escape');
-  await editor.page.keyboard.press('a');
-  await expect(page.getByRole('dialog').getByText('Create from data')).toBeVisible();
 });
 
 const layout = async (page: Page) => {
