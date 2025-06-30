@@ -1,4 +1,5 @@
 import {
+  BasicDialogContent,
   BasicField,
   Button,
   Dialog,
@@ -35,6 +36,7 @@ export const TextareaField = ({ label, value, onChange, message }: TextareaField
   const MINHEIGHT = 60;
   const { t } = useTranslation();
 
+  //here
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <BasicField label={label} message={message} className='badge-field' {...focusWithinProps} tabIndex={0}>
@@ -76,7 +78,7 @@ export const TextareaField = ({ label, value, onChange, message }: TextareaField
           <InputBadgeArea value={value ?? ''} badgeProps={badgeProps} style={{ height: height, minHeight: MINHEIGHT }} />
         )}
       </BasicField>
-      <DialogContent style={{ height: '80vh' }}>
+      <BasicDialogContent title={'asdsa'} description={undefined}>
         <Browser
           activeBrowsers={[
             { type: 'CMS', options: { overrideSelection: true } },
@@ -87,7 +89,19 @@ export const TextareaField = ({ label, value, onChange, message }: TextareaField
           onChange={onChange}
           selection={selection}
         />
-      </DialogContent>
+      </BasicDialogContent>
+      {/* <DialogContent style={{ height: '80vh' }}>
+        <Browser
+          activeBrowsers={[
+            { type: 'CMS', options: { overrideSelection: true } },
+            { type: 'ATTRIBUTE', options: { overrideSelection: true } }
+          ]}
+          close={() => setOpen(false)}
+          value={value}
+          onChange={onChange}
+          selection={selection}
+        />
+      </DialogContent> */}
     </Dialog>
   );
 };

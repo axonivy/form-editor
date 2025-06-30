@@ -61,18 +61,21 @@ export const DataClassDialog = ({ children, ...props }: DataClassDialogProps & {
       contentProps={{
         title: t('label.createFromData'),
         description: t('label.selectAttributes'),
+        buttonClose: (
+          <Button variant='outline' size='large'>
+            {t('common.label.cancel')}
+          </Button>
+        ),
         buttonCustom: (
-          <Button variant='primary' onClick={currentCreateForm || undefined} disabled={isCreateButtonDisabled}>
+          <Button variant='primary' size='large' onClick={currentCreateForm || undefined} disabled={isCreateButtonDisabled}>
             {t('common.label.create')}
           </Button>
         ),
-        buttonClose: t('common.label.cancel')
+        onClick: e => e.stopPropagation()
       }}
       dialogTrigger={<DialogTrigger asChild>{children}</DialogTrigger>}
     >
-      <div onClick={e => e.stopPropagation()}>
-        <DataClassSelect {...props} onFormCreate={handleFormCreate} />
-      </div>
+      <DataClassSelect {...props} onFormCreate={handleFormCreate} />
     </BasicDialog>
   );
 };

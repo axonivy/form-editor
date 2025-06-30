@@ -1,6 +1,6 @@
 import type { Component, ComponentData, Layout, Variable } from '@axonivy/form-editor-protocol';
 import {
-  BasicDialogContent,
+  BasicDialog,
   BasicField,
   Button,
   Dialog,
@@ -87,13 +87,20 @@ export const ExtractComponentDialog = ({ children, data, openDialog, setOpenDial
   );
 
   return (
-    <Dialog open={openDialog} onOpenChange={setOpenDialog}>
-      <DialogTrigger asChild>{children}</DialogTrigger>
-      <BasicDialogContent
-        title={t('dialog.extractComponent', { component: layoutId })}
-        description={t('dialog.logicWarning', { component: layoutId })}
-        onClick={e => e.stopPropagation()}
-        buttonCustom={
+    <BasicDialog
+      open={openDialog}
+      onOpenChange={setOpenDialog}
+      dialogTrigger={<DialogTrigger asChild>{children}</DialogTrigger>}
+      contentProps={{
+        title: t('dialog.extractComponent', { component: layoutId }),
+        description: t('dialog.logicWarning', { component: layoutId }),
+        onClick: e => e.stopPropagation(),
+        buttonClose: (
+          <Button variant='outline' size='large'>
+            {t('common.label.cancel')}
+          </Button>
+        ),
+        buttonCustom: (
           <Button
             variant='primary'
             size='large'
@@ -111,51 +118,51 @@ export const ExtractComponentDialog = ({ children, data, openDialog, setOpenDial
           >
             {t('dialog.applyExtract')}
           </Button>
-        }
-      >
-        <Flex direction='column' gap={2}>
-          <BasicField className='extract-dialog-name' label={t('dialog.componentName')} message={nameValidation}>
-            <Input value={name} onChange={event => setName(event.target.value)} placeholder={layoutId} />
+        )
+      }}
+    >
+      <Flex direction='column' gap={2}>
+        <BasicField className='extract-dialog-name' label={t('dialog.componentName')} message={nameValidation}>
+          <Input value={name} onChange={event => setName(event.target.value)} placeholder={layoutId} />
+        </BasicField>
+        <BasicField className='extract-dialog-namespace' label={t('dialog.nameSpace')} message={namespaceValidation}>
+          <Input value={nameSpace} onChange={event => setNameSpace(event.target.value)} placeholder={namespace} />
+        </BasicField>
+        <Dialog open={open} onOpenChange={setOpen}>
+          <BasicField className='extract-dialog-dataclass' label={t('dialog.dataClass')}>
+            <Flex alignItems='center' gap={2}>
+              <Select value={field} onValueChange={setField} defaultValue={field}>
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    {dataClassItems.map(item => (
+                      <SelectItem key={item.value} value={item.value}>
+                        <>
+                          {item.value}
+                          <span style={{ color: 'var(--N500)' }}> {item.info}</span>
+                        </>
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+              <DialogTrigger asChild>
+                <Button icon={IvyIcons.ListSearch} aria-label={t('label.browser')} />
+              </DialogTrigger>
+            </Flex>
           </BasicField>
-          <BasicField className='extract-dialog-namespace' label={t('dialog.nameSpace')} message={namespaceValidation}>
-            <Input value={nameSpace} onChange={event => setNameSpace(event.target.value)} placeholder={namespace} />
-          </BasicField>
-          <Dialog open={open} onOpenChange={setOpen}>
-            <BasicField className='extract-dialog-dataclass' label={t('dialog.dataClass')}>
-              <Flex alignItems='center' gap={2}>
-                <Select value={field} onValueChange={setField} defaultValue={field}>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      {dataClassItems.map(item => (
-                        <SelectItem key={item.value} value={item.value}>
-                          <>
-                            {item.value}
-                            <span style={{ color: 'var(--N500)' }}> {item.info}</span>
-                          </>
-                        </SelectItem>
-                      ))}
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-                <DialogTrigger asChild>
-                  <Button icon={IvyIcons.ListSearch} aria-label={t('label.browser')} />
-                </DialogTrigger>
-              </Flex>
-            </BasicField>
-            <DialogContent style={{ height: '80vh' }}>
-              <Browser
-                activeBrowsers={[{ type: 'ATTRIBUTE', options: { withoutEl: true, attribute: { onlyObjects: true } } }]}
-                close={() => setOpen(false)}
-                value={field}
-                onChange={setField}
-              />
-            </DialogContent>
-          </Dialog>
-        </Flex>
-      </BasicDialogContent>
-    </Dialog>
+          <DialogContent style={{ height: '80vh' }}>
+            <Browser
+              activeBrowsers={[{ type: 'ATTRIBUTE', options: { withoutEl: true, attribute: { onlyObjects: true } } }]}
+              close={() => setOpen(false)}
+              value={field}
+              onChange={setField}
+            />
+          </DialogContent>
+        </Dialog>
+      </Flex>
+    </BasicDialog>
   );
 };
