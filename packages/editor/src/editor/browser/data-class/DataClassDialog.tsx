@@ -14,6 +14,7 @@ import {
   Table,
   TableBody,
   TableCell,
+  useHotkeyLocalScopes,
   useHotkeys,
   useTableExpand,
   useTableSelect,
@@ -43,10 +44,20 @@ type DataClassDialogProps = {
 export const DataClassDialog = ({ children, ...props }: DataClassDialogProps & { children: ReactNode }) => {
   const [open, setOpen] = useState(false);
   const { createFromData: shortcut } = useKnownHotkeys();
-  useHotkeys(shortcut.hotkey, () => setOpen(true), { scopes: ['global'] });
+  const { activateLocalScopes, restoreLocalScopes } = useHotkeyLocalScopes(['dataclassDialog']);
+  const onOpenChange = (open: boolean) => {
+    setOpen(open);
+    if (open) {
+      activateLocalScopes();
+    } else {
+      restoreLocalScopes();
+    }
+  };
+
+  useHotkeys(shortcut.hotkey, () => onOpenChange(true), { scopes: ['global'] });
   const { t } = useTranslation();
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent onClick={e => e.stopPropagation()}>
         <DialogHeader>
