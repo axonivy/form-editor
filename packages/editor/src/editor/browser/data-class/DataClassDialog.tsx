@@ -5,6 +5,7 @@ import {
   Button,
   DialogClose,
   DialogFooter,
+  DialogTrigger,
   ExpandableCell,
   MessageRow,
   SelectRow,
@@ -61,7 +62,7 @@ export const DataClassDialog = ({ children, ...props }: DataClassDialogProps & {
         description: t('label.selectAttributes'),
         onClick: e => e.stopPropagation()
       }}
-      dialogTrigger={children}
+      dialogTrigger={<DialogTrigger asChild>{children}</DialogTrigger>}
     >
       <DataClassSelect {...props} />
     </BasicDialog>
