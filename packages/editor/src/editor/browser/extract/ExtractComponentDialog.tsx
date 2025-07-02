@@ -51,7 +51,7 @@ export const ExtractComponentDialog = ({ children, data, openDialog, setOpenDial
         description: t('dialog.extractComponentTitle'),
         onClick: e => e.stopPropagation()
       }}
-      dialogTrigger={children}
+      dialogTrigger={<DialogTrigger asChild>{children}</DialogTrigger>}
     >
       <ExtractComponentDialogContent data={data} layoutId={layoutId} />
     </BasicDialog>
