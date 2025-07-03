@@ -1,12 +1,10 @@
+import type { Variable } from '@axonivy/form-editor-protocol';
 import {
   BasicCheckbox,
+  BasicDialog,
   Button,
-  Dialog,
   DialogClose,
-  DialogContent,
   DialogFooter,
-  DialogHeader,
-  DialogTitle,
   DialogTrigger,
   ExpandableCell,
   MessageRow,
@@ -20,16 +18,15 @@ import {
   useTableSelect,
   type BrowserNode
 } from '@axonivy/ui-components';
-import { useMeta } from '../../../context/useMeta';
-import { useAppContext } from '../../../context/AppContext';
-import { useCallback, useEffect, useState, type ReactNode } from 'react';
-import type { Variable } from '@axonivy/form-editor-protocol';
 import { flexRender, getCoreRowModel, getFilteredRowModel, useReactTable, type ColumnDef, type Row } from '@tanstack/react-table';
+import { useCallback, useEffect, useState, type ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useAppContext } from '../../../context/AppContext';
+import { useMeta } from '../../../context/useMeta';
 import { creationTargetId } from '../../../data/data';
 import { useKnownHotkeys } from '../../../utils/hotkeys';
-import { useTranslation } from 'react-i18next';
-import { findAttributesOfType, variableTreeData, rowToCreateData } from './variable-tree-data';
 import { createInitForm } from './create-init-form';
+import { findAttributesOfType, rowToCreateData, variableTreeData } from './variable-tree-data';
 
 type DataClassDialogProps = {
   showWorkflowButtonsCheckbox?: boolean;
@@ -57,15 +54,18 @@ export const DataClassDialog = ({ children, ...props }: DataClassDialogProps & {
   useHotkeys(shortcut.hotkey, () => onOpenChange(true), { scopes: ['global'] });
   const { t } = useTranslation();
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent onClick={e => e.stopPropagation()}>
-        <DialogHeader>
-          <DialogTitle>{t('label.createFromData')}</DialogTitle>
-        </DialogHeader>
-        <DataClassSelect {...props} />
-      </DialogContent>
-    </Dialog>
+    <BasicDialog
+      open={open}
+      onOpenChange={onOpenChange}
+      contentProps={{
+        title: t('label.createFromData'),
+        description: t('label.selectAttributes'),
+        onClick: e => e.stopPropagation()
+      }}
+      dialogTrigger={<DialogTrigger asChild>{children}</DialogTrigger>}
+    >
+      <DataClassSelect {...props} />
+    </BasicDialog>
   );
 };
 

@@ -1,11 +1,11 @@
+import type { Component, ComponentData, Layout, Variable } from '@axonivy/form-editor-protocol';
 import {
+  BasicDialog,
   BasicField,
   Button,
   Dialog,
   DialogContent,
   DialogFooter,
-  DialogHeader,
-  DialogTitle,
   DialogTrigger,
   Flex,
   Input,
@@ -19,18 +19,17 @@ import {
   toast,
   type BrowserNode
 } from '@axonivy/ui-components';
-import type { Component, ComponentData, Layout, Variable } from '@axonivy/form-editor-protocol';
+import { IvyIcons } from '@axonivy/ui-icons';
+import { useQueryClient } from '@tanstack/react-query';
 import { useMemo, useState, type ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAppContext } from '../../../context/AppContext';
-import { useQueryClient } from '@tanstack/react-query';
-import { genQueryKey } from '../../../query/query-client';
 import { useFunction } from '../../../context/useFunction';
 import { useMeta } from '../../../context/useMeta';
+import { genQueryKey } from '../../../query/query-client';
+import { Browser } from '../Browser';
 import { collectNodesWithChildren, variableTreeData } from '../data-class/variable-tree-data';
 import { useExtractFieldValidation } from './useExtractFieldValidation';
-import { IvyIcons } from '@axonivy/ui-icons';
-import { Browser } from '../Browser';
 type ExtractComponentDialogProps = {
   children: ReactNode;
   data: Component | ComponentData;
@@ -44,15 +43,18 @@ export const ExtractComponentDialog = ({ children, data, openDialog, setOpenDial
   const layoutId = (data.config as Layout)?.id?.length > 0 ? (data.config as Layout).id : data.cid;
 
   return (
-    <Dialog open={openDialog} onOpenChange={setOpenDialog}>
-      <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent onClick={e => e.stopPropagation()}>
-        <DialogHeader>
-          <DialogTitle>{t('dialog.extractComponent', { component: layoutId })}</DialogTitle>
-        </DialogHeader>
-        <ExtractComponentDialogContent data={data} layoutId={layoutId} />
-      </DialogContent>
-    </Dialog>
+    <BasicDialog
+      open={openDialog}
+      onOpenChange={setOpenDialog}
+      contentProps={{
+        title: t('dialog.extractComponent', { component: layoutId }),
+        description: t('dialog.extractComponentTitle'),
+        onClick: e => e.stopPropagation()
+      }}
+      dialogTrigger={<DialogTrigger asChild>{children}</DialogTrigger>}
+    >
+      <ExtractComponentDialogContent data={data} layoutId={layoutId} />
+    </BasicDialog>
   );
 };
 
