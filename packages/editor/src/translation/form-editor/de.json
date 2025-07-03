@@ -212,7 +212,7 @@
     "componentName": "Name",
     "dataClass": "Datenklasse",
     "extractComponent": "{{component}} in eigene Ivy-Komponente extrahieren",
-    "extractComponentTitle": "Erstelle einen Ivy Component",
+    "extractComponentTitle": "Erstelle eine Ivy-Komponente",
     "extractErrorTitle": "Komponente konnte nicht als Ivy-Komponente extrahiert werden",
     "extractExists": "Ivy-Komponente {{componentId}} existiert bereits",
     "extractSuccess": "Ivy-Komponente '{{componentName}}' wurde erfolgreich erstellt",
