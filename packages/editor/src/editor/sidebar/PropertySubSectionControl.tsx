@@ -1,6 +1,6 @@
-import { useData } from '../../data/data';
 import { type CollapsibleControlProps } from '@axonivy/ui-components';
 import { useComponents } from '../../context/ComponentsContext';
+import { useData } from '../../data/data';
 import type { Subsection } from '../../types/config';
 
 export const usePropertySubSectionControl = () => {

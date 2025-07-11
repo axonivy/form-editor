@@ -1,19 +1,19 @@
 import {
   EMPTY_FORM,
-  type FormData,
-  type LayoutConfig,
-  type TableConfig,
-  type ComponentData,
-  type TableComponent,
-  type ActionColumnComponent,
-  isTable,
   isColumn,
-  type DataTable,
-  type Text,
-  type DeepPartial,
+  isTable,
+  type ActionColumnComponent,
   type Component,
+  type ComponentData,
+  type DataTable,
+  type DeepPartial,
+  type FormData,
   type Input,
-  type Layout
+  type Layout,
+  type LayoutConfig,
+  type TableComponent,
+  type TableConfig,
+  type Text
 } from '@axonivy/form-editor-protocol';
 import { creationTargetId, DELETE_DROPZONE_ID, findComponentElement, getParentComponent, isEditableTable, modifyData } from './data';
 

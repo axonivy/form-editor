@@ -1,9 +1,9 @@
-import { type ColumnDef } from '@tanstack/react-table';
 import type { SelectItem } from '@axonivy/form-editor-protocol';
+import { ReorderHandleWrapper } from '@axonivy/ui-components';
+import { type ColumnDef } from '@tanstack/react-table';
+import { useTranslation } from 'react-i18next';
 import { InputCellWithBrowser } from './InputCellWithBrowser';
 import { TableField, type TableFieldProps } from './TableField';
-import { useTranslation } from 'react-i18next';
-import { ReorderHandleWrapper } from '@axonivy/ui-components';
 
 type SelectTableFieldProps = Omit<TableFieldProps<SelectItem>, 'columns' | 'emptyDataObject'>;
 

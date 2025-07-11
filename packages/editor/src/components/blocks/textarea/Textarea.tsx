@@ -1,11 +1,11 @@
-import { type Textarea, type Prettify } from '@axonivy/form-editor-protocol';
-import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
-import './Textarea.css';
-import { useBase } from '../base';
-import IconSvg from './Textarea.svg?react';
-import { UiBadge, UiBlockHeader } from '../../UiBlockHeader';
-import { useTranslation } from 'react-i18next';
+import { type Prettify, type Textarea } from '@axonivy/form-editor-protocol';
 import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
+import { UiBadge, UiBlockHeader } from '../../UiBlockHeader';
+import { useBase } from '../base';
+import './Textarea.css';
+import IconSvg from './Textarea.svg?react';
 
 type TextareaProps = Prettify<Textarea>;
 

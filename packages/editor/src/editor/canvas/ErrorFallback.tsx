@@ -1,6 +1,6 @@
+import { PanelMessage } from '@axonivy/ui-components';
 import { IvyIcons } from '@axonivy/ui-icons';
 import type { FallbackProps } from 'react-error-boundary';
-import { PanelMessage } from '@axonivy/ui-components';
 import { useTranslation } from 'react-i18next';
 
 export const ErrorFallback = (props: FallbackProps) => {

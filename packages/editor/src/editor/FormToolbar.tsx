@@ -23,17 +23,17 @@ import {
   useTheme
 } from '@axonivy/ui-components';
 import { IvyIcons } from '@axonivy/ui-icons';
-import { useAppContext } from '../context/AppContext';
-import { PaletteCategoryPopover, PalettePopover } from './palette/PalettePopover';
 import { useMemo, useRef, type ComponentProps } from 'react';
-import { FormPalette } from './palette/Palette';
-import { useData } from '../data/data';
-import { CompositePalette } from './palette/composite/CompositePalette';
-import { useAction } from '../context/useAction';
-import { DataClassDialog } from './browser/data-class/DataClassDialog';
-import { useKnownHotkeys } from '../utils/hotkeys';
 import { useTranslation } from 'react-i18next';
+import { useAppContext } from '../context/AppContext';
 import { useComponents } from '../context/ComponentsContext';
+import { useAction } from '../context/useAction';
+import { useData } from '../data/data';
+import { useKnownHotkeys } from '../utils/hotkeys';
+import { DataClassDialog } from './browser/data-class/DataClassDialog';
+import { CompositePalette } from './palette/composite/CompositePalette';
+import { FormPalette } from './palette/Palette';
+import { PaletteCategoryPopover, PalettePopover } from './palette/PalettePopover';
 
 type DeviceMode = 'desktop' | 'tablet' | 'mobile';
 

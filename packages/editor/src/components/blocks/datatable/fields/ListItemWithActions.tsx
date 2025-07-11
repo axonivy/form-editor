@@ -1,7 +1,7 @@
 import { Button, Flex, Label } from '@axonivy/ui-components';
 import { IvyIcons } from '@axonivy/ui-icons';
-import { modifyData, useData } from '../../../../data/data';
 import { useTranslation } from 'react-i18next';
+import { modifyData, useData } from '../../../../data/data';
 
 type ListItemWithActionsProps = {
   componentCid: string;

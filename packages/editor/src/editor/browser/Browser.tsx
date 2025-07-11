@@ -1,10 +1,10 @@
 import { BrowsersView, useConditionBuilder, type BrowserResult } from '@axonivy/ui-components';
-import { useAttributeBrowser } from './data-class/useAttributeBrowser';
-import { useCmsBrowser } from './cms/useCmsBrowser';
-import { useLogicBrowser } from './logic/useLogicBrowser';
-import { generateConditionString, logicOperators, operators } from './condition-builder/condition-builder-data';
 import { InputFieldWithBrowser } from '../sidebar/fields/InputFieldWithBrowser';
+import { useCmsBrowser } from './cms/useCmsBrowser';
 import type { Selection } from './cms/useTextSelection';
+import { generateConditionString, logicOperators, operators } from './condition-builder/condition-builder-data';
+import { useAttributeBrowser } from './data-class/useAttributeBrowser';
+import { useLogicBrowser } from './logic/useLogicBrowser';
 
 type OnlyAttributeSelection = 'DYNAMICLIST' | 'COLUMN';
 

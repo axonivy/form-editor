@@ -1,9 +1,9 @@
-import { customRenderHook } from 'test-utils';
-import { useComponentBlockActions } from './useComponentBlockActions';
-import { renderHook, waitFor } from '@testing-library/react';
 import type { Component, DeepPartial, FormData } from '@axonivy/form-editor-protocol';
+import { renderHook, waitFor } from '@testing-library/react';
+import { customRenderHook } from 'test-utils';
 import { useDataTableComponent } from '../../components/blocks/datatable/DataTable';
 import type { ComponentConfig } from '../../types/config';
+import { useComponentBlockActions } from './useComponentBlockActions';
 
 const data = {
   id: 'a5c1d16e-1d08-4e1f-a9f0-436c553a3881',

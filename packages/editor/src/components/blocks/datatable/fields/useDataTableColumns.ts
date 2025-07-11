@@ -1,13 +1,13 @@
 import { isTable, type DataTableColumn, type Variable } from '@axonivy/form-editor-protocol';
 
 import type { BrowserNode } from '@axonivy/ui-components';
-import { useAppContext } from '../../../../context/AppContext';
-import { useData } from '../../../../data/data';
-import { useMeta } from '../../../../context/useMeta';
 import { useMemo } from 'react';
+import { useAppContext } from '../../../../context/AppContext';
+import { useMeta } from '../../../../context/useMeta';
+import { useData } from '../../../../data/data';
 import { findAttributesOfType } from '../../../../editor/browser/data-class/variable-tree-data';
-import type { ColumnItem } from './ColumnsField';
 import { createComponent } from '../../../component-factory';
+import type { ColumnItem } from './ColumnsField';
 
 export const useDataTableColumns = () => {
   const { context } = useAppContext();

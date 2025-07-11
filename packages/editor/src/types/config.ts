@@ -1,10 +1,10 @@
 import type { ComponentData, ComponentType, FormData, PrimitiveValue } from '@axonivy/form-editor-protocol';
+import type { CollapsibleControlProps, IvyIconProps } from '@axonivy/ui-components';
+import { IvyIcons } from '@axonivy/ui-icons';
 import type React from 'react';
 import type { ReactNode } from 'react';
 import type { FormBrowser } from '../editor/browser/Browser';
-import type { CollapsibleControlProps, IvyIconProps } from '@axonivy/ui-components';
 import type { UpdateConsumer } from './types';
-import { IvyIcons } from '@axonivy/ui-icons';
 
 export type UiComponentProps<Props extends DefaultComponentProps = DefaultComponentProps> = Props & { id: string };
 

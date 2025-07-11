@@ -1,18 +1,18 @@
-import './Editor.css';
-import { useEffect, useMemo, useState } from 'react';
-import { AppProvider, useUiState } from '../context/AppContext';
-import { Flex, PanelMessage, ResizableHandle, ResizablePanel, ResizablePanelGroup, Spinner, useHistoryData } from '@axonivy/ui-components';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useClient } from '../context/ClientContext';
-import type { Unary } from '../types/types';
 import type { FormContext, FormData, FormEditor } from '@axonivy/form-editor-protocol';
+import { Flex, PanelMessage, ResizableHandle, ResizablePanel, ResizablePanelGroup, Spinner, useHistoryData } from '@axonivy/ui-components';
+import { IvyIcons } from '@axonivy/ui-icons';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { AppProvider, useUiState } from '../context/AppContext';
+import { useClient } from '../context/ClientContext';
+import { ComponentsProvider } from '../context/ComponentsContext';
 import { DndContext } from '../context/DndContext';
 import { genQueryKey } from '../query/query-client';
-import { IvyIcons } from '@axonivy/ui-icons';
+import type { Unary } from '../types/types';
+import './Editor.css';
 import { MasterPart } from './MasterPart';
 import { Sidebar } from './sidebar/Sidebar';
-import { useTranslation } from 'react-i18next';
-import { ComponentsProvider } from '../context/ComponentsContext';
 
 export type FormEditorProps = { context: FormContext; directSave?: boolean };
 

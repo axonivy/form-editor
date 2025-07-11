@@ -1,4 +1,4 @@
-import { PropertyItem } from './PropertyItem';
+import type { FormType } from '@axonivy/form-editor-protocol';
 import {
   BasicInscriptionTabs,
   Collapsible,
@@ -8,20 +8,20 @@ import {
   Flex,
   type InscriptionTabProps
 } from '@axonivy/ui-components';
-import { useData } from '../../data/data';
-import type { FormType } from '@axonivy/form-editor-protocol';
-import { usePropertySubSectionControl } from './PropertySubSectionControl';
+import { IvyIcons } from '@axonivy/ui-icons';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useBase } from '../../components/blocks/base';
+import { addDefaults } from '../../components/component-factory';
+import { useAppContext } from '../../context/AppContext';
 import { useComponents } from '../../context/ComponentsContext';
-import { groupFieldsBySubsection, visibleFields, visibleSections, type VisibleFields } from './property';
+import { getTabState, validationsForPaths } from '../../context/useValidation';
+import { useData } from '../../data/data';
 import type { FieldOption } from '../../types/config';
 import { SelectField } from './fields/SelectField';
-import { useState } from 'react';
-import { IvyIcons } from '@axonivy/ui-icons';
-import { getTabState, validationsForPaths } from '../../context/useValidation';
-import { useAppContext } from '../../context/AppContext';
-import { addDefaults } from '../../components/component-factory';
+import { groupFieldsBySubsection, visibleFields, visibleSections, type VisibleFields } from './property';
+import { PropertyItem } from './PropertyItem';
+import { usePropertySubSectionControl } from './PropertySubSectionControl';
 
 export const Properties = () => {
   const { categoryTranslations: CategoryTranslations } = useBase();

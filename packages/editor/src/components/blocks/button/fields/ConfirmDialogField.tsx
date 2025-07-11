@@ -1,8 +1,8 @@
-import { Checkbox, Field, Label } from '@axonivy/ui-components';
-import type { GenericFieldProps } from '../../../../types/config';
 import { isButton } from '@axonivy/form-editor-protocol';
-import { useData } from '../../../../data/data';
+import { Checkbox, Field, Label } from '@axonivy/ui-components';
 import { useTranslation } from 'react-i18next';
+import { useData } from '../../../../data/data';
+import type { GenericFieldProps } from '../../../../types/config';
 
 export const renderConfirmDialogField = (props: GenericFieldProps) => {
   return <ConfirmDialogField {...props} />;

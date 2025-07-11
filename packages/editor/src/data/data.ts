@@ -1,4 +1,3 @@
-import { add, remove } from '../utils/array';
 import {
   isButton,
   isColumn,
@@ -11,9 +10,10 @@ import {
   type FormData,
   type TableConfig
 } from '@axonivy/form-editor-protocol';
+import { createComponent, type CreateData } from '../components/component-factory';
 import { useAppContext } from '../context/AppContext';
 import type { UpdateConsumer } from '../types/types';
-import { createComponent, type CreateData } from '../components/component-factory';
+import { add, remove } from '../utils/array';
 
 export const CANVAS_DROPZONE_ID = 'canvas';
 export const DELETE_DROPZONE_ID = 'delete';

@@ -6,12 +6,6 @@ import type {
   Composite,
   DataTableColumn
 } from '@axonivy/form-editor-protocol';
-import { useAppContext } from '../../context/AppContext';
-import type { ComponentConfig } from '../../types/config';
-import './ComponentBlock.css';
-import { useDraggable } from '@dnd-kit/core';
-import { getParentComponent, useData } from '../../data/data';
-import { dragData } from './drag-data';
 import {
   Button,
   cn,
@@ -25,17 +19,23 @@ import {
   useReadonly
 } from '@axonivy/ui-components';
 import { IvyIcons } from '@axonivy/ui-icons';
+import { useDraggable } from '@dnd-kit/core';
 import { useState } from 'react';
-import { FormPalette } from '../palette/Palette';
-import { DropZone, type DropZoneProps } from './DropZone';
-import { useValidations } from '../../context/useValidation';
-import { DataClassDialog } from '../browser/data-class/DataClassDialog';
-import { useComponentBlockActions } from './useComponentBlockActions';
 import { useTranslation } from 'react-i18next';
-import { useComponents } from '../../context/ComponentsContext';
-import { ExtractComponentDialog } from '../browser/extract/ExtractComponentDialog';
-import { useCopyPaste } from './useCopyPaste';
 import { addDefaults } from '../../components/component-factory';
+import { useAppContext } from '../../context/AppContext';
+import { useComponents } from '../../context/ComponentsContext';
+import { useValidations } from '../../context/useValidation';
+import { getParentComponent, useData } from '../../data/data';
+import type { ComponentConfig } from '../../types/config';
+import { DataClassDialog } from '../browser/data-class/DataClassDialog';
+import { ExtractComponentDialog } from '../browser/extract/ExtractComponentDialog';
+import { FormPalette } from '../palette/Palette';
+import './ComponentBlock.css';
+import { dragData } from './drag-data';
+import { DropZone, type DropZoneProps } from './DropZone';
+import { useComponentBlockActions } from './useComponentBlockActions';
+import { useCopyPaste } from './useCopyPaste';
 
 type ComponentBlockProps = Omit<DropZoneProps, 'id'> & {
   component: ComponentData | Component;

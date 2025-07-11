@@ -1,11 +1,11 @@
-import './index.css';
 import { App, ClientContextProvider, QueryProvider, initQueryClient } from '@axonivy/form-editor';
 import { HotkeysProvider, ReadonlyProvider, ThemeProvider } from '@axonivy/ui-components';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
+import { initTranslation } from './i18n';
+import './index.css';
 import { FormClientMock } from './mock/form-client-mock';
 import { parameter, readonlyParam } from './url-helper';
-import { initTranslation } from './i18n';
 
 export function start() {
   const datatable = parameter('datatable') === 'true';

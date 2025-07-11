@@ -1,10 +1,10 @@
+import type { LogicMethodInfo } from '@axonivy/form-editor-protocol';
 import { useBrowser, type Browser } from '@axonivy/ui-components';
 import { IvyIcons } from '@axonivy/ui-icons';
-import { useMeta } from '../../../context/useMeta';
 import { useMemo } from 'react';
-import type { LogicMethodInfo } from '@axonivy/form-editor-protocol';
 import { useAppContext } from '../../../context/AppContext';
-import { logicTreeData, formatLogicMethodInfo } from './logic-tree-data';
+import { useMeta } from '../../../context/useMeta';
+import { formatLogicMethodInfo, logicTreeData } from './logic-tree-data';
 
 export const LOGIC_BROWSER_ID = 'Logic';
 

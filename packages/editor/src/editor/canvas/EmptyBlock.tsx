@@ -1,10 +1,10 @@
+import type { Component, ComponentData } from '@axonivy/form-editor-protocol';
 import { Button, cn, Flex, PanelMessage } from '@axonivy/ui-components';
+import { useTranslation } from 'react-i18next';
+import { STRUCTURE_DROPZONE_ID_PREFIX } from '../../data/data';
+import { DataClassDialog } from '../browser/data-class/DataClassDialog';
 import { DropZone } from './DropZone';
 import './EmptyBlock.css';
-import { DataClassDialog } from '../browser/data-class/DataClassDialog';
-import { STRUCTURE_DROPZONE_ID_PREFIX } from '../../data/data';
-import type { Component, ComponentData } from '@axonivy/form-editor-protocol';
-import { useTranslation } from 'react-i18next';
 
 type EmptyBlockProps = {
   id: string;

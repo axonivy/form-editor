@@ -1,11 +1,11 @@
 import { type Input, type InputType, type Prettify, type SymbolPosition } from '@axonivy/form-editor-protocol';
-import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type FieldOption, type UiComponentProps } from '../../../types/config';
-import './Input.css';
-import { useBase } from '../base';
-import IconSvg from './Input.svg?react';
-import { UiBadge, UiBlockHeader } from '../../UiBlockHeader';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type FieldOption, type UiComponentProps } from '../../../types/config';
+import { UiBadge, UiBlockHeader } from '../../UiBlockHeader';
+import { useBase } from '../base';
+import './Input.css';
+import IconSvg from './Input.svg?react';
 
 type InputProps = Prettify<Input>;
 

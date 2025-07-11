@@ -1,17 +1,17 @@
-import { useEffect, useState } from 'react';
-import type { Field } from '../../types/config';
-import { CheckboxField } from './fields/CheckboxField';
-import { TextareaField } from './fields/TextareaField';
-import { SelectField } from './fields/SelectField';
-import { NumberField } from './fields/NumberField';
 import type { PrimitiveValue, SelectItem } from '@axonivy/form-editor-protocol';
-import { InputField } from './fields/InputField';
-import { InputFieldWithBrowser } from './fields/InputFieldWithBrowser';
-import { SelectTableField } from './fields/table-field/SelectTableField';
+import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useValidation } from '../../context/useValidation';
 import { useData } from '../../data/data';
+import type { Field } from '../../types/config';
+import { CheckboxField } from './fields/CheckboxField';
+import { InputField } from './fields/InputField';
+import { InputFieldWithBrowser } from './fields/InputFieldWithBrowser';
+import { NumberField } from './fields/NumberField';
+import { SelectField } from './fields/SelectField';
+import { SelectTableField } from './fields/table-field/SelectTableField';
+import { TextareaField } from './fields/TextareaField';
 import { ToggleGroupField } from './fields/ToggleGroupField';
-import { useTranslation } from 'react-i18next';
 
 type PropertyItemProps = {
   value: PrimitiveValue;

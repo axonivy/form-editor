@@ -1,7 +1,7 @@
 import { EMPTY_FORM, type FormContext, type FormData, type ValidationResult } from '@axonivy/form-editor-protocol';
-import { createContext, useContext, useState, useEffect, type SetStateAction, type Dispatch } from 'react';
-import type { UpdateConsumer } from '../types/types';
 import { useReadonly, type useHistoryData } from '@axonivy/ui-components';
+import { createContext, useContext, useEffect, useState, type Dispatch, type SetStateAction } from 'react';
+import type { UpdateConsumer } from '../types/types';
 
 export type UI = {
   properties: boolean;

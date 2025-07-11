@@ -1,14 +1,14 @@
 import { type Fieldset, type Prettify } from '@axonivy/form-editor-protocol';
-import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
-import { ComponentBlock } from '../../../editor/canvas/ComponentBlock';
-import IconSvg from './Fieldset.svg?react';
-import { useBase } from '../base';
-import { EmptyLayoutBlock } from '../../../editor/canvas/EmptyBlock';
-import './Fieldset.css';
-import { UiBadge, UiBlockHeader } from '../../UiBlockHeader';
 import { Flex } from '@axonivy/ui-components';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { ComponentBlock } from '../../../editor/canvas/ComponentBlock';
+import { EmptyLayoutBlock } from '../../../editor/canvas/EmptyBlock';
+import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
+import { UiBadge, UiBlockHeader } from '../../UiBlockHeader';
+import { useBase } from '../base';
+import './Fieldset.css';
+import IconSvg from './Fieldset.svg?react';
 
 type FieldsetProps = Prettify<Fieldset>;
 

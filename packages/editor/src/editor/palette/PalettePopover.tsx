@@ -1,11 +1,11 @@
-import { IvyIcons } from '@axonivy/ui-icons';
-import type { ItemCategory } from '../../types/config';
 import { PaletteButton, PaletteButtonLabel, Popover, PopoverArrow, PopoverContent, PopoverTrigger } from '@axonivy/ui-components';
-import { FormPalette } from './Palette';
+import { IvyIcons } from '@axonivy/ui-icons';
 import { useDndContext } from '@dnd-kit/core';
 import { useEffect, useState, type ReactNode } from 'react';
 import { useBase } from '../../components/blocks/base';
 import { useComponents } from '../../context/ComponentsContext';
+import type { ItemCategory } from '../../types/config';
+import { FormPalette } from './Palette';
 
 type PalettePopoverProps = {
   label: string;

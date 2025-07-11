@@ -1,8 +1,8 @@
 import type { Locator, Page } from '@playwright/test';
-import { Toolbar } from './toolbar';
+import { randomUUID } from 'crypto';
 import { Canvas } from './canvas';
 import { Inscription } from './inscription';
-import { randomUUID } from 'crypto';
+import { Toolbar } from './toolbar';
 
 export const testForm = 'src_hd/form/test/project/test/test';
 export const server = process.env.BASE_URL ?? 'http://localhost:8081';

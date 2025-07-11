@@ -1,15 +1,15 @@
 import { BasicField, BasicInput, Button, Dialog, DialogContent, DialogTrigger, InputBadge, InputGroup } from '@axonivy/ui-components';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { useRef, useState } from 'react';
-import type { InputFieldProps } from './InputField';
+import { useTranslation } from 'react-i18next';
+import { useOnFocus } from '../../../context/useOnFocus';
 import type { TextFieldOptions } from '../../../types/config';
+import { badgeProps } from '../../../utils/badge-properties';
 import { focusBracketContent } from '../../../utils/focus';
 import { Browser, type FormBrowser } from '../../browser/Browser';
 import { AddCmsQuickFixPopover } from '../../browser/cms/AddCmsQuickFix';
 import useTextSelection from '../../browser/cms/useTextSelection';
-import { badgeProps } from '../../../utils/badge-properties';
-import { useOnFocus } from '../../../context/useOnFocus';
-import { useTranslation } from 'react-i18next';
+import type { InputFieldProps } from './InputField';
 
 export const InputFieldWithBrowser = ({
   label,

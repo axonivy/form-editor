@@ -1,7 +1,7 @@
 import type { Component, ComponentData, ComponentType, ConfigData } from '@axonivy/form-editor-protocol';
+import { useReadonly } from '@axonivy/ui-components';
 import { useClipboard, type TextDropItem } from 'react-aria';
 import { CANVAS_DROPZONE_ID, modifyData, useData } from '../../data/data';
-import { useReadonly } from '@axonivy/ui-components';
 
 export const useCopyPaste = (data?: Component | ComponentData) => {
   const { setData } = useData();

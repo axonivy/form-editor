@@ -7,14 +7,14 @@ import type {
   UpdateProps,
   VisibleProps
 } from '@axonivy/form-editor-protocol';
-import type { FieldOption, Fields, GenericFieldProps, ItemCategory, ItemSubcategory, Subsection } from '../../types/config';
 import { BasicField, Input } from '@axonivy/ui-components';
+import { IvyIcons } from '@axonivy/ui-icons';
+import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAppContext } from '../../context/AppContext';
 import { useValidation } from '../../context/useValidation';
+import type { FieldOption, Fields, GenericFieldProps, ItemCategory, ItemSubcategory, Subsection } from '../../types/config';
 import { hideButtonField } from './button/Button';
-import { IvyIcons } from '@axonivy/ui-icons';
-import { useTranslation } from 'react-i18next';
-import { useMemo } from 'react';
 
 export const useBase = () => {
   const { t } = useTranslation();

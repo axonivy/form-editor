@@ -1,7 +1,7 @@
-import { describe, test, expect } from 'vitest';
 import { renderHook } from '@testing-library/react';
-import useTextSelection, { type InputTextAreaRef } from './useTextSelection';
 import { act } from 'react';
+import { describe, expect, test } from 'vitest';
+import useTextSelection, { type InputTextAreaRef } from './useTextSelection';
 
 const mockRef = (value: string, selectionStart: number | null, selectionEnd: number | null) => {
   return {

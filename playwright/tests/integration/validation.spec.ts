@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 import { FormEditor } from '../page-objects/form-editor';
 
 test('canvas', async ({ page }) => {

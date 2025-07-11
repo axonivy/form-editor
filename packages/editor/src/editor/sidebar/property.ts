@@ -1,7 +1,7 @@
 import { isAlignSelfLayout, isFreeLayout, type ComponentData } from '@axonivy/form-editor-protocol';
-import { sections, type DefaultComponentProps, type Field, type Fields, type HiddenField, type Section } from '../../types/config';
-import { IvyIcons } from '@axonivy/ui-icons';
 import { groupBy } from '@axonivy/ui-components';
+import { IvyIcons } from '@axonivy/ui-icons';
+import { sections, type DefaultComponentProps, type Field, type Fields, type HiddenField, type Section } from '../../types/config';
 
 export type VisibleFields = ReturnType<typeof visibleFields>;
 

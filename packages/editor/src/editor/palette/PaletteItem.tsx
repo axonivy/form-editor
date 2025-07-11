@@ -1,10 +1,10 @@
-import { Flex, type PaletteItemConfig, type PaletteItemProps, cn } from '@axonivy/ui-components';
-import { useDraggable } from '@dnd-kit/core';
-import { useComponents } from '../../context/ComponentsContext';
 import type { ComponentType } from '@axonivy/form-editor-protocol';
-import './PaletteItem.css';
+import { cn, Flex, type PaletteItemConfig, type PaletteItemProps } from '@axonivy/ui-components';
+import { useDraggable } from '@dnd-kit/core';
 import { createComponent, type CreateData } from '../../components/component-factory';
+import { useComponents } from '../../context/ComponentsContext';
 import type { CreateComponentData } from '../../context/DndContext';
+import './PaletteItem.css';
 
 export type FormPaletteItemConfig = Omit<PaletteItemConfig, 'icon'> & {
   displayName: string;

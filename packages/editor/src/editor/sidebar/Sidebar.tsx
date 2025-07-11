@@ -1,15 +1,15 @@
 import { Button, Flex, Message, SidebarHeader, SidebarMessages, Switch } from '@axonivy/ui-components';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useAppContext } from '../../context/AppContext';
+import { useComponents } from '../../context/ComponentsContext';
+import { useAction } from '../../context/useAction';
+import { useValidations } from '../../context/useValidation';
 import { useData } from '../../data/data';
+import { useKnownHotkeys } from '../../utils/hotkeys';
 import { FormOutline } from './Outline';
 import { Properties } from './Properties';
-import { useValidations } from '../../context/useValidation';
-import { useAction } from '../../context/useAction';
-import { useAppContext } from '../../context/AppContext';
-import { useKnownHotkeys } from '../../utils/hotkeys';
-import { useTranslation } from 'react-i18next';
-import { useComponents } from '../../context/ComponentsContext';
 
 export const Sidebar = () => {
   const { t } = useTranslation();

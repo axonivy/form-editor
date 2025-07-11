@@ -1,23 +1,23 @@
 import { type DataTable, type Prettify, type TableComponent } from '@axonivy/form-editor-protocol';
-import type { ComponentConfig, UiComponentProps } from '../../../types/config';
-import './DataTable.css';
-import { useBase } from '../base';
-import IconSvg from './DataTable.svg?react';
-import { ComponentBlock } from '../../../editor/canvas/ComponentBlock';
-import { useAppContext } from '../../../context/AppContext';
 import { Button, cn, Flex, Message } from '@axonivy/ui-components';
+import { IvyIcons } from '@axonivy/ui-icons';
+import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useAppContext } from '../../../context/AppContext';
+import { useComponents } from '../../../context/ComponentsContext';
 import { useMeta } from '../../../context/useMeta';
 import { findComponentDeep, modifyData } from '../../../data/data';
-import { IvyIcons } from '@axonivy/ui-icons';
+import { findAttributesOfType } from '../../../editor/browser/data-class/variable-tree-data';
+import { ComponentBlock } from '../../../editor/canvas/ComponentBlock';
+import type { ComponentConfig, UiComponentProps } from '../../../types/config';
 import { UiBlockHeader } from '../../UiBlockHeader';
+import { useBase } from '../base';
 import { ColumnControl } from './controls/ColumnControl';
+import { createInitTableColumns } from './create-init-columns';
+import './DataTable.css';
+import IconSvg from './DataTable.svg?react';
 import { ColumnsField } from './fields/ColumnsField';
 import { renderEditableDataTableField } from './fields/EditableDataTableField';
-import { useTranslation } from 'react-i18next';
-import { findAttributesOfType } from '../../../editor/browser/data-class/variable-tree-data';
-import { useMemo } from 'react';
-import { useComponents } from '../../../context/ComponentsContext';
-import { createInitTableColumns } from './create-init-columns';
 
 type DataTableProps = Prettify<DataTable>;
 

@@ -1,7 +1,7 @@
 /* eslint-disable testing-library/no-node-access */
 /* eslint-disable testing-library/no-container */
-import { describe, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
+import { describe, expect } from 'vitest';
 import { UiBlockHeader, UiBlockHeaderDisablePart, UiBlockHeaderUpdateOnChangePart, UiBlockHeaderVisiblePart } from './UiBlockHeader';
 
 describe('UiBlockHeader', () => {

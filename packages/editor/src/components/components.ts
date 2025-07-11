@@ -1,24 +1,24 @@
-import type { ComponentConfig, Config, ItemCategory } from '../types/config';
-import { useButtonComponent } from './blocks/button/Button';
-import { useLayoutComponent } from './blocks/layout/Layout';
-import { useInputComponent } from './blocks/input/Input';
-import { useLinkComponent } from './blocks/link/Link';
-import { useTextComponent } from './blocks/text/Text';
-import { useCheckboxComponent } from './blocks/checkbox/Checkbox';
-import { useSelectComponent } from './blocks/select/Select';
 import { type ComponentData, type ComponentType } from '@axonivy/form-editor-protocol';
+import { groupBy } from '@axonivy/ui-components';
+import type { ComponentConfig, Config, ItemCategory } from '../types/config';
 import type { AutoCompleteWithString } from '../types/types';
+import { useButtonComponent } from './blocks/button/Button';
+import { useCheckboxComponent } from './blocks/checkbox/Checkbox';
 import { useComboboxComponent } from './blocks/combobox/Combobox';
-import { useRadioComponent } from './blocks/radio/Radio';
-import { useDatePickerComponent } from './blocks/datepicker/DatePicker';
-import { useTextareaComponent } from './blocks/textarea/Textarea';
+import { useCompositeComponent } from './blocks/composite/Composite';
 import { useDataTableComponent } from './blocks/datatable/DataTable';
 import { useDataTableColumnComponent } from './blocks/datatablecolumn/DataTableColumn';
-import { useFieldsetComponent } from './blocks/fieldset/Fieldset';
-import { usePanelComponent } from './blocks/panel/Panel';
-import { useCompositeComponent } from './blocks/composite/Composite';
+import { useDatePickerComponent } from './blocks/datepicker/DatePicker';
 import { useDialogComponent } from './blocks/dialog/Dialog';
-import { groupBy } from '@axonivy/ui-components';
+import { useFieldsetComponent } from './blocks/fieldset/Fieldset';
+import { useInputComponent } from './blocks/input/Input';
+import { useLayoutComponent } from './blocks/layout/Layout';
+import { useLinkComponent } from './blocks/link/Link';
+import { usePanelComponent } from './blocks/panel/Panel';
+import { useRadioComponent } from './blocks/radio/Radio';
+import { useSelectComponent } from './blocks/select/Select';
+import { useTextComponent } from './blocks/text/Text';
+import { useTextareaComponent } from './blocks/textarea/Textarea';
 
 export const useComponentsInit = () => {
   const componentByElement = (element: ComponentData) => {

@@ -1,10 +1,10 @@
-import { useDndContext, useDroppable } from '@dnd-kit/core';
-import './DropZone.css';
-import type { ComponentProps } from 'react';
-import { isDropZoneDisabled } from './drag-data';
-import { cn } from '@axonivy/ui-components';
 import type { ComponentType } from '@axonivy/form-editor-protocol';
+import { cn } from '@axonivy/ui-components';
+import { useDndContext, useDroppable } from '@dnd-kit/core';
+import type { ComponentProps } from 'react';
 import { useData } from '../../data/data';
+import { isDropZoneDisabled } from './drag-data';
+import './DropZone.css';
 
 export type DropZoneProps = ComponentProps<'div'> & {
   id: string;

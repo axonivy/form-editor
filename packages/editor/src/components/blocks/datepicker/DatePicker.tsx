@@ -1,11 +1,11 @@
 import { type DatePicker, type Prettify } from '@axonivy/form-editor-protocol';
-import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
-import './DatePicker.css';
-import { useBase } from '../base';
-import IconSvg from './DatePicker.svg?react';
-import { UiBadge, UiBlockHeader } from '../../UiBlockHeader';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
+import { UiBadge, UiBlockHeader } from '../../UiBlockHeader';
+import { useBase } from '../base';
+import './DatePicker.css';
+import IconSvg from './DatePicker.svg?react';
 
 type DatePickerProps = Prettify<DatePicker>;
 
