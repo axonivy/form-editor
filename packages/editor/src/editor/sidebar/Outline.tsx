@@ -1,9 +1,9 @@
 import { type ComponentData, isStructure } from '@axonivy/form-editor-protocol';
 import { type OutlineNode, Outline } from '@axonivy/ui-components';
 import { IvyIcons } from '@axonivy/ui-icons';
-import { useData } from '../../data/data';
-import { useComponents } from '../../context/ComponentsContext';
 import { useTranslation } from 'react-i18next';
+import { useComponents } from '../../context/ComponentsContext';
+import { useData } from '../../data/data';
 import type { ItemCategory } from '../../types/config';
 
 export const FormOutline = ({ hideOutline }: { hideOutline: () => void }) => {

@@ -1,5 +1,5 @@
-import { describe, test, expect } from 'vitest';
 import type { ConditionGroupData } from '@axonivy/ui-components';
+import { describe, expect, test } from 'vitest';
 import { generateConditionString } from './condition-builder-data';
 
 describe('generateConditionString', () => {

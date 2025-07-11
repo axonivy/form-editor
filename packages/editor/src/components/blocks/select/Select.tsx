@@ -1,13 +1,13 @@
 import { type Prettify, type Select } from '@axonivy/form-editor-protocol';
-import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
-import './Select.css';
-import { useBase } from '../base';
-import IconSvg from './Select.svg?react';
 import { IvyIcon } from '@axonivy/ui-components';
 import { IvyIcons } from '@axonivy/ui-icons';
-import { UiBadge, UiBlockHeader } from '../../UiBlockHeader';
-import { useTranslation } from 'react-i18next';
 import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
+import { UiBadge, UiBlockHeader } from '../../UiBlockHeader';
+import { useBase } from '../base';
+import './Select.css';
+import IconSvg from './Select.svg?react';
 
 type SelectProps = Prettify<Select>;
 

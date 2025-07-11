@@ -1,16 +1,16 @@
 import { type Component, type ComponentData, type Composite, type Prettify } from '@axonivy/form-editor-protocol';
-import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
-import './Composite.css';
-import { useBase } from '../base';
-import IconSvg from './Composite.svg?react';
-import { renderStartMethodSelect } from './fields/StartMethodSelect';
-import { renderParameters } from './fields/Parameters';
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAppContext } from '../../../context/AppContext';
-import { useMeta } from '../../../context/useMeta';
 import { useComponents } from '../../../context/ComponentsContext';
+import { useMeta } from '../../../context/useMeta';
+import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
 import { addDefaults } from '../../component-factory';
+import { useBase } from '../base';
+import './Composite.css';
+import IconSvg from './Composite.svg?react';
+import { renderParameters } from './fields/Parameters';
+import { renderStartMethodSelect } from './fields/StartMethodSelect';
 
 type CompositeProps = Prettify<Composite>;
 

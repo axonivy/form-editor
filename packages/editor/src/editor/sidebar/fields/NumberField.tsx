@@ -1,4 +1,4 @@
-import { BasicField, type MessageData, BasicInput } from '@axonivy/ui-components';
+import { BasicField, BasicInput, type MessageData } from '@axonivy/ui-components';
 
 type InputFieldProps = {
   label: string;

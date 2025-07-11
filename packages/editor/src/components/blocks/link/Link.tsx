@@ -1,11 +1,11 @@
 import { type Link, type Prettify } from '@axonivy/form-editor-protocol';
-import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
-import './Link.css';
-import { useBase } from '../base';
-import IconSvg from './Link.svg?react';
-import { UiBadge, UiBlockHeader } from '../../UiBlockHeader';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
+import { UiBadge, UiBlockHeader } from '../../UiBlockHeader';
+import { useBase } from '../base';
+import './Link.css';
+import IconSvg from './Link.svg?react';
 
 type LinkProps = Prettify<Link>;
 

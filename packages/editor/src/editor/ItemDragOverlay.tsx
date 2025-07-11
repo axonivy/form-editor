@@ -1,8 +1,8 @@
-import { ComponentBlockOverlay } from './canvas/ComponentBlock';
-import { useData } from '../data/data';
-import { useComponents } from '../context/ComponentsContext';
-import { PaletteItemOverlay } from './palette/PaletteItem';
 import type { CreateData } from '../components/component-factory';
+import { useComponents } from '../context/ComponentsContext';
+import { useData } from '../data/data';
+import { ComponentBlockOverlay } from './canvas/ComponentBlock';
+import { PaletteItemOverlay } from './palette/PaletteItem';
 
 export const ItemDragOverlay = ({ activeId, createData }: { activeId?: string; createData?: CreateData }) => {
   const { componentByElement, componentByName } = useComponents();

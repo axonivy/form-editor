@@ -1,12 +1,12 @@
-import { type Prettify, type Radio, type OrientationType } from '@axonivy/form-editor-protocol';
-import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type FieldOption, type UiComponentProps } from '../../../types/config';
-import './Radio.css';
-import { useBase } from '../base';
-import IconSvg from './Radio.svg?react';
+import { type OrientationType, type Prettify, type Radio } from '@axonivy/form-editor-protocol';
 import { Flex, Message } from '@axonivy/ui-components';
-import { UiBadge, UiBlockHeader } from '../../UiBlockHeader';
-import { useTranslation } from 'react-i18next';
 import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type FieldOption, type UiComponentProps } from '../../../types/config';
+import { UiBadge, UiBlockHeader } from '../../UiBlockHeader';
+import { useBase } from '../base';
+import './Radio.css';
+import IconSvg from './Radio.svg?react';
 
 type RadioProps = Prettify<Radio>;
 

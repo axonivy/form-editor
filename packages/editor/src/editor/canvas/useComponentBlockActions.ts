@@ -1,10 +1,10 @@
-import { useAppContext } from '../../context/AppContext';
 import type { Button, ComponentType, Composite } from '@axonivy/form-editor-protocol';
+import { useReadonly } from '@axonivy/ui-components';
+import { addDefaults } from '../../components/component-factory';
+import { useAppContext } from '../../context/AppContext';
+import { useAction } from '../../context/useAction';
 import { COLUMN_DROPZONE_ID_PREFIX, creationTargetId, modifyData, TABLE_DROPZONE_ID_PREFIX, useData } from '../../data/data';
 import type { DraggableProps } from './ComponentBlock';
-import { useReadonly } from '@axonivy/ui-components';
-import { useAction } from '../../context/useAction';
-import { addDefaults } from '../../components/component-factory';
 
 export const useComponentBlockActions = ({
   config,

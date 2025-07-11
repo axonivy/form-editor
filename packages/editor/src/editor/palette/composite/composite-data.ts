@@ -1,6 +1,6 @@
 import type { CompositeInfo } from '@axonivy/form-editor-protocol';
-import { simpleType } from '../../../utils/string';
 import { splitByCamelCase } from '@axonivy/ui-components';
+import { simpleType } from '../../../utils/string';
 import type { FormPaletteItemConfig } from '../PaletteItem';
 
 export const paletteItems = (composites: Array<CompositeInfo>): Record<string, Array<FormPaletteItemConfig>> => {

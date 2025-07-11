@@ -1,11 +1,11 @@
 import { BasicField, BasicSelect } from '@axonivy/ui-components';
-import type { GenericFieldProps } from '../../../../types/config';
-import { useMeta } from '../../../../context/useMeta';
 import { useAppContext } from '../../../../context/AppContext';
-import { useData } from '../../../../data/data';
-import { useCompositeComponent } from '../Composite';
-import { typesString } from '../../../../utils/string';
+import { useMeta } from '../../../../context/useMeta';
 import { useValidation } from '../../../../context/useValidation';
+import { useData } from '../../../../data/data';
+import type { GenericFieldProps } from '../../../../types/config';
+import { typesString } from '../../../../utils/string';
+import { useCompositeComponent } from '../Composite';
 
 export const renderStartMethodSelect = (props: GenericFieldProps) => {
   return <StartMethodSelect {...props} />;

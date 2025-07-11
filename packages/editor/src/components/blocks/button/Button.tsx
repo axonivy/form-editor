@@ -1,14 +1,14 @@
 import type { Button, ButtonStyle, ButtonVariant, ConfirmDialogSeverity, Prettify } from '@axonivy/form-editor-protocol';
+import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type FieldOption, type UiComponentProps } from '../../../types/config';
-import './Button.css';
-import { useBase } from '../base';
-import IconSvg from './Button.svg?react';
 import { UiBadge, UiBlockHeader } from '../../UiBlockHeader';
+import { useBase } from '../base';
+import './Button.css';
+import IconSvg from './Button.svg?react';
+import { renderConfirmDialogField } from './fields/ConfirmDialogField';
 import { renderIconField } from './fields/IconField';
 import { renderTypeField } from './fields/TypeField';
-import { useTranslation } from 'react-i18next';
-import { useMemo } from 'react';
-import { renderConfirmDialogField } from './fields/ConfirmDialogField';
 
 type ButtonProps = Prettify<Button>;
 

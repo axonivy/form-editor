@@ -1,7 +1,7 @@
-import { customRenderHook } from 'test-utils';
-import { useEditableDataTableField } from './useEditableDataTableField';
 import type { Button, ComponentDataHelper, DeepPartial, Dialog, FormData, TableConfig, VariableInfo } from '@axonivy/form-editor-protocol';
 import { waitFor } from '@testing-library/react';
+import { customRenderHook } from 'test-utils';
+import { useEditableDataTableField } from './useEditableDataTableField';
 
 const variable: DeepPartial<VariableInfo> = {
   variables: [

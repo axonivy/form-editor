@@ -1,13 +1,13 @@
 import { type Checkbox, type Prettify } from '@axonivy/form-editor-protocol';
-import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
-import './Checkbox.css';
-import { useBase } from '../base';
-import IconSvg from './Checkbox.svg?react';
 import { Flex, IvyIcon } from '@axonivy/ui-components';
-import { UiBadge, UiBlockHeader } from '../../UiBlockHeader';
 import { IvyIcons } from '@axonivy/ui-icons';
-import { useTranslation } from 'react-i18next';
 import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
+import { UiBadge, UiBlockHeader } from '../../UiBlockHeader';
+import { useBase } from '../base';
+import './Checkbox.css';
+import IconSvg from './Checkbox.svg?react';
 
 type CheckboxProps = Prettify<Checkbox>;
 

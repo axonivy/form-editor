@@ -1,4 +1,4 @@
-import { labelText, typesString, simpleType, stripELExpression } from './string';
+import { labelText, simpleType, stripELExpression, typesString } from './string';
 
 test('labelText', () => {
   expect(labelText('')).equals('');

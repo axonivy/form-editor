@@ -1,8 +1,3 @@
-import { Message, useBrowser, type Browser, type BrowserNode } from '@axonivy/ui-components';
-import type { Row } from '@tanstack/react-table';
-import { IvyIcons } from '@axonivy/ui-icons';
-import { useMeta } from '../../../context/useMeta';
-import { useCallback, useEffect, useState } from 'react';
 import {
   isColumn,
   isDialog,
@@ -13,12 +8,17 @@ import {
   type Variable,
   type VariableInfo
 } from '@axonivy/form-editor-protocol';
-import { useAppContext } from '../../../context/AppContext';
-import { findComponentDeep, getParentComponent, useData } from '../../../data/data';
-import type { BrowserOptions } from '../Browser';
-import { findAttributesOfType, variableTreeData, fullVariablePath } from './variable-tree-data';
-import { stripELExpression } from '../../../utils/string';
+import { Message, useBrowser, type Browser, type BrowserNode } from '@axonivy/ui-components';
+import { IvyIcons } from '@axonivy/ui-icons';
+import type { Row } from '@tanstack/react-table';
+import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useAppContext } from '../../../context/AppContext';
+import { useMeta } from '../../../context/useMeta';
+import { findComponentDeep, getParentComponent, useData } from '../../../data/data';
+import { stripELExpression } from '../../../utils/string';
+import type { BrowserOptions } from '../Browser';
+import { findAttributesOfType, fullVariablePath, variableTreeData } from './variable-tree-data';
 
 export const ATTRIBUTE_BROWSER_ID = 'Attribute';
 

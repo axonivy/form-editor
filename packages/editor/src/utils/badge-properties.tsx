@@ -1,5 +1,5 @@
-import { IvyIcons } from '@axonivy/ui-icons';
 import type { BadgeType } from '@axonivy/ui-components';
+import { IvyIcons } from '@axonivy/ui-icons';
 import { CmsTooltip } from './CmsTooltip';
 
 const badgePropertyCMS: BadgeType = {

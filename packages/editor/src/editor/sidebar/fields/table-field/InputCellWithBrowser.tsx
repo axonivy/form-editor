@@ -1,7 +1,7 @@
-import { type CellContext } from '@tanstack/react-table';
 import { useEditCell, type InputProps } from '@axonivy/ui-components';
-import './TableField.css';
+import { type CellContext } from '@tanstack/react-table';
 import { InputFieldWithBrowser } from '../InputFieldWithBrowser';
+import './TableField.css';
 
 type InputCellProps<TData> = InputProps & { cell: CellContext<TData, string> };
 

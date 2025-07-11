@@ -1,15 +1,15 @@
 import { type Panel, type Prettify } from '@axonivy/form-editor-protocol';
-import { useBase } from '../base';
-import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
-import IconSvg from './Panel.svg?react';
 import { Flex, IvyIcon } from '@axonivy/ui-components';
 import { IvyIcons } from '@axonivy/ui-icons';
+import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ComponentBlock } from '../../../editor/canvas/ComponentBlock';
 import { EmptyLayoutBlock } from '../../../editor/canvas/EmptyBlock';
-import './Panel.css';
+import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
 import { UiBadge, UiBlockHeaderVisiblePart } from '../../UiBlockHeader';
-import { useTranslation } from 'react-i18next';
-import { useMemo } from 'react';
+import { useBase } from '../base';
+import './Panel.css';
+import IconSvg from './Panel.svg?react';
 
 type PanelProps = Prettify<Panel>;
 

@@ -1,13 +1,13 @@
 import { BasicCheckbox, useBrowser, type Browser, type BrowserNode } from '@axonivy/ui-components';
 import type { Row } from '@tanstack/react-table';
 
-import { IvyIcons } from '@axonivy/ui-icons';
-import { useMeta } from '../../../context/useMeta';
-import { useMemo, useState } from 'react';
 import type { ContentObject } from '@axonivy/form-editor-protocol';
-import { useAppContext } from '../../../context/AppContext';
-import { cmsTreeData } from './cms-tree-data';
+import { IvyIcons } from '@axonivy/ui-icons';
+import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useAppContext } from '../../../context/AppContext';
+import { useMeta } from '../../../context/useMeta';
+import { cmsTreeData } from './cms-tree-data';
 
 export const CMS_BROWSER_ID = 'CMS';
 

@@ -1,13 +1,13 @@
 import { type Combobox, type Prettify } from '@axonivy/form-editor-protocol';
-import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
-import './Combobox.css';
-import { useBase } from '../base';
-import IconSvg from './Combobox.svg?react';
 import { IvyIcon } from '@axonivy/ui-components';
 import { IvyIcons } from '@axonivy/ui-icons';
-import { UiBadge, UiBlockHeader } from '../../UiBlockHeader';
-import { useTranslation } from 'react-i18next';
 import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
+import { UiBadge, UiBlockHeader } from '../../UiBlockHeader';
+import { useBase } from '../base';
+import './Combobox.css';
+import IconSvg from './Combobox.svg?react';
 
 type ComboboxProps = Prettify<Combobox>;
 

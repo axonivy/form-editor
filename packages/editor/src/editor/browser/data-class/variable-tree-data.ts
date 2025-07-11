@@ -2,9 +2,9 @@ import type { ComponentType, Variable, VariableInfo } from '@axonivy/form-editor
 import { labelText, type BrowserNode } from '@axonivy/ui-components';
 import { IvyIcons } from '@axonivy/ui-icons';
 import type { Row } from '@tanstack/react-table';
+import { componentForDataType, type CreateData } from '../../../components/component-factory';
 import { stripELExpression } from '../../../utils/string';
 import { filterNodesWithChildren } from './useAttributeBrowser';
-import { componentForDataType, type CreateData } from '../../../components/component-factory';
 
 export const variableTreeData = () => {
   const of = (paramInfo: VariableInfo): Array<BrowserNode<Variable>> => {

@@ -1,8 +1,8 @@
+import { isColumn } from '@axonivy/form-editor-protocol';
 import { Button, type CollapsibleControlProps } from '@axonivy/ui-components';
-import { COLUMN_DROPZONE_ID_PREFIX, modifyData, useData } from '../../../../data/data';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { useTranslation } from 'react-i18next';
-import { isColumn } from '@axonivy/form-editor-protocol';
+import { COLUMN_DROPZONE_ID_PREFIX, modifyData, useData } from '../../../../data/data';
 
 export const ContentControls = (props: CollapsibleControlProps) => {
   const { element, setData } = useData();

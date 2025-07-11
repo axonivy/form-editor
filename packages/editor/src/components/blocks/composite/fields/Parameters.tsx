@@ -1,13 +1,13 @@
-import { capitalize, Flex, Message } from '@axonivy/ui-components';
-import type { GenericFieldProps } from '../../../../types/config';
-import { useMeta } from '../../../../context/useMeta';
-import { useAppContext } from '../../../../context/AppContext';
-import { useData } from '../../../../data/data';
-import { useCompositeComponent } from '../Composite';
-import { InputFieldWithBrowser } from '../../../../editor/sidebar/fields/InputFieldWithBrowser';
 import type { ParameterInfo, PrimitiveValue } from '@axonivy/form-editor-protocol';
-import { useValidation } from '../../../../context/useValidation';
+import { capitalize, Flex, Message } from '@axonivy/ui-components';
 import { useTranslation } from 'react-i18next';
+import { useAppContext } from '../../../../context/AppContext';
+import { useMeta } from '../../../../context/useMeta';
+import { useValidation } from '../../../../context/useValidation';
+import { useData } from '../../../../data/data';
+import { InputFieldWithBrowser } from '../../../../editor/sidebar/fields/InputFieldWithBrowser';
+import type { GenericFieldProps } from '../../../../types/config';
+import { useCompositeComponent } from '../Composite';
 
 export const renderParameters = (props: GenericFieldProps) => {
   return <Parameters {...props} />;

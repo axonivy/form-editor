@@ -1,4 +1,3 @@
-import './DataTableColumn.css';
 import {
   isTable,
   type ActionButtonAlignment,
@@ -6,19 +5,20 @@ import {
   type DataTableColumn,
   type Prettify
 } from '@axonivy/form-editor-protocol';
-import type { ComponentConfig, FieldOption, UiComponentProps } from '../../../types/config';
-import { useBase } from '../base';
 import { Flex, IvyIcon, PanelMessage } from '@axonivy/ui-components';
 import { IvyIcons } from '@axonivy/ui-icons';
-import { UiBadge, UiBlockHeaderVisiblePart } from '../../UiBlockHeader';
-import { ComponentBlock } from '../../../editor/canvas/ComponentBlock';
+import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useAppContext } from '../../../context/AppContext';
 import { COLUMN_DROPZONE_ID_PREFIX, getParentComponent, useData } from '../../../data/data';
+import { ComponentBlock } from '../../../editor/canvas/ComponentBlock';
 import { DropZone } from '../../../editor/canvas/DropZone';
+import type { ComponentConfig, FieldOption, UiComponentProps } from '../../../types/config';
+import { UiBadge, UiBlockHeaderVisiblePart } from '../../UiBlockHeader';
+import { useBase } from '../base';
 import { ActionButtonsField } from './ActionButtonsField';
 import { ContentControls } from './controls/ContentControls';
-import { useAppContext } from '../../../context/AppContext';
-import { useTranslation } from 'react-i18next';
-import { useMemo } from 'react';
+import './DataTableColumn.css';
 
 type DataTableColumnProps = Prettify<DataTableColumn>;
 

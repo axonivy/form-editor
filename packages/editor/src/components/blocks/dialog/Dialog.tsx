@@ -1,18 +1,18 @@
-import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
 import { isTable, type Dialog, type Prettify } from '@axonivy/form-editor-protocol';
-import { useBase } from '../base';
-import IconSvg from './Dialog.svg?react';
-import { ComponentBlock } from '../../../editor/canvas/ComponentBlock';
-import { EmptyLayoutBlock } from '../../../editor/canvas/EmptyBlock';
-import { UiBadge } from '../../UiBlockHeader';
 import { Button, Flex } from '@axonivy/ui-components';
 import { IvyIcons } from '@axonivy/ui-icons';
+import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAppContext } from '../../../context/AppContext';
 import { findComponentDeep } from '../../../data/data';
 import { DataClassDialog } from '../../../editor/browser/data-class/DataClassDialog';
+import { ComponentBlock } from '../../../editor/canvas/ComponentBlock';
+import { EmptyLayoutBlock } from '../../../editor/canvas/EmptyBlock';
+import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
 import { stripELExpression } from '../../../utils/string';
-import { useTranslation } from 'react-i18next';
-import { useMemo } from 'react';
+import { UiBadge } from '../../UiBlockHeader';
+import { useBase } from '../base';
+import IconSvg from './Dialog.svg?react';
 
 type DialogProps = Prettify<Dialog>;
 

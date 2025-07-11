@@ -1,7 +1,7 @@
 import { expect, type Locator, type Page } from '@playwright/test';
-import { Outline } from './outline';
-import { Browser } from './browser';
 import { DisableInput, RequiredInput, VisibleInput } from './behaviourSection';
+import { Browser } from './browser';
+import { Outline } from './outline';
 
 export class Inscription {
   protected readonly page: Page;

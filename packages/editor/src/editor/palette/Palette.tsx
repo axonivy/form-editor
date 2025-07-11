@@ -1,6 +1,6 @@
 import { Palette, PaletteSection } from '@axonivy/ui-components';
-import { useBase } from '../../components/blocks/base';
 import { useTranslation } from 'react-i18next';
+import { useBase } from '../../components/blocks/base';
 import { FormPaletteItem, type FormPaletteItemConfig } from './PaletteItem';
 
 export type PaletteProps = {

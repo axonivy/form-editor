@@ -1,4 +1,3 @@
-import { flexRender, type ColumnDef, useReactTable, getCoreRowModel, type Row } from '@tanstack/react-table';
 import {
   arraymove,
   BasicField,
@@ -14,6 +13,7 @@ import {
   useTableSelect
 } from '@axonivy/ui-components';
 import { IvyIcons } from '@axonivy/ui-icons';
+import { flexRender, getCoreRowModel, useReactTable, type ColumnDef, type Row } from '@tanstack/react-table';
 import { useCallback, useState } from 'react';
 import { useValidation } from '../../../../context/useValidation';
 

@@ -1,6 +1,6 @@
+import type { ComponentType, FormData } from '@axonivy/form-editor-protocol';
 import type { CreateData } from '../../../components/component-factory';
 import { modifyData, STRUCTURE_DROPZONE_ID_PREFIX } from '../../../data/data';
-import type { ComponentType, FormData } from '@axonivy/form-editor-protocol';
 
 export const createInitForm = (
   data: FormData,

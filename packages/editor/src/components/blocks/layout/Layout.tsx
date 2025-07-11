@@ -1,5 +1,3 @@
-import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type FieldOption, type UiComponentProps } from '../../../types/config';
-import './Layout.css';
 import {
   type Layout,
   type LayoutGridVariant,
@@ -7,15 +5,17 @@ import {
   type LayoutType,
   type Prettify
 } from '@axonivy/form-editor-protocol';
-import { useAppContext } from '../../../context/AppContext';
-import { useBase } from '../base';
-import IconSvg from './Layout.svg?react';
-import { ComponentBlock } from '../../../editor/canvas/ComponentBlock';
-import { EmptyLayoutBlock } from '../../../editor/canvas/EmptyBlock';
-import { UiBlockHeader } from '../../UiBlockHeader';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useAppContext } from '../../../context/AppContext';
+import { ComponentBlock } from '../../../editor/canvas/ComponentBlock';
+import { EmptyLayoutBlock } from '../../../editor/canvas/EmptyBlock';
+import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type FieldOption, type UiComponentProps } from '../../../types/config';
+import { UiBlockHeader } from '../../UiBlockHeader';
+import { useBase } from '../base';
+import './Layout.css';
+import IconSvg from './Layout.svg?react';
 
 type LayoutProps = Prettify<Layout>;
 

@@ -1,7 +1,7 @@
 import { Flex, InputBadge } from '@axonivy/ui-components';
-import './UiBlockHeader.css';
-import { badgeProps } from '../utils/badge-properties';
 import { useAppContext } from '../context/AppContext';
+import { badgeProps } from '../utils/badge-properties';
+import './UiBlockHeader.css';
 
 type UiBlockHeaderProps = {
   visible: string;

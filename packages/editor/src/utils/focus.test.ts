@@ -1,4 +1,4 @@
-import { describe, expect, vi, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, vi } from 'vitest';
 import { focusBracketContent } from './focus';
 
 describe('focusBracketContent', () => {

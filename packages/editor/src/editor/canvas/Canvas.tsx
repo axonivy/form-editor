@@ -1,9 +1,9 @@
-import './Canvas.css';
+import { cn, IvyIcon } from '@axonivy/ui-components';
+import { IvyIcons } from '@axonivy/ui-icons';
+import { useDndContext, useDroppable } from '@dnd-kit/core';
 import { useAppContext } from '../../context/AppContext';
 import { CANVAS_DROPZONE_ID, DELETE_DROPZONE_ID } from '../../data/data';
-import { cn, IvyIcon } from '@axonivy/ui-components';
-import { useDndContext, useDroppable } from '@dnd-kit/core';
-import { IvyIcons } from '@axonivy/ui-icons';
+import './Canvas.css';
 import { ComponentBlock } from './ComponentBlock';
 import { EmptyBlock } from './EmptyBlock';
 import { isDragData } from './drag-data';

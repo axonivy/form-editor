@@ -1,8 +1,8 @@
 /* eslint-disable testing-library/no-node-access */
-import { describe } from 'vitest';
-import { badgeProps } from './badge-properties';
 import { InputBadge } from '@axonivy/ui-components';
 import { render, screen } from '@testing-library/react';
+import { describe } from 'vitest';
+import { badgeProps } from './badge-properties';
 
 describe('createBadges', () => {
   const inputValues =

@@ -1,9 +1,9 @@
 import { isButton, type ButtonType } from '@axonivy/form-editor-protocol';
+import { useTranslation } from 'react-i18next';
+import { useValidation } from '../../../../context/useValidation';
+import { isEditableTable, useData } from '../../../../data/data';
 import { SelectField } from '../../../../editor/sidebar/fields/SelectField';
 import type { FieldOption, GenericFieldProps } from '../../../../types/config';
-import { isEditableTable, useData } from '../../../../data/data';
-import { useValidation } from '../../../../context/useValidation';
-import { useTranslation } from 'react-i18next';
 
 export const renderTypeField = (props: GenericFieldProps) => {
   return <TypeField {...props} />;

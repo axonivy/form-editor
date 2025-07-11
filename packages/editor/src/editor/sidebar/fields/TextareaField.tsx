@@ -10,14 +10,14 @@ import {
   Textarea,
   type MessageData
 } from '@axonivy/ui-components';
-import { useMemo, useRef, useState } from 'react';
 import { IvyIcons } from '@axonivy/ui-icons';
+import { useMemo, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useOnFocus } from '../../../context/useOnFocus';
+import { badgeProps } from '../../../utils/badge-properties';
 import { Browser } from '../../browser/Browser';
 import { AddCmsQuickFixPopover } from '../../browser/cms/AddCmsQuickFix';
 import useTextSelection from '../../browser/cms/useTextSelection';
-import { useOnFocus } from '../../../context/useOnFocus';
-import { badgeProps } from '../../../utils/badge-properties';
-import { useTranslation } from 'react-i18next';
 
 type TextareaFieldProps = {
   label: string;

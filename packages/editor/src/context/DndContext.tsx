@@ -1,22 +1,22 @@
 import {
   DndContext as DndKitContext,
+  DragOverlay,
+  MouseSensor,
+  pointerWithin,
+  rectIntersection,
   useSensor,
   useSensors,
-  MouseSensor,
-  DragOverlay,
-  type DragEndEvent,
-  type DragStartEvent,
-  pointerWithin,
   type CollisionDetection,
-  rectIntersection
+  type DragEndEvent,
+  type DragStartEvent
 } from '@dnd-kit/core';
 
+import type { ComponentType } from '@axonivy/form-editor-protocol';
 import { useState, type ReactNode } from 'react';
+import type { CreateData } from '../components/component-factory';
 import { findComponentElement, modifyData, useData } from '../data/data';
 import { ItemDragOverlay } from '../editor/ItemDragOverlay';
 import { useAppContext } from './AppContext';
-import type { CreateData } from '../components/component-factory';
-import type { ComponentType } from '@axonivy/form-editor-protocol';
 
 export type CreateComponentData<TType extends ComponentType = ComponentType> = {
   componentName: TType;
