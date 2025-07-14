@@ -5,7 +5,6 @@ import {
   Button,
   Dialog,
   DialogContent,
-  DialogFooter,
   DialogTrigger,
   Flex,
   Input,
@@ -39,37 +38,15 @@ type ExtractComponentDialogProps = {
 
 export const ExtractComponentDialog = ({ children, data, openDialog, setOpenDialog }: ExtractComponentDialogProps) => {
   const { t } = useTranslation();
-
   const layoutId = (data.config as Layout)?.id?.length > 0 ? (data.config as Layout).id : data.cid;
-
-  return (
-    <BasicDialog
-      open={openDialog}
-      onOpenChange={setOpenDialog}
-      contentProps={{
-        title: t('dialog.extractComponent', { component: layoutId }),
-        description: t('dialog.extractComponentTitle'),
-        onClick: e => e.stopPropagation()
-      }}
-      dialogTrigger={<DialogTrigger asChild>{children}</DialogTrigger>}
-    >
-      <ExtractComponentDialogContent data={data} layoutId={layoutId} />
-    </BasicDialog>
-  );
-};
-
-const ExtractComponentDialogContent = ({ data, layoutId }: { data: Component | ComponentData; layoutId: string }) => {
   const { context, namespace } = useAppContext();
-  const { t } = useTranslation();
   const queryClient = useQueryClient();
   const { validateComponentName, validateComponentNamespace } = useExtractFieldValidation();
   const variableInfo = useMeta('meta/data/attributes', context, { types: {}, variables: [] }).data;
-
   const [name, setName] = useState(layoutId);
   const [nameSpace, setNameSpace] = useState(namespace);
   const [field, setField] = useState('data');
   const [open, setOpen] = useState(false);
-
   const dataClassItems = useMemo(() => {
     const fullTree: BrowserNode<Variable>[] = variableTreeData().of(variableInfo);
     return fullTree.length === 1 && fullTree[0].children.length === 0 ? [fullTree[0]] : collectNodesWithChildren(fullTree);
@@ -109,7 +86,40 @@ const ExtractComponentDialogContent = ({ data, layoutId }: { data: Component | C
   );
 
   return (
-    <>
+    <BasicDialog
+      open={openDialog}
+      onOpenChange={setOpenDialog}
+      contentProps={{
+        title: t('dialog.extractComponent', { component: layoutId }),
+        description: t('dialog.extractComponentTitle'),
+        onClick: e => e.stopPropagation(),
+        buttonCustom: (
+          <Button
+            variant='primary'
+            size='large'
+            aria-label={t('dialog.extractComponent', { component: data.cid })}
+            onClick={() =>
+              extractIntoComponent.mutate({
+                context,
+                layoutId: data.cid,
+                newComponentName: name,
+                nameSpace: nameSpace,
+                dataClassField: field
+              })
+            }
+            disabled={buttonDisabled}
+          >
+            {t('dialog.applyExtract')}
+          </Button>
+        ),
+        buttonClose: (
+          <Button variant='outline' size='large'>
+            {t('common.label.cancel')}
+          </Button>
+        )
+      }}
+      dialogTrigger={<DialogTrigger asChild>{children}</DialogTrigger>}
+    >
       <Flex direction='column' gap={2}>
         <BasicField className='extract-dialog-name' label={t('dialog.componentName')} message={nameValidation}>
           <Input value={name} onChange={event => setName(event.target.value)} placeholder={layoutId} />
@@ -153,28 +163,6 @@ const ExtractComponentDialogContent = ({ data, layoutId }: { data: Component | C
         </Dialog>
         <Message variant='info' message={t('dialog.logicWarning', { component: layoutId })} />
       </Flex>
-
-      <DialogFooter>
-        <Flex direction='column' gap={2}>
-          <Button
-            variant='primary'
-            size='large'
-            aria-label={t('dialog.extractComponent', { component: data.cid })}
-            onClick={() =>
-              extractIntoComponent.mutate({
-                context,
-                layoutId: data.cid,
-                newComponentName: name,
-                nameSpace: nameSpace,
-                dataClassField: field
-              })
-            }
-            disabled={buttonDisabled}
-          >
-            {t('dialog.applyExtract')}
-          </Button>
-        </Flex>
-      </DialogFooter>
-    </>
+    </BasicDialog>
   );
 };
