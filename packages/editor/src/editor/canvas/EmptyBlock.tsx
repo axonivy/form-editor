@@ -1,5 +1,6 @@
 import type { Component, ComponentData } from '@axonivy/form-editor-protocol';
 import { Button, cn, Flex, PanelMessage } from '@axonivy/ui-components';
+import { IvyIcons } from '@axonivy/ui-icons';
 import { useTranslation } from 'react-i18next';
 import { STRUCTURE_DROPZONE_ID_PREFIX } from '../../data/data';
 import { DataClassDialog } from '../browser/data-class/DataClassDialog';
@@ -17,14 +18,13 @@ export const EmptyBlock = ({ id, components }: EmptyBlockProps) => {
     <DropZone id={id} preId={components.at(-1)?.cid ?? ''}>
       {components.length === 0 ? (
         <Flex direction='column' alignItems='center' justifyContent='center' className='canvas-empty-message'>
-          <PanelMessage message={t('hint.dragFirstItem')} mode='column' className={cn('drag-hint', 'column')} />
-          <Flex justifyContent='center'>
+          <PanelMessage message={t('hint.dragFirstItem')} mode='column' className={cn('drag-hint', 'column')}>
             <DataClassDialog>
-              <Button className='drag-hint-button' size='large' variant='primary'>
+              <Button icon={IvyIcons.DatabaseLink} className='drag-hint-button' size='large' variant='primary'>
                 {t('label.createFromData')}
               </Button>
             </DataClassDialog>
-          </Flex>
+          </PanelMessage>
         </Flex>
       ) : (
         <div className='empty-block' />
