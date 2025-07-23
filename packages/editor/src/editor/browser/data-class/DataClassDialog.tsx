@@ -1,10 +1,10 @@
 import type { Variable } from '@axonivy/form-editor-protocol';
 import {
   BasicCheckbox,
-  BasicDialog,
+  BasicDialogContent,
   Button,
-  DialogClose,
-  DialogFooter,
+  Dialog,
+  DialogContent,
   DialogTrigger,
   ExpandableCell,
   MessageRow,
@@ -12,12 +12,13 @@ import {
   Table,
   TableBody,
   TableCell,
-  useHotkeyLocalScopes,
+  useDialogHotkeys,
   useHotkeys,
   useTableExpand,
   useTableSelect,
   type BrowserNode
 } from '@axonivy/ui-components';
+import { IvyIcons } from '@axonivy/ui-icons';
 import { flexRender, getCoreRowModel, getFilteredRowModel, useReactTable, type ColumnDef, type Row } from '@tanstack/react-table';
 import { useCallback, useEffect, useState, type ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -39,37 +40,21 @@ type DataClassDialogProps = {
 };
 
 export const DataClassDialog = ({ children, ...props }: DataClassDialogProps & { children: ReactNode }) => {
-  const [open, setOpen] = useState(false);
+  const { open, onOpenChange } = useDialogHotkeys(['dataclassDialog']);
   const { createFromData: shortcut } = useKnownHotkeys();
-  const { activateLocalScopes, restoreLocalScopes } = useHotkeyLocalScopes(['dataclassDialog']);
-  const onOpenChange = (open: boolean) => {
-    setOpen(open);
-    if (open) {
-      activateLocalScopes();
-    } else {
-      restoreLocalScopes();
-    }
-  };
 
   useHotkeys(shortcut.hotkey, () => onOpenChange(true), { scopes: ['global'] });
-  const { t } = useTranslation();
   return (
-    <BasicDialog
-      open={open}
-      onOpenChange={onOpenChange}
-      contentProps={{
-        title: t('label.createFromData'),
-        description: t('label.selectAttributes'),
-        onClick: e => e.stopPropagation()
-      }}
-      dialogTrigger={<DialogTrigger asChild>{children}</DialogTrigger>}
-    >
-      <DataClassSelect {...props} />
-    </BasicDialog>
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogTrigger asChild>{children}</DialogTrigger>
+      <DialogContent onClick={e => e.stopPropagation()}>
+        <DataClassDialogContent {...props} />
+      </DialogContent>
+    </Dialog>
   );
 };
 
-const DataClassSelect = ({
+const DataClassDialogContent = ({
   showWorkflowButtonsCheckbox = true,
   workflowButtonsInit = true,
   creationTarget,
@@ -139,7 +124,16 @@ const DataClassSelect = ({
     });
   };
   return (
-    <>
+    <BasicDialogContent
+      title={t('label.createFromData')}
+      description={t('label.selectAttributes')}
+      submit={
+        <Button variant='primary' icon={IvyIcons.Check} onClick={createForm} disabled={tree.length === 0}>
+          {t('common.label.create')}
+        </Button>
+      }
+      cancel={<Button variant='outline'>{t('common.label.cancel')}</Button>}
+    >
       <Table>
         <TableBody>
           {table.getRowModel().flatRows.length ? (
@@ -162,16 +156,6 @@ const DataClassSelect = ({
           label={t('label.createBtns')}
         />
       )}
-      <DialogFooter>
-        <DialogClose asChild>
-          <Button variant='primary' onClick={createForm} disabled={tree.length === 0}>
-            {t('common.label.create')}
-          </Button>
-        </DialogClose>
-        <DialogClose asChild>
-          <Button variant='outline'>{t('common.label.cancel')}</Button>
-        </DialogClose>
-      </DialogFooter>
-    </>
+    </BasicDialogContent>
   );
 };

@@ -15,7 +15,7 @@ import {
   PopoverAnchor,
   PopoverContent,
   Separator,
-  useHotkeyLocalScopes,
+  useDialogHotkeys,
   useReadonly
 } from '@axonivy/ui-components';
 import { IvyIcons } from '@axonivy/ui-icons';
@@ -70,16 +70,7 @@ const Draggable = ({ config, data }: DraggableProps) => {
   const { selectedElement, setSelectedElement } = useAppContext();
   const isSelected = selectedElement === data.cid;
   const elementConfig = addDefaults(data.type, data.config);
-  const { activateLocalScopes, restoreLocalScopes } = useHotkeyLocalScopes(['extractDialog']);
-  const [showExtractDialog, setShowExtractDialog] = useState(false);
-  const onOpenExtractDialogChange = (open: boolean) => {
-    setShowExtractDialog(open);
-    if (open) {
-      activateLocalScopes();
-    } else {
-      restoreLocalScopes();
-    }
-  };
+  const { open: showExtractDialog, onOpenChange: onOpenExtractDialogChange } = useDialogHotkeys(['extractDialog']);
   const { createElement, duplicateElement, openComponent, onKeyDown, deleteElement, createActionButton, createActionColumn, createColumn } =
     useComponentBlockActions({ config, data, setShowExtractDialog: onOpenExtractDialogChange });
   const validations = useValidations(data.cid);
