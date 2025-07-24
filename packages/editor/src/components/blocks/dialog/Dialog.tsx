@@ -63,14 +63,7 @@ const DialogUiBlock = ({ id, components, header, linkedComponent }: UiComponentP
     <>
       <Flex direction='row' justifyContent='space-between' alignItems='center'>
         <UiBadge value={header} />
-        <DataClassDialog
-          showWorkflowButtonsCheckbox={false}
-          creationTarget={id}
-          onlyAttributs={onlyAttributs}
-          showRootNode={false}
-          prefix='currentRow'
-          parentName='row'
-        >
+        <DataClassDialog showWorkflowButtonsCheckbox={false} creationTarget={id} onlyAttributs={onlyAttributs} parentName='currentRow'>
           <Button
             icon={IvyIcons.DatabaseLink}
             size='small'

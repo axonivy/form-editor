@@ -164,7 +164,9 @@ export const useBase = () => {
         subsection: 'Dynamic Options',
         label: t('label.objectLabel'),
         type: 'textBrowser',
-        browsers: [{ type: 'ATTRIBUTE', options: { attribute: { onlyAttributes: 'DYNAMICLIST' }, overrideSelection: true } }],
+        browsers: [
+          { type: 'ATTRIBUTE', options: { attribute: { onlyAttributes: { root: 'item', type: 'DYNAMICLIST' } }, overrideSelection: true } }
+        ],
         options: {
           placeholder: t('placeholder.attributeOrBlank')
         },
@@ -174,7 +176,9 @@ export const useBase = () => {
         subsection: 'Dynamic Options',
         label: t('label.objectValue'),
         type: 'textBrowser',
-        browsers: [{ type: 'ATTRIBUTE', options: { attribute: { onlyAttributes: 'DYNAMICLIST' }, overrideSelection: true } }],
+        browsers: [
+          { type: 'ATTRIBUTE', options: { attribute: { onlyAttributes: { root: 'item', type: 'DYNAMICLIST' } }, overrideSelection: true } }
+        ],
         options: {
           placeholder: t('placeholder.attributeOrBlank')
         },

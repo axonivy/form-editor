@@ -3,7 +3,6 @@ import { labelText, type BrowserNode } from '@axonivy/ui-components';
 import { IvyIcons } from '@axonivy/ui-icons';
 import type { Row } from '@tanstack/react-table';
 import { componentForDataType, type CreateData } from '../../../components/component-factory';
-import { stripELExpression } from '../../../utils/string';
 import { filterNodesWithChildren } from './useAttributeBrowser';
 
 export const variableTreeData = () => {
@@ -88,99 +87,19 @@ export const fullVariablePath = (row: Row<BrowserNode>, showRootNode: boolean = 
   return parentPath ? `${parentPath}.${row.original.value}` : row.original.value;
 };
 
-export const rowToCreateData = (
-  row: Row<BrowserNode>,
-  showRootNode: boolean = true,
-  prefix?: string
-): { type: ComponentType; config: CreateData } | undefined => {
+export const rowToCreateData = (row: Row<BrowserNode>): { type: ComponentType; config: CreateData } | undefined => {
   const node = row.original;
   const { type, config } = componentForDataType(node.info);
   if (type === undefined) {
     return undefined;
   }
-  const variablePath = fullVariablePath(row, showRootNode);
-
-  const value = formatVariableValue(variablePath, prefix);
+  const variablePath = fullVariablePath(row);
   return {
     type,
     config: {
       label: labelText(node.value),
-      value,
+      value: `#{${variablePath}}`,
       ...config
     }
   };
 };
-
-export const formatVariableValue = (variablePath: string, prefix?: string): string => {
-  if (!prefix) {
-    return `#{${variablePath}}`;
-  }
-  const separator = variablePath.length > 0 ? '.' : '';
-  return `#{${prefix}${separator}${variablePath}}`;
-};
-
-export function findAttributesOfType(
-  data: VariableInfo,
-  variableName: string,
-  maxDepth: number = 10,
-  parentName: string = 'item'
-): Array<BrowserNode<Variable>> {
-  const nameToSearch = extractVariableName(variableName);
-
-  for (const attributes of Object.values(data.types)) {
-    const foundType = attributes.find(attr => attr.attribute === nameToSearch);
-    if (foundType) {
-      const extractedType = extractTypeFromList(foundType.type);
-      const children = processType(data, extractedType, maxDepth);
-
-      return [
-        {
-          value: parentName,
-          info: `${extractedType}`,
-          icon: IvyIcons.Attribute,
-          data: { attribute: nameToSearch, description: '', simpleType: extractedType, type: extractedType },
-          children,
-          isLoaded: true
-        }
-      ];
-    }
-  }
-
-  return [];
-}
-
-function processType(data: VariableInfo, type: string, currentDepth: number): Array<BrowserNode<Variable>> {
-  if (currentDepth <= 0) {
-    return [];
-  }
-
-  const foundAttributes = data.types[type];
-  if (!foundAttributes) {
-    return [];
-  }
-
-  return foundAttributes.map(param => ({
-    value: param.attribute,
-    info: param.type,
-    icon: IvyIcons.Attribute,
-    data: param,
-    children: processType(data, param.type, currentDepth - 1),
-    isLoaded: true
-  }));
-}
-
-function extractVariableName(variableName: string): string {
-  const cleanedName = stripELExpression(variableName);
-
-  const lastDotIndex = cleanedName.lastIndexOf('.');
-  if (lastDotIndex !== -1) {
-    return cleanedName.substring(lastDotIndex + 1);
-  }
-
-  return cleanedName;
-}
-
-function extractTypeFromList(type: string): string {
-  const match = type.match(/^List<(.+)>$/);
-  return match ? match[1] : '';
-}

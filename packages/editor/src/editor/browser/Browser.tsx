@@ -6,7 +6,10 @@ import { generateConditionString, logicOperators, operators } from './condition-
 import { useAttributeBrowser } from './data-class/useAttributeBrowser';
 import { useLogicBrowser } from './logic/useLogicBrowser';
 
-type OnlyAttributeSelection = 'DYNAMICLIST' | 'COLUMN';
+export type OnlyAttributeSelection = {
+  type: 'DYNAMICLIST' | 'COLUMN';
+  root: string;
+};
 
 export type BrowserType = 'ATTRIBUTE' | 'LOGIC' | 'CMS' | 'CONDITION';
 
