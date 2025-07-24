@@ -1,330 +1,92 @@
 {
   "align": {
-    "bottom": "",
-    "center": "",
-    "top": ""
   },
   "category": {
-    "actions": "",
-    "behaviour": "",
-    "columns": "",
-    "confirm": "",
-    "content": "",
-    "dynamicOptions": "",
-    "elements": "",
-    "formatting": "",
-    "general": "",
-    "hidden": "",
-    "input": "",
-    "layout": "",
-    "options": "",
-    "paginator": "",
-    "parameters": "",
-    "properties": "",
-    "selection": "",
-    "staticOptions": "",
-    "structures": "",
-    "styling": "",
-    "text": ""
   },
   "cms": {
-    "cmsQuickfix": "",
-    "cmsQuickfixCat": "",
-    "createCmsObj": "",
-    "createContentObj": ""
   },
   "common": {
     "hotkey": {
-      "focusInscription": "",
-      "focusMain": "",
-      "focusToolbar": "",
-      "help": "",
-      "redo": "",
-      "undo": ""
     },
     "label": {
-      "cancel": "",
-      "create": "",
-      "delete": "",
-      "options": "",
-      "save": "",
-      "search": "",
-      "theme": ""
     },
     "message": {
-      "errorOccured": ""
     }
   },
   "components": {
     "button": {
       "confirm": {
-        "confirmDialogHeader": "",
-        "confirmDialogMessage": "",
-        "no": "",
-        "yes": ""
       },
-      "description": "",
       "fieldType": {
-        "delete": "",
-        "edit": "",
-        "generic": ""
       },
-      "name": "",
       "property": {
-        "cancelButton": "",
-        "confirmButton": "",
-        "confirmDialog": "",
-        "message": "",
-        "rounded": "",
-        "severity": "",
-        "style": ""
       },
       "severity": {
-        "danger": "",
-        "error": "",
-        "help": "",
-        "info": "",
-        "primary": "",
-        "secondary": "",
-        "success": "",
-        "warn": ""
       },
       "type": {
-        "flat": "",
-        "outline": "",
-        "solid": ""
       }
     },
     "checkbox": {
-      "description": "",
-      "name": ""
     },
     "combobox": {
-      "addDropdown": "",
-      "description": "",
-      "name": ""
     },
     "composite": {
-      "description": "",
-      "name": "",
       "property": {
-        "startMethod": ""
       }
     },
     "dataTable": {
-      "columnFromValue": "",
-      "description": "",
-      "name": "",
       "property": {
-        "addButton": "",
-        "colBoundByAttr": "",
-        "editable": "",
-        "editDialog": "",
-        "enablePaginator": "",
-        "rowsPerPage": ""
       },
-      "valueEmpty": ""
     },
     "dataTableColumn": {
-      "description": "",
-      "name": "",
       "property": {
-        "actionColumn": "",
-        "enableFiltering": "",
-        "groupActions": "",
-        "header": ""
       }
     },
     "datePicker": {
-      "datePlaceholder": "",
-      "description": "",
-      "name": "",
       "property": {
-        "datePattern": "",
-        "timePattern": ""
       },
-      "timePlaceholder": ""
     },
     "dialog": {
-      "description": "",
-      "name": ""
     },
     "fieldset": {
-      "description": "",
-      "name": ""
     },
     "input": {
-      "description": "",
-      "name": ""
     },
     "layout": {
-      "column": "",
-      "description": "",
-      "flex": "",
-      "free": "",
-      "grid": "",
-      "left": "",
-      "name": "",
       "property": {
-        "columns": ""
       },
-      "right": "",
-      "spaceBetween": ""
     },
     "link": {
-      "description": "",
-      "name": "",
       "property": {
-        "href": ""
       }
     },
     "panel": {
-      "description": "",
-      "name": ""
     },
     "radio": {
-      "description": "",
-      "name": "",
       "property": {
-        "orientation": ""
       }
     },
     "select": {
-      "description": "",
-      "name": ""
     },
     "text": {
-      "description": "",
-      "name": ""
     },
     "textarea": {
-      "description": "",
-      "name": "",
       "property": {
-        "autoResize": "",
-        "visibleRows": ""
       }
     }
   },
   "dialog": {
-    "applyExtract": "",
-    "componentName": "",
-    "dataClass": "",
-    "extractComponent": "",
-    "extractComponentTitle": "",
-    "extractErrorTitle": "",
-    "extractExists": "",
-    "extractSuccess": "",
-    "logicWarning": "",
-    "nameSpace": ""
   },
   "hint": {
-    "dragFirstItem": "",
-    "dragItemInto": ""
   },
   "hotkey": {
-    "createFormData": "",
-    "deviceMode": "",
-    "openDataClass": "",
-    "openPreview": "",
-    "openProcess": "",
-    "viewMode": ""
   },
   "label": {
-    "addNewActionCol": "",
-    "allComponents": "",
-    "browser": "",
-    "component": "",
-    "composites": "",
-    "createActionCol": "",
-    "createActionColBtn": "",
-    "createBtns": "",
-    "createCol": "",
-    "createFrom": "",
-    "createFromData": "",
-    "data": "",
-    "deviceModeParam": "",
-    "disable": "",
-    "dragFirstButton": "",
-    "duplicate": "",
-    "enableReqProjects": "",
-    "extractComponent": "",
-    "filterBy": "",
-    "form": "",
-    "formType": "",
-    "general": "",
-    "id": "",
-    "largeSpan": "",
-    "listOfObjects": "",
-    "mediumSpan": "",
-    "nRowsPerPage": "",
-    "objectLabel": "",
-    "objectValue": "",
-    "objNotValid": "",
-    "openComponent": "",
-    "options": "",
-    "outline": "",
-    "required": "",
-    "requiredMessage": "",
-    "selectAttributes": "",
-    "setDefaultCol": "",
-    "togglePropView": "",
-    "updateFormChange": "",
-    "useEntireObj": "",
-    "verticalAlign": "",
-    "visible": ""
   },
   "message": {
-    "componentNamespaceNotEmpty": "",
-    "componentNotEmpty": "",
-    "emptyPalette": "",
-    "errorOnly": "",
-    "fieldTypeUnknown": "",
-    "formNotFound": "",
-    "invalidChar": "",
-    "noData": "",
-    "noOptionsDefined": "",
-    "noParam": "",
-    "typeDefinedBy": ""
   },
   "placeholder": {
-    "attributeOrBlank": "",
-    "dynamicList": ""
   },
   "property": {
-    "action": "",
-    "actions": "",
-    "collapsedDefault": "",
-    "collapsible": "",
-    "completeMethod": "",
-    "content": "",
-    "decimalPlaces": "",
-    "editRow": "",
-    "email": "",
-    "enableSorting": "",
-    "header": "",
-    "horizontal": "",
-    "horizontalAlignment": "",
-    "icon": "",
-    "iconStyle": "",
-    "itemLabel": "",
-    "itemValue": "",
-    "label": "",
-    "linkedComponent": "",
-    "name": "",
-    "number": "",
-    "objectBoundColumns": "",
-    "password": "",
-    "prefix": "",
-    "selected": "",
-    "suffix": "",
-    "symbol": "",
-    "symbolPosition": "",
-    "text": "",
-    "title": "",
-    "type": "",
-    "value": "",
-    "variant": "",
-    "vertical": ""
   }
 }
