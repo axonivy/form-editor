@@ -27,7 +27,7 @@ import { useMeta } from '../../../context/useMeta';
 import { creationTargetId } from '../../../data/data';
 import { useKnownHotkeys } from '../../../utils/hotkeys';
 import { createInitForm } from './create-init-form';
-import { findAttributesOfType, rowToCreateData, variableTreeData } from './variable-tree-data';
+import { rowToCreateData, variableTreeData } from './variable-tree-data';
 
 type DataClassDialogProps = {
   showWorkflowButtonsCheckbox?: boolean;
@@ -35,8 +35,6 @@ type DataClassDialogProps = {
   creationTarget?: string;
   onlyAttributs?: string;
   parentName?: string;
-  showRootNode?: boolean;
-  prefix?: string;
 };
 
 export const DataClassDialog = ({ children, ...props }: DataClassDialogProps & { children: ReactNode }) => {
@@ -59,23 +57,22 @@ const DataClassDialogContent = ({
   workflowButtonsInit = true,
   creationTarget,
   parentName,
-  onlyAttributs,
-  showRootNode,
-  prefix
+  onlyAttributs
 }: DataClassDialogProps) => {
   const { context, setData } = useAppContext();
   const { t } = useTranslation();
   const [tree, setTree] = useState<Array<BrowserNode<Variable>>>([]);
   const [workflowButtons, setWorkflowButtons] = useState(showWorkflowButtonsCheckbox ? workflowButtonsInit : false);
-  const dataClass = useMeta('meta/data/attributes', context, { types: {}, variables: [] }).data;
+  const dataClass = useMeta(
+    'meta/data/attributes',
+    { context, dataClassField: onlyAttributs ?? '', rootVariable: parentName ?? 'data' },
+    { types: {}, variables: [] }
+  ).data;
 
   useEffect(() => {
-    if (onlyAttributs) {
-      setTree(findAttributesOfType(dataClass, onlyAttributs, 10, parentName));
-    } else {
-      setTree(variableTreeData().of(dataClass));
-    }
-  }, [dataClass, onlyAttributs, parentName]);
+    setTree(variableTreeData().of(dataClass));
+  }, [dataClass]);
+
   const loadChildren = useCallback<(row: Row<BrowserNode>) => void>(
     row => setTree(tree => variableTreeData().loadChildrenFor(dataClass, row.original.info, tree)),
     [dataClass, setTree]
@@ -118,7 +115,7 @@ const DataClassDialogContent = ({
     setData(data => {
       const creates = table
         .getSelectedRowModel()
-        .flatRows.map(r => rowToCreateData(r, showRootNode, prefix))
+        .flatRows.map(r => rowToCreateData(r))
         .filter(create => create !== undefined);
       return createInitForm(data, creates, workflowButtons, creationTargetId(data.components, creationTarget));
     });

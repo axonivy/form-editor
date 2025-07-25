@@ -7,9 +7,10 @@ import { useAppContext } from '../../../context/AppContext';
 import { useComponents } from '../../../context/ComponentsContext';
 import { useMeta } from '../../../context/useMeta';
 import { findComponentDeep, modifyData } from '../../../data/data';
-import { findAttributesOfType } from '../../../editor/browser/data-class/variable-tree-data';
+import { variableTreeData } from '../../../editor/browser/data-class/variable-tree-data';
 import { ComponentBlock } from '../../../editor/canvas/ComponentBlock';
 import type { ComponentConfig, UiComponentProps } from '../../../types/config';
+import { stripELExpression } from '../../../utils/string';
 import { UiBlockHeader } from '../../UiBlockHeader';
 import { useBase } from '../base';
 import { ColumnControl } from './controls/ColumnControl';
@@ -141,14 +142,17 @@ const UiBlock = ({ id, components, value, paginator, maxRows, visible, editDialo
 const EmptyDataTableColumn = ({ id, initValue }: { id: string; initValue: string }) => {
   const { t } = useTranslation();
   const { context, setData } = useAppContext();
-  const dataClass = useMeta('meta/data/attributes', context, { types: {}, variables: [] }).data;
-
+  const dataClass = useMeta(
+    'meta/data/attributes',
+    { context, dataClassField: stripELExpression(initValue), rootVariable: 'row' },
+    { types: {}, variables: [] }
+  ).data;
   if (initValue.length === 0) {
     return <Message variant='warning' message={t('components.dataTable.valueEmpty')} />;
   }
 
   const createColumns = () => {
-    const tree = findAttributesOfType(dataClass, initValue, 10, 'row');
+    const tree = variableTreeData().of(dataClass);
     const isLeafNode = tree[0].children.length === 0;
     const mappableBrowserNode = isLeafNode ? tree : tree[0].children;
     setData(data => {

@@ -27,6 +27,7 @@ export type ContentObjectType = "STRING" | "FILE" | "FOLDER";
 export type Severity = "INFO" | "WARNING" | "ERROR";
 
 export interface Forms {
+  attributesContext: AttributesContext;
   boolean: boolean;
   cmsQuickAction: CmsQuickAction[];
   cmsQuickActionRequest: CmsQuickActionRequest;
@@ -51,6 +52,16 @@ export interface Forms {
   void: Void;
   [k: string]: unknown;
 }
+export interface AttributesContext {
+  context: FormContext;
+  dataClassField: string;
+  rootVariable: string;
+}
+export interface FormContext {
+  app: string;
+  file: string;
+  pmv: string;
+}
 export interface CmsQuickAction {
   category: CmsQuickactionCategory;
   coContent: string;
@@ -60,11 +71,6 @@ export interface CmsQuickAction {
 export interface CmsQuickActionRequest {
   context: FormContext;
   text: string;
-}
-export interface FormContext {
-  app: string;
-  file: string;
-  pmv: string;
 }
 export interface CompositeContext {
   compositeId: string;

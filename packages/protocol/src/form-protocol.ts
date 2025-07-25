@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-invalid-void-type */
 import type {
+  AttributesContext,
   CmsQuickAction,
   CmsQuickActionRequest,
   CompositeContext,
@@ -20,7 +21,7 @@ import type {
 import type { FormEditor, FormSaveData } from './data/form-data';
 
 export interface FormMetaRequestTypes {
-  'meta/data/attributes': [FormContext, VariableInfo];
+  'meta/data/attributes': [AttributesContext, VariableInfo];
   'meta/data/logic': [FormContext, LogicInfo];
   'meta/cms/cmsTree': [FormCmsMetaRequest, Array<ContentObject>];
   'meta/cms/executeCmsQuickAction': [ExecuteCmsQuickActionRequest, string];

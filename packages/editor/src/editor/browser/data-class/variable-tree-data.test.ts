@@ -1,14 +1,7 @@
 import type { DeepPartial, Variable, VariableInfo } from '@axonivy/form-editor-protocol';
 import type { BrowserNode } from '@axonivy/ui-components';
 import type { Row } from '@tanstack/react-table';
-import {
-  collectNodesWithChildren,
-  findAttributesOfType,
-  formatVariableValue,
-  fullVariablePath,
-  rowToCreateData,
-  variableTreeData
-} from './variable-tree-data';
+import { collectNodesWithChildren, fullVariablePath, rowToCreateData, variableTreeData } from './variable-tree-data';
 
 const variableInfo: VariableInfo = {
   variables: [
@@ -127,17 +120,6 @@ describe('variableTreeData', () => {
   });
 });
 
-test('findAttributesOfType of List<demo.Endless>', () => {
-  const list = findAttributesOfType(endlessParamInfo, 'param.Endless.endlessList');
-  expect(list.length).toEqual(1);
-  expect(list[0].value).toEqual('item');
-  expect(list[0].info).toEqual('demo.Endless');
-  expect(list[0].children[0].value).toEqual('endless');
-  expect(list[0].children[0].info).toEqual('demo.Endless');
-  expect(list[0].children[2].value).toEqual('something');
-  expect(list[0].children[2].info).toEqual('String');
-});
-
 const row = {
   original: { value: 'country', info: 'String' },
   getParentRows: () => [{ original: { value: 'data' } }, { original: { value: 'address' } }, { original: { value: 'location' } }]
@@ -160,22 +142,6 @@ test('rowToCreateData', () => {
       value: '#{data.address.location.country}'
     }
   });
-});
-
-test('return the variable path wrapped in #{ } when no prefix is provided', () => {
-  expect(formatVariableValue('some.path')).toBe('#{some.path}');
-});
-
-test('prepend prefix when given', () => {
-  expect(formatVariableValue('some.path', 'prefix')).toBe('#{prefix.some.path}');
-});
-
-test('return only the prefix when variablePath is empty', () => {
-  expect(formatVariableValue('', 'prefix')).toBe('#{prefix}');
-});
-
-test('return an empty #{ } when both prefix and variablePath are empty', () => {
-  expect(formatVariableValue('')).toBe('#{}');
 });
 
 describe('collectNodesWithChildren', () => {
