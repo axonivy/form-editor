@@ -1,10 +1,11 @@
-import type {
-  Button as ButtonType,
-  Component,
-  ComponentData,
-  ComponentType,
-  Composite,
-  DataTableColumn
+import {
+  isTable,
+  type Button as ButtonType,
+  type Component,
+  type ComponentData,
+  type ComponentType,
+  type Composite,
+  type DataTableColumn
 } from '@axonivy/form-editor-protocol';
 import {
   Button,
@@ -96,6 +97,7 @@ const Draggable = ({ config, data }: DraggableProps) => {
             'draggable',
             isSelected && 'selected',
             isDragging && 'dragging',
+            isTable(data) && data.config.isEditable && formData.config.type === 'COMPONENT' && 'validation error',
             validations.length > 0 && `validation ${evalDotState(validations, undefined)}`
           )}
           ref={setNodeRef}

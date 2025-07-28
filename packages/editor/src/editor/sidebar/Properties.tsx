@@ -1,4 +1,4 @@
-import type { FormType } from '@axonivy/form-editor-protocol';
+import { isTable, type FormType } from '@axonivy/form-editor-protocol';
 import {
   BasicInscriptionTabs,
   Collapsible,
@@ -6,6 +6,7 @@ import {
   CollapsibleState,
   CollapsibleTrigger,
   Flex,
+  Message,
   type InscriptionTabProps
 } from '@axonivy/ui-components';
 import { IvyIcons } from '@axonivy/ui-icons';
@@ -26,7 +27,7 @@ import { usePropertySubSectionControl } from './PropertySubSectionControl';
 export const Properties = () => {
   const { categoryTranslations: CategoryTranslations } = useBase();
   const { componentByElement } = useComponents();
-  const { element, parent } = useData();
+  const { element, parent, data } = useData();
   const { validations } = useAppContext();
   const [value, setValue] = useState('Properties');
   if (element === undefined) {
@@ -39,9 +40,16 @@ export const Properties = () => {
 
   const tabs: InscriptionTabProps[] = [...sections].map(([, { section, fields }]) => {
     return {
-      content: groupFieldsBySubsection(fields).map(({ title, fields }) => (
-        <PropertySubSection key={title} title={CategoryTranslations[title]} fields={fields} />
-      )),
+      content: (
+        <>
+          {isTable(element) && element.config.isEditable && data.config.type === 'COMPONENT' && (
+            <Message variant='error' message='Editable DataTable is not supported inside a form component.' />
+          )}
+          {groupFieldsBySubsection(fields).map(({ title, fields }) => (
+            <PropertySubSection key={title} title={CategoryTranslations[title]} fields={fields} />
+          ))}
+        </>
+      ),
       icon: section.icon,
       id: section.name,
       name: CategoryTranslations[section.name],
