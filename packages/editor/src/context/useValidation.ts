@@ -7,7 +7,7 @@ export function useValidations(path: string, options?: { exact?: boolean }): Arr
   if (options?.exact) {
     return validations.filter(val => val.path === path).map<MessageData>(toMessageData);
   }
-  return validations.filter(val => val.path.startsWith(path)).map<MessageData>(toMessageData);
+  return validations.filter(val => val.path === path || val.path.startsWith(`${path}.`)).map<MessageData>(toMessageData);
 }
 
 export function useValidation(path: string): MessageData | undefined {
