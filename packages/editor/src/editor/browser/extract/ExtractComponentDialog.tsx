@@ -54,7 +54,11 @@ const ExtractComponentDialogContent = ({ data }: { data: Component | ComponentDa
   const { context, namespace } = useAppContext();
   const queryClient = useQueryClient();
   const { validateComponentName, validateComponentNamespace } = useExtractFieldValidation();
-  const variableInfo = useMeta('meta/data/attributes', context, { types: {}, variables: [] }).data;
+  const variableInfo = useMeta(
+    'meta/data/attributes',
+    { context, dataClassField: '', rootVariable: '' },
+    { types: {}, variables: [] }
+  ).data;
   const [name, setName] = useState(layoutId);
   const [nameSpace, setNameSpace] = useState(namespace);
   const [field, setField] = useState('data');

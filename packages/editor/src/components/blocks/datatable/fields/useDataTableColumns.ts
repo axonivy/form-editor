@@ -5,7 +5,8 @@ import { useMemo } from 'react';
 import { useAppContext } from '../../../../context/AppContext';
 import { useMeta } from '../../../../context/useMeta';
 import { useData } from '../../../../data/data';
-import { findAttributesOfType } from '../../../../editor/browser/data-class/variable-tree-data';
+import { variableTreeData } from '../../../../editor/browser/data-class/variable-tree-data';
+import { stripELExpression } from '../../../../utils/string';
 import { createComponent } from '../../../component-factory';
 import type { ColumnItem } from './ColumnsField';
 
@@ -13,8 +14,11 @@ export const useDataTableColumns = () => {
   const { context } = useAppContext();
   const { element } = useData();
 
-  const variableInfo = useMeta('meta/data/attributes', context, { types: {}, variables: [] }).data;
-  const attributesOfTableType = findAttributesOfType(variableInfo, isTable(element) ? element.config.value : '', 10, 'row');
+  const variableInfo = useMeta(
+    'meta/data/attributes',
+    { context, dataClassField: isTable(element) ? stripELExpression(element.config.value) : '', rootVariable: 'row' },
+    { types: {}, variables: [] }
+  ).data;
 
   const activeColumns = useMemo(
     () =>
@@ -36,7 +40,7 @@ export const useDataTableColumns = () => {
     });
   };
 
-  const boundColumns = convertBrowserNodesToColumns(attributesOfTableType);
+  const boundColumns = convertBrowserNodesToColumns(variableTreeData().of(variableInfo));
 
   const boundInactiveColumns = useMemo(() => {
     return boundColumns.filter(boundCol => !activeColumns.some(activeCol => activeCol.value === boundCol.value));

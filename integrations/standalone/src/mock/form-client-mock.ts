@@ -1,4 +1,5 @@
 import type {
+  AttributesContext,
   EditorFileContent,
   FormActionArgs,
   FormClient,
@@ -11,7 +12,7 @@ import type {
 import { Emitter } from '@axonivy/jsonrpc';
 import { data } from './data-mock';
 import { dataDataTable } from './data-mock-datatable';
-import { ATTRIBUTES, CMSQUICKACTIONS, COMPOSITE_PARAMS, COMPOSITES } from './meta-mock';
+import { ATTRIBUTES, CMSQUICKACTIONS, COMPOSITE_PARAMS, COMPOSITES, getGenericAttributes } from './meta-mock';
 import { validateMock } from './validation-mock';
 
 export class FormClientMock implements FormClient {
@@ -52,10 +53,18 @@ export class FormClientMock implements FormClient {
     return Promise.resolve(validateMock(this.formData.data));
   }
 
-  meta<TMeta extends keyof FormMetaRequestTypes>(path: TMeta): Promise<FormMetaRequestTypes[TMeta][1]> {
+  meta<TMeta extends keyof FormMetaRequestTypes>(
+    path: TMeta,
+    args: FormMetaRequestTypes[TMeta][0]
+  ): Promise<FormMetaRequestTypes[TMeta][1]> {
     switch (path) {
-      case 'meta/data/attributes':
+      case 'meta/data/attributes': {
+        const context = args as AttributesContext;
+        if (context.dataClassField.length > 0) {
+          return Promise.resolve(getGenericAttributes(context.rootVariable, context.dataClassField));
+        }
         return Promise.resolve(ATTRIBUTES);
+      }
       case 'meta/composite/all':
         return Promise.resolve(COMPOSITES);
       case 'meta/composite/params':
