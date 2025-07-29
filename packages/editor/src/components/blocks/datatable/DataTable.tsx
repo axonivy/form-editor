@@ -42,9 +42,9 @@ export const useDataTableComponent = () => {
         ...baseComponentFields,
         value: {
           subsection: 'General',
-          label: t('label.listOfObjects'),
+          label: t('label.dataSource'),
           type: 'textBrowser',
-          browsers: [{ type: 'ATTRIBUTE', options: { attribute: { typeHint: 'List' } } }]
+          browsers: [{ type: 'ATTRIBUTE', options: { attribute: { typeHint: 'List or LazyRepositoryDataModel' } } }]
         },
         isEditable: {
           subsection: 'General',
