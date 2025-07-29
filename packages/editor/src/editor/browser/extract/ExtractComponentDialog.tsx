@@ -19,7 +19,7 @@ import {
   toast,
   type BrowserNode
 } from '@axonivy/ui-components';
-import type { Component, ComponentData, Layout, Variable } from '@axonivy/form-editor-protocol';
+import { isStructure, isTable, type Component, type ComponentData, type Layout, type Variable } from '@axonivy/form-editor-protocol';
 import { useMemo, useState, type ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAppContext } from '../../../context/AppContext';
@@ -74,9 +74,10 @@ const ExtractComponentDialogContent = ({ data, layoutId }: { data: Component | C
   }, [variableInfo]);
   const nameValidation = useMemo(() => validateComponentName(name), [name, validateComponentName]);
   const namespaceValidation = useMemo(() => validateComponentNamespace(nameSpace), [nameSpace, validateComponentNamespace]);
+  const hasDataTable = hasEditableDataTableType((data.config as Layout).components);
   const buttonDisabled = useMemo(
-    () => nameValidation?.variant === 'error' || namespaceValidation?.variant === 'error',
-    [nameValidation, namespaceValidation]
+    () => nameValidation?.variant === 'error' || namespaceValidation?.variant === 'error' || hasDataTable,
+    [nameValidation, namespaceValidation, hasDataTable]
   );
 
   const extractIntoComponent = useFunction(
@@ -150,6 +151,7 @@ const ExtractComponentDialogContent = ({ data, layoutId }: { data: Component | C
           </DialogContent>
         </Dialog>
         <Message variant='info' message={t('dialog.logicWarning', { component: layoutId })} />
+        {hasDataTable && <Message variant='error' message={t('dialog.dataTableWarning', { component: layoutId })} />}
       </Flex>
 
       <DialogFooter>
@@ -175,4 +177,21 @@ const ExtractComponentDialogContent = ({ data, layoutId }: { data: Component | C
       </DialogFooter>
     </>
   );
+};
+
+const hasEditableDataTableType = (data: Array<Component | ComponentData>): boolean => {
+  for (const component of data) {
+    if (isTable(component) && component.config.isEditable) {
+      return true;
+    }
+
+    if (isStructure(component)) {
+      const childHasType = hasEditableDataTableType(component.config.components);
+      if (childHasType) {
+        return true;
+      }
+    }
+  }
+
+  return false;
 };
