@@ -10,7 +10,7 @@ test('default', async ({ page }) => {
   await editor.inscription.expectHeader('DataTable');
   const properties = editor.inscription.section('Properties');
   const section = properties.collapsible('General');
-  const listOfObjects = section.input({ label: 'List of Objects' });
+  const listOfObjects = section.input({ label: 'Data Source' });
   const editable = section.checkbox({ label: 'Editable' });
   const behaviour = properties.behaviour();
 
@@ -102,7 +102,7 @@ test('columns from attribute', async ({ page }) => {
 
   const properties = editor.inscription.section('Properties');
   const section = properties.collapsible('General');
-  const listOfObjects = section.input({ label: 'List of Objects' });
+  const listOfObjects = section.input({ label: 'Data Source' });
 
   const columnsSection = properties.collapsible('Columns');
   await columnsSection.expectListItems(3);
