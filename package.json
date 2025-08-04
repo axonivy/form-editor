@@ -37,7 +37,7 @@
     "@types/node": "^22.10.2",
     "eslint-plugin-i18next": "^6.1.1",
     "rimraf": "^6.0.1",
-    "typescript": "~5.8.0",
+    "typescript": "~5.9.0",
     "typescript-cp": "^0.1.9",
     "i18next-parser": "^9.3.0"
   },
