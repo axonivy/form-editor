@@ -1,4 +1,4 @@
-import type { Collapsible, Input } from './inscription';
+import type { Checkbox, Collapsible, Input } from './inscription';
 
 export class VisibleInput {
   visibleField: Input;
@@ -46,21 +46,29 @@ export class DisableInput extends VisibleInput {
 export class RequiredInput extends DisableInput {
   private requiredField: Input;
   private requiredMessageField: Input;
+  private updateFormOnChange: Checkbox;
+  private listener: Input;
 
   constructor(behaviourSection: Collapsible) {
     super(behaviourSection);
     this.requiredField = behaviourSection.input({ label: 'Required' });
     this.requiredMessageField = behaviourSection.input({ label: 'Required Message' });
+    this.updateFormOnChange = behaviourSection.checkbox({ label: 'Update Form on Change' });
+    this.listener = behaviourSection.input({ label: 'Listener' });
   }
 
   async fillRequired() {
     await this.fillDisable();
+    await this.updateFormOnChange.check();
+    await this.listener.fill('logic.method');
     await this.requiredField.fill('true');
     await this.requiredMessageField.fill('Field is required');
   }
 
   async expectRequired() {
     await this.excpectDisabled();
+    await this.updateFormOnChange.expectValue(true);
+    await this.listener.expectValue('logic.method');
     await this.requiredField.expectValue('true');
     await this.requiredMessageField.expectValue('Field is required');
   }

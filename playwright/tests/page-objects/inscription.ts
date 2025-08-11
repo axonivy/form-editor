@@ -354,7 +354,7 @@ export class ListItem {
   }
 }
 
-class Checkbox {
+export class Checkbox {
   readonly locator: Locator;
 
   constructor(

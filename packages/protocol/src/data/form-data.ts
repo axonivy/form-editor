@@ -129,5 +129,5 @@ export type SelectItemsProps = {
 };
 export type VisibleProps = { visible: FormExpression };
 export type DisableProps = VisibleProps & { disabled: string };
-export type UpdateProps = DisableProps & { updateOnChange: boolean };
+export type UpdateProps = DisableProps & { updateOnChange: boolean; listener: string };
 export type RequireProps = UpdateProps & { required: string; requiredMessage: string };
