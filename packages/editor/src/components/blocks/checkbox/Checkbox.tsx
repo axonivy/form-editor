@@ -21,6 +21,7 @@ export const useCheckboxComponent = () => {
       selected: 'true',
       ...defaultDisabledComponent,
       updateOnChange: false,
+      listener: '',
       ...defaultBaseComponent
     } as const;
   }, [defaultBaseComponent, defaultDisabledComponent, t]);
@@ -52,7 +53,14 @@ export const useCheckboxComponent = () => {
           browsers: [{ type: 'ATTRIBUTE' }]
         },
         ...disabledComponentFields,
-        updateOnChange: { subsection: 'Behaviour', label: t('label.updateFormChange'), type: 'checkbox' }
+        updateOnChange: { subsection: 'Behaviour', label: t('label.updateFormChange'), type: 'checkbox' },
+        listener: {
+          subsection: 'Behaviour',
+          label: t('label.listener'),
+          type: 'textBrowser',
+          browsers: [{ type: 'LOGIC' }],
+          hide: data => !data.updateOnChange
+        }
       },
       quickActions: DEFAULT_QUICK_ACTIONS
     };

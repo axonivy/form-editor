@@ -49,7 +49,7 @@ export const useBase = () => {
   };
   type VisibleItemProps = { visible: string };
   type DisabledItemProps = VisibleItemProps & { disabled: string };
-  type BehaviourItemProps = DisabledItemProps & { required: string; requiredMessage: string; updateOnChange: boolean };
+  type BehaviourItemProps = DisabledItemProps & { required: string; requiredMessage: string; updateOnChange: boolean; listener: string };
 
   const defaultVisibleComponent: VisibleItemProps = {
     visible: ''
@@ -64,7 +64,8 @@ export const useBase = () => {
     ...defaultDisabledComponent,
     required: '',
     requiredMessage: '',
-    updateOnChange: false
+    updateOnChange: false,
+    listener: ''
   } as const;
 
   const defaultBaseComponent: BaseComponentProps = {
@@ -157,7 +158,14 @@ export const useBase = () => {
         browsers: [{ type: 'CMS', options: { overrideSelection: true } }],
         hide: data => data.required.length === 0
       },
-      updateOnChange: { subsection: 'Behaviour', label: t('label.updateFormChange'), type: 'checkbox' }
+      updateOnChange: { subsection: 'Behaviour', label: t('label.updateFormChange'), type: 'checkbox' },
+      listener: {
+        subsection: 'Behaviour',
+        label: t('label.listener'),
+        type: 'textBrowser',
+        browsers: [{ type: 'LOGIC' }],
+        hide: data => !data.updateOnChange
+      }
     };
   }, [disabledComponentFields, t]);
 

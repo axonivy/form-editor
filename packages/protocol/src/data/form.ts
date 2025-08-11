@@ -45,7 +45,7 @@ export interface Forms {
   formSaveDataArgs: FormSaveDataArgs;
   logicInfo: LogicInfo;
   parameterInfo: ParameterInfo[];
-  string: string;
+  string: string[];
   validationResult: ValidationResult[];
   variableInfo: VariableInfo;
   void: Void;
@@ -153,6 +153,7 @@ export interface Checkbox {
   id: string;
   label: FormExpression;
   lgSpan: string;
+  listener: string;
   mdSpan: string;
   selected: FormExpression;
   updateOnChange: boolean;
@@ -167,6 +168,7 @@ export interface Combobox {
   itemValue: string;
   label: FormExpression;
   lgSpan: string;
+  listener: string;
   mdSpan: string;
   required: FormExpression;
   requiredMessage: FormExpression;
@@ -229,6 +231,7 @@ export interface DatePicker {
   id: string;
   label: FormExpression;
   lgSpan: string;
+  listener: string;
   mdSpan: string;
   required: FormExpression;
   requiredMessage: FormExpression;
@@ -265,6 +268,7 @@ export interface Input {
   id: string;
   label: FormExpression;
   lgSpan: string;
+  listener: string;
   mdSpan: string;
   required: FormExpression;
   requiredMessage: FormExpression;
@@ -315,6 +319,7 @@ export interface Radio {
   id: string;
   label: FormExpression;
   lgSpan: string;
+  listener: string;
   mdSpan: string;
   orientation: OrientationType;
   required: FormExpression;
@@ -337,6 +342,7 @@ export interface Select {
   id: string;
   label: FormExpression;
   lgSpan: string;
+  listener: string;
   mdSpan: string;
   required: FormExpression;
   requiredMessage: FormExpression;
@@ -363,6 +369,7 @@ export interface Textarea {
   id: string;
   label: FormExpression;
   lgSpan: string;
+  listener: string;
   mdSpan: string;
   required: FormExpression;
   requiredMessage: FormExpression;
