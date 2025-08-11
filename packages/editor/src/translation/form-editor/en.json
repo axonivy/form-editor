@@ -254,6 +254,7 @@
     "formType": "Form Type",
     "id": "ID",
     "largeSpan": "Large Span",
+    "listener": "Listener",
     "listOfObjects": "List of Objects",
     "mediumSpan": "Medium Span",
     "nRowsPerPage": "Rows per Page: {{rows}}",
