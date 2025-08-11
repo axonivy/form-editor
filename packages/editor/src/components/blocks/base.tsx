@@ -120,6 +120,13 @@ export const useBase = () => {
         subsection: 'Behaviour',
         label: t('label.updateFormChange'),
         type: 'checkbox'
+      },
+      listener: {
+        subsection: 'Behaviour',
+        label: t('label.listener'),
+        type: 'textBrowser',
+        browsers: [{ type: 'LOGIC' }],
+        hide: data => !data.updateOnChange
       }
     };
   }, [disabledComponentFields, t]);

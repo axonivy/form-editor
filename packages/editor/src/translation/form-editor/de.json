@@ -258,6 +258,7 @@
     "general": "Allgemein",
     "id": "ID",
     "largeSpan": "Breite Spanne",
+    "listener": "Listener",
     "listOfObjects": "Objektliste",
     "mediumSpan": "Mittlere Spanne",
     "nRowsPerPage": "Zeilen pro Seite: {{rows}}",

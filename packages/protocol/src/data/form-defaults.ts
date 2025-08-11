@@ -40,7 +40,8 @@ const DISABLE_DEFAULTS: DisableProps = {
 
 const UPDATE_DEFAULTS: UpdateProps = {
   ...DISABLE_DEFAULTS,
-  updateOnChange: false
+  updateOnChange: false,
+  listener: ''
 } as const;
 
 const REQUIRE_DEFAULTS: RequireProps = {
