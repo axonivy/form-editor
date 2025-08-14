@@ -12,7 +12,7 @@
     <engine.test.app>Developer-form-test-project</engine.test.app>
     <engine.test.ws>form-test-project</engine.test.ws>
     <engine.dir>${project.build.directory}/ivyEngine</engine.dir>
-    <project.build.plugin.version>12.0.6-SNAPSHOT</project.build.plugin.version>
+    <project.build.plugin.version>12.0.8-SNAPSHOT</project.build.plugin.version>
     <engine.page.url>https://product.ivyteam.io/</engine.page.url>
     <webtest.cmd>webtest</webtest.cmd>
   </properties>
