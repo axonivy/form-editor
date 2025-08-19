@@ -98,7 +98,7 @@ export const useButtonComponent = () => {
         },
         action: {
           subsection: 'General',
-          label: t('property.action'),
+          label: t('property.actionListener'),
           type: 'textBrowser',
           browsers: [{ type: 'LOGIC' }, { type: 'ATTRIBUTE', options: { withoutEl: true, overrideSelection: true } }],
           hide: data => hideButtonField(data)
