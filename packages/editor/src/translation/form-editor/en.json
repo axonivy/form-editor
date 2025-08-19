@@ -296,7 +296,8 @@
     "dynamicList": "e.g. #{data.dynamicList}"
   },
   "property": {
-    "action": "Action Listener",
+    "action": "Action",
+    "actionListener": "Action Listener",
     "actions": "Actions",
     "collapsedDefault": "Collapsed by default",
     "collapsible": "Collapsible",
