@@ -258,7 +258,7 @@
     "general": "Allgemein",
     "id": "ID",
     "largeSpan": "Breite Spanne",
-    "listener": "Listener",
+    "listener": "Änderungs-Listener",
     "listOfObjects": "Objektliste",
     "mediumSpan": "Mittlere Spanne",
     "nRowsPerPage": "Zeilen pro Seite: {{rows}}",
@@ -296,7 +296,7 @@
     "dynamicList": "z.B. #{data.dynamicList}"
   },
   "property": {
-    "action": "Aktion",
+    "action": "Aktions-Listener",
     "actions": "Aktionen",
     "collapsedDefault": "Standardmässig eingeklappt",
     "collapsible": "Einklappbar",
