@@ -258,7 +258,7 @@
     "general": "General",
     "id": "ID",
     "largeSpan": "Large Span",
-    "listener": "Listener",
+    "listener": "Change Listener",
     "listOfObjects": "List of Objects",
     "mediumSpan": "Medium Span",
     "nRowsPerPage": "Rows per Page: {{rows}}",
@@ -296,7 +296,7 @@
     "dynamicList": "e.g. #{data.dynamicList}"
   },
   "property": {
-    "action": "Action",
+    "action": "Action Listener",
     "actions": "Actions",
     "collapsedDefault": "Collapsed by default",
     "collapsible": "Collapsible",
