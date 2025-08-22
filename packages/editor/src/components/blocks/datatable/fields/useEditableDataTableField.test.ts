@@ -147,17 +147,17 @@ test('useEditableDataTableField createComponentData', async () => {
   expect((data.components[0] as TableConfig).config.components.length).toEqual(1);
   view.result.current.createEditComponents();
 
-  expect(newData[0].components.length).toEqual(2);
-  expect(newData[0].components[0].cid).toEqual('datatable1');
-  expect((newData[0].components[0] as TableConfig).config.components.length).toEqual(2);
-  expect((newData[0].components[0] as TableConfig).config.components[0].config.components.length).toEqual(0);
-  expect((newData[0].components[0] as TableConfig).config.components[1].config.components.length).toEqual(2);
+  expect(newData[0]?.components.length).toEqual(2);
+  expect(newData[0]?.components[0]?.cid).toEqual('datatable1');
+  expect((newData[0]?.components[0] as TableConfig).config.components.length).toEqual(2);
+  expect((newData[0]?.components[0] as TableConfig).config.components[0]?.config.components.length).toEqual(0);
+  expect((newData[0]?.components[0] as TableConfig).config.components[1]?.config.components.length).toEqual(2);
 
-  expect((newData[0].components[0] as TableConfig).config.components[1].config.components[0]).toEqual(editButton);
-  expect((newData[0].components[0] as TableConfig).config.components[1].config.components[1]).toEqual(deleteButton);
+  expect((newData[0]?.components[0] as TableConfig).config.components[1]?.config.components[0]).toEqual(editButton);
+  expect((newData[0]?.components[0] as TableConfig).config.components[1]?.config.components[1]).toEqual(deleteButton);
 
-  expect(newData[0].components[1]).toEqual(dialog);
-  expect((newData[1].components[0] as TableConfig).config.editDialogId).toEqual('dialog3');
+  expect(newData[0]?.components[1]).toEqual(dialog);
+  expect((newData[1]?.components[0] as TableConfig).config.editDialogId).toEqual('dialog3');
 });
 
 const dataEditableTable = {
@@ -215,12 +215,12 @@ test('useEditableDataTableField deleteComponentData', async () => {
   });
   await waitFor(() => expect(view.result.current).toBeDefined());
   expect(dataEditableTable.components.length).toEqual(2);
-  expect((dataEditableTable.components[0] as TableConfig).config.components[1].config.components.length).toEqual(2);
+  expect((dataEditableTable.components[0] as TableConfig).config.components[1]?.config.components.length).toEqual(2);
   view.result.current.deleteEditComponents();
-  expect(newData[0].components.length).toEqual(1);
-  expect(newData[0].components[0].cid).toEqual('datatable1');
-  expect((newData[0].components[0] as TableConfig).config.components.length).toEqual(2);
-  expect((newData[0].components[0] as TableConfig).config.components[0].config.components.length).toEqual(0);
-  expect((newData[0].components[0] as TableConfig).config.components[1].config.components.length).toEqual(0);
-  expect((newData[1].components[0] as TableConfig).config.editDialogId).toEqual('');
+  expect(newData[0]?.components.length).toEqual(1);
+  expect(newData[0]?.components[0]?.cid).toEqual('datatable1');
+  expect((newData[0]?.components[0] as TableConfig).config.components.length).toEqual(2);
+  expect((newData[0]?.components[0] as TableConfig).config.components[0]?.config.components.length).toEqual(0);
+  expect((newData[0]?.components[0] as TableConfig).config.components[1]?.config.components.length).toEqual(0);
+  expect((newData[1]?.components[0] as TableConfig).config.editDialogId).toEqual('');
 });

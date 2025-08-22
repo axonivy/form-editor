@@ -44,9 +44,13 @@ type ComponentBlockProps = Omit<DropZoneProps, 'id'> & {
 
 export const ComponentBlock = ({ component, preId, ...props }: ComponentBlockProps) => {
   const { componentByName } = useComponents();
+  const config = componentByName(component.type);
+  if (!config) {
+    return null;
+  }
   return (
     <DropZone id={component.cid} type={component.type} preId={preId} {...props}>
-      <Draggable config={componentByName(component.type)} data={component} />
+      <Draggable config={config} data={component} />
     </DropZone>
   );
 };

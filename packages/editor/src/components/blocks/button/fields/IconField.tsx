@@ -41,7 +41,7 @@ const extractStreamlineIcons = (): string[] => {
 
   for (let i = 0; i < document.styleSheets.length; i++) {
     const stylesheet = document.styleSheets[i];
-    if (stylesheet.href && stylesheet.href === linkTag.href) {
+    if (stylesheet?.href && stylesheet.href === linkTag.href) {
       try {
         const rules = stylesheet.cssRules || stylesheet.rules;
         if (rules) {
@@ -50,7 +50,9 @@ const extractStreamlineIcons = (): string[] => {
               const selector = rule.selectorText;
               if (selector.startsWith(`.si-`)) {
                 const cleanSelector = selector.split('::')[0];
-                iconDetails.push('si ' + cleanSelector.slice(1));
+                if (cleanSelector) {
+                  iconDetails.push('si ' + cleanSelector.slice(1));
+                }
               }
             }
           }

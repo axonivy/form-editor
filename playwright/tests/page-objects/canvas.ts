@@ -60,7 +60,7 @@ export class Canvas {
 
   async expectFormOrder(expected: Array<string>) {
     for (let i = 0; i < expected.length; i++) {
-      await expect(this.blockByNth(i).block).toContainText(expected[i]);
+      await expect(this.blockByNth(i).block).toContainText(expected[i]!);
     }
   }
 }

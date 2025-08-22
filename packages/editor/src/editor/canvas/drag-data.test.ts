@@ -6,22 +6,22 @@ import { dragData, isDropZoneDisabled, type DragData } from './drag-data';
 describe('dragData', () => {
   test('normal', () => {
     const data = filledData();
-    expect(dragData(data.components[0])).toEqual<DragData>({ componentType: 'Input', disabledIds: [] });
+    expect(dragData(data.components[0]!)).toEqual<DragData>({ componentType: 'Input', disabledIds: [] });
   });
 
   test('layout', () => {
     const data = filledData();
-    expect(dragData(data.components[2])).toEqual<DragData>({ componentType: 'Layout', disabledIds: ['31', '32', '33'] });
+    expect(dragData(data.components[2]!)).toEqual<DragData>({ componentType: 'Layout', disabledIds: ['31', '32', '33'] });
   });
 
   test('fieldset', () => {
     const data = filledData();
-    expect(dragData(data.components[3])).toEqual<DragData>({ componentType: 'Fieldset', disabledIds: ['41', '42', '43'] });
+    expect(dragData(data.components[3]!)).toEqual<DragData>({ componentType: 'Fieldset', disabledIds: ['41', '42', '43'] });
   });
 
   test('panel', () => {
     const data = filledData();
-    expect(dragData(data.components[4])).toEqual<DragData>({ componentType: 'Panel', disabledIds: ['51', '52', '53'] });
+    expect(dragData(data.components[4]!)).toEqual<DragData>({ componentType: 'Panel', disabledIds: ['51', '52', '53'] });
   });
 });
 

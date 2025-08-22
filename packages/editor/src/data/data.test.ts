@@ -50,9 +50,9 @@ describe('modifyData', () => {
       const data = modifyData(emptyData(), { type: 'dnd', data: { activeId: 'Input', targetId: '' } }).newData;
       expect(data).to.not.deep.equals(emptyData);
       expect(data.components).to.have.length(1);
-      expect(data.components[0].cid).toEqual('input1');
-      expect(data.components[0].type).toEqual('Input');
-      expect(data.components[0].config).not.toBeUndefined();
+      expect(data.components[0]?.cid).toEqual('input1');
+      expect(data.components[0]?.type).toEqual('Input');
+      expect(data.components[0]?.config).not.toBeUndefined();
     });
 
     test('add two', () => {
@@ -60,25 +60,25 @@ describe('modifyData', () => {
       data = modifyData(data, { type: 'dnd', data: { activeId: 'Button', targetId: '' } }).newData;
       expect(data).to.not.deep.equals(emptyData());
       expect(data.components).to.have.length(2);
-      expect(data.components[1].type).to.equals('Button');
+      expect(data.components[1]?.type).to.equals('Button');
     });
 
     test('add deep', () => {
       let data = modifyData(emptyData(), { type: 'dnd', data: { activeId: 'Layout', targetId: '' } }).newData;
       data = modifyData(data, {
         type: 'dnd',
-        data: { activeId: 'Button', targetId: `layout-${data.components[0].cid}` }
+        data: { activeId: 'Button', targetId: `layout-${data.components[0]?.cid}` }
       }).newData;
       data = modifyData(data, {
         type: 'dnd',
-        data: { activeId: 'Text', targetId: `layout-${data.components[0].cid}` }
+        data: { activeId: 'Text', targetId: `layout-${data.components[0]?.cid}` }
       }).newData;
       expect(data).to.not.deep.equals(emptyData());
       expect(data.components).to.have.length(1);
       const layoutData = (data.components[0] as LayoutConfig).config.components;
       expect(layoutData).to.have.length(2);
-      expect(layoutData[0].type).to.equals('Button');
-      expect(layoutData[1].type).to.equals('Text');
+      expect(layoutData[0]?.type).to.equals('Button');
+      expect(layoutData[1]?.type).to.equals('Text');
     });
 
     test('move down', () => {
@@ -150,7 +150,7 @@ describe('modifyData', () => {
       }).newData;
       expect(data).not.toEqual(emptyData());
       expect(data.components).toHaveLength(1);
-      expect(data.components[0].type).to.equals('Input');
+      expect(data.components[0]?.type).to.equals('Input');
     });
 
     test('add to structure', () => {
@@ -176,7 +176,7 @@ describe('modifyData', () => {
 
   describe('paste', () => {
     test('duplicate', () => {
-      const copy = findComponentElement(filledData(), '1')!.element;
+      const copy = findComponentElement(filledData(), '1')!.element!;
       const data = modifyData(filledData(), {
         type: 'paste',
         data: { componentType: copy.type, clipboard: copy.config, targetId: '1' }
@@ -187,7 +187,7 @@ describe('modifyData', () => {
     });
 
     test('paste', () => {
-      const copy = findComponentElement(filledData(), '1')!.element;
+      const copy = findComponentElement(filledData(), '1')!.element!;
       const data = modifyData(filledData(), {
         type: 'paste',
         data: { componentType: copy.type, clipboard: copy.config, targetId: '4' }
@@ -198,7 +198,7 @@ describe('modifyData', () => {
     });
 
     test('paste datatable column', () => {
-      const copy = findComponentElement(tableData(), '11')!.element;
+      const copy = findComponentElement(tableData(), '11')!.element!;
       const data = modifyData(tableData(), {
         type: 'paste',
         data: { componentType: copy.type, clipboard: copy.config, targetId: '11' }
@@ -207,11 +207,11 @@ describe('modifyData', () => {
       expect(data.components).toHaveLength(1);
       const component = data.components.find(c => c.cid === '1') as TableConfig;
       expect(component.config.components).toHaveLength(4);
-      expect(component.config.components[0].cid).toEqual('datatablecolumn15');
+      expect(component.config.components[0]?.cid).toEqual('datatablecolumn15');
     });
 
     test('paste datatable action column', () => {
-      const copy = findComponentElement(tableData(), '13')!.element;
+      const copy = findComponentElement(tableData(), '13')!.element!;
       const data = modifyData(tableData(), {
         type: 'paste',
         data: { componentType: copy.type, clipboard: copy.config, targetId: '13' }
@@ -220,8 +220,8 @@ describe('modifyData', () => {
       expect(data.components).toHaveLength(1);
       const component = data.components.find(c => c.cid === '1') as TableConfig;
       expect(component.config.components).toHaveLength(4);
-      expect(component.config.components[2].config.components).toHaveLength(1);
-      expect(component.config.components[2].config.components[0].cid).toEqual('button16');
+      expect(component.config.components[2]?.config.components).toHaveLength(1);
+      expect(component.config.components[2]?.config.components[0]?.cid).toEqual('button16');
     });
 
     test('paste other things into datatable is not possible', () => {
@@ -236,7 +236,7 @@ describe('modifyData', () => {
     });
 
     test('paste datatable column outside of datatable is not possible', () => {
-      const copy = findComponentElement(tableData(), '11')!.element;
+      const copy = findComponentElement(tableData(), '11')!.element!;
       const data = modifyData(tableData(), {
         type: 'paste',
         data: { componentType: copy.type, clipboard: copy.config, targetId: '1' }
@@ -245,7 +245,7 @@ describe('modifyData', () => {
     });
 
     test('duplicate deep', () => {
-      const copy = findComponentElement(filledData(), '31')!.element;
+      const copy = findComponentElement(filledData(), '31')!.element!;
       const data = modifyData(filledData(), {
         type: 'paste',
         data: { componentType: copy.type, clipboard: copy.config, targetId: '31' }
@@ -253,12 +253,12 @@ describe('modifyData', () => {
       expect(data.components).toHaveLength(5);
       const component = data.components.find(c => c.cid === '3') as LayoutConfig;
       expect(component.config.components).toHaveLength(4);
-      expect(component.config.components[0].cid).toEqual('text54');
-      expect((component.config.components[0].config as Text).content).toEqual('Hello');
+      expect(component.config.components[0]?.cid).toEqual('text54');
+      expect((component.config.components[0]?.config as Text).content).toEqual('Hello');
     });
 
     test('duplicate layout', () => {
-      const copy = findComponentElement(filledData(), '3')!.element;
+      const copy = findComponentElement(filledData(), '3')!.element!;
       const data = modifyData(filledData(), {
         type: 'paste',
         data: { componentType: copy.type, clipboard: copy.config, targetId: '3' }
@@ -266,14 +266,14 @@ describe('modifyData', () => {
       expect(data.components).toHaveLength(6);
       const component = data.components.find(c => c.cid === 'layout54') as LayoutConfig;
       expect(component.config.components).toHaveLength(3);
-      expect(component.config.components[0].cid).toEqual('text55');
-      expect((component.config.components[0].config as Text).content).toEqual('Hello');
-      expect(component.config.components[1].cid).toEqual('button56');
-      expect(component.config.components[2].cid).toEqual('input57');
+      expect(component.config.components[0]?.cid).toEqual('text55');
+      expect((component.config.components[0]?.config as Text)?.content).toEqual('Hello');
+      expect(component.config.components[1]?.cid).toEqual('button56');
+      expect(component.config.components[2]?.cid).toEqual('input57');
     });
 
     test('duplicate table', () => {
-      const copy = findComponentElement(tableData(), '1')!.element;
+      const copy = findComponentElement(tableData(), '1')!.element!;
       const data = modifyData(tableData(), {
         type: 'paste',
         data: { componentType: copy.type, clipboard: copy.config, targetId: '1' }
@@ -281,14 +281,14 @@ describe('modifyData', () => {
       expect(data.components).toHaveLength(2);
       const component = data.components.find(c => c.cid === 'datatable15') as TableConfig;
       expect(component.config.components).toHaveLength(3);
-      expect(component.config.components[0].cid).toEqual('datatablecolumn16');
-      expect(component.config.components[0].config.value).toEqual('Hello');
-      expect(component.config.components[1].cid).toEqual('datatablecolumn17');
-      expect(component.config.components[2].cid).toEqual('datatablecolumn18');
+      expect(component.config.components[0]?.cid).toEqual('datatablecolumn16');
+      expect(component.config.components[0]?.config.value).toEqual('Hello');
+      expect(component.config.components[1]?.cid).toEqual('datatablecolumn17');
+      expect(component.config.components[2]?.cid).toEqual('datatablecolumn18');
     });
 
     test('duplicate table column', () => {
-      const copy = findComponentElement(tableData(), '11')!.element;
+      const copy = findComponentElement(tableData(), '11')!.element!;
       const data = modifyData(tableData(), {
         type: 'paste',
         data: { componentType: copy.type, clipboard: copy.config, targetId: '11' }
@@ -364,7 +364,7 @@ describe('findParentTableComponent', () => {
   test('return DataTable containing the element', () => {
     const parent = getParentComponent(data, 'col1');
     expect(parent?.cid).toEqual('3');
-    expect(isTable(parent) && parent.config.components[0].cid).toEqual('col1');
+    expect(isTable(parent) && parent.config.components[0]?.cid).toEqual('col1');
     expect(isColumn(parent)).toEqual(false);
   });
 

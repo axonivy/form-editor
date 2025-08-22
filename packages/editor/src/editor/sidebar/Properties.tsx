@@ -34,25 +34,23 @@ export const Properties = () => {
   }
   const propertyConfig = componentByElement(element);
   const elementConfig = addDefaults(element.type, element.config);
-  const fields = visibleFields(propertyConfig.fields, { ...elementConfig });
+  const fields = visibleFields(propertyConfig?.fields ?? {}, { ...elementConfig });
   const sections = visibleSections(fields, parent);
 
-  const tabs: InscriptionTabProps[] = [...sections].map(([, { section, fields }]) => {
-    return {
-      content: groupFieldsBySubsection(fields).map(({ title, fields }) => (
-        <PropertySubSection key={title} title={CategoryTranslations[title]} fields={fields} />
-      )),
-      icon: section.icon,
-      id: section.name,
-      name: CategoryTranslations[section.name],
-      state: getTabState(
-        validationsForPaths(
-          fields.map(field => `${element?.cid}.${field.key}`),
-          validations
-        )
+  const tabs = [...sections].map<InscriptionTabProps>(([, { section, fields }]) => ({
+    content: groupFieldsBySubsection(fields).map(({ title, fields }) => (
+      <PropertySubSection key={title} title={CategoryTranslations[title] ?? ''} fields={fields} />
+    )),
+    icon: section.icon,
+    id: section.name,
+    name: CategoryTranslations[section.name] ?? '',
+    state: getTabState(
+      validationsForPaths(
+        fields.map(field => `${element?.cid}.${field.key}`),
+        validations
       )
-    };
-  });
+    )
+  }));
   return <BasicInscriptionTabs value={sections.has(value) ? value : 'Properties'} onChange={setValue} tabs={tabs} />;
 };
 
@@ -84,7 +82,7 @@ const PropertySubSection = ({ title, fields }: { title: string; fields: VisibleF
           {fields.map(({ key, field, value }) => (
             <PropertyItem
               key={`${element.cid}-${key}`}
-              value={value}
+              value={value ?? ''}
               onChange={change => {
                 setElement(element => {
                   element.config = { ...element.config, [key]: change };

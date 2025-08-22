@@ -51,7 +51,7 @@ export const PaletteItemOverlay = ({ type, createData }: PaletteItemOverlayProps
   return (
     <div className='draggable dragging' style={{ width: 400 }}>
       {/* eslint-disable-next-line i18next/no-literal-string */}
-      {component.render({ id: 'overlay', ...createComponent(type, createData) })}
+      {component?.render({ id: 'overlay', ...createComponent(type, createData) })}
     </div>
   );
 };

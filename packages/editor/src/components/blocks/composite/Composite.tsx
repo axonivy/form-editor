@@ -90,7 +90,7 @@ const CompositeRenderer = ({ name }: { name: string }) => {
     content.data.components.map(component => {
       const config = componentByName(component.type);
       const elementConfig = addDefaults('Composite', component.config);
-      return <React.Fragment key={component.cid}>{config.render({ ...elementConfig, id: component.cid })}</React.Fragment>;
+      return <React.Fragment key={component.cid}>{config?.render({ ...elementConfig, id: component.cid })}</React.Fragment>;
     })
   ) : (
     <div className='block-composite'>

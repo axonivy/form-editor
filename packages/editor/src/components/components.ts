@@ -25,7 +25,7 @@ export const useComponentsInit = () => {
     return componentByName(element.type);
   };
 
-  const componentByName = (type: AutoCompleteWithString<ComponentType>): ComponentConfig => {
+  const componentByName = (type: AutoCompleteWithString<ComponentType>): ComponentConfig | undefined => {
     return config.components[type];
   };
 
