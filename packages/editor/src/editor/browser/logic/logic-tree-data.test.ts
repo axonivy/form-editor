@@ -35,16 +35,16 @@ describe('logicTreeData', () => {
     expect(tree).toHaveLength(2);
 
     // Check "Events" node
-    expect(tree[0].value).toEqual('Events');
-    expect(tree[0].children).toHaveLength(2);
-    expect(tree[0].children[0].value).toEqual('onPaymentReceived');
-    expect(tree[0].children[1].value).toEqual('onInterestCalculated');
+    expect(tree[0]?.value).toEqual('Events');
+    expect(tree[0]?.children).toHaveLength(2);
+    expect(tree[0]?.children[0]?.value).toEqual('onPaymentReceived');
+    expect(tree[0]?.children[1]?.value).toEqual('onInterestCalculated');
 
     // Check "Methods" node
-    expect(tree[1].value).toEqual('Methods');
-    expect(tree[1].children).toHaveLength(2);
-    expect(tree[1].children[0].value).toEqual('calculateInterest(Number, Number, Number)');
-    expect(tree[1].children[1].value).toEqual('processPayment(Number, String)');
+    expect(tree[1]?.value).toEqual('Methods');
+    expect(tree[1]?.children).toHaveLength(2);
+    expect(tree[1]?.children[0]?.value).toEqual('calculateInterest(Number, Number, Number)');
+    expect(tree[1]?.children[1]?.value).toEqual('processPayment(Number, String)');
   });
 
   test('convertEventsToMethods', () => {
@@ -54,10 +54,10 @@ describe('logicTreeData', () => {
     ];
     const methods = convertEventsToMethods(events);
     expect(methods).toHaveLength(2);
-    expect(methods[0].value).toEqual('event1');
-    expect(methods[1].value).toEqual('event2');
-    expect(methods[0].info).toEqual('Event 1 description');
-    expect(methods[1].info).toEqual('Event 2 description');
+    expect(methods[0]?.value).toEqual('event1');
+    expect(methods[1]?.value).toEqual('event2');
+    expect(methods[0]?.info).toEqual('Event 1 description');
+    expect(methods[1]?.info).toEqual('Event 2 description');
   });
 });
 

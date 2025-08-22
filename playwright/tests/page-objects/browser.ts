@@ -16,7 +16,7 @@ export class Browser {
   async expectEntries(values: Array<string | RegExp>) {
     await expect(this.view.getByRole('row')).toHaveCount(values.length);
     for (let i = 0; i < values.length; i++) {
-      await expect(this.view.getByRole('row').nth(i)).toContainText(values[i]);
+      await expect(this.view.getByRole('row').nth(i)).toContainText(values[i]!);
     }
   }
 }
