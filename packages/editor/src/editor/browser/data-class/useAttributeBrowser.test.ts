@@ -54,16 +54,16 @@ test('filters out nodes without children', () => {
   const nodes = [mockNode('A'), mockNode('B', [mockNode('B1')])];
   const result = filterNodesWithChildren(nodes as BrowserNode<Variable>[]);
   expect(result).toHaveLength(1);
-  expect(result[0].value).toBe('B');
+  expect(result[0]?.value).toBe('B');
 });
 
 test('recursively filters nested nodes', () => {
   const nodes = [mockNode('A', [mockNode('A1'), mockNode('A2', [mockNode('A2a'), mockNode('A2b')])]), mockNode('B')];
   const result = filterNodesWithChildren(nodes as BrowserNode<Variable>[]);
   expect(result).toHaveLength(1);
-  expect(result[0].value).toBe('A');
-  expect(result[0].children).toHaveLength(1);
-  expect(result[0].children[0].value).toBe('A2');
+  expect(result[0]?.value).toBe('A');
+  expect(result[0]?.children).toHaveLength(1);
+  expect(result[0]?.children[0]?.value).toBe('A2');
 });
 
 test('returns only top-level nodes with children', () => {

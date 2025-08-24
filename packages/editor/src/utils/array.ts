@@ -1,5 +1,9 @@
 export const move = <T extends object>(arr: Array<T>, fromIndex: number, toIndex: number) => {
-  const element = remove(arr, fromIndex);
+  const element = arr.at(fromIndex);
+  if (!element) {
+    return;
+  }
+  remove(arr, fromIndex);
   add(arr, element, toIndex);
 };
 

@@ -26,7 +26,11 @@ export const useComponentsInit = () => {
   };
 
   const componentByName = (type: AutoCompleteWithString<ComponentType>): ComponentConfig => {
-    return config.components[type];
+    const component = config.components[type];
+    if (component === undefined) {
+      throw new Error(`Component not found: ${type}`);
+    }
+    return component;
   };
 
   const componentsByCategory = (category: ItemCategory) => {

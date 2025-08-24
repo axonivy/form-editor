@@ -61,8 +61,8 @@ test('delete datatable also deletes dialog', async () => {
   expect(data.components.length).toBe(2);
   view.result.current.deleteElement();
 
-  expect(newData[0].components.length).toBe(1);
-  expect(newData[0].components[0].cid).toBe('dialog3');
-  expect(newData[1].components.length).toBe(1);
-  expect(newData[1].components[0].cid).toBe('datatable1');
+  expect(newData[0]?.components.length).toBe(1);
+  expect(newData[0]?.components[0]?.cid).toBe('dialog3');
+  expect(newData[1]?.components.length).toBe(1);
+  expect(newData[1]?.components[0]?.cid).toBe('datatable1');
 });

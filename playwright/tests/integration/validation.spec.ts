@@ -13,7 +13,7 @@ test('inscription input', async ({ page }) => {
   await canvas.blockByText('Address').inscribe();
   const badge = inscription.section('Properties').collapsible('General').input({ label: 'Value' });
   await expect(badge.locator).toBeVisible();
-  await expect(badge.outputLocator).toHaveAccessibleDescription(/Value is required/);
+  await expect(badge.outputLocator!).toHaveAccessibleDescription(/Value is required/);
 });
 
 test('global sidebar', async ({ page }) => {

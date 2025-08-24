@@ -211,7 +211,7 @@ class Select {
 
 export class Input {
   readonly locator: Locator;
-  readonly outputLocator: Locator;
+  readonly outputLocator?: Locator;
   readonly inputLocator: Locator;
 
   constructor(
@@ -460,13 +460,13 @@ export class Row {
     for (let column = 0; column < this.columns.length; column++) {
       if (this.columns[column] !== 'input') {
         const cell = this.column(column);
-        await cell.fill(values[value++]);
+        await cell.fill(values[value++]!);
       }
     }
   }
 
   column(column: number) {
-    return new Cell(this.page, this.locator, column, this.columns[column]);
+    return new Cell(this.page, this.locator, column, this.columns[column]!);
   }
 
   async expectValues(values: string[]) {
@@ -474,7 +474,7 @@ export class Row {
     for (let column = 0; column < this.columns.length; column++) {
       if (this.columns[column] !== 'input') {
         const cell = this.column(column);
-        await cell.expectValue(values[value++]);
+        await cell.expectValue(values[value++]!);
       }
     }
   }

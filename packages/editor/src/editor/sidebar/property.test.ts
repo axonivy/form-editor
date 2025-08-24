@@ -69,8 +69,8 @@ describe('groupFieldsBySubsection', () => {
 
   test('subsections', () => {
     expect(groupFieldsBySubsection(fields)).toEqual([
-      { title: 'General', fields: [{ key: 'a', field: fields[0].field, value: '' }] },
-      { title: 'Behaviour', fields: [{ key: 'b', field: fields[1].field, value: '' }] }
+      { title: 'General', fields: [{ key: 'a', field: fields[0]?.field, value: '' }] },
+      { title: 'Behaviour', fields: [{ key: 'b', field: fields[1]?.field, value: '' }] }
     ]);
   });
 });

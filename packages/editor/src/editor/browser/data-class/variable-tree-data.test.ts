@@ -81,42 +81,42 @@ describe('variableTreeData', () => {
   test('of', () => {
     const tree = variableTreeData().of(variableInfo);
     expect(tree).toHaveLength(1);
-    expect(tree[0].value).equals('param.procurementRequest');
-    expect(tree[0].children).toHaveLength(3);
-    expect(tree[0].children[0].value).equals('accepted');
-    expect(tree[0].children[1].value).equals('amount');
-    expect(tree[0].children[2].value).equals('requester');
-    expect(tree[0].children[2].isLoaded).toBeTruthy();
-    expect(tree[0].children[2].children).toHaveLength(1);
-    expect(tree[0].children[2].children[0].value).equals('email');
+    expect(tree[0]?.value).equals('param.procurementRequest');
+    expect(tree[0]?.children).toHaveLength(3);
+    expect(tree[0]?.children[0]?.value).equals('accepted');
+    expect(tree[0]?.children[1]?.value).equals('amount');
+    expect(tree[0]?.children[2]?.value).equals('requester');
+    expect(tree[0]?.children[2]?.isLoaded).toBeTruthy();
+    expect(tree[0]?.children[2]?.children).toHaveLength(1);
+    expect(tree[0]?.children[2]?.children[0]?.value).equals('email');
   });
 
   test('of endless', () => {
     const tree = variableTreeData().of(endlessParamInfo);
-    expect(tree[0].isLoaded).toBeTruthy();
-    expect(tree[0].children[0].isLoaded).toBeFalsy();
+    expect(tree[0]?.isLoaded).toBeTruthy();
+    expect(tree[0]?.children[0]?.isLoaded).toBeFalsy();
 
     variableTreeData().loadChildrenFor(endlessParamInfo, 'demo.Endless', tree);
-    expect(tree[0].children[0].isLoaded).toBeTruthy();
-    expect(tree[0].children[0].children[0].isLoaded).toBeFalsy();
+    expect(tree[0]?.children[0]?.isLoaded).toBeTruthy();
+    expect(tree[0]?.children[0]?.children[0]?.isLoaded).toBeFalsy();
 
     variableTreeData().loadChildrenFor(endlessParamInfo, 'demo.Endless', tree);
-    expect(tree[0].children[0].children[0].isLoaded).toBeTruthy();
-    expect(tree[0].children[0].children[0].children[0].isLoaded).toBeFalsy();
+    expect(tree[0]?.children[0]?.children[0]?.isLoaded).toBeTruthy();
+    expect(tree[0]?.children[0]?.children[0]?.children[0]?.isLoaded).toBeFalsy();
   });
 
   test('of endless', () => {
     const tree = variableTreeData().of(endlessParamInfo);
-    expect(tree[0].isLoaded).toBeTruthy();
-    expect(tree[0].children[0].isLoaded).toBeFalsy();
+    expect(tree[0]?.isLoaded).toBeTruthy();
+    expect(tree[0]?.children[0]?.isLoaded).toBeFalsy();
 
     variableTreeData().loadChildrenFor(endlessParamInfo, 'demo.Endless', tree);
-    expect(tree[0].children[0].isLoaded).toBeTruthy();
-    expect(tree[0].children[0].children[0].isLoaded).toBeFalsy();
+    expect(tree[0]?.children[0]?.isLoaded).toBeTruthy();
+    expect(tree[0]?.children[0]?.children[0]?.isLoaded).toBeFalsy();
 
     variableTreeData().loadChildrenFor(endlessParamInfo, 'demo.Endless', tree);
-    expect(tree[0].children[0].children[0].isLoaded).toBeTruthy();
-    expect(tree[0].children[0].children[0].children[0].isLoaded).toBeFalsy();
+    expect(tree[0]?.children[0]?.children[0]?.isLoaded).toBeTruthy();
+    expect(tree[0]?.children[0]?.children[0]?.children[0]?.isLoaded).toBeFalsy();
   });
 });
 
@@ -159,7 +159,7 @@ describe('collectNodesWithChildren', () => {
     ];
     const result = collectNodesWithChildren(nodes as BrowserNode<Variable>[]);
     expect(result).toHaveLength(1);
-    expect(result[0].value).toBe('parent');
+    expect(result[0]?.value).toBe('parent');
   });
 
   test('collects nested nodes with adjusted values', () => {
@@ -176,8 +176,8 @@ describe('collectNodesWithChildren', () => {
     ];
     const result = collectNodesWithChildren(nodes as BrowserNode<Variable>[]);
     expect(result).toHaveLength(2);
-    expect(result[0].value).toBe('root');
-    expect(result[1].value).toBe('root.child');
+    expect(result[0]?.value).toBe('root');
+    expect(result[1]?.value).toBe('root.child');
   });
 
   test('handles mixed nodes (some with children, some without)', () => {
@@ -198,6 +198,6 @@ describe('collectNodesWithChildren', () => {
     ];
     const result = collectNodesWithChildren(nodes as BrowserNode<Variable>[]);
     expect(result).toHaveLength(1);
-    expect(result[0].value).toBe('root2');
+    expect(result[0]?.value).toBe('root2');
   });
 });

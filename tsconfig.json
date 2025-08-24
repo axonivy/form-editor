@@ -1,13 +1,13 @@
 {
-  "extends": "./config/tsconfig.base.json",
+  "extends": "@axonivy/ts-config/base",
   "files": [],
   "compilerOptions": {
     "noEmit": true
   },
   "references": [
-    { "path": "integrations/standalone/tsconfig.json" },
-    { "path": "packages/editor/tsconfig.json" },
     { "path": "packages/protocol/tsconfig.json" },
-    { "path": "packages/core/tsconfig.json" }
+    { "path": "packages/core/tsconfig.json" },
+    { "path": "packages/editor/tsconfig.json" },
+    { "path": "integrations/standalone/tsconfig.json" }
   ]
 }

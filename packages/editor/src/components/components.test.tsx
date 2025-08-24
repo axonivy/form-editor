@@ -5,7 +5,7 @@ describe('Component hooks', () => {
   const { componentByName, componentsByCategory, allComponentsByCategory, config } = componentsResult.current;
 
   test('componentByName', () => {
-    expect(componentByName('unknown')).toEqual(undefined);
+    expect(() => componentByName('unknown')).toThrowError('Component not found: unknown');
     expect(componentByName('Button')).toEqual(config.components.Button);
     expect(componentByName('Input')).toEqual(config.components.Input);
   });
