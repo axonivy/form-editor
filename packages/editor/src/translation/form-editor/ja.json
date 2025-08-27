@@ -1,92 +1,10 @@
 {
-  "align": {
-  },
-  "category": {
-  },
-  "cms": {
-  },
   "common": {
     "hotkey": {
+      "help": "オープンヘルプ({{hotkey}})"
     },
     "label": {
-    },
-    "message": {
+      "cancel": "キャンセル"
     }
-  },
-  "components": {
-    "button": {
-      "confirm": {
-      },
-      "fieldType": {
-      },
-      "property": {
-      },
-      "severity": {
-      },
-      "type": {
-      }
-    },
-    "checkbox": {
-    },
-    "combobox": {
-    },
-    "composite": {
-      "property": {
-      }
-    },
-    "dataTable": {
-      "property": {
-      }
-    },
-    "dataTableColumn": {
-      "property": {
-      }
-    },
-    "datePicker": {
-      "property": {
-      }
-    },
-    "dialog": {
-    },
-    "fieldset": {
-    },
-    "input": {
-    },
-    "layout": {
-      "property": {
-      }
-    },
-    "link": {
-      "property": {
-      }
-    },
-    "panel": {
-    },
-    "radio": {
-      "property": {
-      }
-    },
-    "select": {
-    },
-    "text": {
-    },
-    "textarea": {
-      "property": {
-      }
-    }
-  },
-  "dialog": {
-  },
-  "hint": {
-  },
-  "hotkey": {
-  },
-  "label": {
-  },
-  "message": {
-  },
-  "placeholder": {
-  },
-  "property": {
   }
 }
