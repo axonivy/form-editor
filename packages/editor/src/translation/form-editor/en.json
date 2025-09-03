@@ -211,7 +211,6 @@
     "applyExtract": "Extract",
     "componentName": "Name",
     "dataClass": "Dataclass",
-    "dataTableWarning": "The '{{component}}' contains a DataTable element. Editable DataTables are not currently supported within Ivy components and may result in unexpected behavior.",
     "extractComponent": "Extract {{component}} into own Ivy Component",
     "extractComponentTitle": "Create an Ivy Component",
     "extractErrorTitle": "Failed to extract Component into own Ivy Component",
