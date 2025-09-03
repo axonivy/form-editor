@@ -1,14 +1,165 @@
 {
   "common": {
     "hotkey": {
-      "help": "オープンヘルプ({{hotkey}})",
-      "focusInscription": "焦点の徴候({{hotkey}})"
+      "help": "ヘルプを開く ({{hotkey}})",
+      "focusInscription": "フォーカスインスクリプション ({{hotkey}})",
+      "focusMain": "フォーカスメイン ({{hotkey}})",
+      "focusToolbar": "フォーカスツールバー ({{hotkey}})",
+      "redo": "やり直す ({{hotkey}})",
+      "undo": "元に戻す ({{hotkey}})"
     },
     "label": {
-      "cancel": "キャンセル"
+      "cancel": "キャンセル",
+      "create": "作成",
+      "delete": "削除",
+      "search": "検索",
+      "save": "保存",
+      "theme": "テーマ",
+      "options": "オプション"
+    },
+    "message": {
+      "errorOccured": "エラーが発生しました: {{message}}"
     }
   },
   "align": {
-    "bottom": "ボトム"
+    "bottom": "ボトム",
+    "center": "中央",
+    "top": "上"
+  },
+  "message": {
+    "invalidChar": "'{{- str}}' の位置 {{pos}} で文字 '{{- char}}' が無効です。"
+  },
+  "label": {
+    "filterBy": "フィルター条件",
+    "addNewActionCol": "新しいアクション列ボタンを追加",
+    "allComponents": "すべてのコンポーネント",
+    "browser": "ブラウザ",
+    "component": "コンポーネント",
+    "composites": "複合",
+    "createActionCol": "アクション列を作成",
+    "createActionColBtn": "アクション列ボタンを作成",
+    "createBtns": "進むボタンとキャンセルボタンを作成する",
+    "createCol": "列を作成",
+    "createFrom": "{{component}} から作成する",
+    "createFromData": "データから作成する",
+    "data": "データ",
+    "dataSource": "データソース",
+    "deviceModeParam": "デバイスモード {{mode}} ({{hotkey}})",
+    "disable": "無効化",
+    "dragFirstButton": "{{type}} 内の最初のボタンをドラッグします",
+    "duplicate": "重複 (M)",
+    "enableReqProjects": "必要なプロジェクトを有効にする",
+    "extractComponent": "独自の Ivy コンポーネント (E) に展開する",
+    "form": "フォーム",
+    "formType": "フォームタイプ",
+    "general": "一般",
+    "id": "ID",
+    "largeSpan": "大きいスパン"
+  },
+  "category": {
+    "actions": "アクション",
+    "behaviour": "動作",
+    "columns": "列",
+    "confirm": "確認",
+    "content": "コンテンツ",
+    "dynamicOptions": "動的オプション",
+    "elements": "要素",
+    "formatting": "書式設定",
+    "general": "一般",
+    "hidden": "非表示",
+    "input": "入力",
+    "layout": "レイアウト",
+    "options": "オプション",
+    "paginator": "ページネーター",
+    "parameters": "パラメーター",
+    "properties": "プロパティ",
+    "selection": "選択",
+    "staticOptions": "静的オプション",
+    "structures": "構造体",
+    "styling": "スタイリング",
+    "text": "テキスト"
+  },
+  "cms": {
+    "cmsQuickfix": "CMS クイック修正",
+    "cmsQuickfixCat": "CMS-Quickfix-{{cat}}",
+    "createCmsObj": "{{category}} CMS オブジェクトを作成: '{{name}}'",
+    "createContentObj": "コンテンツオブジェクトを作成する: '{{parentUri}}{{name}}' 値: {{value}}-{{category}}"
+  },
+  "components": {
+    "layout": {
+      "name": "レイアウト",
+      "property": {
+        "columns": "コラム"
+      },
+      "right": "右",
+      "spaceBetween": "スペース間"
+    },
+    "link": {
+      "description": "どこかへリンクする",
+      "name": "リンク",
+      "property": {
+        "href": "リンク URL"
+      }
+    },
+    "panel": {
+      "description": "コンポーネントのグループ",
+      "name": "パネル"
+    },
+    "radio": {
+      "description": "1 つのオプションを選択するためのラベル付きのラジオボタングループ",
+      "name": "ラジオ",
+      "property": {
+        "orientation": "方向"
+      }
+    },
+    "select": {
+      "description": "1 つのオプションを選択するためのラベル付きのドロップダウンメニュー",
+      "name": "選択"
+    },
+    "text": {
+      "description": "テキスト出力",
+      "name": "テキスト"
+    },
+    "textarea": {
+      "description": "カスタマイズ可能なテキストエリアコンポーネント",
+      "name": "テキストエリア",
+      "property": {
+        "autoResize": "自動リサイズ",
+        "visibleRows": "表示可能な列"
+      }
+    },
+    "button": {
+      "confirm": {
+        "confirmDialogHeader": "確認を削除",
+        "confirmDialogMessage": "行: #{row} を削除してもよろしいですか?",
+        "no": "いいえ",
+        "yes": "はい"
+      }
+    }
+  },
+  "dialog": {
+    "applyExtract": "抽出",
+    "componentName": "名前",
+    "dataClass": "データクラス",
+    "dataTableWarning": "'{{component}}' には DataTable 要素が含まれます。現在、編集可能な DataTable は Ivy コンポーネント内でサポートされていないため、予期しない動作を引き起こす可能性があります。",
+    "extractComponent": "独自の Ivy コンポーネントに {{component}} を展開する",
+    "extractComponentTitle": "Ivy コンポーネントを作成する",
+    "extractErrorTitle": "コンポーネントを独自の Ivy コンポーネントに展開できませんでした",
+    "extractExists": "Ivy コンポーネント '{{componentId}}' は既に存在します",
+    "extractSuccess": "Ivy コンポーネント '{{componentName}}' が正常に作成されました",
+    "logicWarning": "論理プロセスが '{{component}}' 内で使用される場合、それらはエクスポートされず、展開後に手動で実装する必要があります。",
+    "nameSpace": "名前空間"
+  },
+  "hint": {
+    "dragFirstItem": "キャンバス内の最初の要素をドラッグするか、または",
+    "dragItemInto": "{{type}} 内の最初の要素をドラッグする"
+  },
+  "hotkey": {
+    "createFormData": "データから作成する({{hotkey}})",
+    "deviceMode": "デバイスモードを変更する ({{hotkey}})",
+    "openDataClass": "データ クラスを開く({{hotkey}})",
+    "openPreview": "プレビューを開く({{hotkey}})",
+    "openProcess": "プロセスを開く({{hotkey}})",
+    "viewMode": "表示モード({{hotkey}})"
   }
 }
