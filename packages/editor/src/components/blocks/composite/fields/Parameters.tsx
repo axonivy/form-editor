@@ -57,7 +57,7 @@ const ParameterInput = ({ value, onChange, name, description, type, validationPa
   return (
     <InputFieldWithBrowser
       label={capitalize(name)}
-      value={value[name]}
+      value={value[name] ?? ''}
       onChange={change => updateValue(name, change)}
       browsers={[{ type: 'ATTRIBUTE', options: { attribute: { typeHint: type } } }]}
       message={message ?? { variant: 'description', message: description }}

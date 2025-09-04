@@ -14,15 +14,15 @@ const cmsData: Array<ContentObject> = [
 test('of', () => {
   const tree = cmsTreeData(cmsData);
   expect(tree).toHaveLength(1);
-  expect(tree[0].value).equals('form-test-project');
-  expect(tree[0].info).equals('FOLDER');
-  expect(tree[0].icon).equals('folder-open');
-  expect(tree[0].notSelectable).equals(true);
-  expect(tree[0].isLoaded).equals(true);
-  expect(tree[0].children).toHaveLength(1);
-  expect(tree[0].children[0].value).equals('greetings');
-  expect(tree[0].children[0].info).equals('STRING');
-  expect(tree[0].children[0].icon).equals('change-type');
-  expect(tree[0].children[0].notSelectable).equals(false);
-  expect(tree[0].children[0].isLoaded).equals(true);
+  expect(tree[0]?.value).equals('form-test-project');
+  expect(tree[0]?.info).equals('FOLDER');
+  expect(tree[0]?.icon).equals('folder-open');
+  expect(tree[0]?.notSelectable).equals(true);
+  expect(tree[0]?.isLoaded).equals(true);
+  expect(tree[0]?.children).toHaveLength(1);
+  expect(tree[0]?.children[0]?.value).equals('greetings');
+  expect(tree[0]?.children[0]?.info).equals('STRING');
+  expect(tree[0]?.children[0]?.icon).equals('change-type');
+  expect(tree[0]?.children[0]?.notSelectable).equals(false);
+  expect(tree[0]?.children[0]?.isLoaded).equals(true);
 });

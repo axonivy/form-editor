@@ -74,7 +74,7 @@ test('cmsToolTip', async ({ page }) => {
   const properties = editor.inscription.section('Properties');
   const section = properties.collapsible('General');
   const label = section.input({ label: 'Label' });
-  const badge = label.outputLocator.locator('.ui-input-badge-item').first();
+  const badge = label.outputLocator!.locator('.ui-input-badge-item').first();
 
   await label.fill("#{ivy.cms.co('/greetings')}");
   await label.blur();

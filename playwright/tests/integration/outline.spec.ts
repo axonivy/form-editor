@@ -5,18 +5,18 @@ test('outline', async ({ page }) => {
   const { outline } = await openOutline(page);
   await outline.view.getByRole('row').all();
   const rows = await outline.view.getByRole('row').all();
-  await expect(rows[0]).toHaveText('LayoutGRID');
-  await expect(rows[1]).toHaveText('InputFirstname');
-  await expect(rows[2]).toHaveText('InputLastname');
-  await expect(rows[3]).toHaveText('InputAddress');
-  await expect(rows[4]).toHaveText('SelectCity');
-  await expect(rows[5]).toHaveText('InputState');
-  await expect(rows[6]).toHaveText('InputZip');
-  await expect(rows[7]).toHaveText('LayoutFLEX');
-  await expect(rows[8]).toHaveText('ButtonCancel');
-  await expect(rows[9]).toHaveText('ButtonProceed');
-  await expect(rows[10]).toHaveText('FieldsetLegend');
-  await expect(rows[11]).toHaveText('InputTitle');
+  await expect(rows[0]!).toHaveText('LayoutGRID');
+  await expect(rows[1]!).toHaveText('InputFirstname');
+  await expect(rows[2]!).toHaveText('InputLastname');
+  await expect(rows[3]!).toHaveText('InputAddress');
+  await expect(rows[4]!).toHaveText('SelectCity');
+  await expect(rows[5]!).toHaveText('InputState');
+  await expect(rows[6]!).toHaveText('InputZip');
+  await expect(rows[7]!).toHaveText('LayoutFLEX');
+  await expect(rows[8]!).toHaveText('ButtonCancel');
+  await expect(rows[9]!).toHaveText('ButtonProceed');
+  await expect(rows[10]!).toHaveText('FieldsetLegend');
+  await expect(rows[11]!).toHaveText('InputTitle');
 });
 
 test('select element', async ({ page }) => {

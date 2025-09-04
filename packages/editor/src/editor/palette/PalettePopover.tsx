@@ -44,7 +44,7 @@ export const PaletteCategoryPopover = ({ category, icon }: PaletteCategoryPopove
   const { componentsByCategory } = useComponents();
   const { categoryTranslations: CategoryTranslations } = useBase();
   return (
-    <PalettePopover label={CategoryTranslations[category]} icon={icon}>
+    <PalettePopover label={CategoryTranslations[category] ?? ''} icon={icon}>
       <FormPalette sections={componentsByCategory(category)} />
     </PalettePopover>
   );
