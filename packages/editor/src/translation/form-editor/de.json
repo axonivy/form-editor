@@ -211,7 +211,6 @@
     "applyExtract": "Extrahieren",
     "componentName": "Name",
     "dataClass": "Datenklasse",
-    "dataTableWarning": "Die Komponente '{{component}}' enthält ein DataTable-Element. Bearbeitbare DataTables werden derzeit in Ivy-Komponenten nicht unterstützt und können zu unerwartetem Verhalten führen.",
     "extractComponent": "{{component}} in eigene Ivy-Komponente extrahieren",
     "extractComponentTitle": "Erstelle eine Ivy-Komponente",
     "extractErrorTitle": "Komponente konnte nicht als Ivy-Komponente extrahiert werden",

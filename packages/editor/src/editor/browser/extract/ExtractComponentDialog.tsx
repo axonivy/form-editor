@@ -1,4 +1,4 @@
-import { isStructure, isTable, type Component, type ComponentData, type Layout, type Variable } from '@axonivy/form-editor-protocol';
+import { type Component, type ComponentData, type Layout, type Variable } from '@axonivy/form-editor-protocol';
 import {
   BasicDialogContent,
   BasicField,
@@ -69,10 +69,9 @@ const ExtractComponentDialogContent = ({ data }: { data: Component | ComponentDa
   }, [variableInfo]);
   const nameValidation = useMemo(() => validateComponentName(name), [name, validateComponentName]);
   const namespaceValidation = useMemo(() => validateComponentNamespace(nameSpace), [nameSpace, validateComponentNamespace]);
-  const hasDataTable = hasEditableDataTableType((data.config as Layout).components);
   const buttonDisabled = useMemo(
-    () => nameValidation?.variant === 'error' || namespaceValidation?.variant === 'error' || hasDataTable,
-    [hasDataTable, nameValidation?.variant, namespaceValidation?.variant]
+    () => nameValidation?.variant === 'error' || namespaceValidation?.variant === 'error',
+    [nameValidation?.variant, namespaceValidation?.variant]
   );
 
   const extractIntoComponent = useFunction(
@@ -173,24 +172,6 @@ const ExtractComponentDialogContent = ({ data }: { data: Component | ComponentDa
         </DialogContent>
       </Dialog>
       <Message variant='info' message={t('dialog.logicWarning', { component: layoutId })} />
-      {hasDataTable && <Message variant='error' message={t('dialog.dataTableWarning', { component: layoutId })} />}
     </BasicDialogContent>
   );
-};
-
-const hasEditableDataTableType = (data: Array<ComponentData>): boolean => {
-  for (const component of data) {
-    if (isTable(component) && component.config.isEditable) {
-      return true;
-    }
-
-    if (isStructure(component)) {
-      const childHasType = hasEditableDataTableType(component.config.components);
-      if (childHasType) {
-        return true;
-      }
-    }
-  }
-
-  return false;
 };
