@@ -2,9 +2,9 @@
   "common": {
     "hotkey": {
       "help": "ヘルプを開く ({{hotkey}})",
-      "focusInscription": "フォーカスインスクリプション ({{hotkey}})",
-      "focusMain": "フォーカスメイン ({{hotkey}})",
-      "focusToolbar": "フォーカスツールバー ({{hotkey}})",
+      "focusInscription": "インスクリプションをフォーカス ({{hotkey}})",
+      "focusMain": "メインをフォーカス ({{hotkey}})",
+      "focusToolbar": "ツールバーをフォーカス ({{hotkey}})",
       "redo": "やり直す ({{hotkey}})",
       "undo": "元に戻す ({{hotkey}})"
     },
@@ -22,12 +22,22 @@
     }
   },
   "align": {
-    "bottom": "ボトム",
+    "bottom": "下",
     "center": "中央",
     "top": "上"
   },
   "message": {
-    "invalidChar": "'{{- str}}' の位置 {{pos}} で文字 '{{- char}}' が無効です。"
+    "invalidChar": "'{{- str}}' の位置 {{pos}} で文字 '{{- char}}' が無効です。",
+    "componentNamespaceNotEmpty": "コンポーネント名前空間は空にする必要はありません。",
+    "componentNotEmpty": "コンポーネント名は空にしてはなりません。",
+    "emptyPalette": "利用可能なアイテムがありません",
+    "errorOnly": "エラー: {{error}}",
+    "fieldTypeUnknown": "不明なフィールドタイプ",
+    "formNotFound": "フォームが見つかりません",
+    "noData": "データなし",
+    "noOptionsDefined": "オプションが定義されていません",
+    "noParam": "パラメーターなし",
+    "typeDefinedBy": "入力フィールドにより定義されるタイプ '{{type}}'"
   },
   "label": {
     "filterBy": "フィルター条件",
@@ -49,12 +59,31 @@
     "dragFirstButton": "{{type}} 内の最初のボタンをドラッグします",
     "duplicate": "重複 (M)",
     "enableReqProjects": "必要なプロジェクトを有効にする",
-    "extractComponent": "独自の Ivy コンポーネント (E) に展開する",
+    "extractComponent": "独自の Ivy コンポーネントに展開する (E)",
     "form": "フォーム",
     "formType": "フォームタイプ",
     "general": "一般",
     "id": "ID",
-    "largeSpan": "大きいスパン"
+    "largeSpan": "大きいスパン",
+    "listener": "リスナーを変更",
+    "listOfObjects": "オブジェクトのリスト",
+    "outline": "アウトライン",
+    "required": "必須",
+    "requiredMessage": "必須メッセージ",
+    "selectAttributes": "追加する必要がある属性を選択してください",
+    "setDefaultCol": "デフォルト列を設定する",
+    "togglePropView": "プロパティ表示を切り替える",
+    "updateFormChange": "変更時にフォームを更新",
+    "useEntireObj": "オブジェクト全体を使用する",
+    "verticalAlign": "縦の位置合わせ",
+    "visible": "表示可能",
+    "mediumSpan": "ミディアムスパン",
+    "nRowsPerPage": "1 ページあたりの行数: {{rows}}",
+    "objectLabel": "オブジェクトラベル",
+    "objectValue": "オブジェクト値",
+    "objNotValid": "定義されたオブジェクトは有効ではありません",
+    "openComponent": "コンポーネントを開く (J)",
+    "options": "オプション"
   },
   "category": {
     "actions": "アクション",
@@ -64,7 +93,7 @@
     "content": "コンテンツ",
     "dynamicOptions": "動的オプション",
     "elements": "要素",
-    "formatting": "書式設定",
+    "formatting": "フォーマット",
     "general": "一般",
     "hidden": "非表示",
     "input": "入力",
@@ -81,7 +110,7 @@
   },
   "cms": {
     "cmsQuickfix": "CMS クイック修正",
-    "cmsQuickfixCat": "CMS-Quickfix-{{cat}}",
+    "cmsQuickfixCat": "CMS クイック修正 {{cat}}",
     "createCmsObj": "{{category}} CMS オブジェクトを作成: '{{name}}'",
     "createContentObj": "コンテンツオブジェクトを作成する: '{{parentUri}}{{name}}' 値: {{value}}-{{category}}"
   },
@@ -92,7 +121,13 @@
         "columns": "コラム"
       },
       "right": "右",
-      "spaceBetween": "スペース間"
+      "spaceBetween": "スペース間",
+      "description": "柔軟なレイアウト",
+      "flex": "フレックス",
+      "free": "フリー",
+      "grid": "グリッド",
+      "left": "左",
+      "column_other": "{{count}} 列"
     },
     "link": {
       "description": "どこかへリンクする",
@@ -134,18 +169,111 @@
         "confirmDialogMessage": "行: #{row} を削除してもよろしいですか?",
         "no": "いいえ",
         "yes": "はい"
+      },
+      "description": "アクションをトリガーするボタン",
+      "fieldType": {
+        "delete": "削除",
+        "edit": "編集",
+        "generic": "ジェネリック"
+      },
+      "name": "ボタン",
+      "property": {
+        "cancelButton": "キャンセルボタンの値",
+        "confirmButton": "確認ボタンの値",
+        "confirmDialog": "確認ダイアログ",
+        "message": "ダイアログメッセージ",
+        "rounded": "丸角",
+        "severity": "重大度",
+        "style": "スタイル"
+      },
+      "severity": {
+        "success": "成功",
+        "warn": "警告",
+        "error": "エラー",
+        "help": "ヘルプ",
+        "info": "情報",
+        "primary": "プライマリ",
+        "secondary": "セカンダリ",
+        "danger": "危険"
+      },
+      "type": {
+        "flat": "フラット",
+        "outline": "アウトライン",
+        "solid": "ソリッド"
       }
+    },
+    "checkbox": {
+      "description": "選択可能なブールチェックボックス",
+      "name": "チェックボックス"
+    },
+    "combobox": {
+      "addDropdown": "ドロップダウンボタンをコンボボックスに追加",
+      "description": "ラベル付きオートコンプリートコンボボックス",
+      "name": "コンボボックス"
+    },
+    "composite": {
+      "description": "再使用可能なコンポーネント",
+      "name": "複合",
+      "property": {
+        "startMethod": "開始メソッド"
+      }
+    },
+    "dataTable": {
+      "columnFromValue": "値から列を作成する",
+      "description": "データテーブルコンポーネント",
+      "name": "データテーブル",
+      "property": {
+        "addButton": "ボタンを追加",
+        "colBoundByAttr": "列はオブジェクト属性にバインドされます",
+        "editable": "編集可能",
+        "editDialog": "編集ダイアログ",
+        "enablePaginator": "ページネーターを有効化",
+        "rowsPerPage": "1 ページあたりの行数"
+      },
+      "valueEmpty": "データテーブルの値が空です。データテーブルのプロパティ内で値を定義してください"
+    },
+    "dataTableColumn": {
+      "description": "データテーブルの列",
+      "name": "DataTableColumn",
+      "property": {
+        "actionColumn": "アクション列",
+        "enableFiltering": "フィルタリングを有効化",
+        "groupActions": "グループアクション",
+        "header": "ヘッダー"
+      }
+    },
+    "datePicker": {
+      "datePlaceholder": " '例: dd.MM.yyyy'",
+      "description": "日付または日時用のラベル付き日付ピッカー",
+      "name": "日付ピッカー",
+      "property": {
+        "datePattern": "日付パターン",
+        "timePattern": "時間パターン"
+      },
+      "timePlaceholder": "例: HH:mm"
+    },
+    "dialog": {
+      "description": "柔軟なレイアウト",
+      "name": "ダイアログ"
+    },
+    "fieldset": {
+      "description": "入力のグループ",
+      "name": "フィールドセット"
+    },
+    "input": {
+      "description": "ラベル付き入力",
+      "name": "入力"
     }
   },
   "dialog": {
-    "applyExtract": "抽出",
+    "applyExtract": "展開",
     "componentName": "名前",
     "dataClass": "データクラス",
     "dataTableWarning": "'{{component}}' には DataTable 要素が含まれます。現在、編集可能な DataTable は Ivy コンポーネント内でサポートされていないため、予期しない動作を引き起こす可能性があります。",
     "extractComponent": "独自の Ivy コンポーネントに {{component}} を展開する",
     "extractComponentTitle": "Ivy コンポーネントを作成する",
     "extractErrorTitle": "コンポーネントを独自の Ivy コンポーネントに展開できませんでした",
-    "extractExists": "Ivy コンポーネント '{{componentId}}' は既に存在します",
+    "extractExists": "Ivy コンポーネント '{{componentId}}' はすでに存在します",
     "extractSuccess": "Ivy コンポーネント '{{componentName}}' が正常に作成されました",
     "logicWarning": "論理プロセスが '{{component}}' 内で使用される場合、それらはエクスポートされず、展開後に手動で実装する必要があります。",
     "nameSpace": "名前空間"
@@ -161,5 +289,46 @@
     "openPreview": "プレビューを開く({{hotkey}})",
     "openProcess": "プロセスを開く({{hotkey}})",
     "viewMode": "表示モード({{hotkey}})"
+  },
+  "placeholder": {
+    "attributeOrBlank": "属性を入力してください (または空白のままにしてオブジェクト全体を選択してください)",
+    "dynamicList": "例: #{data.dynamicList}"
+  },
+  "property": {
+    "action": "アクション",
+    "actionListener": "アクションリスナー",
+    "actions": "アクション",
+    "collapsedDefault": "デフォルトで折りたたまれる",
+    "collapsible": "折りたたみ可能",
+    "completeMethod": "完全なメソッド",
+    "content": "コンテンツ",
+    "decimalPlaces": "小数点の位置",
+    "editRow": "行を編集",
+    "email": "メール",
+    "enableSorting": "並べ替えを有効化",
+    "header": "ヘッダー",
+    "horizontal": "水平",
+    "horizontalAlignment": "横の位置合わせ",
+    "icon": "アイコン",
+    "iconStyle": "アイコンスタイル",
+    "itemLabel": "アイテムラベル",
+    "itemValue": "アイテム値",
+    "label": "ラベル",
+    "linkedComponent": "リンクされたコンポーネント",
+    "name": "表示テキスト",
+    "number": "番号",
+    "objectBoundColumns": "オブジェクトバウンド列",
+    "password": "パスワード",
+    "prefix": "プレフィックス",
+    "selected": "選択済み",
+    "suffix": "サフィックス",
+    "symbol": "シンボル",
+    "symbolPosition": "シンボルの位置",
+    "text": "テキスト",
+    "title": "タイトル",
+    "type": "タイプ",
+    "value": "値",
+    "variant": "バリアント",
+    "vertical": "垂直"
   }
 }
