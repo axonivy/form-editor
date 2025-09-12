@@ -16,6 +16,9 @@ export const ItemDragOverlay = ({ activeId, createData }: { activeId?: string; c
   }
   if (element) {
     const component = componentByElement(element);
+    if (!component) {
+      return null;
+    }
     return <ComponentBlockOverlay config={component} data={element} />;
   }
   return null;

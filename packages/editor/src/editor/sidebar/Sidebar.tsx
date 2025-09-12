@@ -15,16 +15,18 @@ export const Sidebar = () => {
   const { t } = useTranslation();
   const { helpUrl } = useAppContext();
   const { element, data } = useData();
-  const { componentByName } = useComponents();
+  const { componentByElement } = useComponents();
   const [outline, setOutline] = useState(false);
-  const formatType = (str: string) => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-  const elementType = element ? componentByName(element.type).displayName : formatType(data.config.type);
+  let title = formatType(data.config.type);
+  if (element) {
+    title = componentByElement(element)?.displayName ?? title;
+  }
   const messages = useValidations(element?.cid ?? '', { exact: true });
   const openUrl = useAction('openUrl');
   const { openHelp: shortcut } = useKnownHotkeys();
   return (
     <Flex direction='column' className='properties' style={{ height: '100%' }}>
-      <SidebarHeader icon={IvyIcons.PenEdit} title={elementType} className='sidebar-header'>
+      <SidebarHeader icon={IvyIcons.PenEdit} title={title} className='sidebar-header'>
         <Switch
           size='large'
           icon={{ icon: IvyIcons.List }}
@@ -46,3 +48,5 @@ export const Sidebar = () => {
     </Flex>
   );
 };
+
+const formatType = (str: string) => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();

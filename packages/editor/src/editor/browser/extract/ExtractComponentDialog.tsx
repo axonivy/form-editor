@@ -65,7 +65,7 @@ const ExtractComponentDialogContent = ({ data }: { data: Component | ComponentDa
   const [open, setOpen] = useState(false);
   const dataClassItems = useMemo(() => {
     const fullTree: BrowserNode<Variable>[] = variableTreeData().of(variableInfo);
-    return fullTree.length === 1 && fullTree[0].children.length === 0 ? [fullTree[0]] : collectNodesWithChildren(fullTree);
+    return fullTree.length === 1 && fullTree[0]?.children.length === 0 ? [fullTree[0]] : collectNodesWithChildren(fullTree);
   }, [variableInfo]);
   const nameValidation = useMemo(() => validateComponentName(name), [name, validateComponentName]);
   const namespaceValidation = useMemo(() => validateComponentNamespace(nameSpace), [nameSpace, validateComponentNamespace]);

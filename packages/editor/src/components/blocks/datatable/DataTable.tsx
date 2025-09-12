@@ -132,7 +132,7 @@ const UiBlock = ({ id, components, value, paginator, maxRows, visible, editDialo
             setSelectedElement(editDialogId);
           }}
         >
-          {componentByName(DIALOG_TYPE).render({ ...dialog.data[dialog.index].config, id: editDialogId })}
+          {componentByName(DIALOG_TYPE)?.render({ ...dialog.data[dialog.index]?.config, id: editDialogId })}
         </div>
       )}
     </Flex>
@@ -153,8 +153,12 @@ const EmptyDataTableColumn = ({ id, initValue }: { id: string; initValue: string
 
   const createColumns = () => {
     const tree = variableTreeData().of(dataClass);
-    const isLeafNode = tree[0].children.length === 0;
-    const mappableBrowserNode = isLeafNode ? tree : tree[0].children;
+    const root = tree[0];
+    if (root === undefined) {
+      return;
+    }
+    const isLeafNode = root.children.length === 0;
+    const mappableBrowserNode = isLeafNode ? tree : root.children;
     setData(data => {
       const creates = mappableBrowserNode
         .map(attribute => ({

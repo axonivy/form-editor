@@ -32,8 +32,8 @@ export const FormOutline = ({ hideOutline }: { hideOutline: () => void }) => {
       return {
         id: component.cid,
         title: component.type,
-        info: config.outlineInfo({ ...component.config }),
-        icon: iconByCategory(config.category),
+        info: config?.outlineInfo({ ...component.config }),
+        icon: iconByCategory(config?.category ?? 'Hidden'),
         children
       };
     });

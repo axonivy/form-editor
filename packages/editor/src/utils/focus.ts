@@ -1,9 +1,8 @@
 export const focusBracketContent = (e: Event, value: string, inputElement: HTMLInputElement | null) => {
   if (inputElement) {
-    const match = value.match(/\(([^)]+)\)/);
-    if (match) {
+    const textToSelect = value.match(/\(([^)]+)\)/)?.at(1);
+    if (textToSelect) {
       e.preventDefault();
-      const textToSelect = match[1];
       const startIndex = value.indexOf(textToSelect);
       const endIndex = startIndex + textToSelect.length;
       inputElement.focus();

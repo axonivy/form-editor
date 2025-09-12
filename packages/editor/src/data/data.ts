@@ -149,6 +149,9 @@ const moveComponent = (data: Array<ComponentData>, id: string, indexMove: number
   const find = findComponent(data, id);
   if (find) {
     const removed = remove(find.data, find.index);
+    if (removed === undefined) {
+      return;
+    }
     const moveIndex = find.index + indexMove < 0 ? 0 : find.index + indexMove;
     add(find.data, removed, moveIndex);
   }
@@ -304,7 +307,7 @@ export const useData = () => {
   };
   const setElement: UpdateConsumer<ComponentData> = updateElement => {
     setHistoricisedData(oldData => {
-      if (foundElement === undefined) {
+      if (foundElement?.element === undefined) {
         return oldData;
       }
       const findElement = findComponentElement(oldData, foundElement.element.cid);

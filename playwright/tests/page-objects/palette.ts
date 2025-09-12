@@ -31,7 +31,7 @@ export class Palette {
   async expectSections(sections: Array<string>) {
     await expect(this.palette.locator('.ui-palette-section-title')).toHaveCount(sections.length);
     for (let i = 0; i < sections.length; i++) {
-      await expect(this.palette.locator('.ui-palette-section-title').nth(i)).toHaveText(sections[i]);
+      await expect(this.palette.locator('.ui-palette-section-title').nth(i)).toHaveText(sections[i]!);
     }
   }
 }

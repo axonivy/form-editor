@@ -128,7 +128,7 @@ const UiBlock = ({
               {isTable(parentTable) &&
                 parentTable.config.isEditable &&
                 parentTable.config.addButton &&
-                parentTable.config.components[parentTable.config.components.length - 1].cid === id && <i className='pi pi-plus' />}
+                parentTable.config.components.at(-1)?.cid === id && <i className='pi pi-plus' />}
               <UiBlockHeaderVisiblePart visible={visible} />
             </Flex>
           </Flex>

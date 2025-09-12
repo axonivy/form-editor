@@ -19,7 +19,7 @@ export const FormPalette = ({ sections, directCreate }: PaletteProps) => {
       options={{ searchPlaceholder: t('common.label.search'), searchFilter, emptyMessage: t('message.emptyPalette') }}
     >
       {(title, items) => (
-        <PaletteSection key={title} title={categoryTranslations[title]} items={items}>
+        <PaletteSection key={title} title={categoryTranslations[title] ?? ''} items={items}>
           {item => <FormPaletteItem key={item.name} directCreate={directCreate} {...item} />}
         </PaletteSection>
       )}

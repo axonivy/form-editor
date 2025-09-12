@@ -64,15 +64,15 @@ export const TableField = <TData extends object>({
   };
 
   const removeRow = () => {
-    if (tableSelection.tableState.rowSelection === undefined) {
+    const selectedRowIndex = table.getSelectedRowModel().rows.at(0)?.index;
+    if (selectedRowIndex === undefined) {
       return;
     }
-    const index = table.getRowModel().rowsById[Object.keys(tableSelection.tableState.rowSelection)[0]].index;
     const newData = [...tableData];
-    newData.splice(index, 1);
+    newData.splice(selectedRowIndex, 1);
     if (newData.length === 0) {
       tableSelection.options.onRowSelectionChange({});
-    } else if (index === tableData.length - 1) {
+    } else if (selectedRowIndex === tableData.length - 1) {
       tableSelection.options.onRowSelectionChange({ [`${newData.length - 1}`]: true });
     }
     changeData(newData);
@@ -85,13 +85,14 @@ export const TableField = <TData extends object>({
     return null;
   };
 
-  const updateDataArray = (fromIndex: number[], toIndex: number, data: TData[]) => {
-    arraymove(data, fromIndex[0], toIndex);
+  const updateDataArray = (fromIndex: number, toIndex: number, data: TData[]) => {
+    arraymove(data, fromIndex, toIndex);
     onChange(data);
     setTableData([...data]);
   };
+
   const updateOrder = (moveId: string, targetId: string) => {
-    updateDataArray([Number(moveId)], Number(targetId), tableData);
+    updateDataArray(Number(moveId), Number(targetId), tableData);
   };
 
   const tableSelection = useTableSelect<TData>();
