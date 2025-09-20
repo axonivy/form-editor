@@ -37,7 +37,7 @@
     "@vanilla-extract/recipes": "^0.5.5",
     "@vitejs/plugin-react": "^5.0.0",
     "i18next-parser": "^9.3.0",
-    "jsdom": "^26.0.0",
+    "jsdom": "^27.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "vite-plugin-dts": "^4.5.0",
