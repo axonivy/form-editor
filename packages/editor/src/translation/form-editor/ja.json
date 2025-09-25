@@ -28,8 +28,8 @@
   },
   "message": {
     "invalidChar": "'{{- str}}' の位置 {{pos}} で文字 '{{- char}}' が無効です。",
-    "componentNamespaceNotEmpty": "コンポーネント名前空間は空にする必要はありません。",
-    "componentNotEmpty": "コンポーネント名は空にしてはなりません。",
+    "componentNamespaceNotEmpty": "コンポーネント名前空間は空にできません。",
+    "componentNotEmpty": "コンポーネント名は空にできません。",
     "emptyPalette": "利用可能なアイテムがありません",
     "errorOnly": "エラー: {{error}}",
     "fieldTypeUnknown": "不明なフィールドタイプ",
@@ -45,10 +45,10 @@
     "allComponents": "すべてのコンポーネント",
     "browser": "ブラウザ",
     "component": "コンポーネント",
-    "composites": "複合",
+    "composites": "コンポジット",
     "createActionCol": "アクション列を作成",
     "createActionColBtn": "アクション列ボタンを作成",
-    "createBtns": "進むボタンとキャンセルボタンを作成する",
+    "createBtns": "続行ボタンとキャンセルボタンを作成",
     "createCol": "列を作成",
     "createFrom": "{{component}} から作成する",
     "createFromData": "データから作成する",
@@ -64,7 +64,7 @@
     "formType": "フォームタイプ",
     "general": "一般",
     "id": "ID",
-    "largeSpan": "大きいスパン",
+    "largeSpan": "スパン（大）",
     "listener": "リスナーを変更",
     "listOfObjects": "オブジェクトのリスト",
     "outline": "アウトライン",
@@ -77,7 +77,7 @@
     "useEntireObj": "オブジェクト全体を使用する",
     "verticalAlign": "縦の位置合わせ",
     "visible": "表示可能",
-    "mediumSpan": "ミディアムスパン",
+    "mediumSpan": "スパン（中）",
     "nRowsPerPage": "1 ページあたりの行数: {{rows}}",
     "objectLabel": "オブジェクトラベル",
     "objectValue": "オブジェクト値",
@@ -118,7 +118,7 @@
     "layout": {
       "name": "レイアウト",
       "property": {
-        "columns": "コラム"
+        "columns": "列"
       },
       "right": "右",
       "spaceBetween": "スペース間",
@@ -166,7 +166,7 @@
     "button": {
       "confirm": {
         "confirmDialogHeader": "確認を削除",
-        "confirmDialogMessage": "行: #{row} を削除してもよろしいですか?",
+        "confirmDialogMessage": "行: #{row} を削除してもよろしいですか？",
         "no": "いいえ",
         "yes": "はい"
       },
@@ -208,12 +208,12 @@
     },
     "combobox": {
       "addDropdown": "ドロップダウンボタンをコンボボックスに追加",
-      "description": "ラベル付きオートコンプリートコンボボックス",
+      "description": "ラベル付き自動入力コンボボックス",
       "name": "コンボボックス"
     },
     "composite": {
-      "description": "再使用可能なコンポーネント",
-      "name": "複合",
+      "description": "再利用可能なコンポーネント",
+      "name": "コンポジット",
       "property": {
         "startMethod": "開始メソッド"
       }
@@ -234,7 +234,7 @@
     },
     "dataTableColumn": {
       "description": "データテーブルの列",
-      "name": "DataTableColumn",
+      "name": "データテーブル列",
       "property": {
         "actionColumn": "アクション列",
         "enableFiltering": "フィルタリングを有効化",
@@ -275,7 +275,7 @@
     "extractErrorTitle": "コンポーネントを独自の Ivy コンポーネントに展開できませんでした",
     "extractExists": "Ivy コンポーネント '{{componentId}}' はすでに存在します",
     "extractSuccess": "Ivy コンポーネント '{{componentName}}' が正常に作成されました",
-    "logicWarning": "論理プロセスが '{{component}}' 内で使用される場合、それらはエクスポートされず、展開後に手動で実装する必要があります。",
+    "logicWarning": "ロジックプロセスが '{{component}}' 内で使用される場合、それらはエクスポートされず、展開後に手動で実装する必要があります。",
     "nameSpace": "名前空間"
   },
   "hint": {
@@ -291,7 +291,7 @@
     "viewMode": "表示モード({{hotkey}})"
   },
   "placeholder": {
-    "attributeOrBlank": "属性を入力してください (または空白のままにしてオブジェクト全体を選択してください)",
+    "attributeOrBlank": "属性を入力してください （または空白のままにしてオブジェクト全体を選択してください）",
     "dynamicList": "例: #{data.dynamicList}"
   },
   "property": {
@@ -302,7 +302,7 @@
     "collapsible": "折りたたみ可能",
     "completeMethod": "完全なメソッド",
     "content": "コンテンツ",
-    "decimalPlaces": "小数点の位置",
+    "decimalPlaces": "小数位",
     "editRow": "行を編集",
     "email": "メール",
     "enableSorting": "並べ替えを有効化",
@@ -321,7 +321,7 @@
     "password": "パスワード",
     "prefix": "プレフィックス",
     "selected": "選択済み",
-    "suffix": "サフィックス",
+    "suffix": "接尾辞",
     "symbol": "シンボル",
     "symbolPosition": "シンボルの位置",
     "text": "テキスト",
