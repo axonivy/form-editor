@@ -1,5 +1,5 @@
-import tseslint from 'typescript-eslint';
 import config from '@axonivy/eslint-config';
+import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
   ...config.base,
@@ -14,6 +14,9 @@ export default tseslint.config(
       }
     }
   },
+  // Latest react-hook rules
+  ...config.reactHooksLatest,
+  // Custom rules for core package
   {
     name: 'packages/core',
     files: ['packages/core/**/*.{js,mjs,cjs,ts,jsx,tsx}'],

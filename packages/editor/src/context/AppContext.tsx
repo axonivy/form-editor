@@ -1,6 +1,6 @@
 import { EMPTY_FORM, type FormContext, type FormData, type ValidationResult } from '@axonivy/form-editor-protocol';
 import { useReadonly, type useHistoryData } from '@axonivy/ui-components';
-import { createContext, useContext, useEffect, useState, type Dispatch, type SetStateAction } from 'react';
+import { createContext, useContext, useState, type Dispatch, type SetStateAction } from 'react';
 import type { UpdateConsumer } from '../types/types';
 
 export type UI = {
@@ -13,12 +13,7 @@ const DEFAULT_UI: UI = { properties: false, helpPaddings: true, deviceMode: 'des
 
 export const useUiState = () => {
   const readonly = useReadonly();
-  const [ui, setUi] = useState(DEFAULT_UI);
-  useEffect(() => {
-    if (readonly) {
-      setUi(old => ({ ...old, helpPaddings: false, components: false }));
-    }
-  }, [readonly]);
+  const [ui, setUi] = useState<UI>(readonly ? { ...DEFAULT_UI, helpPaddings: false } : DEFAULT_UI);
   return { ui, setUi };
 };
 

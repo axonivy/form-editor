@@ -35,6 +35,7 @@ export const useAttributeBrowser = (options?: BrowserOptions): Browser => {
 
   useEffect(() => {
     const treeData = variableTreeData().of(variableInfo);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setTree(options?.attribute?.onlyObjects ? filterNodesWithChildren(treeData) : treeData);
   }, [options?.attribute?.onlyObjects, variableInfo]);
 
