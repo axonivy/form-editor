@@ -10,7 +10,7 @@
     "url": "https://github.com/axonivy/form-editor"
   },
   "devDependencies": {
-    "@playwright/test": "1.55.1"
+    "@playwright/test": "1.56.0"
   },
   "type": "module",
   "scripts": {
