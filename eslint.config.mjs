@@ -14,8 +14,6 @@ export default tseslint.config(
       }
     }
   },
-  // Latest react-hook rules
-  ...config.reactHooksLatest,
   // Custom rules for core package
   {
     name: 'packages/core',
