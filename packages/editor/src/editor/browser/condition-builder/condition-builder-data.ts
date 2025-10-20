@@ -45,7 +45,7 @@ export const generateConditionString = (conditionMode: ConditionMode, conditionG
     return 'false';
   }
   const wrapInQuotesIfNeeded = (arg: string) => {
-    return arg.startsWith('data.') || arg === 'data' ? arg : `'${arg}'`;
+    return arg.startsWith('data.') || arg === 'data' || arg.startsWith('currentRow.') || arg === 'currentRow' ? arg : `'${arg}'`;
   };
 
   const groupStrings = conditionGroups.map((group, index) => {

@@ -38,6 +38,21 @@ describe('generateConditionString', () => {
     expect(result).toBe("'age' gt '18' and data.user eq 'admin'");
   });
 
+  test('does not wrap currentRow references in quotes', () => {
+    const conditionGroups: ConditionGroupData[] = [
+      {
+        conditions: [
+          { argument1: 'currentRow.age', operator: 'greater than', argument2: '5', logicalOperator: 'and' },
+          { argument1: 'currentRow', operator: 'equal to', argument2: 'data.user', logicalOperator: 'and' },
+          { argument1: 'age', operator: 'equal to', argument2: 'currentRow.age', logicalOperator: 'and' }
+        ],
+        logicalOperator: 'and'
+      }
+    ];
+    const result = generateConditionString('nested-condition', conditionGroups);
+    expect(result).toBe("currentRow.age gt '5' and currentRow eq data.user and 'age' eq currentRow.age");
+  });
+
   test('ignores additional groups in basic-condition mode', () => {
     const conditionGroups: ConditionGroupData[] = [
       {
