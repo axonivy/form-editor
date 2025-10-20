@@ -109,7 +109,7 @@ export const DATATABLE_DEFAULTS: DataTable = {
   editDialogId: '',
   paginator: false,
   maxRows: '10',
-  ...VISIBLE_DEFAULTS,
+  ...UPDATE_DEFAULTS,
   ...BASE_DEFAULTS
 } as const;
 
