@@ -81,6 +81,9 @@ export interface CompositeData {
 }
 export interface Form {
   $schema: string;
+  /**
+   * Unique ID in UUID format
+   */
   id: string;
   config: FormConfig;
   components: Component[];
@@ -185,23 +188,26 @@ export interface Composite {
   lgSpan: string;
   mdSpan: string;
   name: string;
-  parameters: MapStringString;
+  parameters: MapStringFormExpression;
   startMethod: string;
 }
-export interface MapStringString {
-  [k: string]: string;
+export interface MapStringFormExpression {
+  [k: string]: FormExpression;
 }
 export interface DataTable {
   addButton: boolean;
   alignSelf: LayoutAlignItems;
   components: TableComponent[];
+  disabled: FormExpression;
   editDialogId: string;
   id: string;
   isEditable: boolean;
   lgSpan: string;
+  listener: string;
   maxRows: string;
   mdSpan: string;
   paginator: boolean;
+  updateOnChange: boolean;
   value: string;
   visible: FormExpression;
 }
@@ -400,6 +406,9 @@ export interface ContentObject {
   name: string;
   type: ContentObjectType;
   values: MapStringString;
+}
+export interface MapStringString {
+  [k: string]: string;
 }
 export interface EditorFileContent {
   content: string;

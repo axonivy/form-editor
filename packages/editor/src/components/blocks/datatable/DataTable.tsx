@@ -25,7 +25,7 @@ type DataTableProps = Prettify<DataTable>;
 const DIALOG_TYPE = 'Dialog';
 
 export const useDataTableComponent = () => {
-  const { baseComponentFields, visibleComponentField } = useBase();
+  const { baseComponentFields, updateOnChangeComponentFields } = useBase();
   const { t } = useTranslation();
 
   const DataTableComponent = useMemo(() => {
@@ -72,7 +72,7 @@ export const useDataTableComponent = () => {
           type: 'number',
           hide: data => !data.paginator
         },
-        ...visibleComponentField
+        ...updateOnChangeComponentFields
       },
       quickActions: ['DELETE', 'DUPLICATE', 'CREATECOLUMN', 'CREATEACTIONCOLUMN'],
       subSectionControls: (props, subSection) => (subSection === 'Columns' ? <ColumnControl {...props} /> : null),
@@ -84,7 +84,7 @@ export const useDataTableComponent = () => {
     };
 
     return component;
-  }, [baseComponentFields, t, visibleComponentField]);
+  }, [baseComponentFields, t, updateOnChangeComponentFields]);
 
   return { DataTableComponent };
 };
