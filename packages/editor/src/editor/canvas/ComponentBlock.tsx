@@ -66,8 +66,11 @@ const Draggable = ({ config, data }: DraggableProps) => {
   const readonly = useReadonly();
   const isDataTableEditableButtons =
     data.type === 'Button' && ((data.config as ButtonType).type === 'EDIT' || (data.config as ButtonType).type === 'DELETE');
+  const isDialogButton =
+    data.type === 'Button' && ((data.config as ButtonType).type === 'DIALOGCANCEL' || (data.config as ButtonType).type === 'DIALOGSAVE');
+
   const { isDragging, attributes, listeners, setNodeRef } = useDraggable({
-    disabled: readonly || isDataTableEditableButtons,
+    disabled: readonly || isDataTableEditableButtons || isDialogButton,
     id: data.cid,
     data: dragData(data)
   });
@@ -110,37 +113,39 @@ const Draggable = ({ config, data }: DraggableProps) => {
           {config.render({ ...elementConfig, id: data.cid })}
         </div>
       </PopoverAnchor>
-      <Quickbar
-        deleteAction={config.quickActions.includes('DELETE') ? deleteElement : undefined}
-        duplicateAction={config.quickActions.includes('DUPLICATE') && !isDataTableEditableButtons ? duplicateElement : undefined}
-        createAction={parentComponent?.type !== 'DataTableColumn' && config.quickActions.includes('CREATE') ? createElement : undefined}
-        createFromDataAction={
-          parentComponent?.type !== 'DataTableColumn' &&
-          parentComponent?.type !== 'Dialog' &&
-          config.quickActions.includes('CREATEFROMDATA')
-            ? data.cid
-            : undefined
-        }
-        openComponentAction={
-          config.quickActions.includes('OPENCOMPONENT') && data.type === 'Composite'
-            ? () => openComponent((data.config as Composite).name)
-            : undefined
-        }
-        extractIntoComponent={
-          config.quickActions.includes('EXTRACTINTOCOMPONENT')
-            ? { data, openDialog: showExtractDialog, setOpenDialog: onOpenExtractDialogChange }
-            : undefined
-        }
-        createColumnAction={config.quickActions.includes('CREATECOLUMN') ? createColumn : undefined}
-        createActionColumnAction={config.quickActions.includes('CREATEACTIONCOLUMN') ? createActionColumn : undefined}
-        createActionColumnButtonAction={
-          config.quickActions.includes('CREATEACTIONCOLUMNBUTTON') &&
-          data.type === 'DataTableColumn' &&
-          (data.config as DataTableColumn).asActionColumn
-            ? createActionButton
-            : undefined
-        }
-      />
+      {!isDialogButton && (
+        <Quickbar
+          deleteAction={config.quickActions.includes('DELETE') ? deleteElement : undefined}
+          duplicateAction={config.quickActions.includes('DUPLICATE') && !isDataTableEditableButtons ? duplicateElement : undefined}
+          createAction={parentComponent?.type !== 'DataTableColumn' && config.quickActions.includes('CREATE') ? createElement : undefined}
+          createFromDataAction={
+            parentComponent?.type !== 'DataTableColumn' &&
+            parentComponent?.type !== 'Dialog' &&
+            config.quickActions.includes('CREATEFROMDATA')
+              ? data.cid
+              : undefined
+          }
+          openComponentAction={
+            config.quickActions.includes('OPENCOMPONENT') && data.type === 'Composite'
+              ? () => openComponent((data.config as Composite).name)
+              : undefined
+          }
+          extractIntoComponent={
+            config.quickActions.includes('EXTRACTINTOCOMPONENT')
+              ? { data, openDialog: showExtractDialog, setOpenDialog: onOpenExtractDialogChange }
+              : undefined
+          }
+          createColumnAction={config.quickActions.includes('CREATECOLUMN') ? createColumn : undefined}
+          createActionColumnAction={config.quickActions.includes('CREATEACTIONCOLUMN') ? createActionColumn : undefined}
+          createActionColumnButtonAction={
+            config.quickActions.includes('CREATEACTIONCOLUMNBUTTON') &&
+            data.type === 'DataTableColumn' &&
+            (data.config as DataTableColumn).asActionColumn
+              ? createActionButton
+              : undefined
+          }
+        />
+      )}
     </Popover>
   );
 };

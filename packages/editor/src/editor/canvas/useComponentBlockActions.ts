@@ -16,6 +16,8 @@ export const useComponentBlockActions = ({
   const { setData } = useData();
   const isDataTableEditableButtons =
     data.type === 'Button' && ((data.config as Button).type === 'EDIT' || (data.config as Button).type === 'DELETE');
+  const isDialogButton =
+    data.type === 'Button' && ((data.config as Button).type === 'DIALOGCANCEL' || (data.config as Button).type === 'DIALOGSAVE');
   const elementConfig = addDefaults(data.type, data.config);
   const deleteElement = () => {
     setData(oldData => modifyData(oldData, { type: 'remove', data: { id: data.cid } }).newData);
@@ -94,7 +96,7 @@ export const useComponentBlockActions = ({
       setUi(old => ({ ...old, properties: true }));
     }
     if (readonly) return;
-    if (e.key === 'Delete') {
+    if (e.key === 'Delete' && !isDialogButton) {
       e.stopPropagation();
       deleteElement();
     }
@@ -106,7 +108,7 @@ export const useComponentBlockActions = ({
       e.stopPropagation();
       setData(oldData => modifyData(oldData, { type: 'moveDown', data: { id: data.cid } }).newData);
     }
-    if (e.code === 'KeyM' && !isDataTableEditableButtons) {
+    if (e.code === 'KeyM' && !isDataTableEditableButtons && !isDialogButton) {
       e.stopPropagation();
       duplicateElement();
     }

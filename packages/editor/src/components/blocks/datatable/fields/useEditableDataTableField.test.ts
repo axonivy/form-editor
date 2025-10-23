@@ -38,6 +38,60 @@ const dialog: ComponentDataHelper<'Dialog', Dialog> = {
   cid: 'dialog3',
   config: {
     alignSelf: 'START',
+    buttons: [
+      {
+        cid: 'button3',
+        type: 'Button',
+        config: {
+          action: 'cancelEdit',
+          alignSelf: 'START',
+          confirmCancelValue: '',
+          confirmDialog: false,
+          confirmHeader: '',
+          confirmMessage: '',
+          confirmOkValue: '',
+          confirmSeverity: 'WARN',
+          disabled: '',
+          icon: '',
+          id: '',
+          lgSpan: '6',
+          mdSpan: '12',
+          name: 'Cancel',
+          processOnlySelf: false,
+          rounded: false,
+          style: 'FLAT',
+          type: 'DIALOGCANCEL',
+          variant: 'SECONDARY',
+          visible: ''
+        }
+      },
+      {
+        cid: 'button4',
+        type: 'Button',
+        config: {
+          action: 'saveEdit',
+          alignSelf: 'START',
+          confirmCancelValue: '',
+          confirmDialog: false,
+          confirmHeader: '',
+          confirmMessage: '',
+          confirmOkValue: '',
+          confirmSeverity: 'WARN',
+          disabled: '',
+          icon: 'si si-check-1',
+          id: '',
+          lgSpan: '6',
+          mdSpan: '12',
+          name: 'Save',
+          processOnlySelf: false,
+          rounded: false,
+          style: 'SOLID',
+          type: 'DIALOGSAVE',
+          variant: 'PRIMARY',
+          visible: ''
+        }
+      }
+    ],
     components: [],
     header: 'Edit Row',
     id: '',
@@ -48,7 +102,7 @@ const dialog: ComponentDataHelper<'Dialog', Dialog> = {
   type: 'Dialog'
 };
 const editButton: ComponentDataHelper<'Button', Button> = {
-  cid: 'button5',
+  cid: 'button6',
   config: {
     action: 'editRow', // just placeholder, will be set from backend
     alignSelf: 'START',
@@ -75,7 +129,7 @@ const editButton: ComponentDataHelper<'Button', Button> = {
 };
 
 const deleteButton: ComponentDataHelper<'Button', Button> = {
-  cid: 'button6',
+  cid: 'button7',
   config: {
     action: 'deleteRow', // just placeholder, will be set from backend
     alignSelf: 'START',

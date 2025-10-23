@@ -200,7 +200,7 @@ test('editable datatable', async ({ page }) => {
 
   const dialog = editor.canvas.blockByNth(0, { datatableNth: 0, dialog: true });
   await dialog.select();
-  await dialog.block.getByRole('button').click();
+  await dialog.block.getByRole('button').first().click();
 
   const createDialog = page.getByRole('dialog');
   await createDialog.getByRole('row', { name: 'row' }).first().click();

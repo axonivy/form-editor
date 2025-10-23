@@ -139,6 +139,7 @@ export const DIALOG_DEFAULTS: Dialog = {
   components: [],
   header: '',
   linkedComponent: '',
+  buttons: [],
   ...BASE_DEFAULTS
 } as const;
 

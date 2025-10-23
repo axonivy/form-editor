@@ -2,8 +2,10 @@ import {
   isButton,
   isColumn,
   isComponentType,
+  isDialog,
   isStructure,
   isTable,
+  type ActionButtonComponent,
   type ComponentData,
   type ComponentType,
   type ConfigData,
@@ -20,6 +22,7 @@ export const DELETE_DROPZONE_ID = 'delete';
 export const STRUCTURE_DROPZONE_ID_PREFIX = 'layout-';
 export const TABLE_DROPZONE_ID_PREFIX = 'table-';
 export const COLUMN_DROPZONE_ID_PREFIX = 'column-';
+export const BUTTONS_DROPZONE_ID_PREFIX = 'buttons-';
 export const DIALOG_DROPZONE_ID_PREFIX = 'dialog-';
 
 const findComponent = (
@@ -48,6 +51,12 @@ export const findComponentDeep = (data: Array<ComponentData>, id: string, parent
     for (const element of data) {
       if (isTable(element) || isStructure(element) || isColumn(element)) {
         const find = findComponent(element.config.components, id, element);
+        if (find) {
+          return find;
+        }
+      }
+      if (isDialog(element)) {
+        const find = findComponent(element.config.buttons, id, element);
         if (find) {
           return find;
         }
@@ -129,6 +138,22 @@ const addComponent = (data: Array<ComponentData>, component: ComponentData, id: 
     if (isColumn(find.parent) && component.type !== 'Button') {
       console.warn('It is not possible to add something else than buttons to a action column');
       return;
+    }
+    if (isDialog(component)) {
+      const currentData = structuredClone(data);
+      const cancelButton = createComponentData(currentData, 'Button', {
+        label: 'Cancel',
+        value: 'cancelEdit',
+        config: { type: 'DIALOGCANCEL', variant: 'SECONDARY', style: 'FLAT', confirmDialog: false }
+      }) as ActionButtonComponent;
+      add(currentData, cancelButton, 0);
+      const saveButton = createComponentData(currentData, 'Button', {
+        label: 'Save',
+        value: 'saveEdit',
+        config: { type: 'DIALOGSAVE', icon: 'si si-check-1', variant: 'PRIMARY', confirmDialog: false }
+      }) as ActionButtonComponent;
+
+      component.config.buttons = [cancelButton, saveButton];
     }
     add(find.data, component, find.index);
     return component.cid;
@@ -221,6 +246,10 @@ const allCids = (components: Array<ComponentData>) => {
     ids.add(component.cid);
     if ('components' in component.config) {
       allCids(component.config.components as Array<ComponentData>).forEach(id => ids.add(id));
+    }
+    if ('buttons' in component.config) {
+      const buttons = component.config.buttons as Array<ComponentData>;
+      buttons.forEach(button => ids.add(button.cid));
     }
   }
   return ids;
