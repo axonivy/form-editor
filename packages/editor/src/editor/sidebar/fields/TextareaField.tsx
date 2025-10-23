@@ -1,4 +1,5 @@
 import {
+  BasicDialogHeader,
   BasicField,
   Button,
   Dialog,
@@ -76,7 +77,8 @@ export const TextareaField = ({ label, value, onChange, message }: TextareaField
           <InputBadgeArea value={value ?? ''} badgeProps={badgeProps} style={{ height: height, minHeight: MINHEIGHT }} />
         )}
       </BasicField>
-      <DialogContent style={{ height: '80vh' }}>
+      <DialogContent style={{ height: '80vh', gridTemplateRows: 'auto 1fr' }}>
+        <BasicDialogHeader title={t('dialog.propertyContentBrowser.title')} description={t('dialog.propertyContentBrowser.description')} />
         <Browser
           activeBrowsers={[
             { type: 'CMS', options: { overrideSelection: true } },

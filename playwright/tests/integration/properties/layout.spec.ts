@@ -90,7 +90,7 @@ test('extract Dialog', async ({ page }) => {
   await expect(dialog).toBeVisible();
   await expect(dialog.getByRole('textbox', { name: 'Name', exact: true })).toHaveValue('layout1');
   await expect(dialog.getByRole('textbox', { name: 'Namespace' })).toHaveValue('temp');
-  await expect(dialog.getByRole('combobox', { name: 'Dataclass' })).toHaveText(/data/);
+  await expect(dialog.getByRole('combobox', { name: 'Data Class' })).toHaveText(/data/);
 
   await editor.page.keyboard.press('a');
   await expect(page.getByRole('dialog').getByText('Extract layout1 into own Ivy Component')).toBeVisible();

@@ -45,7 +45,11 @@
     "label": {
       "cancel": "Abbrechen",
       "create": "Erstellen",
+      "dataClass": "Datenklasse",
       "delete": "Löschen",
+      "extract": "Extrahieren",
+      "name": "Name",
+      "namespace": "Namensraum",
       "options": "Optionen",
       "save": "Speichern",
       "search": "Suchen",
@@ -208,16 +212,22 @@
     }
   },
   "dialog": {
-    "applyExtract": "Extrahieren",
-    "componentName": "Name",
-    "dataClass": "Datenklasse",
-    "extractComponent": "{{component}} in eigene Ivy-Komponente extrahieren",
-    "extractComponentTitle": "Erstelle eine Ivy-Komponente",
-    "extractErrorTitle": "Komponente konnte nicht als Ivy-Komponente extrahiert werden",
-    "extractExists": "Ivy-Komponente {{componentId}} existiert bereits",
-    "extractSuccess": "Ivy-Komponente '{{componentName}}' wurde erfolgreich erstellt",
-    "logicWarning": "Wenn im '{{component}}' Logik-Prozesse verwendet werden, werden diese nicht exportiert und müssen nach der Extraktion manuell implementiert werden.",
-    "nameSpace": "Namensraum"
+    "extractComponent": {
+      "alreadyExists": "Ivy-Komponente {{componentId}} existiert bereits",
+      "dataClassBrowser": {
+        "description": "Wähle die Datenklasse für die neue Ivy-Komponente aus.",
+        "title": "Datenklasse auswählen"
+      },
+      "description": "Erstelle eine Ivy-Komponente.",
+      "errorMessage": "Komponente konnte nicht als Ivy-Komponente extrahiert werden",
+      "logicWarning": "Wenn im '{{component}}' Logik-Prozesse verwendet werden, werden diese nicht exportiert und müssen nach der Extraktion manuell implementiert werden.",
+      "success": "Ivy-Komponente '{{componentName}}' wurde erfolgreich erstellt",
+      "title": "{{component}} in eigene Ivy-Komponente extrahieren"
+    },
+    "propertyContentBrowser": {
+      "description": "Wähle den Inhalt dieser Eigenschaft aus.",
+      "title": "Inhalt auswählen"
+    }
   },
   "hint": {
     "dragFirstItem": "Ziehen Sie das erste Element in die Arbeitsfläche oder",

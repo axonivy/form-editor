@@ -45,7 +45,11 @@
     "label": {
       "cancel": "Cancel",
       "create": "Create",
+      "dataClass": "Data Class",
       "delete": "Delete",
+      "extract": "Extract",
+      "name": "Name",
+      "namespace": "Namespace",
       "options": "Options",
       "save": "Save",
       "search": "Search",
@@ -208,16 +212,22 @@
     }
   },
   "dialog": {
-    "applyExtract": "Extract",
-    "componentName": "Name",
-    "dataClass": "Dataclass",
-    "extractComponent": "Extract {{component}} into own Ivy Component",
-    "extractComponentTitle": "Create an Ivy Component",
-    "extractErrorTitle": "Failed to extract Component into own Ivy Component",
-    "extractExists": "Ivy Component '{{componentId}}' already exists",
-    "extractSuccess": "Ivy Component '{{componentName}}' was successfully created",
-    "logicWarning": "If Logic Processes are used within '{{component}}', they will not be exported and must be implemented manually after extraction.",
-    "nameSpace": "Namespace"
+    "extractComponent": {
+      "alreadyExists": "Ivy Component '{{componentId}}' already exists",
+      "dataClassBrowser": {
+        "description": "Select the Data Class for the new Ivy Component.",
+        "title": "Select Data Class"
+      },
+      "description": "Create an Ivy Component.",
+      "errorMessage": "Failed to extract Component into own Ivy Component",
+      "logicWarning": "If Logic Processes are used within '{{component}}', they will not be exported and must be implemented manually after extraction.",
+      "success": "Ivy Component '{{componentName}}' was successfully created",
+      "title": "Extract {{component}} into own Ivy Component"
+    },
+    "propertyContentBrowser": {
+      "description": "Select the content of this property.",
+      "title": "Select Content"
+    }
   },
   "hint": {
     "dragFirstItem": "Drag first element inside the canvas or",
