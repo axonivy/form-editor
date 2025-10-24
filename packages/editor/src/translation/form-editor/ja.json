@@ -11,7 +11,11 @@
     "label": {
       "cancel": "キャンセル",
       "create": "作成",
+      "dataClass": "データクラス",
       "delete": "削除",
+      "extract": "展開",
+      "name": "名前",
+      "namespace": "名前空間",
       "search": "検索",
       "save": "保存",
       "theme": "テーマ",
@@ -266,17 +270,14 @@
     }
   },
   "dialog": {
-    "applyExtract": "展開",
-    "componentName": "名前",
-    "dataClass": "データクラス",
-    "dataTableWarning": "'{{component}}' には DataTable 要素が含まれます。現在、編集可能な DataTable は Ivy コンポーネント内でサポートされていないため、予期しない動作を引き起こす可能性があります。",
-    "extractComponent": "独自の Ivy コンポーネントに {{component}} を展開する",
-    "extractComponentTitle": "Ivy コンポーネントを作成する",
-    "extractErrorTitle": "コンポーネントを独自の Ivy コンポーネントに展開できませんでした",
-    "extractExists": "Ivy コンポーネント '{{componentId}}' はすでに存在します",
-    "extractSuccess": "Ivy コンポーネント '{{componentName}}' が正常に作成されました",
-    "logicWarning": "ロジックプロセスが '{{component}}' 内で使用される場合、それらはエクスポートされず、展開後に手動で実装する必要があります。",
-    "nameSpace": "名前空間"
+    "extractComponent": {
+      "alreadyExists": "Ivy コンポーネント '{{componentId}}' はすでに存在します",
+      "description": "Ivy コンポーネントを作成する",
+      "errorMessage": "コンポーネントを独自の Ivy コンポーネントに展開できませんでした",
+      "logicWarning": "ロジックプロセスが '{{component}}' 内で使用される場合、それらはエクスポートされず、展開後に手動で実装する必要があります。",
+      "success": "Ivy コンポーネント '{{componentName}}' が正常に作成されました",
+      "title": "独自の Ivy コンポーネントに {{component}} を展開する"
+    }
   },
   "hint": {
     "dragFirstItem": "キャンバス内の最初の要素をドラッグするか、または",

@@ -1,6 +1,7 @@
 import { type Component, type ComponentData, type Layout, type Variable } from '@axonivy/form-editor-protocol';
 import {
   BasicDialogContent,
+  BasicDialogHeader,
   BasicField,
   Button,
   Dialog,
@@ -85,14 +86,14 @@ const ExtractComponentDialogContent = ({ data }: { data: Component | ComponentDa
     },
     {
       onSuccess: componentName => {
-        toast.info(t('dialog.extractSuccess', { componentName }));
+        toast.info(t('dialog.extractComponent.success', { componentName }));
         queryClient.invalidateQueries({ queryKey: genQueryKey('data', context) });
       },
       onError: error => {
-        toast.error(t('dialog.extractErrorTitle'), {
+        toast.error(t('dialog.extractComponent.errorMessage'), {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           description: (error as any).data?.includes('already exists')
-            ? t('dialog.extractExists', {
+            ? t('dialog.extractComponent.alreadyExists', {
                 componentId: (data.config as Layout).id.length > 0 ? (data.config as Layout).id : data.cid
               })
             : error.message
@@ -103,13 +104,12 @@ const ExtractComponentDialogContent = ({ data }: { data: Component | ComponentDa
 
   return (
     <BasicDialogContent
-      title={t('dialog.extractComponent', { component: layoutId })}
-      description={t('dialog.extractComponentTitle')}
+      title={t('dialog.extractComponent.title', { component: layoutId })}
+      description={t('dialog.extractComponent.description')}
       submit={
         <Button
           variant='primary'
           size='large'
-          aria-label={t('dialog.extractComponent', { component: data.cid })}
           icon={IvyIcons.Check}
           onClick={() =>
             extractIntoComponent.mutate({
@@ -122,7 +122,7 @@ const ExtractComponentDialogContent = ({ data }: { data: Component | ComponentDa
           }
           disabled={buttonDisabled}
         >
-          {t('dialog.applyExtract')}
+          {t('common.label.extract')}
         </Button>
       }
       cancel={
@@ -131,14 +131,14 @@ const ExtractComponentDialogContent = ({ data }: { data: Component | ComponentDa
         </Button>
       }
     >
-      <BasicField className='extract-dialog-name' label={t('dialog.componentName')} message={nameValidation}>
+      <BasicField className='extract-dialog-name' label={t('common.label.name')} message={nameValidation}>
         <Input value={name} onChange={event => setName(event.target.value)} placeholder={layoutId} />
       </BasicField>
-      <BasicField className='extract-dialog-namespace' label={t('dialog.nameSpace')} message={namespaceValidation}>
+      <BasicField className='extract-dialog-namespace' label={t('common.label.namespace')} message={namespaceValidation}>
         <Input value={nameSpace} onChange={event => setNameSpace(event.target.value)} placeholder={namespace} />
       </BasicField>
       <Dialog open={open} onOpenChange={setOpen}>
-        <BasicField className='extract-dialog-dataclass' label={t('dialog.dataClass')}>
+        <BasicField className='extract-dialog-dataclass' label={t('common.label.dataClass')}>
           <Flex alignItems='center' gap={2}>
             <Select value={field} onValueChange={setField} defaultValue={field}>
               <SelectTrigger>
@@ -162,7 +162,11 @@ const ExtractComponentDialogContent = ({ data }: { data: Component | ComponentDa
             </DialogTrigger>
           </Flex>
         </BasicField>
-        <DialogContent style={{ height: '80vh' }}>
+        <DialogContent style={{ height: '80vh', gridTemplateRows: 'auto 1fr' }}>
+          <BasicDialogHeader
+            title={t('dialog.extractComponent.dataClassBrowser.title')}
+            description={t('dialog.extractComponent.dataClassBrowser.description')}
+          />
           <Browser
             activeBrowsers={[{ type: 'ATTRIBUTE', options: { withoutEl: true, attribute: { onlyObjects: true } } }]}
             close={() => setOpen(false)}
@@ -171,7 +175,7 @@ const ExtractComponentDialogContent = ({ data }: { data: Component | ComponentDa
           />
         </DialogContent>
       </Dialog>
-      <Message variant='info' message={t('dialog.logicWarning', { component: layoutId })} />
+      <Message variant='info' message={t('dialog.extractComponent.logicWarning', { component: layoutId })} />
     </BasicDialogContent>
   );
 };

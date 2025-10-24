@@ -1,4 +1,14 @@
-import { BasicField, BasicInput, Button, Dialog, DialogContent, DialogTrigger, InputBadge, InputGroup } from '@axonivy/ui-components';
+import {
+  BasicDialogHeader,
+  BasicField,
+  BasicInput,
+  Button,
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+  InputBadge,
+  InputGroup
+} from '@axonivy/ui-components';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -67,9 +77,10 @@ export const InputFieldWithBrowser = ({
         )}
       </BasicField>
       <DialogContent
-        style={{ height: '80vh' }}
+        style={{ height: '80vh', gridTemplateRows: 'auto 1fr' }}
         onCloseAutoFocus={browsers.find(b => b.type === 'LOGIC') ? e => focusBracketContent(e, value, inputRef.current) : undefined}
       >
+        <BasicDialogHeader title={t('dialog.propertyContentBrowser.title')} description={t('dialog.propertyContentBrowser.description')} />
         <Browser
           activeBrowsers={browsers}
           close={() => setOpen(false)}
