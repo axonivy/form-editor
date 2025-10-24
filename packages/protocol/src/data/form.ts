@@ -12,7 +12,7 @@ export type FormExpression = string;
 export type LayoutAlignItems = "START" | "CENTER" | "END";
 export type ConfirmDialogSeverity = "INFO" | "WARN" | "ERROR" | "SUCCESS";
 export type ButtonStyle = "SOLID" | "OUTLINED" | "FLAT";
-export type ButtonType = "SUBMIT" | "BUTTON" | "RESET" | "EDIT" | "DELETE";
+export type ButtonType = "SUBMIT" | "BUTTON" | "RESET" | "EDIT" | "DELETE" | "DIALOGSAVE" | "DIALOGCANCEL";
 export type ButtonVariant = "PRIMARY" | "SECONDARY" | "DANGER" | "SUCCESS" | "INFO" | "WARNING" | "HELP";
 export type ActionButtonAlignment = "START" | "CENTER" | "END";
 export type SymbolPosition = "p" | "s";
@@ -220,14 +220,14 @@ export interface DataTableColumn {
   actionButtonAlignment: ActionButtonAlignment;
   actionColumnAsMenu: boolean;
   asActionColumn: boolean;
-  components: ActionColumnComponent[];
+  components: ActionButtonComponent[];
   filterable: boolean;
   header: FormExpression;
   sortable: boolean;
   value: FormExpression;
   visible: FormExpression;
 }
-export interface ActionColumnComponent {
+export interface ActionButtonComponent {
   cid: string;
   type: "Button";
   config: Button;
@@ -251,6 +251,7 @@ export interface DatePicker {
 }
 export interface Dialog {
   alignSelf: LayoutAlignItems;
+  buttons: ActionButtonComponent[];
   components: Component[];
   header: FormExpression;
   id: string;

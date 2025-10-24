@@ -4,7 +4,7 @@ import { IvyIcons } from '@axonivy/ui-icons';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAppContext } from '../../../context/AppContext';
-import { findComponentDeep } from '../../../data/data';
+import { BUTTONS_DROPZONE_ID_PREFIX, findComponentDeep } from '../../../data/data';
 import { DataClassDialog } from '../../../editor/browser/data-class/DataClassDialog';
 import { ComponentBlock } from '../../../editor/canvas/ComponentBlock';
 import { EmptyLayoutBlock } from '../../../editor/canvas/EmptyBlock';
@@ -39,7 +39,8 @@ export const useDialogComponent = () => {
           type: 'textBrowser',
           browsers: [{ type: 'CMS', options: { overrideSelection: true } }]
         },
-        linkedComponent: { subsection: 'General', label: t('property.linkedComponent'), type: 'hidden' }
+        linkedComponent: { subsection: 'General', label: t('property.linkedComponent'), type: 'hidden' },
+        buttons: { subsection: 'General', type: 'hidden' }
       },
       quickActions: DEFAULT_QUICK_ACTIONS
     };
@@ -52,7 +53,7 @@ export const useDialogComponent = () => {
   };
 };
 
-const DialogUiBlock = ({ id, components, header, linkedComponent }: UiComponentProps<DialogProps>) => {
+const DialogUiBlock = ({ id, components, header, linkedComponent, buttons }: UiComponentProps<DialogProps>) => {
   const { data } = useAppContext();
   const dataTable = findComponentDeep(data.components, linkedComponent);
   const table = dataTable ? dataTable.data[dataTable.index] : undefined;
@@ -81,13 +82,9 @@ const DialogUiBlock = ({ id, components, header, linkedComponent }: UiComponentP
 
       <EmptyLayoutBlock id={id} components={components} type='dialog' />
       <Flex direction='row' justifyContent='flex-end' alignItems='center' gap={1}>
-        <div className='block-button' data-variant='secondary' data-style='flat'>
-          {t('common.label.cancel')}
-        </div>
-        <div className='block-button' data-variant='primary'>
-          <i className='si si-check-1' />
-          {t('common.label.save')}
-        </div>
+        {buttons.map(button => (
+          <ComponentBlock key={`${BUTTONS_DROPZONE_ID_PREFIX}${button.cid}`} component={button} disableDropZone={true} />
+        ))}
       </Flex>
     </>
   );

@@ -1,7 +1,7 @@
 import {
   isTable,
   type ActionButtonAlignment,
-  type ActionColumnComponent,
+  type ActionButtonComponent,
   type DataTableColumn,
   type Prettify
 } from '@axonivy/form-editor-protocol';
@@ -165,7 +165,7 @@ const UiBlock = ({
   );
 };
 
-const EmptyActionColumnBlock = ({ id, components, type }: { id: string; components: Array<ActionColumnComponent>; type: string }) => {
+const EmptyActionColumnBlock = ({ id, components, type }: { id: string; components: Array<ActionButtonComponent>; type: string }) => {
   const { t } = useTranslation();
   return (
     <DropZone id={`${COLUMN_DROPZONE_ID_PREFIX}${id}`} preId={components[components.length - 1]?.cid}>
@@ -197,9 +197,9 @@ const ButtonMenu = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-const renderActionButtons = (components: ActionColumnComponent[]) =>
+const renderActionButtons = (components: ActionButtonComponent[]) =>
   components.map((button, index) => {
-    const actionButton: ActionColumnComponent = { ...button };
+    const actionButton: ActionButtonComponent = { ...button };
     return (
       <ComponentBlock
         key={`${COLUMN_DROPZONE_ID_PREFIX}${actionButton.cid}`}

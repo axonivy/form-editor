@@ -2,11 +2,12 @@ import {
   EMPTY_FORM,
   isColumn,
   isTable,
-  type ActionColumnComponent,
+  type ActionButtonComponent,
   type Component,
   type ComponentData,
   type DataTable,
   type DeepPartial,
+  type Dialog,
   type FormData,
   type Input,
   type Layout,
@@ -172,6 +173,20 @@ describe('modifyData', () => {
       expectOrder(data, ['1']);
       expectOrderDeep(data, '1', ['11', '12', '13']);
     });
+
+    test('dialog', () => {
+      const data = modifyData(emptyData(), {
+        type: 'add',
+        data: { componentType: 'Dialog', create: { label: 'Edit Row', value: 'datatable1' } }
+      }).newData;
+      expect(data).not.toEqual(emptyData());
+      expect(data.components).toHaveLength(1);
+      expect(data.components[0]?.type).to.equals('Dialog');
+
+      expect((data.components[0]?.config as Dialog).buttons).toHaveLength(2);
+      expect((data.components[0]?.config as Dialog).buttons[0]?.config.name).to.equals('Cancel');
+      expect((data.components[0]?.config as Dialog).buttons[1]?.config.name).to.equals('Save');
+    });
   });
 
   describe('paste', () => {
@@ -328,7 +343,7 @@ describe('modifyData', () => {
 });
 
 describe('findParentTableComponent', () => {
-  const but1: DeepPartial<ActionColumnComponent> = {
+  const but1: DeepPartial<ActionButtonComponent> = {
     cid: 'but1',
     config: {},
     type: 'Button'

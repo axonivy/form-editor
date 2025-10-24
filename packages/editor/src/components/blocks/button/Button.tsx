@@ -17,7 +17,7 @@ const isButtonProps = (obj: unknown): obj is ButtonProps => {
 };
 export const hideButtonField = <T,>(obj: T): boolean => {
   if (isButtonProps(obj)) {
-    if (obj.type === 'DELETE' || obj.type === 'EDIT') {
+    if (obj.type === 'DELETE' || obj.type === 'EDIT' || obj.type === 'DIALOGSAVE' || obj.type === 'DIALOGCANCEL') {
       return true;
     }
   }
@@ -59,7 +59,7 @@ export const useButtonComponent = () => {
       subcategory: 'General',
       icon: <IconSvg />,
       description: t('components.button.description'),
-      render: props => <UiBlock {...props} />,
+      render: props => <UiButtonBlock {...props} />,
       outlineInfo: component => component.name,
       fields: {
         ...baseComponentFields,
@@ -168,7 +168,7 @@ export const useButtonComponent = () => {
   };
 };
 
-const UiBlock = ({ name, icon, variant, visible, style, rounded, disabled }: UiComponentProps<ButtonProps>) => (
+export const UiButtonBlock = ({ name, icon, variant, visible, style, rounded, disabled }: UiComponentProps<ButtonProps>) => (
   <>
     <UiBlockHeader visible={visible} disabled={disabled} />
     <div
