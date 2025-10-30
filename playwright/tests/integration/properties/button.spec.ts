@@ -9,6 +9,7 @@ test('default', async ({ page }) => {
   const section = properties.collapsible('General');
   const name = section.input({ label: 'Display Text' });
   const action = section.input({ label: 'Action' });
+  const bypassValidation = section.checkbox({ label: 'Run action without validation' });
   const styleSection = properties.collapsible('Styling');
   const variant = styleSection.select({ label: 'Variant' });
   const style = styleSection.select({ label: 'Style' });
@@ -17,9 +18,11 @@ test('default', async ({ page }) => {
 
   await name.expectValue('Action');
   await action.expectValue('');
+  await bypassValidation.expectValue(false);
   await variant.expectValue('Primary');
   await name.fill('Cancel');
   await action.fill('#{logic.close}');
+  await bypassValidation.check();
   await variant.choose('Secondary');
   await style.choose('Outline');
   await rounded.check();
@@ -29,6 +32,7 @@ test('default', async ({ page }) => {
   await editor.canvas.blockByNth(0).inscribe();
   await name.expectValue('Cancel');
   await action.expectValue('close');
+  await bypassValidation.expectValue(true);
   await variant.expectValue('Secondary');
   await style.expectValue('Outline');
   await rounded.expectValue(true);

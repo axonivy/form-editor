@@ -244,6 +244,7 @@
     "addNewActionCol": "Neue Aktionsspalte hinzufügen",
     "allComponents": "Alle Komponenten",
     "browser": "Browser",
+    "bypassValidation": "Aktion ohne Validierung ausführen",
     "component": "Komponente",
     "composites": "Komposite",
     "createActionCol": "Aktionsspalte erstellen",
