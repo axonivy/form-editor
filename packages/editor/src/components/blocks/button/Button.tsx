@@ -103,6 +103,12 @@ export const useButtonComponent = () => {
           browsers: [{ type: 'LOGIC' }, { type: 'ATTRIBUTE', options: { withoutEl: true, overrideSelection: true } }],
           hide: data => hideButtonField(data)
         },
+        processOnlySelf: {
+          subsection: 'General',
+          label: t('label.bypassValidation'),
+          type: 'checkbox',
+          hide: data => hideButtonField(data)
+        },
         icon: {
           subsection: 'General',
           label: t('property.icon'),
@@ -126,8 +132,6 @@ export const useButtonComponent = () => {
           label: t('components.button.property.rounded'),
           type: 'checkbox'
         },
-
-        processOnlySelf: { subsection: 'Behaviour', type: 'hidden' },
         confirmDialog: {
           section: 'Confirm',
           subsection: 'General',
