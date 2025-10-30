@@ -237,6 +237,7 @@
     "addNewActionCol": "Add new Action Column Button",
     "allComponents": "All Components",
     "browser": "Browser",
+    "bypassValidation": "Run action without validation",
     "composites": "Composites",
     "createActionCol": "Create Action Column",
     "createActionColBtn": "Create Action Column Button",
