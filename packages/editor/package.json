@@ -36,7 +36,7 @@
     "@types/react": "^19.0.7",
     "@vanilla-extract/recipes": "^0.5.5",
     "@vitejs/plugin-react": "^5.0.0",
-    "i18next-parser": "^9.3.0",
+    "i18next-cli": "^1.21.1",
     "jsdom": "^27.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -56,7 +56,7 @@
     "type": "tsc --noEmit",
     "test": "vitest",
     "test:ci": "vitest --watch=false",
-    "i18n:extract": "i18next",
-    "i18n:ci": "i18next --fail-on-update"
+    "i18n": "i18next-cli extract",
+    "i18n:ci": "i18next-cli extract --ci --dry-run"
   }
 }
