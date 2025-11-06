@@ -77,7 +77,7 @@ export const InputFieldWithBrowser = ({
         )}
       </BasicField>
       <DialogContent
-        style={{ height: '80vh', gridTemplateRows: 'auto 1fr' }}
+        style={{ height: '80vh' }}
         onCloseAutoFocus={browsers.find(b => b.type === 'LOGIC') ? e => focusBracketContent(e, value, inputRef.current) : undefined}
       >
         <BasicDialogHeader title={t('dialog.propertyContentBrowser.title')} description={t('dialog.propertyContentBrowser.description')} />

@@ -77,7 +77,7 @@ export const TextareaField = ({ label, value, onChange, message }: TextareaField
           <InputBadgeArea value={value ?? ''} badgeProps={badgeProps} style={{ height: height, minHeight: MINHEIGHT }} />
         )}
       </BasicField>
-      <DialogContent style={{ height: '80vh', gridTemplateRows: 'auto 1fr' }}>
+      <DialogContent style={{ height: '80vh' }}>
         <BasicDialogHeader title={t('dialog.propertyContentBrowser.title')} description={t('dialog.propertyContentBrowser.description')} />
         <Browser
           activeBrowsers={[

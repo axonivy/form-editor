@@ -162,7 +162,7 @@ const ExtractComponentDialogContent = ({ data }: { data: Component | ComponentDa
             </DialogTrigger>
           </Flex>
         </BasicField>
-        <DialogContent style={{ height: '80vh', gridTemplateRows: 'auto 1fr' }}>
+        <DialogContent style={{ height: '80vh' }}>
           <BasicDialogHeader
             title={t('dialog.extractComponent.dataClassBrowser.title')}
             description={t('dialog.extractComponent.dataClassBrowser.description')}
