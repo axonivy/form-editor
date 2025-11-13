@@ -1,11 +1,12 @@
 import { type DataTable, type Prettify, type TableComponent } from '@axonivy/form-editor-protocol';
-import { Button, cn, Flex, Message } from '@axonivy/ui-components';
+import { Button, cn, evalDotState, Flex, Message } from '@axonivy/ui-components';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAppContext } from '../../../context/AppContext';
 import { useComponents } from '../../../context/ComponentsContext';
 import { useMeta } from '../../../context/useMeta';
+import { useValidations } from '../../../context/useValidation';
 import { findComponentDeep, modifyData } from '../../../data/data';
 import { variableTreeData } from '../../../editor/browser/data-class/variable-tree-data';
 import { ComponentBlock } from '../../../editor/canvas/ComponentBlock';
@@ -94,7 +95,7 @@ const UiBlock = ({ id, components, value, paginator, maxRows, visible, editDialo
   const { componentByName } = useComponents();
   const { data, setSelectedElement, selectedElement, ui } = useAppContext();
   const dialog = findComponentDeep(data.components, editDialogId);
-
+  const validations = useValidations(editDialogId);
   return (
     <Flex direction='column' gap={2} className='block-table'>
       <Flex direction='column' gap={4}>
@@ -125,7 +126,12 @@ const UiBlock = ({ id, components, value, paginator, maxRows, visible, editDialo
       )}
       {dialog && ui.helpPaddings && (
         <div
-          className={cn('draggable', 'block-table__dialog', selectedElement === editDialogId && 'selected')}
+          className={cn(
+            'draggable',
+            'block-table__dialog',
+            selectedElement === editDialogId && 'selected',
+            validations.length > 0 && `validation ${evalDotState(validations, undefined)}`
+          )}
           style={{ boxShadow: 'var(--editor-shadow)' }}
           onClick={e => {
             e.stopPropagation();
