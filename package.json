@@ -8,24 +8,25 @@
     "node": "24.11.0"
   },
   "scripts": {
-    "ci": "npm install && npm run package && npm run type && (npm run lint:ci || true) && npm run test:ci && npm run i18n:ci",
-    "clean": "lerna run clean",
+    "ci": "pnpm install --no-frozen-lockfile && pnpm run package && pnpm run type && (pnpm run lint:ci || true) && pnpm run test:ci && pnpm run i18n:ci",
+    "clean": "pnpm run -r clean",
     "build": "tsc --build && tscp --build",
-    "package": "lerna run package",
-    "build:clean": "lerna run build:clean",
-    "type": "lerna run type",
+    "package": "pnpm run -r package",
+    "build:clean": "pnpm run -r build:clean",
+    "type": "pnpm run -r type",
     "lint": "eslint",
     "lint:ci": "eslint -o eslint.xml -f checkstyle",
     "lint:fix": "eslint --fix",
     "lint:inspect": "eslint --inspect-config",
-    "i18n": "lerna run i18n",
-    "i18n:ci": "lerna run i18n:ci",
-    "protocol": "npm run -w @axonivy/form-editor-protocol",
-    "dev": "npm run -w @axonivy/form-editor-standalone dev",
-    "test": "npm run -w @axonivy/form-editor test",
-    "test:ci": "lerna run test:ci",
-    "webtest": "lerna run webtest --",
+    "i18n": "pnpm run -r i18n",
+    "i18n:ci": "pnpm run -r i18n:ci",
+    "protocol": "pnpm run --filter @axonivy/form-editor-protocol",
+    "dev": "pnpm run --filter @axonivy/form-editor-standalone dev",
+    "test": "pnpm run --filter @axonivy/form-editor test",
+    "test:ci": "pnpm run -r test:ci",
+    "webtest": "pnpm run -r webtest",
     "update:axonivy:next": "npx --yes npm-check-updates @axonivy* -ws -t semver -u",
+    "raise:version": "lerna version --no-git-tag-version --no-push --ignore-scripts --exact --yes",
     "publish:next": "lerna publish --exact --canary --preid next --tag-version-prefix beta --pre-dist-tag next --no-git-tag-version --no-push --ignore-scripts --yes"
   },
   "devDependencies": {
@@ -35,16 +36,10 @@
     "@types/node": "^24.0.0",
     "@lerna-lite/cli": "^4.0.0",
     "@lerna-lite/publish": "^4.0.0",
-    "@lerna-lite/run": "^4.0.0",
     "@lerna-lite/version": "^4.0.0",
     "rimraf": "^6.0.1",
     "typescript": "^5.8.3",
     "typescript-cp": "^0.1.9"
   },
-  "workspaces": [
-    "packages/*",
-    "integrations/*",
-    "playwright"
-  ],
   "prettier": "@axonivy/prettier-config"
 }

@@ -1,21 +1,22 @@
 import type {
-  FormRequestTypes,
-  FormNotificationTypes,
-  FormMetaRequestTypes,
-  FormContext,
-  FormClient,
-  FormEditor,
-  FormSaveData,
-  FormOnNotificationTypes,
-  ValidationResult,
+  EditorFileContent,
+  Event,
   FormActionArgs,
-  EditorFileContent
+  FormClient,
+  FormContext,
+  FormEditor,
+  FormMetaRequestTypes,
+  FormNotificationTypes,
+  FormOnNotificationTypes,
+  FormRequestTypes,
+  FormSaveData,
+  ValidationResult
 } from '@axonivy/form-editor-protocol';
 import {
   BaseRpcClient,
-  urlBuilder,
   createMessageConnection,
   Emitter,
+  urlBuilder,
   type Connection,
   type Disposable,
   type MessageConnection
@@ -25,9 +26,9 @@ export class FormClientJsonRpc extends BaseRpcClient implements FormClient {
   protected onDataChangedEmitter = new Emitter<void>();
   protected onValidaitonChangedEmitter = new Emitter<void>();
   protected onSelectElementEmitter = new Emitter<string>();
-  onDataChanged = this.onDataChangedEmitter.event;
-  onValidationChanged = this.onValidaitonChangedEmitter.event;
-  onSelectElement = this.onSelectElementEmitter.event;
+  onDataChanged: Event<void> = this.onDataChangedEmitter.event;
+  onValidationChanged: Event<void> = this.onValidaitonChangedEmitter.event;
+  onSelectElement: Event<string> = this.onSelectElementEmitter.event;
 
   protected override setupConnection(): void {
     super.setupConnection();

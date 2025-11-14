@@ -9,8 +9,9 @@
     "url": "https://github.com/axonivy/form-editor"
   },
   "dependencies": {
-    "@axonivy/form-editor": "~13.2.0-next",
-    "@axonivy/form-editor-core": "~13.2.0-next",
+    "@axonivy/form-editor": "workspace:~13.2.0-next",
+    "@axonivy/form-editor-core": "workspace:~13.2.0-next",
+    "@axonivy/form-editor-protocol": "workspace:~13.2.0-next",
     "@axonivy/jsonrpc": "~13.2.0-next.934.4686e45",
     "@axonivy/ui-components": "~13.2.0-next.934.4686e45",
     "@axonivy/ui-icons": "~13.2.0-next.934.4686e45",
@@ -27,12 +28,13 @@
     "@types/react": "^19.0.7",
     "@types/react-dom": "^19.0.3",
     "@vitejs/plugin-react": "^5.0.0",
+    "vite-plugin-svgr": "^4.3.0",
     "vite": "^7.0.0"
   },
   "scripts": {
     "clean": "rimraf build",
     "build": "tsc --build",
-    "build:clean": "npm run clean && npm run build",
+    "build:clean": "pnpm run clean && pnpm run build",
     "package": "vite build",
     "type": "tsc --noEmit",
     "dev": "vite",
