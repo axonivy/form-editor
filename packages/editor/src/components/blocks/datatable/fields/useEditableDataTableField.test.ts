@@ -136,7 +136,7 @@ const deleteButton: ComponentDataHelper<'Button', Button> = {
     confirmCancelValue: 'No',
     confirmOkValue: 'Yes',
     confirmHeader: 'Delete Confirmation',
-    confirmMessage: 'Are you sure you want to delete row: #{row}?',
+    confirmMessage: 'Are you sure you want to delete row: #{currentRow}?',
     confirmSeverity: 'WARN',
     confirmDialog: true,
     disabled: '',

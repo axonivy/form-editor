@@ -115,7 +115,7 @@ export const DATATABLE_DEFAULTS: DataTable = {
 
 export const DATATABLECOLUMN_DEFAULTS: DataTableColumn = {
   header: 'Header',
-  value: '',
+  value: '#{currentRow}',
   components: [],
   asActionColumn: false,
   actionColumnAsMenu: false,

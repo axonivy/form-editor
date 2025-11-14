@@ -119,7 +119,7 @@ test('columns from attribute', async ({ page }) => {
   await listOfObjects.fill('#{data.data.strings}');
   await columnsSection.toggleControl();
   await columnsSection.expectListItems(4);
-  const columnString = columnsSection.listItem({ label: 'row' });
+  const columnString = columnsSection.listItem({ label: 'currentRow' });
 
   await columnString.expectBound(true);
   await columnAddressNew.expectBound(false);
