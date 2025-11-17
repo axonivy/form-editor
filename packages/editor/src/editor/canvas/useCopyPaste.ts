@@ -1,9 +1,9 @@
 import type { Component, ComponentData, ComponentType, ConfigData } from '@axonivy/form-editor-protocol';
 import { useReadonly } from '@axonivy/ui-components';
-import { useClipboard, type TextDropItem } from 'react-aria';
+import { useClipboard, type ClipboardResult, type TextDropItem } from 'react-aria';
 import { CANVAS_DROPZONE_ID, modifyData, useData } from '../../data/data';
 
-export const useCopyPaste = (data?: Component | ComponentData) => {
+export const useCopyPaste = (data?: Component | ComponentData): ClipboardResult['clipboardProps'] => {
   const { setData } = useData();
   const readonly = useReadonly();
   const { clipboardProps } = useClipboard({

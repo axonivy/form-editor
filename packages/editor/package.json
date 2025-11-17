@@ -14,7 +14,7 @@
     "src"
   ],
   "dependencies": {
-    "@axonivy/form-editor-protocol": "~13.2.0-next",
+    "@axonivy/form-editor-protocol": "workspace:~13.2.0-next",
     "@dnd-kit/core": "^6.3.1",
     "react-aria": "^3.38.0",
     "react-error-boundary": "^6.0.0"
@@ -29,6 +29,9 @@
     "react-i18next": "^15.4.1 || ^16.0.0"
   },
   "devDependencies": {
+    "@axonivy/ui-components": "~13.2.0-next.934.4686e45",
+    "@axonivy/ui-icons": "~13.2.0-next.934.4686e45",
+    "@tanstack/react-table": "^8.21.3",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
@@ -40,6 +43,7 @@
     "jsdom": "^27.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "vite": "^7.0.0",
     "vite-plugin-dts": "^4.5.0",
     "vite-plugin-svgr": "^4.3.0",
     "vitest": "^4.0.0"
@@ -51,8 +55,8 @@
   "scripts": {
     "clean": "rimraf lib *.tsbuildinfo",
     "build": "tsc --build && tscp",
-    "package": "npm run clean && vite build && tsc -p tsconfig.production.json && tscp",
-    "build:clean": "npm run clean && npm run build",
+    "package": "pnpm run clean && vite build && tsc -p tsconfig.production.json && tscp",
+    "build:clean": "pnpm run clean && pnpm run build",
     "type": "tsc --noEmit",
     "test": "vitest",
     "test:ci": "vitest --watch=false",

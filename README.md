@@ -10,7 +10,7 @@ This client is build with React.
 
 ### Available Scripts
 
-`npm run dev`: Start the dev server
+`pnpm run dev`: Start the dev server
 
 ### VsCode dev environment
 
