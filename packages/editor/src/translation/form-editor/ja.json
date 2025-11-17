@@ -170,7 +170,7 @@
     "button": {
       "confirm": {
         "confirmDialogHeader": "確認を削除",
-        "confirmDialogMessage": "行: #{row} を削除してもよろしいですか？",
+        "confirmDialogMessage": "行: #{currentRow} を削除してもよろしいですか？",
         "no": "いいえ",
         "yes": "はい"
       },

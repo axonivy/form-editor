@@ -16,7 +16,7 @@ export const useDataTableColumns = () => {
 
   const variableInfo = useMeta(
     'meta/data/attributes',
-    { context, dataClassField: isTable(element) ? stripELExpression(element.config.value) : '', rootVariable: 'row' },
+    { context, dataClassField: isTable(element) ? stripELExpression(element.config.value) : '', rootVariable: 'currentRow' },
     { types: {}, variables: [] }
   ).data;
 
@@ -34,9 +34,11 @@ export const useDataTableColumns = () => {
   const convertBrowserNodesToColumns = (nodes: Array<BrowserNode<Variable>>): DataTableColumn[] => {
     return nodes.flatMap(node => {
       if (node.children.length === 0) {
-        return [createComponent('DataTableColumn', { label: node.data?.attribute ?? '', value: '' })];
+        return [createComponent('DataTableColumn', { label: node.data?.attribute ?? '', value: '#{currentRow}' })];
       }
-      return node.children.map(childNode => createComponent('DataTableColumn', { label: childNode.value, value: childNode.value }));
+      return node.children.map(childNode =>
+        createComponent('DataTableColumn', { label: childNode.value, value: '#{currentRow.' + childNode.value + '}' })
+      );
     });
   };
 

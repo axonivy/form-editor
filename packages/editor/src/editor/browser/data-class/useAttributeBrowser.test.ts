@@ -20,11 +20,6 @@ test('returns full variable path when row is defined and componentInDialog is fa
   expect(result).toEqual({ value: 'data.address.location.country' });
 });
 
-test('returns partial path when onlyAttributes is COLUMN and componentInDialog is false', () => {
-  const result = getApplyModifierValue(row, { type: 'COLUMN', root: '' });
-  expect(result).toEqual({ value: 'address.location.country' });
-});
-
 test('returns rootonly prefix when row has no parents and componentInDialog is true', () => {
   const result = getApplyModifierValue({
     original: { value: 'currentRow', info: 'String' },
@@ -35,13 +30,11 @@ test('returns rootonly prefix when row has no parents and componentInDialog is t
 });
 
 test('returns only row value when onlyAttributes is COLUMN and row has no parents', () => {
-  const result = getApplyModifierValue(
-    {
-      original: { value: 'data', info: 'String' },
-      getParentRows: () => [{}]
-    } as Row<BrowserNode>,
-    { type: 'COLUMN', root: '' }
-  );
+  const result = getApplyModifierValue({
+    original: { value: 'data', info: 'String' },
+    getParentRow: () => undefined,
+    getParentRows: () => []
+  } as unknown as Row<BrowserNode>);
   expect(result).toEqual({ value: 'data' });
 });
 

@@ -53,12 +53,12 @@ export const useAttributeBrowser = (options?: BrowserOptions): Browser => {
       <Message variant='info' message={t('message.typeDefinedBy', { type: options.attribute.typeHint })} />
     ) : undefined,
     infoProvider: row => row?.original.info,
-    applyModifier: row => getApplyModifierValue(row, options?.attribute?.onlyAttributes)
+    applyModifier: row => getApplyModifierValue(row)
   };
 };
 
-export const getApplyModifierValue = (row: Row<BrowserNode<unknown>> | undefined, options?: OnlyAttributeSelection): { value: string } => {
-  return { value: !row ? '' : fullVariablePath(row, options?.type !== 'COLUMN') };
+export const getApplyModifierValue = (row: Row<BrowserNode<unknown>> | undefined): { value: string } => {
+  return { value: !row ? '' : fullVariablePath(row) };
 };
 export const filterNodesWithChildren = (nodes: Array<BrowserNode<Variable>>): Array<BrowserNode<Variable>> => {
   return nodes

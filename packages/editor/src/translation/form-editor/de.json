@@ -62,7 +62,7 @@
     "button": {
       "confirm": {
         "confirmDialogHeader": "Löschbestätigung",
-        "confirmDialogMessage": "Möchten Sie die Zeile #{row} wirklich löschen ?",
+        "confirmDialogMessage": "Möchten Sie die Zeile #{currentRow} wirklich löschen ?",
         "no": "Nein",
         "yes": "Ja"
       },

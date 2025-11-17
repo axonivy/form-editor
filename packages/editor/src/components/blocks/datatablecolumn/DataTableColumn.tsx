@@ -75,7 +75,7 @@ export const useDataTableColumnComponent = () => {
           subsection: 'Content',
           label: t('property.value'),
           type: 'textBrowser',
-          browsers: [{ type: 'ATTRIBUTE', options: { withoutEl: true, attribute: { onlyAttributes: { root: 'row', type: 'COLUMN' } } } }],
+          browsers: [{ type: 'ATTRIBUTE', options: { attribute: { onlyAttributes: { root: 'currentRow', type: 'COLUMN' } } } }],
           hide: data => data.asActionColumn
         },
         sortable: { subsection: 'General', label: t('property.enableSorting'), type: 'checkbox', hide: data => data.asActionColumn },
@@ -158,7 +158,7 @@ const UiBlock = ({
             <EmptyActionColumnBlock components={components} id={id} type='Action Column' />
           )
         ) : (
-          <span>{value?.length === 0 || value === 'variable' ? t('label.useEntireObj') : value}</span>
+          <UiBadge value={value === '#{currentRow}' ? t('label.useEntireObj') : value} />
         )}
       </div>
     </div>

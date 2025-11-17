@@ -66,7 +66,7 @@ test('confirm dialog section', async ({ page }) => {
   await confirmDialog.expectValue(true);
   await severity.expectValue('Warning');
   await header.expectValue('Delete Confirmation');
-  await dialogMessage.expectValue(/Are you sure you want to delete row:\s*row\s*\?/);
+  await dialogMessage.expectValue(/Are you sure you want to delete row:\s*currentRow\s*\?/);
   await header.expectValue('Delete Confirmation');
   await confirmButton.expectValue('Yes');
   await cancelButton.expectValue('No');

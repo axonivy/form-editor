@@ -16,8 +16,8 @@ export const ColumnControl = (props: CollapsibleControlProps) => {
       setData(data => {
         const creates = boundInactiveColumns
           .map(column => ({
-            label: column.value.length > 0 ? column.value : column.header,
-            value: column.value
+            label: column.header,
+            value: column.value.length > 0 ? column.value : '#{currentRow}'
           }))
           .filter(create => create !== undefined);
         return createInitTableColumns(element.cid, data, creates);

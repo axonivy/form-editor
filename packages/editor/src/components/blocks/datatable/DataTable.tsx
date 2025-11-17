@@ -169,7 +169,7 @@ const EmptyDataTableColumn = ({ id, initValue }: { id: string; initValue: string
       const creates = mappableBrowserNode
         .map(attribute => ({
           label: isLeafNode && attribute.data ? attribute.data.attribute : attribute.value,
-          value: isLeafNode ? '' : attribute.value
+          value: isLeafNode ? '#{currentRow}' : `#{currentRow.${attribute.value}}`
         }))
         .filter(create => create !== undefined);
       return createInitTableColumns(id, data, creates);
