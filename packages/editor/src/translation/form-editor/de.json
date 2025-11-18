@@ -284,6 +284,7 @@
     "togglePropView": "Eigenschaftsansicht umschalten",
     "updateFormChange": "Formular bei Änderungen aktualisieren",
     "useEntireObj": "Gesamtes Objekt verwenden",
+    "validationMessage": "Validierungsmeldung",
     "verticalAlign": "Vertikale Ausrichtung",
     "visible": "Sichtbar"
   },

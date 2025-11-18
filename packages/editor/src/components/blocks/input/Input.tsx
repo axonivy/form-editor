@@ -59,6 +59,13 @@ export const useInputComponent = () => {
           options: positionOptions,
           hide: data => !(data.type === 'NUMBER' && data.symbol.length > 0)
         },
+        validationMessage: {
+          subsection: 'General',
+          label: t('label.validationMessage'),
+          type: 'textBrowser',
+          browsers: [{ type: 'CMS', options: { overrideSelection: true } }],
+          hide: data => data.type !== 'EMAIL'
+        },
         ...behaviourComponentFields
       },
       quickActions: DEFAULT_QUICK_ACTIONS
