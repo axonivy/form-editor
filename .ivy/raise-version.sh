@@ -7,4 +7,4 @@ mvn --batch-mode -f playwright/form-test-project/pom.xml versions:set versions:c
 
 pnpm install
 pnpm run raise:version ${1/SNAPSHOT/next}
-pnpm install
+pnpm install --no-frozen-lockfile
