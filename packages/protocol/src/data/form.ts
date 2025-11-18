@@ -285,6 +285,7 @@ export interface Input {
   symbolPosition: SymbolPosition;
   type: InputType;
   updateOnChange: boolean;
+  validationMessage: FormExpression;
   value: FormExpression;
   visible: FormExpression;
 }

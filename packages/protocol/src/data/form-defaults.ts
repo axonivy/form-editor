@@ -159,6 +159,7 @@ export const INPUT_DEFAULTS: Input = {
   decimalPlaces: '',
   symbol: '',
   symbolPosition: 's',
+  validationMessage: 'Invalid E-Mail',
   ...REQUIRE_DEFAULTS,
   ...BASE_DEFAULTS
 } as const;
