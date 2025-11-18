@@ -45,7 +45,7 @@ export interface Forms {
   formSaveDataArgs: FormSaveDataArgs;
   logicInfo: LogicInfo;
   parameterInfo: ParameterInfo[];
-  string: string[];
+  string: string;
   validationResult: ValidationResult[];
   variableInfo: VariableInfo;
   void: Void;
@@ -276,6 +276,7 @@ export interface Input {
   symbolPosition: SymbolPosition;
   type: InputType;
   updateOnChange: boolean;
+  validationMessage: FormExpression;
   value: FormExpression;
   visible: FormExpression;
 }
