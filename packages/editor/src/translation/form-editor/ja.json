@@ -87,7 +87,8 @@
     "objectValue": "オブジェクト値",
     "objNotValid": "定義されたオブジェクトは有効ではありません",
     "openComponent": "コンポーネントを開く (J)",
-    "options": "オプション"
+    "options": "オプション",
+    "bypassValidation": "検証なしでアクションを実行"
   },
   "category": {
     "actions": "アクション",
@@ -276,7 +277,15 @@
       "errorMessage": "コンポーネントを独自の Ivy コンポーネントに展開できませんでした",
       "logicWarning": "ロジックプロセスが '{{component}}' 内で使用される場合、それらはエクスポートされず、展開後に手動で実装する必要があります。",
       "success": "Ivy コンポーネント '{{componentName}}' が正常に作成されました",
-      "title": "独自の Ivy コンポーネントに {{component}} を展開する"
+      "title": "独自の Ivy コンポーネントに {{component}} を展開する",
+      "dataClassBrowser": {
+        "description": "新しい Ivy コンポーネントのデータクラスを選択してください。",
+        "title": "データクラスを選択"
+      }
+    },
+    "propertyContentBrowser": {
+      "description": "このプロパティのコンテンツを選択してください。",
+      "title": "コンテンツを選択"
     }
   },
   "hint": {
