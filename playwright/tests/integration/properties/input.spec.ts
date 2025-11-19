@@ -40,6 +40,25 @@ test('default', async ({ page }) => {
   await behaviour.expectRequired();
 });
 
+test('email', async ({ page }) => {
+  const editor = await FormEditor.openNewForm(page, { block: 'Input' });
+  await editor.canvas.blockByNth(0).inscribe();
+  await editor.inscription.expectHeader('Input');
+  const properties = editor.inscription.section('Properties');
+  const section = properties.collapsible('General');
+  const type = section.select({ label: 'Type' });
+  const validation = section.input({ label: 'Validation Message' });
+
+  await type.expectValue('Text');
+  await type.choose('E-Mail');
+  await validation.expectValue('Invalid E-Mail');
+  await validation.fill('Please enter a valid email address');
+
+  await page.reload();
+  await editor.canvas.blockByNth(0).inscribe();
+  await validation.expectValue('Please enter a valid email address');
+});
+
 test('id', async ({ page }) => {
   const editor = await FormEditor.openMock(page);
   await editor.canvas.blockByNth(0).inscribe();

@@ -38,6 +38,7 @@ export const useInputComponent = () => {
       label: t('components.input.name'),
       value: '',
       type: 'TEXT',
+      validationMessage: 'Invalid E-Mail',
       ...defaultNumberFormatting,
       ...defaultBehaviourComponent,
       ...defaultBaseComponent
@@ -77,6 +78,13 @@ export const useInputComponent = () => {
           type: 'select',
           options: positionOptions,
           hide: data => !(data.type === 'NUMBER' && data.symbol.length > 0)
+        },
+        validationMessage: {
+          subsection: 'General',
+          label: t('label.validationMessage'),
+          type: 'textBrowser',
+          browsers: [{ type: 'CMS', options: { overrideSelection: true } }],
+          hide: data => data.type !== 'EMAIL'
         },
         ...behaviourComponentFields
       },
