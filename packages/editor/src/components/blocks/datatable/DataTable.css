@@ -1,8 +1,5 @@
 .block-table__columns {
   overflow-x: auto;
-  > div {
-    flex: 1 1 auto;
-  }
 }
 
 .block-table__dialog {
