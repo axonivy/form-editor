@@ -39,6 +39,7 @@ export const useDataTableColumnComponent = () => {
       components: [],
       asActionColumn: false,
       actionColumnAsMenu: false,
+      width: '',
       sortable: false,
       filterable: false,
       actionButtonAlignment: 'END',
@@ -63,6 +64,12 @@ export const useDataTableColumnComponent = () => {
           label: t('components.dataTableColumn.property.header'),
           type: 'textBrowser',
           browsers: [{ type: 'CMS', options: { overrideSelection: true } }]
+        },
+        width: {
+          subsection: 'General',
+          label: t('components.dataTableColumn.property.width'),
+          type: 'text',
+          options: { placeholder: t('components.dataTableColumn.property.widthPlaceholder') }
         },
         asActionColumn: { subsection: 'General', label: t('components.dataTableColumn.property.actionColumn'), type: 'checkbox' },
         actionButtonAlignment: {

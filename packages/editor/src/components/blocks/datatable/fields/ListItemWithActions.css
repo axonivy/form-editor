@@ -1,0 +1,17 @@
+.list-item-with-actions {
+  border: var(--basic-border);
+  border-radius: var(--border-r1);
+  padding: var(--size-1);
+  padding-left: var(--size-2);
+  overflow: hidden;
+
+  .list-item-width-badge {
+    background-color: var(--N100);
+    color: var(--body);
+    border: 1px solid transparent;
+    border-radius: var(--border-r2);
+    padding: var(--size-1);
+    height: 15px;
+    font-size: 12px;
+  }
+}

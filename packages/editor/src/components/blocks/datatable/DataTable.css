@@ -1,12 +1,3 @@
-.block-table {
-  .header-block__label {
-    display: none;
-  }
-  .block-table__dialog .header-block__label {
-    display: flex;
-  }
-}
-
 .block-table__columns {
   overflow-x: auto;
   > div {
@@ -49,10 +40,6 @@
     .draggable {
       border-radius: 0;
     }
-  }
-
-  .header-block__label {
-    display: none;
   }
 }
 
