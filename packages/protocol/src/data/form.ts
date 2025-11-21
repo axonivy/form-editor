@@ -207,6 +207,7 @@ export interface DataTable {
   maxRows: string;
   mdSpan: string;
   paginator: boolean;
+  resizableColumns: boolean;
   updateOnChange: boolean;
   value: string;
   visible: FormExpression;
@@ -226,6 +227,7 @@ export interface DataTableColumn {
   sortable: boolean;
   value: FormExpression;
   visible: FormExpression;
+  width: string;
 }
 export interface ActionButtonComponent {
   cid: string;

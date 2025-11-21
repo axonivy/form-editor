@@ -1,7 +1,7 @@
 .block-column {
   border-radius: var(--border-r1);
   border: var(--basic-border);
-
+  overflow: hidden;
   background: var(--N25);
   > div {
     padding: var(--size-2);
@@ -9,6 +9,7 @@
   .block-column__head {
     font-weight: 600;
     border-bottom: var(--basic-border);
+    overflow: hidden;
   }
   .block-column__body {
     width: fit-content;
@@ -18,9 +19,6 @@
   }
   .block-column__buttons {
     overflow-x: auto;
-    > div {
-      flex: 1 1 auto;
-    }
   }
 }
 .block-column__filter {

@@ -124,6 +124,7 @@
         "editable": "Bearbeitbar",
         "editDialog": "Dialog bearbeiten",
         "enablePaginator": "Seitennummerierung aktivieren",
+        "resizableColumns": "Grössenveränderbare Spalten",
         "rowsPerPage": "Zeilen pro Seite"
       },
       "valueEmpty": "Keine Werte vorhanden. Definiere die Werte in den Eigenschaften der Datentabelle"
@@ -135,7 +136,10 @@
         "actionColumn": "Aktionsspalte",
         "enableFiltering": "Filter aktivieren",
         "groupActions": "Gruppenaktionen",
-        "header": "Kopfzeile"
+        "header": "Kopfzeile",
+        "width": "Breite",
+        "widthAuto": "auto",
+        "widthPlaceholder": "150px oder 20% (automatische Grösse, wenn leer gelassen)"
       }
     },
     "datePicker": {

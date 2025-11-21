@@ -1,0 +1,7 @@
+.list-item-with-actions {
+  border: var(--basic-border);
+  border-radius: var(--border-r1);
+  padding: var(--size-1);
+  padding-left: var(--size-2);
+  overflow: hidden;
+}
