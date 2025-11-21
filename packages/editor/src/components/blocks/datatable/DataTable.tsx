@@ -104,7 +104,13 @@ const UiBlock = ({ id, components, value, paginator, maxRows, visible, editDialo
   return (
     <Flex direction='column' gap={2} className='block-table'>
       <Flex direction='column' gap={4}>
-        <UiBlockHeader visible={visible} disabled={disabled} additionalInfo={paginator ? t('label.nRowsPerPage', { rows: maxRows }) : ''} />
+        {!ui.helpPaddings && (
+          <UiBlockHeader
+            visible={visible}
+            disabled={disabled}
+            additionalInfo={paginator ? t('label.nRowsPerPage', { rows: maxRows }) : ''}
+          />
+        )}
 
         {components.length > 0 && (
           <Flex direction='row' gap={1} className='block-table__columns'>
