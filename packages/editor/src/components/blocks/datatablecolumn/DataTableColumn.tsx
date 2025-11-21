@@ -50,6 +50,12 @@ export const useDataTableColumnComponent = () => {
           type: 'textBrowser',
           browsers: [{ type: 'CMS', options: { overrideSelection: true } }]
         },
+        width: {
+          subsection: 'General',
+          label: t('components.dataTableColumn.property.width'),
+          type: 'text',
+          options: { placeholder: t('components.dataTableColumn.property.widthPlaceholder') }
+        },
         asActionColumn: { subsection: 'General', label: t('components.dataTableColumn.property.actionColumn'), type: 'checkbox' },
         actionButtonAlignment: {
           subsection: 'Content',

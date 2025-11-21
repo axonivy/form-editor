@@ -17,6 +17,7 @@ export const ColumnsField = () => {
           key={column.columnCid}
           componentCid={column.columnCid}
           label={column.header}
+          width={column.width}
           isBound={boundColumns.some(active => active.value === column.value)}
         />
       ))}

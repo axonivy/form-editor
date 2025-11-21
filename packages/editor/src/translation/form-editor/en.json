@@ -124,6 +124,7 @@
         "editable": "Editable",
         "editDialog": "Edit Dialog",
         "enablePaginator": "Enable Paginator",
+        "resizableColumns": "Resizable Columns",
         "rowsPerPage": "Rows per Page"
       },
       "valueEmpty": "Value of DataTable is empty. Define value within Properties of DataTable"
@@ -135,7 +136,10 @@
         "actionColumn": "Action Column",
         "enableFiltering": "Enable Filtering",
         "groupActions": "Group Actions",
-        "header": "Header"
+        "header": "Header",
+        "width": "Width",
+        "widthAuto": "auto",
+        "widthPlaceholder": "150px or 20% (auto-size if left empty)"
       }
     },
     "datePicker": {

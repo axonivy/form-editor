@@ -1,23 +1,12 @@
-.block-table {
-  .header-block__label {
-    display: none;
-  }
-  .block-table__dialog .header-block__label {
-    display: flex;
-  }
-}
-
 .block-table__columns {
   overflow-x: auto;
-  > div {
-    flex: 1 1 auto;
-  }
 }
 
 .block-table__dialog {
   border: var(--basic-border);
   border-radius: var(--border-r2);
   padding: var(--size-2);
+  overflow: hidden;
 }
 
 .block-table__paginator {
@@ -49,10 +38,6 @@
     .draggable {
       border-radius: 0;
     }
-  }
-
-  .header-block__label {
-    display: none;
   }
 }
 

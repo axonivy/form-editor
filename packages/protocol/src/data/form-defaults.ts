@@ -108,6 +108,7 @@ export const DATATABLE_DEFAULTS: DataTable = {
   addButton: false,
   editDialogId: '',
   paginator: false,
+  resizableColumns: true,
   maxRows: '10',
   ...UPDATE_DEFAULTS,
   ...BASE_DEFAULTS
@@ -122,6 +123,7 @@ export const DATATABLECOLUMN_DEFAULTS: DataTableColumn = {
   sortable: false,
   filterable: false,
   actionButtonAlignment: 'END',
+  width: '',
   ...VISIBLE_DEFAULTS
 } as const;
 
