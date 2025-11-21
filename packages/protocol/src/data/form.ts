@@ -45,7 +45,7 @@ export interface Forms {
   formSaveDataArgs: FormSaveDataArgs;
   logicInfo: LogicInfo;
   parameterInfo: ParameterInfo[];
-  string: string;
+  string: string[];
   validationResult: ValidationResult[];
   variableInfo: VariableInfo;
   void: Void;
@@ -200,6 +200,7 @@ export interface DataTable {
   maxRows: string;
   mdSpan: string;
   paginator: boolean;
+  resizableColumns: boolean;
   value: string;
   visible: FormExpression;
 }
@@ -218,6 +219,7 @@ export interface DataTableColumn {
   sortable: boolean;
   value: FormExpression;
   visible: FormExpression;
+  width: string;
 }
 export interface ActionColumnComponent {
   cid: string;

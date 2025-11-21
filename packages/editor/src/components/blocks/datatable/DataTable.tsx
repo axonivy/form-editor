@@ -35,6 +35,7 @@ export const useDataTableComponent = (componentByName: ComponentByName) => {
       addButton: false,
       editDialogId: '',
       paginator: false,
+      resizableColumns: true,
       maxRows: '10',
       ...defaultVisibleComponent,
       ...defaultBaseComponent
@@ -72,6 +73,11 @@ export const useDataTableComponent = (componentByName: ComponentByName) => {
           hide: data => !data.isEditable
         },
         editDialogId: { subsection: 'General', label: t('components.dataTable.property.editDialog'), type: 'hidden' },
+        resizableColumns: {
+          subsection: 'Columns',
+          label: t('components.dataTable.property.resizableColumns'),
+          type: 'checkbox'
+        },
         components: {
           subsection: 'Columns',
           label: t('property.objectBoundColumns'),
@@ -111,13 +117,26 @@ const UiBlock = ({ id, components, value, paginator, maxRows, visible, editDialo
   return (
     <Flex direction='column' gap={2} className='block-table'>
       <Flex direction='column' gap={4}>
-        <UiBlockHeader visible={visible} additionalInfo={paginator ? t('label.nRowsPerPage', { rows: maxRows }) : ''} />
+        {!ui.helpPaddings && (
+          <UiBlockHeader visible={visible} additionalInfo={paginator ? t('label.nRowsPerPage', { rows: maxRows }) : ''} />
+        )}
 
         {components.length > 0 && (
           <Flex direction='row' gap={1} className='block-table__columns'>
             {components.map((column, index) => {
               const columnComponent: TableComponent = { ...column };
-              return <ComponentBlock key={column.cid} component={columnComponent} preId={components[index - 1]?.cid} />;
+              const hasWidth = Boolean(column.config.width && !ui.helpPaddings);
+              const minWidth = /^[0-9]+$/.test(column.config.width) ? `${column.config.width}px` : column.config.width;
+              const allColumnsHaveWidth = hasWidth && components.every(col => col.config.width.length > 0);
+              const flex = allColumnsHaveWidth ? `${parseInt(column.config.width.replace(/[^\d]/g, ''), 10) || 1} 1 0` : undefined;
+              return (
+                <ComponentBlock
+                  key={column.cid}
+                  component={columnComponent}
+                  preId={components[index - 1]?.cid}
+                  style={{ minWidth: hasWidth ? minWidth : undefined, flex: flex ? flex : hasWidth ? undefined : '1 1 auto' }}
+                />
+              );
             })}
           </Flex>
         )}
