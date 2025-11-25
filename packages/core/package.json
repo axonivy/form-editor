@@ -14,10 +14,10 @@
     "src"
   ],
   "dependencies": {
-    "@axonivy/form-editor-protocol": "12.0.12-next"
+    "@axonivy/form-editor-protocol": "~12.0.12-next"
   },
   "peerDependencies": {
-    "@axonivy/jsonrpc": "~12.0.11-next"
+    "@axonivy/jsonrpc": "~12.0.12-next"
   },
   "devDependencies": {
     "vite": "^7.0.0"
