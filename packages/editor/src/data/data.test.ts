@@ -12,9 +12,11 @@ import {
   type Input,
   type Layout,
   type LayoutConfig,
+  type Select,
   type TableComponent,
   type TableConfig,
-  type Text
+  type Text,
+  type Textarea
 } from '@axonivy/form-editor-protocol';
 import { creationTargetId, DELETE_DROPZONE_ID, findComponentElement, getParentComponent, isEditableTable, modifyData } from './data';
 
@@ -140,6 +142,59 @@ describe('modifyData', () => {
       const removeDeep = modifyData(filledData(), { type: 'remove', data: { id: '32' } }).newData;
       expectOrder(removeDeep, ['1', '2', '3', '4', '5']);
       expectOrderDeep(removeDeep, '3', ['31', '33']);
+    });
+  });
+
+  describe('change', () => {
+    test('change', () => {
+      const data: DeepPartial<FormData> = {
+        components: [{ cid: '1', type: 'DataTable', config: { value: 'Table Value', components: [] } }]
+      };
+      const newData = modifyData(data as FormData, { type: 'changeType', data: { componentType: 'Select', id: '1' } }).newData;
+      expect(newData.components).toHaveLength(1);
+      expect(newData.components[0]?.type).to.equals('Select');
+      expect((newData.components[0]?.config as Select).dynamicItemsList).to.equals('Table Value');
+      expect((newData.components[0]?.config as Select).label).to.equals('Select');
+    });
+
+    test('change structure', () => {
+      const data: DeepPartial<FormData> = {
+        components: [
+          {
+            cid: '3',
+            type: 'Layout',
+            config: {
+              components: [{ cid: '32', type: 'Input', config: { label: 'Input Label', value: 'Input Value' } }]
+            }
+          }
+        ]
+      };
+
+      const newData = modifyData(data as FormData, { type: 'changeType', data: { componentType: 'Panel', id: '3' } }).newData;
+      expect(newData.components).toHaveLength(1);
+      expect(newData.components[0]?.type).to.equals('Panel');
+      expect((newData.components[0]?.config as Layout).components).toHaveLength(1);
+    });
+
+    test('change deep', () => {
+      const data: DeepPartial<FormData> = {
+        components: [
+          {
+            cid: '3',
+            type: 'Layout',
+            config: {
+              components: [{ cid: '32', type: 'Input', config: { label: 'Input Label', value: 'Input Value' } }]
+            }
+          }
+        ]
+      };
+      const newData = modifyData(data as FormData, { type: 'changeType', data: { componentType: 'Textarea', id: '32' } }).newData;
+      expect(newData.components).toHaveLength(1);
+      expect(newData.components[0]?.type).to.equals('Layout');
+      expect((newData.components[0]?.config as Layout).components).toHaveLength(1);
+      expect((newData.components[0]?.config as Layout).components[0]?.type).to.equals('Textarea');
+      expect(((newData.components[0]?.config as Layout).components[0]?.config as Textarea).value).to.equals('Input Value');
+      expect(((newData.components[0]?.config as Layout).components[0]?.config as Textarea).label).to.equals('Input Label');
     });
   });
 
@@ -436,7 +491,7 @@ const filledData = () => {
         cid: '4',
         type: 'Fieldset',
         config: {
-          legend: 'Legend',
+          label: 'Legend',
           collapsible: true,
           disabled: 'false',
           collapsed: false,
@@ -451,7 +506,7 @@ const filledData = () => {
         cid: '5',
         type: 'Panel',
         config: {
-          title: 'Title',
+          label: 'Title',
           collapsible: true,
           collapsed: false,
           components: [

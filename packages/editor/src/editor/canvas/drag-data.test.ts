@@ -98,7 +98,7 @@ const filledData = () => {
         cid: '4',
         type: 'Fieldset',
         config: {
-          legend: 'Legend',
+          label: 'Legend',
           collapsible: true,
           disabled: 'false',
           collapsed: false,
@@ -113,7 +113,7 @@ const filledData = () => {
         cid: '5',
         type: 'Panel',
         config: {
-          title: 'Title',
+          label: 'Title',
           collapsible: true,
           collapsed: false,
           components: [

@@ -78,7 +78,7 @@ export const BUTTON_DEFAULTS: Button = {
 
 export const CHECKBOX_DEFAULTS: Checkbox = {
   label: 'Label',
-  selected: 'true',
+  value: 'true',
   ...UPDATE_DEFAULTS,
   ...BASE_DEFAULTS
 } as const;
@@ -147,7 +147,7 @@ export const DIALOG_DEFAULTS: Dialog = {
 
 export const FIELDSET_DEFAULTS: Fieldset = {
   components: [],
-  legend: 'Title',
+  label: 'Title',
   collapsible: false,
   collapsed: false,
   ...VISIBLE_DEFAULTS,
@@ -184,7 +184,7 @@ export const LINK_DEFAULTS: Link = {
 
 export const PANEL_DEFAULTS: Panel = {
   components: [],
-  title: 'Title',
+  label: 'Title',
   collapsible: false,
   collapsed: false,
   ...VISIBLE_DEFAULTS,

@@ -249,6 +249,7 @@
     "allComponents": "All Components",
     "browser": "Browser",
     "bypassValidation": "Run action without validation",
+    "changeComponentType": "Change Component Type",
     "component": "Component",
     "composites": "Composites",
     "createActionCol": "Create Action Column",

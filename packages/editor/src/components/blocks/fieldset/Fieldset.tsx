@@ -26,11 +26,11 @@ export const useFieldsetComponent = () => {
       description: t('components.fieldset.description'),
       quickActions: [...DEFAULT_QUICK_ACTIONS, 'EXTRACTINTOCOMPONENT'],
       render: props => <UiBlock {...props} />,
-      outlineInfo: component => component.legend,
+      outlineInfo: component => component.label,
       fields: {
         ...baseComponentFields,
         components: { subsection: 'General', type: 'hidden' },
-        legend: {
+        label: {
           subsection: 'General',
           label: t('property.title'),
           type: 'textBrowser',
@@ -58,14 +58,14 @@ export const useFieldsetComponent = () => {
   };
 };
 
-const UiBlock = ({ id, components, legend, collapsible, collapsed, visible }: UiComponentProps<FieldsetProps>) => (
+const UiBlock = ({ id, components, label, collapsible, collapsed, visible }: UiComponentProps<FieldsetProps>) => (
   <>
     <UiBlockHeader visible={visible} />
     <fieldset className={`${collapsible ? (collapsed ? 'collapsible default-collapsed' : 'collapsible') : ''}`}>
       <legend>
         <Flex direction='row' alignItems='center' gap={1}>
           {collapsible ? (collapsed ? '+' : '-') : ''}
-          <UiBadge value={legend} />
+          <UiBadge value={label} />
         </Flex>
       </legend>
       {components.map((component, index) => (

@@ -138,6 +138,41 @@ test.describe('quickbar', () => {
     await canvas.expectFormOrder(['Firstname', 'Firstname', 'Lastname']);
   });
 
+  test('change', async ({ page }) => {
+    const editor = await FormEditor.openMock(page);
+    await editor.canvas.blockByText('Firstname').inscribe();
+    await editor.inscription.expectHeader('Input');
+    const properties = editor.inscription.section('Properties');
+    const section = properties.collapsible('General');
+    const label = section.input({ label: 'Label' });
+    const value = section.input({ label: 'Value' });
+    const type = section.select({ label: 'Type' });
+    await label.expectValue('Firstname');
+    await value.expectValue('data.value');
+    await type.expectValue('Text');
+    await type.choose('Number');
+
+    await editor.canvas.blockByText('Firstname').quickAction('Change Component Type');
+    await expect(page.getByRole('dialog').last().getByRole('button')).toHaveCount(8);
+    await page.getByRole('button', { name: 'Textarea' }).click();
+
+    await editor.inscription.expectHeader('Textarea');
+    await label.expectValue('Firstname');
+    await value.expectValue('data.value');
+    const rows = section.input({ label: 'Visible Rows', type: 'number' });
+    await rows.expectValue('5');
+
+    await editor.canvas.blockByText('Firstname').quickAction('Change Component Type');
+    await page.getByRole('button', { name: 'Input' }).click();
+    await editor.inscription.expectHeader('Input');
+    await label.expectValue('Firstname');
+    await value.expectValue('data.value');
+    await type.expectValue('Text');
+
+    await editor.canvas.blockByText('Proceed').quickAction('Change Component Type');
+    await expect(page.getByRole('dialog').last().getByRole('button')).toHaveCount(1);
+  });
+
   test('add', async ({ page }) => {
     const { canvas } = await FormEditor.openMock(page);
     await canvas.expectFormOrder(['Firstname', 'Lastname', 'Address']);

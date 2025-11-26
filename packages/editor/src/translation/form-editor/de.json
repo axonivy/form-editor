@@ -249,6 +249,7 @@
     "allComponents": "Alle Komponenten",
     "browser": "Browser",
     "bypassValidation": "Aktion ohne Validierung ausführen",
+    "changeComponentType": "Komponententyp ändern",
     "component": "Komponente",
     "composites": "Komposite",
     "createActionCol": "Aktionsspalte erstellen",

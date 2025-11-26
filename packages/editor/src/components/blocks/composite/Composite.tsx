@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useAppContext } from '../../../context/AppContext';
 import { useComponents } from '../../../context/ComponentsContext';
 import { useMeta } from '../../../context/useMeta';
-import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
+import { type ComponentConfig, type UiComponentProps } from '../../../types/config';
 import { addDefaults } from '../../component-factory';
 import { useBase } from '../base';
 import './Composite.css';
@@ -42,7 +42,7 @@ export const useCompositeComponent = () => {
         },
         parameters: { subsection: 'Parameters', type: 'generic', render: renderParameters }
       },
-      quickActions: [...DEFAULT_QUICK_ACTIONS, 'OPENCOMPONENT']
+      quickActions: ['DELETE', 'DUPLICATE', 'CREATE', 'CREATEFROMDATA', 'OPENCOMPONENT']
     } as const;
 
     return CompositeComponent;

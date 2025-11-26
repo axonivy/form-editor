@@ -29,9 +29,19 @@ export const useComponentsInit = () => {
     return config.components[type];
   };
 
-  const componentsByCategory = (category: ItemCategory) => {
-    const filteredComponents = Object.values(config.components).filter(component => component.category === category);
+  const componentsByCategory = (category: ItemCategory, excludeTypes?: ComponentType[]) => {
+    const filteredComponents = Object.values(config.components).filter(
+      component => component.category === category && !excludeTypes?.includes(component.name)
+    );
     return groupBy(Object.values(filteredComponents), item => item.subcategory);
+  };
+
+  const componentsByElement = (element: ComponentData, excludeTypes?: ComponentType[]) => {
+    const componentConfig = componentByElement(element);
+    if (!componentConfig) {
+      return {};
+    }
+    return componentsByCategory(componentConfig.category, excludeTypes);
   };
 
   const allComponentsByCategory = () => {
@@ -85,6 +95,7 @@ export const useComponentsInit = () => {
     config,
     componentByElement,
     componentByName,
+    componentsByElement,
     componentsByCategory,
     allComponentsByCategory
   };
