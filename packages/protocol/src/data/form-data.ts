@@ -13,6 +13,8 @@ import type {
   Layout,
   LayoutAlignItems,
   Panel,
+  Radio,
+  Select,
   SelectItem
 } from './form';
 
@@ -66,6 +68,8 @@ export type LayoutConfig = ComponentDataHelper<'Layout', Omit<Layout, 'component
 export type FieldsetConfig = ComponentDataHelper<'Fieldset', Omit<Fieldset, 'components' & { components: Array<ComponentData> }>>;
 export type PanelConfig = ComponentDataHelper<'Panel', Omit<Panel, 'components' & { components: Array<ComponentData> }>>;
 export type DialogConfig = ComponentDataHelper<'Dialog', Omit<Dialog, 'components' & { components: Array<ComponentData> }>>;
+export type RadioConfig = ComponentDataHelper<'Radio', Omit<Radio, 'components' & { components: Array<ComponentData> }>>;
+export type SelectConfig = ComponentDataHelper<'Select', Omit<Select, 'components' & { components: Array<ComponentData> }>>;
 
 export type FormData = Omit<Form, 'components' | '$schema'> & {
   components: Array<ComponentData>;
@@ -83,6 +87,10 @@ export const isStructure = (
 
 export const isTable = (component?: ComponentData): component is TableConfig => {
   return component !== undefined && component.type === 'DataTable' && 'components' in component.config;
+};
+
+export const isRadioSelect = (component?: ComponentData): component is RadioConfig | SelectConfig => {
+  return component !== undefined && (component.type === 'Radio' || component.type === 'Select') && 'dynamicItemsList' in component.config;
 };
 
 export const isColumn = (component?: ComponentData): component is ColumnConfig => {

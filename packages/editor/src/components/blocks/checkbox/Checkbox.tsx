@@ -33,7 +33,7 @@ export const useCheckboxComponent = () => {
           type: 'textBrowser',
           browsers: [{ type: 'CMS', options: { overrideSelection: true } }]
         },
-        selected: {
+        value: {
           subsection: 'General',
           label: t('property.selected'),
           type: 'textBrowser',
@@ -52,12 +52,12 @@ export const useCheckboxComponent = () => {
   };
 };
 
-const UiBlock = ({ label, selected, visible, disabled, updateOnChange }: UiComponentProps<CheckboxProps>) => (
+const UiBlock = ({ label, value, visible, disabled, updateOnChange }: UiComponentProps<CheckboxProps>) => (
   <>
     <UiBlockHeader visible={visible} disabled={disabled} updateOnChange={updateOnChange} />
     <Flex direction='row' gap={1} className='block-checkbox'>
-      <div className={`checkbox-button ${selected.toLowerCase() !== 'false' && 'checkbox-checked'}`}>
-        {selected.toLowerCase() !== 'false' && <IvyIcon icon={IvyIcons.Check} className='checkbox-icon' />}
+      <div className={`checkbox-button ${value.toLowerCase() !== 'false' && 'checkbox-checked'}`}>
+        {value.toLowerCase() !== 'false' && <IvyIcon icon={IvyIcons.Check} className='checkbox-icon' />}
       </div>
       <UiBadge value={label} />
     </Flex>

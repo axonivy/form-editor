@@ -79,6 +79,19 @@ export const useComponentBlockActions = ({
     );
   };
 
+  const changeElementType = (name: ComponentType) => {
+    let newCid;
+    setData(oldData => {
+      const result = modifyData(oldData, {
+        type: 'changeType',
+        data: { id: data.cid, componentType: name }
+      });
+      newCid = result.newComponentId ?? data.cid;
+      setSelectedElement(newCid);
+      return result.newData;
+    });
+  };
+
   const createElement = (name: ComponentType) => {
     setData(
       oldData =>
@@ -131,6 +144,7 @@ export const useComponentBlockActions = ({
     createColumn,
     createActionColumn,
     createActionButton,
+    changeElementType,
     createElement
   };
 };

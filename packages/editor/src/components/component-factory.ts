@@ -1,4 +1,11 @@
-import { CONFIG_DEFAULTS, type ComponentConfigs, type ComponentData, type ComponentType } from '@axonivy/form-editor-protocol';
+import {
+  CONFIG_DEFAULTS,
+  isRadioSelect,
+  isTable,
+  type ComponentConfigs,
+  type ComponentData,
+  type ComponentType
+} from '@axonivy/form-editor-protocol';
 
 export const addDefaults = <TType extends ComponentType>(type: TType, config?: Partial<ComponentConfigs[TType]>) => {
   const defaults: ComponentData['config'] = CONFIG_DEFAULTS[type];
@@ -21,7 +28,7 @@ export const createComponent = <TType extends ComponentType>(type: TType, create
     case 'Button':
       return addDefaults('Button', { name: label, action: value, ...config }) as ComponentConfigs[TType];
     case 'Checkbox':
-      return addDefaults('Checkbox', { label, selected: value, ...config }) as ComponentConfigs[TType];
+      return addDefaults('Checkbox', { label, value, ...config }) as ComponentConfigs[TType];
     case 'Dialog':
       return addDefaults('Dialog', { header: label, linkedComponent: value, ...config }) as ComponentConfigs[TType];
     case 'Composite':
@@ -41,6 +48,24 @@ export const createComponent = <TType extends ComponentType>(type: TType, create
   }
   return addDefaults(type, { ...config });
 };
+
+export function applyConfigOfPreviousComponent(previous: ComponentData, current: ComponentData): void {
+  const prevConfig = previous.config;
+  const currConfig = current.config;
+
+  (Object.keys(currConfig) as (keyof typeof currConfig)[]).forEach(key => {
+    if (key in prevConfig) {
+      currConfig[key] = prevConfig[key];
+    }
+  });
+
+  if (isTable(current) && isRadioSelect(previous)) {
+    current.config.value = previous.config.dynamicItemsList;
+  }
+  if (isTable(previous) && isRadioSelect(current)) {
+    current.config.dynamicItemsList = previous.config.value;
+  }
+}
 
 export const componentForDataType = (
   dataType: string

@@ -27,11 +27,11 @@ export const usePanelComponent = () => {
       description: t('components.panel.description'),
       quickActions: [...DEFAULT_QUICK_ACTIONS, 'EXTRACTINTOCOMPONENT'],
       render: props => <UiBlock {...props} />,
-      outlineInfo: component => component.title,
+      outlineInfo: component => component.label,
       fields: {
         ...baseComponentFields,
         components: { subsection: 'General', type: 'hidden' },
-        title: {
+        label: {
           subsection: 'General',
           label: t('property.title'),
           type: 'textBrowser',
@@ -60,10 +60,10 @@ export const usePanelComponent = () => {
   };
 };
 
-const UiBlock = ({ id, components, title, collapsible, collapsed, visible }: UiComponentProps<PanelProps>) => (
+const UiBlock = ({ id, components, label, collapsible, collapsed, visible }: UiComponentProps<PanelProps>) => (
   <div className={`i-panel ${collapsible && collapsed ? 'default-collapsed' : ''}`}>
     <div className='i-panel-header'>
-      <UiBadge value={title} />
+      <UiBadge value={label} />
       <Flex gap={1} alignItems='center'>
         <UiBlockHeaderVisiblePart visible={visible} />
         {collapsible ? (

@@ -12,7 +12,7 @@ import {
   type FormData,
   type TableConfig
 } from '@axonivy/form-editor-protocol';
-import { createComponent, type CreateData } from '../components/component-factory';
+import { applyConfigOfPreviousComponent, createComponent, type CreateData } from '../components/component-factory';
 import { useAppContext } from '../context/AppContext';
 import type { UpdateConsumer } from '../types/types';
 import { add, remove } from '../utils/array';
@@ -162,6 +162,22 @@ const addComponent = (data: Array<ComponentData>, component: ComponentData, id: 
   return component.cid;
 };
 
+const changeTypeComponent = (data: Array<ComponentData>, id: string, type: ComponentType) => {
+  const find = findComponent(data, id);
+  if (find) {
+    const removed = remove(find.data, find.index);
+    if (!removed) return;
+    const newComponent = createComponentData(data, type);
+    if (newComponent) {
+      applyConfigOfPreviousComponent(removed, newComponent);
+      add(find.data, newComponent, find.index);
+      defineNewCid(data, newComponent);
+      return newComponent.cid;
+    }
+  }
+  return;
+};
+
 const removeComponent = (data: Array<ComponentData>, id: string) => {
   const find = findComponent(data, id);
   if (find) {
@@ -201,7 +217,8 @@ type ModifyAction<TType extends ComponentType = ComponentType> =
         clipboard: Partial<ConfigData>;
         targetId: string;
       };
-    };
+    }
+  | { type: 'changeType'; data: { id: string; componentType: TType } };
 
 const dndModify = (data: Array<ComponentData>, action: Extract<ModifyAction, { type: 'dnd' }>['data']) => {
   if (isComponentType(action.activeId)) {
@@ -291,6 +308,9 @@ export const modifyData = <TType extends ComponentType>(data: FormData, action: 
       break;
     case 'paste':
       pasteComponent(newData, action.data.componentType, action.data.clipboard, action.data.targetId);
+      break;
+    case 'changeType':
+      newComponentId = changeTypeComponent(newData.components, action.data.id, action.data.componentType);
       break;
     case 'remove':
       removeComponent(newData.components, action.data.id);

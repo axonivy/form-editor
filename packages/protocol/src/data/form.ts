@@ -160,8 +160,8 @@ export interface Checkbox {
   lgSpan: string;
   listener: FormExpression;
   mdSpan: string;
-  selected: FormExpression;
   updateOnChange: boolean;
+  value: FormExpression;
   visible: FormExpression;
 }
 export interface Combobox {
@@ -267,7 +267,7 @@ export interface Fieldset {
   collapsible: boolean;
   components: Component[];
   id: string;
-  legend: FormExpression;
+  label: FormExpression;
   lgSpan: string;
   mdSpan: string;
   visible: FormExpression;
@@ -317,9 +317,9 @@ export interface Panel {
   collapsible: boolean;
   components: Component[];
   id: string;
+  label: FormExpression;
   lgSpan: string;
   mdSpan: string;
-  title: FormExpression;
   visible: FormExpression;
 }
 export interface Radio {

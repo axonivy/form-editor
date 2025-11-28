@@ -116,7 +116,7 @@ export const data: DeepPartial<FormData> = {
       cid: 'Fieldset-dd040544-90c6-47e3-867a-ee310c74391c',
       type: 'Fieldset',
       config: {
-        legend: 'Legend',
+        label: 'Legend',
         collapsible: true,
         disabled: 'false',
         collapsed: false,
