@@ -88,7 +88,9 @@
     "objNotValid": "定義されたオブジェクトは有効ではありません",
     "openComponent": "コンポーネントを開く (J)",
     "options": "オプション",
-    "bypassValidation": "検証なしでアクションを実行"
+    "bypassValidation": "検証なしでアクションを実行",
+    "changeComponentType": "コンポーネントタイプの変更",
+    "validationMessage": "検証メッセージ"
   },
   "category": {
     "actions": "アクション",
@@ -233,7 +235,8 @@
         "editable": "編集可能",
         "editDialog": "編集ダイアログ",
         "enablePaginator": "ページネーターを有効化",
-        "rowsPerPage": "1 ページあたりの行数"
+        "rowsPerPage": "1 ページあたりの行数",
+        "resizableColumns": "幅変更可能な列"
       },
       "valueEmpty": "データテーブルの値が空です。データテーブルのプロパティ内で値を定義してください"
     },
@@ -244,7 +247,10 @@
         "actionColumn": "アクション列",
         "enableFiltering": "フィルタリングを有効化",
         "groupActions": "グループアクション",
-        "header": "ヘッダー"
+        "header": "ヘッダー",
+        "width": "幅",
+        "widthAuto": "自動",
+        "widthPlaceholder": "150pxまたは20%（空欄の場合は自動サイズ調整）"
       }
     },
     "datePicker": {
