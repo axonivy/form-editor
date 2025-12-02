@@ -49,7 +49,9 @@ test('delete datatable also deletes dialog', async () => {
       useComponentBlockActions({
         config: DataTableComponent as unknown as ComponentConfig,
         data: compData,
-        setShowExtractDialog: () => {}
+        setShowExtractDialog: () => {},
+        setMenu: () => {},
+        setPaletteMode: () => {}
       }),
     {
       wrapperProps: {
