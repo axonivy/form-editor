@@ -1,7 +1,7 @@
 import type { Component, ComponentData, ComponentType } from '@axonivy/form-editor-protocol';
 import { Button, Flex, Popover, PopoverAnchor, PopoverContent, Separator, useReadonly } from '@axonivy/ui-components';
 import { IvyIcons } from '@axonivy/ui-icons';
-import { useState } from 'react';
+import { type Dispatch, type SetStateAction } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useComponents } from '../../context/ComponentsContext';
 import { useData } from '../../data/data';
@@ -9,7 +9,13 @@ import { DataClassDialog } from '../browser/data-class/DataClassDialog';
 import { ExtractComponentDialog } from '../browser/extract/ExtractComponentDialog';
 import { FormPalette } from '../palette/Palette';
 
+export type PaletteMode = 'create' | 'replace' | undefined;
+
 type QuickbarProps = {
+  menu: boolean;
+  setMenu: Dispatch<SetStateAction<boolean>>;
+  paletteMode: PaletteMode;
+  setPaletteMode: Dispatch<SetStateAction<PaletteMode>>;
   deleteAction?: () => void;
   duplicateAction?: () => void;
   createAction?: (name: ComponentType) => void;
@@ -23,22 +29,20 @@ type QuickbarProps = {
 };
 
 export const Quickbar = (props: QuickbarProps) => {
-  const [menu, setMenu] = useState(false);
-  const [paletteMode, setPaletteMode] = useState<'create' | 'replace' | null>(null);
   const readonly = useReadonly();
   if (readonly) {
     return null;
   }
   return (
     <PopoverContent className='quickbar' sideOffset={8} onOpenAutoFocus={e => e.preventDefault()} hideWhenDetached={true}>
-      <Popover open={menu} onOpenChange={change => setMenu(change)}>
+      <Popover open={props.menu} onOpenChange={change => props.setMenu(change)}>
         <PopoverAnchor asChild>
           <Flex gap={1}>
-            <QuickbarButtons setPaletteMode={setPaletteMode} onToggleMenu={() => setMenu(old => !old)} {...props} />
+            <QuickbarButtons onToggleMenu={() => props.setMenu(old => !old)} {...props} />
           </Flex>
         </PopoverAnchor>
         <PopoverContent className='quickbar-menu' sideOffset={8} onClick={e => e.stopPropagation()}>
-          <PaletteContent paletteMode={paletteMode} {...props} />
+          <PaletteContent {...props} />
         </PopoverContent>
       </Popover>
     </PopoverContent>
@@ -47,7 +51,6 @@ export const Quickbar = (props: QuickbarProps) => {
 
 type QuickbarButtonsProps = {
   onToggleMenu: () => void;
-  setPaletteMode: (mode: 'create' | 'replace' | null) => void;
 } & QuickbarProps;
 
 const QuickbarButtons = ({
@@ -62,7 +65,9 @@ const QuickbarButtons = ({
   createFromDataAction,
   createActionColumnButtonAction,
   onToggleMenu,
-  setPaletteMode
+  setPaletteMode,
+  paletteMode,
+  menu
 }: QuickbarButtonsProps) => {
   const { t } = useTranslation();
 
@@ -81,6 +86,19 @@ const QuickbarButtons = ({
           aria-label={t('label.openComponent')}
           title={t('label.openComponent')}
           onClick={openComponentAction}
+        />
+      )}
+      {changeTypeAction && (
+        <Button
+          icon={IvyIcons.Replace}
+          aria-label={t('label.changeComponentType')}
+          title={t('label.changeComponentType')}
+          onClick={e => {
+            e.stopPropagation();
+            setPaletteMode('replace');
+            onToggleMenu();
+          }}
+          variant={menu && paletteMode === 'replace' ? 'primary-outline' : undefined}
         />
       )}
       {extractIntoComponent && (
@@ -128,18 +146,6 @@ const QuickbarButtons = ({
           onClick={createActionColumnButtonAction}
         />
       )}
-      {changeTypeAction && (
-        <Button
-          icon={IvyIcons.ChangeType}
-          aria-label={t('label.changeComponentType')}
-          title={t('label.changeComponentType')}
-          onClick={e => {
-            e.stopPropagation();
-            setPaletteMode('replace');
-            onToggleMenu();
-          }}
-        />
-      )}
       {createFromDataAction && (
         <DataClassDialog workflowButtonsInit={false} creationTarget={createFromDataAction}>
           <Button
@@ -156,13 +162,14 @@ const QuickbarButtons = ({
       {createAction && (
         <Button
           icon={IvyIcons.Task}
-          aria-label={t('label.allComponents')}
-          title={t('label.allComponents')}
+          aria-label={t('label.allComponentsInsert')}
+          title={t('label.allComponentsInsert')}
           onClick={e => {
             e.stopPropagation();
             setPaletteMode('create');
             onToggleMenu();
           }}
+          variant={menu && paletteMode === 'create' ? 'primary-outline' : undefined}
         />
       )}
     </>
@@ -170,7 +177,7 @@ const QuickbarButtons = ({
 };
 
 type PaletteContentProps = Pick<QuickbarProps, 'createAction' | 'changeTypeAction'> & {
-  paletteMode: 'create' | 'replace' | null;
+  paletteMode: PaletteMode;
 };
 
 const PaletteContent = ({ changeTypeAction, createAction, paletteMode }: PaletteContentProps) => {

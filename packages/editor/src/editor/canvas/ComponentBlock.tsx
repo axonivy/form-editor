@@ -1,6 +1,7 @@
 import type { Button as ButtonType, Component, ComponentData, Composite, DataTableColumn } from '@axonivy/form-editor-protocol';
 import { cn, evalDotState, Popover, PopoverAnchor, useDialogHotkeys, useReadonly } from '@axonivy/ui-components';
 import { useDraggable } from '@dnd-kit/core';
+import { useState } from 'react';
 import { addDefaults } from '../../components/component-factory';
 import { useAppContext } from '../../context/AppContext';
 import { useComponents } from '../../context/ComponentsContext';
@@ -10,7 +11,7 @@ import type { ComponentConfig } from '../../types/config';
 import './ComponentBlock.css';
 import { dragData } from './drag-data';
 import { DropZone, type DropZoneProps } from './DropZone';
-import { Quickbar } from './Quickbar';
+import { Quickbar, type PaletteMode } from './Quickbar';
 import { useComponentBlockActions } from './useComponentBlockActions';
 import { useCopyPaste } from './useCopyPaste';
 
@@ -40,6 +41,8 @@ export type DraggableProps = {
 const Draggable = ({ config, data }: DraggableProps) => {
   const { setUi } = useAppContext();
   const { data: formData } = useData();
+  const [componentMenu, setComponentMenu] = useState(false);
+  const [paletteMode, setPaletteMode] = useState<PaletteMode>(undefined);
   const readonly = useReadonly();
   const isDataTableEditableButtons =
     data.type === 'Button' && ((data.config as ButtonType).type === 'EDIT' || (data.config as ButtonType).type === 'DELETE');
@@ -65,7 +68,13 @@ const Draggable = ({ config, data }: DraggableProps) => {
     changeElementType,
     createActionColumn,
     createColumn
-  } = useComponentBlockActions({ config, data, setShowExtractDialog: onOpenExtractDialogChange });
+  } = useComponentBlockActions({
+    config,
+    data,
+    setShowExtractDialog: onOpenExtractDialogChange,
+    setMenu: setComponentMenu,
+    setPaletteMode
+  });
   const validations = useValidations(data.cid);
   const clipboardProps = useCopyPaste(data);
   const parentComponent = getParentComponent(formData.components, data.cid);
@@ -101,6 +110,10 @@ const Draggable = ({ config, data }: DraggableProps) => {
       </PopoverAnchor>
       {!isDialogButton && (
         <Quickbar
+          menu={componentMenu}
+          setMenu={setComponentMenu}
+          paletteMode={paletteMode}
+          setPaletteMode={setPaletteMode}
           deleteAction={config.quickActions.includes('DELETE') ? deleteElement : undefined}
           duplicateAction={config.quickActions.includes('DUPLICATE') && !isDataTableEditableButtons ? duplicateElement : undefined}
           createAction={parentComponent?.type !== 'DataTableColumn' && config.quickActions.includes('CREATE') ? createElement : undefined}

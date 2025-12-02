@@ -1,16 +1,24 @@
 import type { Button, ComponentType, Composite } from '@axonivy/form-editor-protocol';
 import { useReadonly } from '@axonivy/ui-components';
+import type { Dispatch, SetStateAction } from 'react';
 import { addDefaults } from '../../components/component-factory';
 import { useAppContext } from '../../context/AppContext';
 import { useAction } from '../../context/useAction';
 import { COLUMN_DROPZONE_ID_PREFIX, creationTargetId, modifyData, TABLE_DROPZONE_ID_PREFIX, useData } from '../../data/data';
 import type { DraggableProps } from './ComponentBlock';
+import type { PaletteMode } from './Quickbar';
 
 export const useComponentBlockActions = ({
   config,
   data,
-  setShowExtractDialog
-}: DraggableProps & { setShowExtractDialog: (open: boolean) => void }) => {
+  setShowExtractDialog,
+  setMenu,
+  setPaletteMode
+}: DraggableProps & {
+  setShowExtractDialog: (open: boolean) => void;
+  setMenu: Dispatch<SetStateAction<boolean>>;
+  setPaletteMode: Dispatch<SetStateAction<PaletteMode>>;
+}) => {
   const { setSelectedElement, setUi } = useAppContext();
   const readonly = useReadonly();
   const { setData } = useData();
@@ -112,6 +120,18 @@ export const useComponentBlockActions = ({
     if (e.key === 'Delete' && !isDialogButton) {
       e.stopPropagation();
       deleteElement();
+    }
+    if (e.code === 'KeyT' && !isDataTableEditableButtons) {
+      e.stopPropagation();
+      e.preventDefault();
+      setPaletteMode('replace');
+      setMenu(old => !old);
+    }
+    if (e.code === 'KeyN' && !isDataTableEditableButtons) {
+      e.stopPropagation();
+      e.preventDefault();
+      setPaletteMode('create');
+      setMenu(old => !old);
     }
     if (e.key === 'ArrowUp' && !isDataTableEditableButtons) {
       e.stopPropagation();
