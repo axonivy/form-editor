@@ -87,8 +87,8 @@ export const COMBOBOX_DEFAULTS: Combobox = {
   label: 'Combobox',
   value: '',
   completeMethod: '',
-  itemLabel: '',
-  itemValue: '',
+  itemLabel: '#{item}',
+  itemValue: '#{item}',
   withDropdown: false,
   ...REQUIRE_DEFAULTS,
   ...BASE_DEFAULTS

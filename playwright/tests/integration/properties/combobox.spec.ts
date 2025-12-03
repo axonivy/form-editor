@@ -25,6 +25,8 @@ test('default', async ({ page }) => {
   await label.fill('Hi');
   await value.fill('#{data.zag}');
   await complete.fill('#{data.complete}');
+  await itemLabel.expectValue('#{item}');
+  await itemValue.expectValue('#{item}');
   await itemLabel.fill('label');
   await itemValue.fill('value');
   await button.check();
