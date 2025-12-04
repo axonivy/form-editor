@@ -1,7 +1,7 @@
 import type { Button, ButtonStyle, ButtonVariant, ConfirmDialogSeverity, Prettify } from '@axonivy/form-editor-protocol';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type FieldOption, type UiComponentProps } from '../../../types/config';
+import { type ComponentConfig, type FieldOption, type UiComponentProps } from '../../../types/config';
 import { UiBadge, UiBlockHeader } from '../../UiBlockHeader';
 import { useBase } from '../base';
 import './Button.css';
@@ -160,8 +160,7 @@ export const useButtonComponent = () => {
           hide: data => !data.confirmDialog || data.type !== 'DELETE'
         },
         ...disabledComponentFields
-      },
-      quickActions: DEFAULT_QUICK_ACTIONS
+      }
     };
 
     return component;

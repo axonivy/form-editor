@@ -1,7 +1,7 @@
 import { type Input, type InputType, type Prettify, type SymbolPosition } from '@axonivy/form-editor-protocol';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type FieldOption, type UiComponentProps } from '../../../types/config';
+import { type ComponentConfig, type FieldOption, type UiComponentProps } from '../../../types/config';
 import { UiBadge, UiBlockHeader } from '../../UiBlockHeader';
 import { useBase } from '../base';
 import './Input.css';
@@ -67,8 +67,7 @@ export const useInputComponent = () => {
           hide: data => data.type !== 'EMAIL'
         },
         ...behaviourComponentFields
-      },
-      quickActions: DEFAULT_QUICK_ACTIONS
+      }
     };
 
     return InputComponent;

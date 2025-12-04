@@ -3,7 +3,7 @@ import { Flex, IvyIcon } from '@axonivy/ui-components';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
+import { type ComponentConfig, type UiComponentProps } from '../../../types/config';
 import { UiBadge, UiBlockHeader } from '../../UiBlockHeader';
 import { useBase } from '../base';
 import './Checkbox.css';
@@ -40,8 +40,7 @@ export const useCheckboxComponent = () => {
           browsers: [{ type: 'ATTRIBUTE' }]
         },
         ...updateOnChangeComponentFields
-      },
-      quickActions: DEFAULT_QUICK_ACTIONS
+      }
     };
 
     return component;

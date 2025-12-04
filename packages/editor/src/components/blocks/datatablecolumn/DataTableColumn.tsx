@@ -94,7 +94,6 @@ export const useDataTableColumnComponent = () => {
 
         ...visibleComponentField
       },
-      quickActions: ['DELETE', 'DUPLICATE', 'CREATEACTIONCOLUMNBUTTON'],
       subSectionControls: (props, subSection) => (subSection === 'Content' ? <ContentControls {...props} /> : null)
     };
 

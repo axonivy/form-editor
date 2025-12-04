@@ -240,6 +240,9 @@ test('editable datatable buttons', async ({ page }) => {
   const deleteButton = editor.canvas.blockByNth(1, { datatableNth: 0, columnNth: 3, actionButton: true });
   await deleteButton.quickAction('Delete', true);
 
+  const actionColumn = editor.canvas.blockByNth(3, { datatableNth: 0, column: true });
+  await actionColumn.select({ position: { x: 10, y: 10 } });
+
   const contentSection = properties.collapsible('Content');
   await contentSection.expectListItems(1);
 
