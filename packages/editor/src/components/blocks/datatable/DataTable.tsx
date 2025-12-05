@@ -80,7 +80,7 @@ export const useDataTableComponent = () => {
         },
         ...updateOnChangeComponentFields
       },
-      quickActions: ['DELETE', 'DUPLICATE', 'CREATECOLUMN', 'CREATEACTIONCOLUMN', 'CHANGETYPE'],
+
       subSectionControls: (props, subSection) => (subSection === 'Columns' ? <ColumnControl {...props} /> : null),
       onDelete: (component, setData) => {
         if (component.editDialogId.length > 0) {

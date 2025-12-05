@@ -1,31 +1,25 @@
-import type { Button, ComponentType, Composite } from '@axonivy/form-editor-protocol';
-import { useReadonly } from '@axonivy/ui-components';
+import type { ComponentType } from '@axonivy/form-editor-protocol';
+import { useDialogHotkeys } from '@axonivy/ui-components';
 import type { Dispatch, SetStateAction } from 'react';
 import { addDefaults } from '../../components/component-factory';
 import { useAppContext } from '../../context/AppContext';
 import { useAction } from '../../context/useAction';
 import { COLUMN_DROPZONE_ID_PREFIX, creationTargetId, modifyData, TABLE_DROPZONE_ID_PREFIX, useData } from '../../data/data';
 import type { DraggableProps } from './ComponentBlock';
-import type { PaletteMode } from './Quickbar';
+import type { PaletteMode } from './quickbar/Quickbar';
 
 export const useComponentBlockActions = ({
   config,
   data,
-  setShowExtractDialog,
-  setMenu,
+  setComponentMenu,
   setPaletteMode
 }: DraggableProps & {
-  setShowExtractDialog: (open: boolean) => void;
-  setMenu: Dispatch<SetStateAction<boolean>>;
+  setComponentMenu: Dispatch<SetStateAction<boolean>>;
   setPaletteMode: Dispatch<SetStateAction<PaletteMode>>;
 }) => {
-  const { setSelectedElement, setUi } = useAppContext();
-  const readonly = useReadonly();
+  const { setSelectedElement } = useAppContext();
   const { setData } = useData();
-  const isDataTableEditableButtons =
-    data.type === 'Button' && ((data.config as Button).type === 'EDIT' || (data.config as Button).type === 'DELETE');
-  const isDialogButton =
-    data.type === 'Button' && ((data.config as Button).type === 'DIALOGCANCEL' || (data.config as Button).type === 'DIALOGSAVE');
+  const { open: showExtractDialog, onOpenChange: onOpenExtractDialogChange } = useDialogHotkeys(['extractDialog']);
   const elementConfig = addDefaults(data.type, data.config);
   const deleteElement = () => {
     setData(oldData => modifyData(oldData, { type: 'remove', data: { id: data.cid } }).newData);
@@ -110,61 +104,27 @@ export const useComponentBlockActions = ({
     );
   };
 
-  const onKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') {
-      e.stopPropagation();
-      setSelectedElement(data.cid);
-      setUi(old => ({ ...old, properties: true }));
-    }
-    if (readonly) return;
-    if (e.key === 'Delete' && !isDialogButton) {
-      e.stopPropagation();
-      deleteElement();
-    }
-    if (e.code === 'KeyT' && !isDataTableEditableButtons) {
-      e.stopPropagation();
-      e.preventDefault();
-      setPaletteMode('replace');
-      setMenu(old => !old);
-    }
-    if (e.code === 'KeyN' && !isDataTableEditableButtons) {
-      e.stopPropagation();
-      e.preventDefault();
-      setPaletteMode('create');
-      setMenu(old => !old);
-    }
-    if (e.key === 'ArrowUp' && !isDataTableEditableButtons) {
-      e.stopPropagation();
-      setData(oldData => modifyData(oldData, { type: 'moveUp', data: { id: data.cid } }).newData);
-    }
-    if (e.key === 'ArrowDown' && !isDataTableEditableButtons) {
-      e.stopPropagation();
-      setData(oldData => modifyData(oldData, { type: 'moveDown', data: { id: data.cid } }).newData);
-    }
-    if (e.code === 'KeyM' && !isDataTableEditableButtons && !isDialogButton) {
-      e.stopPropagation();
-      duplicateElement();
-    }
-    if (e.code === 'KeyJ' && config.quickActions.find(q => q === 'OPENCOMPONENT')) {
-      e.stopPropagation();
-      openComponent((data.config as Composite).name);
-    }
-    if (e.code === 'KeyE' && config.quickActions.find(q => q === 'EXTRACTINTOCOMPONENT')) {
-      e.stopPropagation();
-      setTimeout(() => {
-        setShowExtractDialog(true);
-      }, 0);
-    }
+  const toggleComponentMenu = (paletteMode: PaletteMode) => {
+    setPaletteMode(paletteMode);
+    setComponentMenu(old => !old);
   };
+
+  const extractComponent = {
+    data,
+    openDialog: showExtractDialog,
+    setOpenDialog: onOpenExtractDialogChange
+  };
+
   return {
     deleteElement,
     duplicateElement,
     openComponent,
-    onKeyDown,
     createColumn,
+    toggleComponentMenu,
     createActionColumn,
     createActionButton,
     changeElementType,
-    createElement
+    createElement,
+    extractComponent
   };
 };

@@ -1,7 +1,7 @@
 import { type Link, type Prettify } from '@axonivy/form-editor-protocol';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
+import { type ComponentConfig, type UiComponentProps } from '../../../types/config';
 import { UiBadge, UiBlockHeader } from '../../UiBlockHeader';
 import { useBase } from '../base';
 import './Link.css';
@@ -33,8 +33,7 @@ export const useLinkComponent = () => {
         },
         href: { subsection: 'General', label: t('components.link.property.href'), type: 'text' },
         ...visibleComponentField
-      },
-      quickActions: DEFAULT_QUICK_ACTIONS
+      }
     };
 
     return LinkComponent;

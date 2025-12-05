@@ -3,7 +3,7 @@ import { IvyIcon } from '@axonivy/ui-components';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
+import { type ComponentConfig, type UiComponentProps } from '../../../types/config';
 import { UiBadge, UiBlockHeader } from '../../UiBlockHeader';
 import { useBase } from '../base';
 import './Combobox.css';
@@ -59,8 +59,7 @@ export const useComboboxComponent = () => {
         },
         withDropdown: { subsection: 'Options', label: t('components.combobox.addDropdown'), type: 'checkbox' },
         ...behaviourComponentFields
-      },
-      quickActions: DEFAULT_QUICK_ACTIONS
+      }
     };
     return component;
   }, [baseComponentFields, behaviourComponentFields, t]);

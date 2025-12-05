@@ -1,18 +1,17 @@
-import type { Button as ButtonType, Component, ComponentData, Composite, DataTableColumn } from '@axonivy/form-editor-protocol';
-import { cn, evalDotState, Popover, PopoverAnchor, useDialogHotkeys, useReadonly } from '@axonivy/ui-components';
+import type { Component, ComponentData } from '@axonivy/form-editor-protocol';
+import { cn, evalDotState, Popover, PopoverAnchor, useReadonly } from '@axonivy/ui-components';
 import { useDraggable } from '@dnd-kit/core';
-import { useState } from 'react';
 import { addDefaults } from '../../components/component-factory';
 import { useAppContext } from '../../context/AppContext';
+import { ComponentBlockProvider, useComponentBlock } from '../../context/ComponentBlockContext';
 import { useComponents } from '../../context/ComponentsContext';
 import { useValidations } from '../../context/useValidation';
-import { getParentComponent, useData } from '../../data/data';
 import type { ComponentConfig } from '../../types/config';
 import './ComponentBlock.css';
 import { dragData } from './drag-data';
 import { DropZone, type DropZoneProps } from './DropZone';
-import { Quickbar, type PaletteMode } from './Quickbar';
-import { useComponentBlockActions } from './useComponentBlockActions';
+import { isDataTableEditableButtons, isDialogButton } from './quickbar/component-quickaction-registry';
+import { Quickbar } from './quickbar/Quickbar';
 import { useCopyPaste } from './useCopyPaste';
 
 type ComponentBlockProps = Omit<DropZoneProps, 'id'> & {
@@ -28,7 +27,9 @@ export const ComponentBlock = ({ component, preId, ...props }: ComponentBlockPro
   }
   return (
     <DropZone id={component.cid} type={component.type} preId={preId} {...props}>
-      <Draggable config={config} data={component} />
+      <ComponentBlockProvider config={config} data={component}>
+        <Draggable />
+      </ComponentBlockProvider>
     </DropZone>
   );
 };
@@ -38,49 +39,24 @@ export type DraggableProps = {
   data: Component | ComponentData;
 };
 
-const Draggable = ({ config, data }: DraggableProps) => {
+const Draggable = () => {
   const { setUi } = useAppContext();
-  const { data: formData } = useData();
-  const [componentMenu, setComponentMenu] = useState(false);
-  const [paletteMode, setPaletteMode] = useState<PaletteMode>(undefined);
+  const { data, config, onKeyDown } = useComponentBlock();
   const readonly = useReadonly();
-  const isDataTableEditableButtons =
-    data.type === 'Button' && ((data.config as ButtonType).type === 'EDIT' || (data.config as ButtonType).type === 'DELETE');
-  const isDialogButton =
-    data.type === 'Button' && ((data.config as ButtonType).type === 'DIALOGCANCEL' || (data.config as ButtonType).type === 'DIALOGSAVE');
-
   const { isDragging, attributes, listeners, setNodeRef } = useDraggable({
-    disabled: readonly || isDataTableEditableButtons || isDialogButton,
+    disabled: readonly || isDataTableEditableButtons(data) || isDialogButton(data),
     id: data.cid,
     data: dragData(data)
   });
   const { selectedElement, setSelectedElement } = useAppContext();
   const isSelected = selectedElement === data.cid;
   const elementConfig = addDefaults(data.type, data.config);
-  const { open: showExtractDialog, onOpenChange: onOpenExtractDialogChange } = useDialogHotkeys(['extractDialog']);
-  const {
-    createElement,
-    duplicateElement,
-    openComponent,
-    onKeyDown,
-    deleteElement,
-    createActionButton,
-    changeElementType,
-    createActionColumn,
-    createColumn
-  } = useComponentBlockActions({
-    config,
-    data,
-    setShowExtractDialog: onOpenExtractDialogChange,
-    setMenu: setComponentMenu,
-    setPaletteMode
-  });
   const validations = useValidations(data.cid);
   const clipboardProps = useCopyPaste(data);
-  const parentComponent = getParentComponent(formData.components, data.cid);
   if (data.type === 'Dialog') {
     return null;
   }
+
   return (
     <Popover open={isSelected && !isDragging}>
       <PopoverAnchor asChild>
@@ -108,44 +84,7 @@ const Draggable = ({ config, data }: DraggableProps) => {
           {config.render({ ...elementConfig, id: data.cid })}
         </div>
       </PopoverAnchor>
-      {!isDialogButton && (
-        <Quickbar
-          menu={componentMenu}
-          setMenu={setComponentMenu}
-          paletteMode={paletteMode}
-          setPaletteMode={setPaletteMode}
-          deleteAction={config.quickActions.includes('DELETE') ? deleteElement : undefined}
-          duplicateAction={config.quickActions.includes('DUPLICATE') && !isDataTableEditableButtons ? duplicateElement : undefined}
-          createAction={parentComponent?.type !== 'DataTableColumn' && config.quickActions.includes('CREATE') ? createElement : undefined}
-          changeTypeAction={config.quickActions.includes('CHANGETYPE') ? changeElementType : undefined}
-          createFromDataAction={
-            parentComponent?.type !== 'DataTableColumn' &&
-            parentComponent?.type !== 'Dialog' &&
-            config.quickActions.includes('CREATEFROMDATA')
-              ? data.cid
-              : undefined
-          }
-          openComponentAction={
-            config.quickActions.includes('OPENCOMPONENT') && data.type === 'Composite'
-              ? () => openComponent((data.config as Composite).name)
-              : undefined
-          }
-          extractIntoComponent={
-            config.quickActions.includes('EXTRACTINTOCOMPONENT')
-              ? { data, openDialog: showExtractDialog, setOpenDialog: onOpenExtractDialogChange }
-              : undefined
-          }
-          createColumnAction={config.quickActions.includes('CREATECOLUMN') ? createColumn : undefined}
-          createActionColumnAction={config.quickActions.includes('CREATEACTIONCOLUMN') ? createActionColumn : undefined}
-          createActionColumnButtonAction={
-            config.quickActions.includes('CREATEACTIONCOLUMNBUTTON') &&
-            data.type === 'DataTableColumn' &&
-            (data.config as DataTableColumn).asActionColumn
-              ? createActionButton
-              : undefined
-          }
-        />
-      )}
+      <Quickbar />
     </Popover>
   );
 };

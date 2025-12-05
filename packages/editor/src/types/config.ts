@@ -116,7 +116,6 @@ export type ComponentConfig<ComponentProps extends DefaultComponentProps = Defau
   render: UiComponent<ComponentProps>;
   outlineInfo: (data: ComponentProps) => string | undefined;
   fields: Fields<ComponentProps>;
-  quickActions: QuickAction[];
   subSectionControls?: (props: CollapsibleControlProps, subSection: Subsection) => ReactNode;
   onDelete?: (component: ComponentProps, setData: UpdateConsumer<FormData>) => void;
 };
@@ -127,17 +126,3 @@ export type Config<Props extends { [key: string]: any } = { [key: string]: any }
     [ComponentName in keyof Props]: Omit<ComponentConfig<Props[ComponentName]>, 'type'>;
   };
 };
-
-export type QuickAction =
-  | 'DELETE'
-  | 'DUPLICATE'
-  | 'OPENCOMPONENT'
-  | 'EXTRACTINTOCOMPONENT'
-  | 'CHANGETYPE'
-  | 'CREATE'
-  | 'CREATEFROMDATA'
-  | 'CREATECOLUMN'
-  | 'CREATEACTIONCOLUMN'
-  | 'CREATEACTIONCOLUMNBUTTON';
-
-export const DEFAULT_QUICK_ACTIONS: Array<QuickAction> = ['DELETE', 'DUPLICATE', 'CREATE', 'CREATEFROMDATA', 'CHANGETYPE'] as const;

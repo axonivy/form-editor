@@ -8,7 +8,7 @@ import { BUTTONS_DROPZONE_ID_PREFIX, findComponentDeep } from '../../../data/dat
 import { DataClassDialog } from '../../../editor/browser/data-class/DataClassDialog';
 import { ComponentBlock } from '../../../editor/canvas/ComponentBlock';
 import { EmptyLayoutBlock } from '../../../editor/canvas/EmptyBlock';
-import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
+import type { ComponentConfig, UiComponentProps } from '../../../types/config';
 import { stripELExpression } from '../../../utils/string';
 import { UiBadge } from '../../UiBlockHeader';
 import { useBase } from '../base';
@@ -41,8 +41,7 @@ export const useDialogComponent = () => {
         },
         linkedComponent: { subsection: 'General', label: t('property.linkedComponent'), type: 'hidden' },
         buttons: { subsection: 'General', type: 'hidden' }
-      },
-      quickActions: DEFAULT_QUICK_ACTIONS
+      }
     };
 
     return DialogComponent;

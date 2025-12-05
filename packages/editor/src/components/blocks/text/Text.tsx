@@ -1,13 +1,13 @@
 import { type Prettify, type Text } from '@axonivy/form-editor-protocol';
-import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
-import './Text.css';
-import { useBase } from '../base';
-import IconSvg from './Text.svg?react';
-import { IvyIcons } from '@axonivy/ui-icons';
 import { IvyIcon } from '@axonivy/ui-components';
-import { UiBadge, UiBlockHeader } from '../../UiBlockHeader';
+import { IvyIcons } from '@axonivy/ui-icons';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { type ComponentConfig, type UiComponentProps } from '../../../types/config';
+import { UiBadge, UiBlockHeader } from '../../UiBlockHeader';
+import { useBase } from '../base';
+import './Text.css';
+import IconSvg from './Text.svg?react';
 
 type TextProps = Prettify<Text>;
 
@@ -32,8 +32,7 @@ export const useTextComponent = () => {
         icon: { subsection: 'Icon', label: t('property.icon'), type: 'hidden' },
         iconStyle: { subsection: 'Icon', label: t('property.iconStyle'), type: 'hidden' },
         ...visibleComponentField
-      },
-      quickActions: DEFAULT_QUICK_ACTIONS
+      }
     };
 
     return TextComponent;

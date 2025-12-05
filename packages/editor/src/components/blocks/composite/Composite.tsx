@@ -41,8 +41,7 @@ export const useCompositeComponent = () => {
           render: renderStartMethodSelect
         },
         parameters: { subsection: 'Parameters', type: 'generic', render: renderParameters }
-      },
-      quickActions: ['DELETE', 'DUPLICATE', 'CREATE', 'CREATEFROMDATA', 'OPENCOMPONENT']
+      }
     } as const;
 
     return CompositeComponent;

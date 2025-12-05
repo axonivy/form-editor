@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { useAppContext } from '../../../context/AppContext';
 import { ComponentBlock } from '../../../editor/canvas/ComponentBlock';
 import { EmptyLayoutBlock } from '../../../editor/canvas/EmptyBlock';
-import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type FieldOption, type UiComponentProps } from '../../../types/config';
+import { type ComponentConfig, type FieldOption, type UiComponentProps } from '../../../types/config';
 import { UiBlockHeader } from '../../UiBlockHeader';
 import { useBase } from '../base';
 import './Layout.css';
@@ -71,8 +71,7 @@ export const useLayoutComponent = () => {
           hide: data => data.type !== 'GRID'
         },
         ...visibleComponentField
-      },
-      quickActions: [...DEFAULT_QUICK_ACTIONS, 'EXTRACTINTOCOMPONENT']
+      }
     };
 
     return LayoutComponent;
@@ -90,7 +89,9 @@ const UiBlock = ({ id, components, type, justifyContent, gridVariant, visible }:
     <>
       <UiBlockHeader visible={visible} />
       <div
-        className={`block-layout${type === 'GRID' ? ' grid' : ' flex'}${justifyContent === 'END' ? ' justify-end' : justifyContent === 'SPACE_BETWEEN' ? ' justify-space_between' : ''} ${`${gridVariant.toLocaleLowerCase()}`}`}
+        className={`block-layout${type === 'GRID' ? ' grid' : ' flex'}${
+          justifyContent === 'END' ? ' justify-end' : justifyContent === 'SPACE_BETWEEN' ? ' justify-space_between' : ''
+        } ${`${gridVariant.toLocaleLowerCase()}`}`}
         data-responsive-mode={ui.deviceMode}
       >
         {components.map((component, index) => {

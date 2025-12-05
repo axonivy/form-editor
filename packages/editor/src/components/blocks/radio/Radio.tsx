@@ -2,7 +2,7 @@ import { type OrientationType, type Prettify, type Radio } from '@axonivy/form-e
 import { Flex, Message } from '@axonivy/ui-components';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type FieldOption, type UiComponentProps } from '../../../types/config';
+import { type ComponentConfig, type FieldOption, type UiComponentProps } from '../../../types/config';
 import { UiBadge, UiBlockHeader } from '../../UiBlockHeader';
 import { useBase } from '../base';
 import './Radio.css';
@@ -39,8 +39,7 @@ export const useRadioComponent = () => {
           options: orientationOptions
         },
         ...behaviourComponentFields
-      },
-      quickActions: DEFAULT_QUICK_ACTIONS
+      }
     };
 
     return RadioComponent;

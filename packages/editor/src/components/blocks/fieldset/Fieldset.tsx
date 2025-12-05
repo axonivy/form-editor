@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ComponentBlock } from '../../../editor/canvas/ComponentBlock';
 import { EmptyLayoutBlock } from '../../../editor/canvas/EmptyBlock';
-import { DEFAULT_QUICK_ACTIONS, type ComponentConfig, type UiComponentProps } from '../../../types/config';
+import { type ComponentConfig, type UiComponentProps } from '../../../types/config';
 import { UiBadge, UiBlockHeader } from '../../UiBlockHeader';
 import { useBase } from '../base';
 import './Fieldset.css';
@@ -24,7 +24,6 @@ export const useFieldsetComponent = () => {
       subcategory: 'General',
       icon: <IconSvg />,
       description: t('components.fieldset.description'),
-      quickActions: [...DEFAULT_QUICK_ACTIONS, 'EXTRACTINTOCOMPONENT'],
       render: props => <UiBlock {...props} />,
       outlineInfo: component => component.label,
       fields: {
