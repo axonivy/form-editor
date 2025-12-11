@@ -29,8 +29,8 @@
     "react-i18next": "^15.4.1 || ^16.0.0"
   },
   "devDependencies": {
-    "@axonivy/ui-components": "~13.2.0-next.948.edf5823",
-    "@axonivy/ui-icons": "~13.2.0-next.948.edf5823",
+    "@axonivy/ui-components": "~13.2.0-next.953.1644483",
+    "@axonivy/ui-icons": "~13.2.0-next.953.1644483",
     "@tanstack/react-table": "^8.21.3",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",

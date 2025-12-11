@@ -81,16 +81,13 @@ export interface CompositeData {
 }
 export interface Form {
   $schema: string;
-  /**
-   * Unique ID in UUID format
-   */
-  id: string;
   config: FormConfig;
   components: Component[];
 }
 export interface FormConfig {
   renderer: "JSF";
   theme: string;
+  title: string;
   type: FormType;
 }
 export interface Component {

@@ -20,8 +20,8 @@ import type {
 } from './form';
 
 export const EMPTY_FORM: FormData = {
-  id: 'empty',
   config: {
+    title: '',
     renderer: 'JSF',
     theme: '',
     type: 'FORM'

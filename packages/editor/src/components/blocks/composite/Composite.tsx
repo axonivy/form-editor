@@ -79,8 +79,7 @@ const CompositeRenderer = ({ name }: { name: string }) => {
       data: {
         $schema: 'default',
         components: [],
-        config: { renderer: 'JSF', theme: '', type: 'FORM' },
-        id: ''
+        config: { title: '', renderer: 'JSF', theme: '', type: 'FORM' }
       }
     }
   ).data;
