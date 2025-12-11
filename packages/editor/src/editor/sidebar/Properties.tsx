@@ -18,6 +18,7 @@ import { useComponents } from '../../context/ComponentsContext';
 import { getTabState, validationsForPaths } from '../../context/useValidation';
 import { useData } from '../../data/data';
 import type { FieldOption } from '../../types/config';
+import { InputFieldWithBrowser } from './fields/InputFieldWithBrowser';
 import { SelectField } from './fields/SelectField';
 import { groupFieldsBySubsection, visibleFields, visibleSections, type VisibleFields } from './property';
 import { PropertyItem } from './PropertyItem';
@@ -117,17 +118,30 @@ const FormPropertySection = () => {
         <Collapsible defaultOpen={true}>
           <CollapsibleTrigger>{t('label.general')}</CollapsibleTrigger>
           <CollapsibleContent>
-            <SelectField
-              label={t('label.formType')}
-              options={formTypeOptions}
-              value={data.config.type}
-              onChange={value => {
-                setData(data => {
-                  data.config.type = value as FormType;
-                  return data;
-                });
-              }}
-            />
+            <Flex direction='column' gap={2}>
+              <InputFieldWithBrowser
+                label={t('property.title')}
+                value={data.config.title}
+                onChange={value =>
+                  setData(data => {
+                    data.config.title = value;
+                    return data;
+                  })
+                }
+                browsers={[{ type: 'CMS' }]}
+              />
+              <SelectField
+                label={t('label.formType')}
+                options={formTypeOptions}
+                value={data.config.type}
+                onChange={value => {
+                  setData(data => {
+                    data.config.type = value as FormType;
+                    return data;
+                  });
+                }}
+              />
+            </Flex>
           </CollapsibleContent>
         </Collapsible>
       ),

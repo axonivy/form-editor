@@ -15,4 +15,5 @@ test('elements', async ({ page }) => {
   await editor.toolbar.toggleProperties();
   await expect(inscription.view).toBeVisible();
   await inscription.expectHeader('Form');
+  await inscription.section('Properties').collapsible('General').input({ label: 'Title' }).expectValue('Mock Form');
 });

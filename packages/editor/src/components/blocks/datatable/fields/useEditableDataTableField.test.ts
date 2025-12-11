@@ -215,8 +215,8 @@ test('useEditableDataTableField createComponentData', async () => {
 });
 
 const dataEditableTable = {
-  id: 'a5c1d16e-1d08-4e1f-a9f0-436c553a3881',
   config: {
+    title: 'Test Form with DataTable',
     renderer: 'JSF',
     theme: 'freya-ivy',
     type: 'FORM'
