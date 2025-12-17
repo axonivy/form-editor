@@ -1,26 +1,16 @@
 import {
   Button,
-  Field,
   Flex,
   hotkeyRedoFix,
   hotkeyText,
   hotkeyUndoFix,
-  IvyIcon,
-  Label,
   PaletteButton,
   PaletteButtonLabel,
-  Popover,
-  PopoverArrow,
-  PopoverContent,
-  PopoverTrigger,
-  ReadonlyProvider,
   Separator,
-  Switch,
   Toolbar,
   ToolbarContainer,
   useHotkeys,
-  useReadonly,
-  useTheme
+  useReadonly
 } from '@axonivy/ui-components';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { useMemo, useRef, type ComponentProps } from 'react';
@@ -42,7 +32,6 @@ export const FormToolbar = ({ ref }: ComponentProps<'div'>) => {
   const { allComponentsByCategory } = useComponents();
   const { ui, setUi, history, helpUrl, previewUrl } = useAppContext();
   const { data, setUnhistoricisedData } = useData();
-  const { theme, setTheme, disabled } = useTheme();
   const editable = !useReadonly();
   const openDataClass = useAction('openDataClass');
   const openProcess = useAction('openProcess');
@@ -173,33 +162,6 @@ export const FormToolbar = ({ ref }: ComponentProps<'div'>) => {
               size='large'
               onClick={() => openProcess()}
             />
-            {!disabled && (
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button title={t('common.label.options')} aria-label={t('common.label.options')} icon={IvyIcons.Settings} size='large' />
-                </PopoverTrigger>
-                <PopoverContent sideOffset={12} collisionPadding={5} onClick={e => e.stopPropagation()}>
-                  <ReadonlyProvider readonly={false}>
-                    <Flex direction='column' gap={2}>
-                      <Field direction='row' alignItems='center' justifyContent='space-between' gap={4}>
-                        <Label>
-                          <Flex alignItems='center' gap={1}>
-                            <IvyIcon icon={IvyIcons.DarkMode} />
-                            {t('common.label.theme')}
-                          </Flex>
-                        </Label>
-                        <Switch
-                          defaultChecked={theme === 'dark'}
-                          onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                          size='small'
-                        />
-                      </Field>
-                    </Flex>
-                    <PopoverArrow />
-                  </ReadonlyProvider>
-                </PopoverContent>
-              </Popover>
-            )}
           </Flex>
         </ToolbarContainer>
         <Button

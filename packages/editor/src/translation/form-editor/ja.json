@@ -17,9 +17,7 @@
       "name": "名前",
       "namespace": "名前空間",
       "search": "検索",
-      "save": "保存",
-      "theme": "テーマ",
-      "options": "オプション"
+      "save": "保存"
     },
     "message": {
       "errorOccured": "エラーが発生しました: {{message}}"

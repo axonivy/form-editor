@@ -55,15 +55,6 @@ test('help paddings', async ({ page }) => {
   await editor.canvas.expectHelpPaddings(true);
 });
 
-test('theme', async ({ page }) => {
-  const editor = await FormEditor.openMock(page);
-  const toolbar = editor.toolbar;
-  const html = page.locator('html');
-  await expect(html).toHaveClass('light');
-  await toolbar.toggleTheme();
-  await expect(html).toHaveClass('dark');
-});
-
 test('properties', async ({ page }) => {
   const editor = await FormEditor.openMock(page);
   const toolbar = editor.toolbar;
