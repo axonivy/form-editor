@@ -182,7 +182,7 @@ export const FormToolbar = forwardRef<HTMLDivElement>((_, ref) => {
                 <PopoverTrigger asChild>
                   <Button title={t('common.label.options')} aria-label={t('common.label.options')} icon={IvyIcons.Settings} size='large' />
                 </PopoverTrigger>
-                <PopoverContent sideOffset={12} collisionPadding={5}>
+                <PopoverContent sideOffset={12} collisionPadding={5} onClick={e => e.stopPropagation()}>
                   <ReadonlyProvider readonly={false}>
                     <Flex direction='column' gap={2}>
                       <Field direction='row' alignItems='center' justifyContent='space-between' gap={4}>
