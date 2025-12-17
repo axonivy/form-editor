@@ -50,9 +50,7 @@
       "extract": "Extrahieren",
       "name": "Name",
       "namespace": "Namensraum",
-      "options": "Optionen",
-      "search": "Suchen",
-      "theme": "Thema"
+      "search": "Suchen"
     },
     "message": {
       "errorOccured": "Ein Fehler ist aufgetreten: {{message}}"

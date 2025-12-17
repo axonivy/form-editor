@@ -44,11 +44,6 @@ export class Toolbar {
     return new Palette(this.page);
   }
 
-  async toggleTheme() {
-    const dialog = await this.openOptionsMenu();
-    await dialog.getByRole('switch', { name: 'Theme' }).click();
-  }
-
   async toggleProperties() {
     await this.locator.getByRole('button', { name: 'Toggle Property View' }).click();
   }

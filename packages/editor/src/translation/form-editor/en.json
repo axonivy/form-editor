@@ -50,9 +50,7 @@
       "extract": "Extract",
       "name": "Name",
       "namespace": "Namespace",
-      "options": "Options",
-      "search": "Search",
-      "theme": "Theme"
+      "search": "Search"
     },
     "message": {
       "errorOccured": "An error has occurred: {{message}}"

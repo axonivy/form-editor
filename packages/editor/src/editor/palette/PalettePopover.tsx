@@ -31,7 +31,7 @@ export const PalettePopover = ({ label, icon, children }: PalettePopoverProps) =
           <PaletteButton label={label} icon={icon} />
         </PopoverTrigger>
       </PaletteButtonLabel>
-      <PopoverContent sideOffset={7} hideWhenDetached={true}>
+      <PopoverContent sideOffset={7} hideWhenDetached={true} onClick={e => e.stopPropagation()}>
         {children}
         <PopoverArrow />
       </PopoverContent>
