@@ -33,7 +33,7 @@ export const PalettePopover = ({ label, icon, children }: PalettePopoverProps) =
             <IvyIcon icon={IvyIcons.Chevron} className='category-icon' rotate={90} />
           </Button>
         </PopoverTrigger>
-        <PopoverContent sideOffset={5} hideWhenDetached={true}>
+        <PopoverContent sideOffset={5} hideWhenDetached={true} onClick={e => e.stopPropagation()}>
           {children}
           <PopoverArrow />
         </PopoverContent>
