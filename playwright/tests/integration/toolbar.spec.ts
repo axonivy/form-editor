@@ -118,7 +118,7 @@ test('open data class', async ({ page }) => {
   expect(await msg1).toContain('openDataClass');
 
   const msg2 = consoleLog(page);
-  await page.keyboard.press('d');
+  await page.keyboard.press('c');
   expect(await msg2).toContain('openDataClass');
 });
 

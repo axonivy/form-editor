@@ -22,7 +22,7 @@ export const useKnownHotkeys = () => {
   }, [t]);
 
   const openDataClass = useMemo<KnownHotkey>(() => {
-    const hotkey = 'D';
+    const hotkey = 'C';
     return { hotkey, label: t('hotkey.openDataClass', { hotkey: hotkeyText(hotkey) }) };
   }, [t]);
 
