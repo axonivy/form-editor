@@ -8,7 +8,7 @@ test('change device mode', async ({ page }) => {
   await expect(editor.canvas.locator).toHaveAttribute('data-responsive-mode', 'tablet');
   await toolbar.deviceModeButton.click();
   await expect(editor.canvas.locator).toHaveAttribute('data-responsive-mode', 'mobile');
-  await page.keyboard.press('s');
+  await page.keyboard.press('d');
   await expect(editor.canvas.locator).toHaveAttribute('data-responsive-mode', 'desktop');
 });
 
@@ -51,7 +51,7 @@ test('help paddings', async ({ page }) => {
   await editor.canvas.expectHelpPaddings(true);
   await toolbar.helpPaddings.click();
   await editor.canvas.expectHelpPaddings(false);
-  await page.keyboard.press('e');
+  await page.keyboard.press('v');
   await editor.canvas.expectHelpPaddings(true);
 });
 
@@ -101,7 +101,7 @@ test('open preview', async ({ page }) => {
   expect(await msg1).toContain('openUrl');
 
   const msg2 = consoleLog(page);
-  await page.keyboard.press('s');
+  await page.keyboard.press('x');
   expect(await msg2).toContain('openUrl');
 
   await editor.toolbar.toggleProperties();
@@ -127,7 +127,7 @@ test('open data class', async ({ page }) => {
   expect(await msg1).toContain('openDataClass');
 
   const msg2 = consoleLog(page);
-  await page.keyboard.press('d');
+  await page.keyboard.press('c');
   expect(await msg2).toContain('openDataClass');
 });
 

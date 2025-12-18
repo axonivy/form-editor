@@ -17,12 +17,12 @@ export const useKnownHotkeys = () => {
   }, [t]);
 
   const openPreview = useMemo<KnownHotkey>(() => {
-    const hotkey = 'S';
+    const hotkey = 'X';
     return { hotkey, label: t('hotkey.openPreview', { hotkey: hotkeyText(hotkey) }) };
   }, [t]);
 
   const openDataClass = useMemo<KnownHotkey>(() => {
-    const hotkey = 'D';
+    const hotkey = 'C';
     return { hotkey, label: t('hotkey.openDataClass', { hotkey: hotkeyText(hotkey) }) };
   }, [t]);
 
@@ -37,12 +37,12 @@ export const useKnownHotkeys = () => {
   }, [t]);
 
   const viewMode = useMemo<KnownHotkey>(() => {
-    const hotkey = 'E';
+    const hotkey = 'V';
     return { hotkey, label: t('hotkey.viewMode', { hotkey: hotkeyText(hotkey) }) };
   }, [t]);
 
   const deviceMode = useMemo<KnownHotkey>(() => {
-    const hotkey = 'S';
+    const hotkey = 'D';
     return { hotkey, label: t('hotkey.deviceMode', { hotkey: hotkeyText(hotkey) }) };
   }, [t]);
 
