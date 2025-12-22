@@ -16,15 +16,9 @@ import { Sidebar } from './sidebar/Sidebar';
 
 export type FormEditorProps = { context: FormContext; directSave?: boolean };
 
-export const Editor = (props: FormEditorProps) => {
+export const Editor = ({ context, directSave }: FormEditorProps) => {
   const { t } = useTranslation();
-  const [context, setContext] = useState(props.context);
-  const [directSave, setDirectSave] = useState(props.directSave);
   const [selectedElement, setSelectedElement] = useState<string>();
-  useEffect(() => {
-    setContext(props.context);
-    setDirectSave(props.directSave);
-  }, [props]);
   const { ui, setUi } = useUiState();
   const [initialData, setInitalData] = useState<FormData | undefined>(undefined);
   const history = useHistoryData<FormData>();
@@ -32,13 +26,14 @@ export const Editor = (props: FormEditorProps) => {
   const client = useClient();
   const queryClient = useQueryClient();
 
-  const queryKeys = useMemo(() => {
-    return {
+  const queryKeys = useMemo(
+    () => ({
       data: (context: FormContext) => genQueryKey('data', context),
       saveData: (context: FormContext) => genQueryKey('saveData', context),
       validation: (context: FormContext) => genQueryKey('validations', context)
-    };
-  }, []);
+    }),
+    []
+  );
 
   const { data, isPending, isError, isSuccess, error } = useQuery({
     queryKey: queryKeys.data(context),
@@ -64,12 +59,10 @@ export const Editor = (props: FormEditorProps) => {
     };
   }, [client, context, queryClient, queryKeys]);
 
-  useEffect(() => {
-    if (data?.data !== undefined && initialData === undefined) {
-      setInitalData(data.data);
-      history.push(data.data);
-    }
-  }, [data?.data, history, initialData]);
+  if (data?.data !== undefined && initialData === undefined) {
+    setInitalData(data.data);
+    history.push(data.data);
+  }
 
   const mutation = useMutation({
     mutationKey: queryKeys.saveData(context),
@@ -102,6 +95,8 @@ export const Editor = (props: FormEditorProps) => {
     return <PanelMessage icon={IvyIcons.ErrorXMark} message={t('message.formNotFound')} />;
   }
 
+  const iconBaseUrl = data.previewUrl.substring(0, data.previewUrl.indexOf('dev-workflow-ui/'));
+
   return (
     <AppProvider
       value={{
@@ -119,9 +114,9 @@ export const Editor = (props: FormEditorProps) => {
         namespace: data.namespace
       }}
     >
-      <link rel='stylesheet' href='/dev-workflow-ui/webjars/font-awesome/6.1.0/css/all.min.css' />
-      <link rel='stylesheet' href='/dev-workflow-ui/webjars/streamline-icons/StreamlineIcons.css' />
-      <link rel='stylesheet' href='/dev-workflow-ui/faces/javax.faces.resource/primeicons/primeicons.css?ln=primefaces' />
+      <link rel='stylesheet' href={`${iconBaseUrl}dev-workflow-ui/webjars/font-awesome/6.1.0/css/all.min.css`} />
+      <link rel='stylesheet' href={`${iconBaseUrl}dev-workflow-ui/webjars/streamline-icons/StreamlineIcons.css`} />
+      <link rel='stylesheet' href={`${iconBaseUrl}dev-workflow-ui/faces/javax.faces.resource/primeicons/primeicons.css?ln=primefaces`} />
       <ComponentsProvider>
         <DndContext>
           <ResizablePanelGroup direction='horizontal' autoSaveId='form-editor-resize'>
