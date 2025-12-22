@@ -6,7 +6,6 @@ export const renderIconField = (props: GenericFieldProps) => {
 };
 
 export const IconField = ({ value, onChange, label }: GenericFieldProps) => {
-  const icons = extractStreamlineIcons();
   const ExtendedComboboxItem = ({ value }: ComboboxOption) => (
     <Flex direction='row' alignItems='center' gap={2}>
       <i className={value} />
@@ -19,56 +18,238 @@ export const IconField = ({ value, onChange, label }: GenericFieldProps) => {
       <Combobox
         value={value as string}
         onChange={onChange}
-        options={icons.map(icon => {
-          return { value: icon };
-        })}
+        options={streamlineIcons.map(icon => ({ value: icon }))}
         itemRender={option => <ExtendedComboboxItem {...option} />}
       />
     </BasicField>
   );
 };
 
-const extractStreamlineIcons = (): string[] => {
-  const iconDetails: string[] = [];
-
-  const linkTag = Array.from(document.getElementsByTagName('link')).find(
-    link => link.rel === 'stylesheet' && link.href.includes('/StreamlineIcons.css')
-  );
-  if (!linkTag) {
-    console.warn(`Stylesheet not found`);
-    return [];
-  }
-
-  for (let i = 0; i < document.styleSheets.length; i++) {
-    const stylesheet = document.styleSheets[i];
-    if (stylesheet?.href && stylesheet.href === linkTag.href) {
-      try {
-        const rules = stylesheet.cssRules || stylesheet.rules;
-        if (rules) {
-          for (const rule of rules) {
-            if (rule instanceof CSSStyleRule && rule.selectorText && rule.style.content) {
-              const selector = rule.selectorText;
-              if (selector.startsWith(`.si-`)) {
-                const cleanSelector = selector.split('::')[0];
-                if (cleanSelector) {
-                  iconDetails.push('si ' + cleanSelector.slice(1));
-                }
-              }
-            }
-          }
-        }
-      } catch (e) {
-        console.warn(`Error accessing stylesheet "/StreamlineIcons.css":`, e);
-      }
-    }
-  }
-
-  return iconDetails.sort();
-};
+const streamlineIcons = [
+  'si si-add',
+  'si si-add-circle',
+  'si si-add-small',
+  'si si-advertising-megaphone',
+  'si si-advertising-megaphone-2',
+  'si si-alarm-bell',
+  'si si-alarm-bell-timer',
+  'si si-alert-circle',
+  'si si-analytics-bars',
+  'si si-analytics-bars-horizontal',
+  'si si-analytics-board-graph-line',
+  'si si-analytics-graph',
+  'si si-analytics-graph-line',
+  'si si-analytics-graph-lines',
+  'si si-analytics-pie-2',
+  'si si-app-window-pie-chart',
+  'si si-archive',
+  'si si-archive-folder',
+  'si si-arrow-button-right',
+  'si si-arrow-button-right-3',
+  'si si-arrow-down-1',
+  'si si-arrow-left',
+  'si si-arrow-left-1',
+  'si si-arrow-right',
+  'si si-arrow-right-1',
+  'si si-arrow-right-1-small',
+  'si si-arrow-up-1',
+  'si si-beach-palm-sunbed',
+  'si si-bin-1',
+  'si si-briefcase',
+  'si si-buildings-1',
+  'si si-bulb',
+  'si si-business-contract-handshake-sign',
+  'si si-button-pause',
+  'si si-button-refresh-arrow',
+  'si si-button-refresh-arrows',
+  'si si-calendar',
+  'si si-calendar-date',
+  'si si-cd',
+  'si si-charger',
+  'si si-charger-1',
+  'si si-charging-battery-full-1',
+  'si si-chat-translate',
+  'si si-check-1',
+  'si si-check-2',
+  'si si-check-circle',
+  'si si-check-circle-1',
+  'si si-check-double-1',
+  'si si-checklist-pen',
+  'si si-close',
+  'si si-coffee-cup',
+  'si si-coffee-cup-hot',
+  'si si-cog',
+  'si si-cog-double',
+  'si si-cog-double-2',
+  'si si-cog-play',
+  'si si-common-file-add',
+  'si si-common-file-empty',
+  'si si-common-file-search',
+  'si si-common-file-text',
+  'si si-common-file-text-edit',
+  'si si-computer-chip',
+  'si si-computer-chip-search',
+  'si si-controls-play',
+  'si si-controls-stop',
+  'si si-conversation-chat-2',
+  'si si-copy-paste',
+  'si si-database',
+  'si si-database-settings',
+  'si si-delete',
+  'si si-delete-1',
+  'si si-delete-2',
+  'si si-download-bottom',
+  'si si-email-action-unread',
+  'si si-expand-1',
+  'si si-expand-6',
+  'si si-file-code-download-1',
+  'si si-file-code-upload-1',
+  'si si-file-csv',
+  'si si-file-exe',
+  'si si-file-html',
+  'si si-file-rar',
+  'si si-file-xml',
+  'si si-file-zip',
+  'si si-filter-1',
+  'si si-floppy-disk',
+  'si si-folder-empty',
+  'si si-folder-search',
+  'si si-folder-share',
+  'si si-global-warming-globe-fire',
+  'si si-graph-statistics-coffee',
+  'si si-graphic-tablet-drawing-pen',
+  'si si-hammer-wench',
+  'si si-headphones-customer-support-human-1',
+  'si si-heavy-equipment-hook',
+  'si si-help-wheel',
+  'si si-hierarchy-6',
+  'si si-hourglass',
+  'si si-house-1',
+  'si si-house-chimney-2',
+  'si si-human-resources-workflow',
+  'si si-hyperlink-3',
+  'si si-image-file-bmp',
+  'si si-image-file-gif',
+  'si si-image-file-jpg',
+  'si si-image-file-landscape',
+  'si si-image-file-png',
+  'si si-information-circle',
+  'si si-keyboard-arrow-return',
+  'si si-layers-grid-settings',
+  'si si-layout-bullets',
+  'si si-layout-dashboard',
+  'si si-layout-module',
+  'si si-list-bullets',
+  'si si-lock-1',
+  'si si-login-3',
+  'si si-logout-1',
+  'si si-messages-bubble',
+  'si si-messages-bubble-add',
+  'si si-messages-bubble-add-2',
+  'si si-messages-bubble-check',
+  'si si-messages-bubble-information',
+  'si si-messages-bubble-square-sync',
+  'si si-messages-bubble-square-warning',
+  'si si-module',
+  'si si-module-three-1',
+  'si si-module-three-2',
+  'si si-monetization-approve',
+  'si si-monitor',
+  'si si-monitor-heart-beat-search',
+  'si si-monitor-network',
+  'si si-monitor-refresh',
+  'si si-mood-warning',
+  'si si-move-back',
+  'si si-move-expand-vertical',
+  'si si-move-shrink-vertical',
+  'si si-move-to-bottom',
+  'si si-multiple-actions-add',
+  'si si-multiple-neutral-1',
+  'si si-navigation-down-circle',
+  'si si-navigation-left-circle-1',
+  'si si-navigation-menu',
+  'si si-navigation-menu-horizontal',
+  'si si-navigation-menu-horizontal-filled',
+  'si si-navigation-right-circle',
+  'si si-navigation-right-circle-1',
+  'si si-navigation-up-circle',
+  'si si-network-arrow',
+  'si si-network-browser',
+  'si si-network-share',
+  'si si-network-signal',
+  'si si-notes-add',
+  'si si-notes-quill',
+  'si si-office-file-doc-1',
+  'si si-office-file-pdf-1',
+  'si si-office-file-ppt-1',
+  'si si-office-file-txt-1',
+  'si si-office-file-xls-1',
+  'si si-optimization-timer',
+  'si si-password-lock-2',
+  'si si-pencil',
+  'si si-pencil-write',
+  'si si-phone-actions-call',
+  'si si-pie-line-graph',
+  'si si-pie-line-graph-desktop',
+  'si si-pie-line-graph-desktop-2',
+  'si si-pin',
+  'si si-pin-bold',
+  'si si-plane-take-off',
+  'si si-power-button',
+  'si si-presentation-statistics',
+  'si si-question-circle',
+  'si si-ranking-winner-medal',
+  'si si-rating-star-add',
+  'si si-real-estate-action-house-key',
+  'si si-recycling-hand-trash',
+  'si si-recycling-trash-bin-2',
+  'si si-remove',
+  'si si-remove-circle',
+  'si si-road-sign-u-turn-left',
+  'si si-road-sign-u-turn-right',
+  'si si-road-sign-warning',
+  'si si-robot',
+  'si si-search',
+  'si si-search-circle',
+  'si si-send-email',
+  'si si-server-search',
+  'si si-share',
+  'si si-shield-globe',
+  'si si-shield-lock',
+  'si si-shopping-cart-check',
+  'si si-shrink-1',
+  'si si-single-neutral-actions',
+  'si si-single-neutral-actions-process',
+  'si si-single-neutral-actions-setting',
+  'si si-single-neutral-circle',
+  'si si-single-neutral-shield',
+  'si si-soccer-player',
+  'si si-startup-launch',
+  'si si-statistics-daytum',
+  'si si-style-two-pin-user',
+  'si si-style-two-pin-warning',
+  'si si-subtract',
+  'si si-subtract-circle',
+  'si si-subtract-small',
+  'si si-synchronize-arrow-clock',
+  'si si-synchronize-arrows',
+  'si si-task-list-approve',
+  'si si-task-list-edit',
+  'si si-time-clock-circle',
+  'si si-tools-wench',
+  'si si-touch-finger_1',
+  'si si-touchpad-finger',
+  'si si-undo',
+  'si si-upload-bottom',
+  'si si-user-logout',
+  'si si-view-1',
+  'si si-view-off',
+  'si si-yoga-meditate',
+  'si si-zip-file'
+] as const;
 
 const formatIconString = (icon: string) => {
   let formatted = icon.replace(/^(si[- ]?)+/, '');
   formatted = formatted.replace(/-/g, ' ');
-
   return formatted;
 };
