@@ -102,6 +102,8 @@ export const Editor = (props: FormEditorProps) => {
     return <PanelMessage icon={IvyIcons.ErrorXMark} message={t('message.formNotFound')} />;
   }
 
+  const iconBaseUrl = data.previewUrl.substring(0, data.previewUrl.indexOf('dev-workflow-ui/'));
+
   return (
     <AppProvider
       value={{
@@ -119,9 +121,9 @@ export const Editor = (props: FormEditorProps) => {
         namespace: data.namespace
       }}
     >
-      <link rel='stylesheet' href='/dev-workflow-ui/webjars/font-awesome/6.1.0/css/all.min.css' />
-      <link rel='stylesheet' href='/dev-workflow-ui/webjars/streamline-icons/StreamlineIcons.css' />
-      <link rel='stylesheet' href='/dev-workflow-ui/faces/javax.faces.resource/primeicons/primeicons.css?ln=primefaces' />
+      <link rel='stylesheet' href={`${iconBaseUrl}dev-workflow-ui/webjars/font-awesome/6.1.0/css/all.min.css`} />
+      <link rel='stylesheet' href={`${iconBaseUrl}dev-workflow-ui/webjars/streamline-icons/StreamlineIcons.css`} />
+      <link rel='stylesheet' href={`${iconBaseUrl}dev-workflow-ui/faces/javax.faces.resource/primeicons/primeicons.css?ln=primefaces`} />
       <ComponentsProvider>
         <DndContext>
           <ResizablePanelGroup direction='horizontal' autoSaveId='form-editor-resize'>
