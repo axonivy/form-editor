@@ -42,13 +42,13 @@ importers:
   integrations/standalone:
     dependencies:
       '@axonivy/form-editor':
-        specifier: workspace:~13.2.0-next
+        specifier: workspace:~13.2.1-next
         version: link:../../packages/editor
       '@axonivy/form-editor-core':
-        specifier: workspace:~13.2.0-next
+        specifier: workspace:~13.2.1-next
         version: link:../../packages/core
       '@axonivy/form-editor-protocol':
-        specifier: workspace:~13.2.0-next
+        specifier: workspace:~13.2.1-next
         version: link:../../packages/protocol
       '@axonivy/jsonrpc':
         specifier: ~13.2.0-next.953.1644483
@@ -103,7 +103,7 @@ importers:
   packages/core:
     dependencies:
       '@axonivy/form-editor-protocol':
-        specifier: workspace:~13.2.0-next
+        specifier: workspace:~13.2.1-next
         version: link:../protocol
     devDependencies:
       '@axonivy/jsonrpc':
@@ -116,7 +116,7 @@ importers:
   packages/editor:
     dependencies:
       '@axonivy/form-editor-protocol':
-        specifier: workspace:~13.2.0-next
+        specifier: workspace:~13.2.1-next
         version: link:../protocol
       '@dnd-kit/core':
         specifier: ^6.3.1

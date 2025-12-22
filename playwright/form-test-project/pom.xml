@@ -10,7 +10,7 @@
   </parent>
   <groupId>form.test.project</groupId>
   <artifactId>form-test-project</artifactId>
-  <version>13.2.0-SNAPSHOT</version>
+  <version>13.2.1-SNAPSHOT</version>
   <packaging>iar</packaging>
   <properties>
     <engine.test.app>Developer-form-test-project</engine.test.app>

@@ -1,6 +1,6 @@
 {
   "name": "@axonivy/form-editor-standalone",
-  "version": "13.2.0-next",
+  "version": "13.2.1-next",
   "private": true,
   "author": "Axon Ivy AG",
   "homepage": "https://developer.axonivy.com/",
@@ -9,9 +9,9 @@
     "url": "https://github.com/axonivy/form-editor"
   },
   "dependencies": {
-    "@axonivy/form-editor": "workspace:~13.2.0-next",
-    "@axonivy/form-editor-core": "workspace:~13.2.0-next",
-    "@axonivy/form-editor-protocol": "workspace:~13.2.0-next",
+    "@axonivy/form-editor": "workspace:~13.2.1-next",
+    "@axonivy/form-editor-core": "workspace:~13.2.1-next",
+    "@axonivy/form-editor-protocol": "workspace:~13.2.1-next",
     "@axonivy/jsonrpc": "~13.2.0-next.953.1644483",
     "@axonivy/ui-components": "~13.2.0-next.953.1644483",
     "@axonivy/ui-icons": "~13.2.0-next.953.1644483",
@@ -28,8 +28,8 @@
     "@types/react": "^19.0.7",
     "@types/react-dom": "^19.0.3",
     "@vitejs/plugin-react": "^5.0.0",
-    "vite-plugin-svgr": "^4.3.0",
-    "vite": "^7.0.0"
+    "vite": "^7.0.0",
+    "vite-plugin-svgr": "^4.3.0"
   },
   "scripts": {
     "clean": "rimraf build",
