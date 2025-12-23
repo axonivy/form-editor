@@ -30,7 +30,7 @@ type TextareaFieldProps = {
 export const TextareaField = ({ label, value, onChange, message }: TextareaFieldProps) => {
   const [open, setOpen] = useState(false);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
-  const { isFocusWithin, focusWithinProps } = useOnFocus(value, onChange);
+  const { isFocusWithin, focusWithinProps } = useOnFocus();
   const { handleTextSelection, showQuickFix, getSelectedText, selection } = useTextSelection(textAreaRef);
   const height = useMemo(() => splitNewLine(value).length * 14, [value]);
   const MINHEIGHT = 60;
