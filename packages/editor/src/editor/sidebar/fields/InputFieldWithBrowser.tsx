@@ -35,7 +35,7 @@ export const InputFieldWithBrowser = ({
   const [open, setOpen] = useState(false);
 
   const inputRef = useRef<HTMLInputElement>(null);
-  const { isFocusWithin, focusWithinProps } = useOnFocus(value, onChange);
+  const { isFocusWithin, focusWithinProps } = useOnFocus();
   const { handleTextSelection, showQuickFix, getSelectedText, selection } = useTextSelection(inputRef);
 
   return (
