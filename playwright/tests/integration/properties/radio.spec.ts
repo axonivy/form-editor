@@ -45,3 +45,24 @@ test('default', async ({ page }) => {
   await itemValue.expectValue('value');
   await behaviour.expectRequired();
 });
+
+test('cmsQuickfix', async ({ page, browserName }) => {
+  test.skip(browserName === 'firefox', 'Skipping cmsQuickfix test on Firefox due to selection issues');
+  const editor = await FormEditor.openMock(page);
+  const block = editor.canvas.blockByNth(10);
+  await block.inscribe();
+  await editor.inscription.expectHeader('Radio');
+  const properties = editor.inscription.section('Properties');
+
+  const staticOptions = properties.collapsible('Static Options');
+  const table = staticOptions.table(['input', 'input']);
+  const cell = table.cell(1, 0);
+  await cell.fill('Firstname');
+  await cell.expectValue('Firstname');
+
+  await cell.selectText();
+  await cell.openQuickfix();
+  await block.inscribe();
+  await cell.expectValue('Firstname');
+  await cell.expectInputValue("#{ivy.cms.co('/Labels/Firstname')}");
+});
