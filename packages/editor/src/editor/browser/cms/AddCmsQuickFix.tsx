@@ -85,7 +85,11 @@ export const AddCmsQuickFixPopover = ({ value, onChange, selection, inputRef }: 
                   value: fix.coContent,
                   category: fix.category
                 })}
-                onClick={() => {
+                onMouseDown={e => {
+                  if (e.button !== 0) {
+                    return;
+                  }
+                  e.preventDefault();
                   executeCmsQuickFix.mutate({
                     context,
                     cmsQuickAction: fix

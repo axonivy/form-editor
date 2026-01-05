@@ -433,10 +433,8 @@ export class Row {
   async fill(values: string[]) {
     let value = 0;
     for (let column = 0; column < this.columns.length; column++) {
-      if (this.columns[column] !== 'input') {
-        const cell = this.column(column);
-        await cell.fill(values[value++]);
-      }
+      const cell = this.column(column);
+      await cell.fill(values[value++]);
     }
   }
 
@@ -447,10 +445,8 @@ export class Row {
   async expectValues(values: string[]) {
     let value = 0;
     for (let column = 0; column < this.columns.length; column++) {
-      if (this.columns[column] !== 'input') {
-        const cell = this.column(column);
-        await cell.expectValue(values[value++]);
-      }
+      const cell = this.column(column);
+      await cell.expectValue(values[value++]);
     }
   }
 
@@ -482,7 +478,7 @@ export class Cell {
     readonly columnType: ColumnType
   ) {
     this.locator = rowLocator.getByRole('cell').nth(column);
-    this.textbox = this.locator.getByRole('textbox');
+    this.textbox = this.locator.getByRole('textbox').first();
     this.select = new Select(page, this.locator);
   }
 
@@ -499,22 +495,53 @@ export class Cell {
     }
   }
 
+  async selectText() {
+    await this.locator.click();
+    await this.textbox.focus();
+    await this.textbox.dblclick();
+  }
+
+  async openQuickfix() {
+    await this.page.getByRole('button', { name: 'CMS-Quickfix' }).click();
+
+    const popover = this.page.locator('[role="dialog"][data-state="open"]').nth(1);
+    await expect(popover).toBeVisible();
+
+    const localButton = popover.getByRole('button', { name: 'CMS-Quickfix-local' });
+    const globalButton = popover.getByRole('button', { name: 'CMS-Quickfix-global' });
+
+    await expect(localButton).toBeVisible();
+    await expect(globalButton).toBeVisible();
+
+    await globalButton.click();
+    await expect(popover).toBeHidden();
+  }
+
   async expectValue(value: string) {
     switch (this.columnType) {
       case 'select':
         await this.select.expectValue(value);
         break;
+      case 'input':
+        await expect(this.locator).toHaveText(value);
+        break;
       default:
         await expect(this.textbox).toHaveValue(value);
     }
   }
-
+  async expectInputValue(value: string | RegExp) {
+    await this.locator.click();
+    await this.textbox.focus();
+    await expect(this.textbox).toHaveValue(value);
+  }
   async expectEmpty() {
     await expect(this.textbox).toBeEmpty();
   }
 
   private async fillText(value: string) {
+    await this.locator.click();
     const input = this.textbox;
+    await input.clear();
     await input.fill(value);
     await input.blur();
   }
