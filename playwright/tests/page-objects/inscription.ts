@@ -147,11 +147,7 @@ export class Collapsible {
 export class ToggleGroup {
   readonly locator: Locator;
 
-  constructor(
-    readonly page: Page,
-    readonly parentLocator: Locator,
-    options?: { label?: string; nth?: number }
-  ) {
+  constructor(readonly page: Page, readonly parentLocator: Locator, options?: { label?: string; nth?: number }) {
     if (options?.label) {
       this.locator = parentLocator.getByRole('group', { name: options.label }).first();
     } else {
@@ -174,11 +170,7 @@ export class ToggleGroup {
 class Select {
   readonly locator: Locator;
 
-  constructor(
-    readonly page: Page,
-    readonly parentLocator: Locator,
-    options?: { label?: string; nth?: number }
-  ) {
+  constructor(readonly page: Page, readonly parentLocator: Locator, options?: { label?: string; nth?: number }) {
     if (options?.label) {
       this.locator = parentLocator.getByRole('combobox', { name: options.label }).first();
     } else {
@@ -214,11 +206,7 @@ export class Input {
   readonly outputLocator?: Locator;
   readonly inputLocator: Locator;
 
-  constructor(
-    readonly page: Page,
-    readonly parentLocator: Locator,
-    options?: { label?: string; nth?: number; type?: 'text' | 'number' }
-  ) {
+  constructor(readonly page: Page, readonly parentLocator: Locator, options?: { label?: string; nth?: number; type?: 'text' | 'number' }) {
     const role = options?.type === 'number' ? 'spinbutton' : 'textbox';
     const badgeLocator = parentLocator.locator('.badge-field');
     if (options?.type) {
@@ -315,11 +303,7 @@ export class Input {
 export class ListItem {
   public readonly locator: Locator;
 
-  constructor(
-    readonly page: Page,
-    readonly parentLocator: Locator,
-    options?: { nth?: number; label?: string }
-  ) {
+  constructor(readonly page: Page, readonly parentLocator: Locator, options?: { nth?: number; label?: string }) {
     if (options?.label) {
       this.locator = parentLocator
         .locator('.list-item-with-actions')
@@ -357,11 +341,7 @@ export class ListItem {
 export class Checkbox {
   readonly locator: Locator;
 
-  constructor(
-    readonly page: Page,
-    readonly parentLocator: Locator,
-    options?: { label?: string; nth?: number }
-  ) {
+  constructor(readonly page: Page, readonly parentLocator: Locator, options?: { label?: string; nth?: number }) {
     if (options?.label) {
       this.locator = parentLocator.getByRole('checkbox', { name: options.label }).first();
     } else {
@@ -393,12 +373,7 @@ export class Table {
   private readonly header: Locator;
   private readonly locator: Locator;
 
-  constructor(
-    readonly page: Page,
-    parentLocator: Locator,
-    readonly columns: ColumnType[],
-    label?: string
-  ) {
+  constructor(readonly page: Page, parentLocator: Locator, readonly columns: ColumnType[], label?: string) {
     if (label === undefined) {
       this.locator = parentLocator;
     } else {
@@ -444,13 +419,7 @@ export class Row {
   public readonly locator: Locator;
   public readonly header: Locator;
 
-  constructor(
-    readonly page: Page,
-    rowsLocator: Locator,
-    headerLocator: Locator,
-    row: number,
-    readonly columns: ColumnType[]
-  ) {
+  constructor(readonly page: Page, rowsLocator: Locator, headerLocator: Locator, row: number, readonly columns: ColumnType[]) {
     this.locator = rowsLocator.nth(row);
     this.header = headerLocator.nth(0);
   }
@@ -458,10 +427,8 @@ export class Row {
   async fill(values: string[]) {
     let value = 0;
     for (let column = 0; column < this.columns.length; column++) {
-      if (this.columns[column] !== 'input') {
-        const cell = this.column(column);
-        await cell.fill(values[value++]!);
-      }
+      const cell = this.column(column);
+      await cell.fill(values[value++]!);
     }
   }
 
@@ -472,10 +439,8 @@ export class Row {
   async expectValues(values: string[]) {
     let value = 0;
     for (let column = 0; column < this.columns.length; column++) {
-      if (this.columns[column] !== 'input') {
-        const cell = this.column(column);
-        await cell.expectValue(values[value++]!);
-      }
+      const cell = this.column(column);
+      await cell.expectValue(values[value++]!);
     }
   }
 
@@ -500,14 +465,9 @@ export class Cell {
   private readonly textbox: Locator;
   private readonly select: Select;
 
-  constructor(
-    readonly page: Page,
-    rowLocator: Locator,
-    column: number,
-    readonly columnType: ColumnType
-  ) {
+  constructor(readonly page: Page, rowLocator: Locator, column: number, readonly columnType: ColumnType) {
     this.locator = rowLocator.getByRole('cell').nth(column);
-    this.textbox = this.locator.getByRole('textbox');
+    this.textbox = this.locator.getByRole('textbox').first();
     this.select = new Select(page, this.locator);
   }
 
@@ -524,22 +484,53 @@ export class Cell {
     }
   }
 
+  async selectText() {
+    await this.locator.click();
+    await this.textbox.focus();
+    await this.textbox.dblclick();
+  }
+
+  async openQuickfix() {
+    await this.page.getByRole('button', { name: 'CMS-Quickfix' }).click();
+
+    const popover = this.page.locator('[role="dialog"][data-state="open"]').nth(1);
+    await expect(popover).toBeVisible();
+
+    const localButton = popover.getByRole('button', { name: 'CMS-Quickfix-local' });
+    const globalButton = popover.getByRole('button', { name: 'CMS-Quickfix-global' });
+
+    await expect(localButton).toBeVisible();
+    await expect(globalButton).toBeVisible();
+
+    await globalButton.click();
+    await expect(popover).toBeHidden();
+  }
+
   async expectValue(value: string) {
     switch (this.columnType) {
       case 'select':
         await this.select.expectValue(value);
         break;
+      case 'input':
+        await expect(this.locator).toHaveText(value);
+        break;
       default:
         await expect(this.textbox).toHaveValue(value);
     }
   }
-
+  async expectInputValue(value: string | RegExp) {
+    await this.locator.click();
+    await this.textbox.focus();
+    await expect(this.textbox).toHaveValue(value);
+  }
   async expectEmpty() {
     await expect(this.textbox).toBeEmpty();
   }
 
   private async fillText(value: string) {
+    await this.locator.click();
     const input = this.textbox;
+    await input.clear();
     await input.fill(value);
     await input.blur();
   }
