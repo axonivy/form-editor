@@ -135,6 +135,23 @@ export const data: DeepPartial<FormData> = {
           }
         ]
       }
+    },
+    {
+      cid: 'radio1',
+      type: 'Radio',
+      config: {
+        staticItems: [
+          {
+            label: 'Option 1',
+            value: 'Option 1'
+          },
+          {
+            label: 'Option 2',
+            value: 'Option 2'
+          }
+        ],
+        label: 'Radio'
+      }
     }
   ]
 };
