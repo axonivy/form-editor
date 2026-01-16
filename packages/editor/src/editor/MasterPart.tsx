@@ -15,9 +15,8 @@ export const MasterPart = () => {
   return (
     <ResizablePanel
       id='canvas'
-      order={2}
-      defaultSize={50}
-      minSize={30}
+      defaultSize='50%'
+      minSize='30%'
       className='panel'
       onClick={e => {
         if (e.target !== e.currentTarget && !toolbarDiv.current?.contains(e.target as Node)) {

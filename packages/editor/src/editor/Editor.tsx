@@ -1,5 +1,14 @@
 import type { FormContext, FormData, FormEditor } from '@axonivy/form-editor-protocol';
-import { Flex, PanelMessage, ResizableHandle, ResizablePanel, ResizablePanelGroup, Spinner, useHistoryData } from '@axonivy/ui-components';
+import {
+  Flex,
+  PanelMessage,
+  ResizableGroup,
+  ResizableHandle,
+  ResizablePanel,
+  Spinner,
+  useDefaultLayout,
+  useHistoryData
+} from '@axonivy/ui-components';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useEffect, useMemo, useState } from 'react';
@@ -22,6 +31,7 @@ export const Editor = ({ context, directSave }: FormEditorProps) => {
   const { ui, setUi } = useUiState();
   const [initialData, setInitalData] = useState<FormData | undefined>(undefined);
   const history = useHistoryData<FormData>();
+  const { defaultLayout, onLayoutChanged } = useDefaultLayout({ groupId: 'form-editor-resize', storage: localStorage });
 
   const client = useClient();
   const queryClient = useQueryClient();
@@ -119,17 +129,17 @@ export const Editor = ({ context, directSave }: FormEditorProps) => {
       <link rel='stylesheet' href={`${iconBaseUrl}dev-workflow-ui/faces/javax.faces.resource/primeicons/primeicons.css?ln=primefaces`} />
       <ComponentsProvider>
         <DndContext>
-          <ResizablePanelGroup direction='horizontal' autoSaveId='form-editor-resize'>
+          <ResizableGroup orientation='horizontal' defaultLayout={defaultLayout} onLayoutChanged={onLayoutChanged}>
             <MasterPart />
             {ui.properties && (
               <>
                 <ResizableHandle />
-                <ResizablePanel id='properties' order={3} defaultSize={25} minSize={10} className='panel'>
+                <ResizablePanel id='properties' defaultSize='25%' minSize='20%' className='panel'>
                   <Sidebar />
                 </ResizablePanel>
               </>
             )}
-          </ResizablePanelGroup>
+          </ResizableGroup>
         </DndContext>
       </ComponentsProvider>
     </AppProvider>
