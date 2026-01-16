@@ -20,7 +20,7 @@
     "@axonivy/jsonrpc": "~14.0.0-next"
   },
   "devDependencies": {
-    "@axonivy/jsonrpc": "~14.0.0-next.978.49cf9dd",
+    "@axonivy/jsonrpc": "~14.0.0-next.982.5d6a438",
     "vite": "^7.0.0"
   },
   "type": "module",

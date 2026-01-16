@@ -1,16 +1,16 @@
 import {
   Button,
   Flex,
-  hotkeyRedoFix,
   hotkeyText,
-  hotkeyUndoFix,
   PaletteButton,
   PaletteButtonLabel,
   Separator,
   Toolbar,
   ToolbarContainer,
   useHotkeys,
-  useReadonly
+  useReadonly,
+  useRedoHotkey,
+  useUndoHotkey
 } from '@axonivy/ui-components';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { useMemo, useRef, type ComponentProps } from 'react';
@@ -40,8 +40,8 @@ export const FormToolbar = ({ ref }: ComponentProps<'div'>) => {
   const redo = () => history.redo(setUnhistoricisedData);
   const changeViewMode = () => setUi(old => ({ ...old, helpPaddings: !old.helpPaddings }));
   const hotkeys = useKnownHotkeys();
-  useHotkeys(hotkeys.undo.hotkey, e => hotkeyUndoFix(e, undo), { scopes: ['global'] });
-  useHotkeys(hotkeys.redo.hotkey, e => hotkeyRedoFix(e, redo), { scopes: ['global'] });
+  useUndoHotkey(undo, { scopes: ['global'] });
+  useRedoHotkey(redo, { scopes: ['global'] });
 
   useHotkeys(hotkeys.openPreview.hotkey, () => openUrl(previewUrl), { scopes: ['global'] });
   useHotkeys(hotkeys.openDataClass.hotkey, () => openDataClass(), { scopes: ['global'] });
