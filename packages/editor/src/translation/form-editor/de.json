@@ -49,7 +49,7 @@
       "delete": "Löschen (DEL)",
       "extract": "Extrahieren",
       "name": "Name",
-      "namespace": "Namensraum",
+      "namespace": "Namespace",
       "search": "Suchen"
     },
     "message": {
@@ -64,13 +64,13 @@
         "no": "Nein",
         "yes": "Ja"
       },
-      "description": "Schaltfläche zum Auslösen von Aktionen",
+      "description": "Ein Knopf zu auslösen Aktionen",
       "fieldType": {
         "delete": "Löschen",
         "edit": "Bearbeiten",
         "generic": "Generisch"
       },
-      "name": "Schaltfläche",
+      "name": "Knopf",
       "property": {
         "cancelButton": "Abbrechen-Button Wert",
         "confirmButton": "Bestätigungs-Button Wert",
@@ -117,7 +117,7 @@
       "description": "Eine Datentabelle-Komponente",
       "name": "Datentabelle",
       "property": {
-        "addButton": "Schaltfläche hinzufügen",
+        "addButton": "Knopf hinzufügen",
         "colBoundByAttr": "Spalte ist an ein Objektattribut gebunden",
         "editable": "Bearbeitbar",
         "editDialog": "Dialog bearbeiten",
@@ -143,7 +143,7 @@
     "datePicker": {
       "datePlaceholder": " z. B. dd.MM.yyyy",
       "description": "Ein Datumswähler mit Beschriftung für Datum oder Datum-Zeit",
-      "name": "Datum Picker",
+      "name": "Datumauswahl",
       "property": {
         "datePattern": "Datumsformat",
         "timePattern": "Zeitformat"
@@ -252,7 +252,7 @@
     "component": "Komponente",
     "composites": "Komposite",
     "createActionCol": "Aktionsspalte erstellen",
-    "createActionColBtn": "Aktions-Schaltfläche erstellen",
+    "createActionColBtn": "Aktionsspalten-Knopf erstellen",
     "createBtns": "Fortfahren- und Abbrechen-Knöpfe erstellen",
     "createCol": "Spalte erstellen",
     "createFrom": "Erstellen aus {{component}}",
@@ -261,7 +261,7 @@
     "dataSource": "Daten Quelle",
     "deviceModeParam": "Gerätemodus {{mode}} ({{hotkey}})",
     "disable": "Deaktivieren",
-    "dragFirstButton": "Eine Schaltfläche in den {{type}} ziehen",
+    "dragFirstButton": "Ersten Knopf in den {{type}} ziehen",
     "duplicate": "Duplizieren (M)",
     "enableReqProjects": "Erforderliche Projekte aktivieren",
     "extractComponent": "Als eigene Ivy-Komponente extrahieren (E)",
