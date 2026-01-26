@@ -16,7 +16,7 @@ test.describe('empty', () => {
   });
 
   test('init data', async ({ page }) => {
-    const { canvas } = await FormEditor.openForm(page, 'src_hd/form/test/project/empty/empty');
+    const { canvas } = await FormEditor.openForm(page, { file: 'src_hd/form/test/project/empty/empty.f.json' });
     const dialog = await canvas.openInitCreateDialog();
     await expect(dialog.getByRole('row')).toHaveCount(5);
   });

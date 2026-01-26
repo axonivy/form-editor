@@ -3,7 +3,7 @@ import { FormEditor } from '../page-objects/form-editor';
 import { screenshotElement } from './screenshot-util';
 
 test('create from data', async ({ page }) => {
-  const editor = await FormEditor.openForm(page, 'src_hd/form/test/project/test/test');
+  const editor = await FormEditor.openForm(page, { file: 'src_hd/form/test/project/test/test.f.json' });
   await editor.toolbar.dataButton.click();
   const dialog = page.getByRole('dialog');
   await expect(dialog).toBeVisible();
@@ -12,7 +12,7 @@ test('create from data', async ({ page }) => {
 });
 
 test('cms browser', async ({ page }) => {
-  const editor = await FormEditor.openForm(page, 'src_hd/form/test/project/free/free');
+  const editor = await FormEditor.openForm(page, { file: 'src_hd/form/test/project/free/free.f.json' });
   await editor.canvas.blockByText('Address').inscribe();
   const browser = await editor.inscription.section('Properties').collapsible('General').input({ label: 'Label' }).openBrowser();
   await browser.expectEntries(['form-test-project', 'greetings']);
@@ -20,7 +20,7 @@ test('cms browser', async ({ page }) => {
 });
 
 test('logic browser', async ({ page }) => {
-  const editor = await FormEditor.openForm(page, 'src_hd/form/test/project/free/free');
+  const editor = await FormEditor.openForm(page, { file: 'src_hd/form/test/project/free/free.f.json' });
   await editor.canvas.blockByText('Proceed').inscribe();
   const browser = await editor.inscription.section('Properties').collapsible('General').input({ label: 'Action' }).openBrowser();
   await browser.expectEntries(['Events', 'close', 'Methods']);
@@ -28,7 +28,7 @@ test('logic browser', async ({ page }) => {
 });
 
 test('data browser', async ({ page }) => {
-  const editor = await FormEditor.openForm(page, 'src_hd/form/test/project/test/test');
+  const editor = await FormEditor.openForm(page, { file: 'src_hd/form/test/project/test/test.f.json' });
   await editor.canvas.blockByText('City').inscribe();
   const browser = await editor.inscription.section('Properties').collapsible('General').input({ label: 'Value' }).openBrowser();
   await browser.expectEntries(['data', 'address', 'age', 'name', 'person']);
