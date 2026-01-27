@@ -82,3 +82,13 @@ export class FormEditor {
     await palette.dndTo(block, target ?? this.canvas.dropZone);
   }
 }
+
+export const consoleLog = async (page: Page) => {
+  return new Promise(result => {
+    page.on('console', msg => {
+      if (msg.type() === 'log') {
+        result(msg.text());
+      }
+    });
+  });
+};

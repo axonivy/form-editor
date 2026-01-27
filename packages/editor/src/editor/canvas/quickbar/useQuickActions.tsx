@@ -1,4 +1,4 @@
-import type { ComponentData } from '@axonivy/form-editor-protocol';
+import type { ComponentData, Composite } from '@axonivy/form-editor-protocol';
 import { Button } from '@axonivy/ui-components';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { useMemo, type ReactNode } from 'react';
@@ -90,7 +90,7 @@ export const useQuickActions = () => {
             aria-label={t('label.openComponent')}
             onClick={e => {
               e.stopPropagation();
-              ctx.actions.openComponent(ctx.config.name);
+              ctx.actions.openComponent((ctx.data.config as Composite).name);
             }}
           />
         ),

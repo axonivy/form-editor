@@ -1,5 +1,5 @@
-import { expect, test, type Page } from '@playwright/test';
-import { FormEditor } from '../page-objects/form-editor';
+import { expect, test } from '@playwright/test';
+import { consoleLog, FormEditor } from '../page-objects/form-editor';
 
 test('change device mode', async ({ page }) => {
   const editor = await FormEditor.openMock(page);
@@ -148,13 +148,3 @@ test('focus jumps', async ({ page }) => {
   await page.keyboard.press('3');
   await expect(editor.inscription.section('Properties').tabButtonLocator).toBeFocused();
 });
-
-const consoleLog = async (page: Page) => {
-  return new Promise(result => {
-    page.on('console', msg => {
-      if (msg.type() === 'log') {
-        result(msg.text());
-      }
-    });
-  });
-};

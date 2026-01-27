@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { FormEditor } from '../page-objects/form-editor';
+import { consoleLog, FormEditor } from '../page-objects/form-editor';
 
 test.describe('empty', () => {
   test('create init', async ({ page }) => {
@@ -179,6 +179,22 @@ test.describe('quickbar', () => {
     await canvas.blockByText('Firstname').quickAction('Add new Component');
     await page.getByRole('button', { name: 'Input' }).click();
     await canvas.expectFormOrder(['Input', 'Firstname', 'Lastname', 'Address']);
+  });
+
+  test('jump to component', async ({ page }) => {
+    const editor = await FormEditor.openMock(page);
+    const palette = await editor.toolbar.openPalette('Composites');
+    await palette.dndTo('Address Component', editor.canvas.dropZone);
+
+    const msg1 = consoleLog(page);
+    await editor.canvas.blockByText('form.test.project.AddressComponent').quickAction('Open Component');
+    expect(await msg1).toContain('openComponent');
+    expect(await msg1).toContain('form.test.project.AddressComponent');
+
+    const msg2 = consoleLog(page);
+    await editor.canvas.blockByText('form.test.project.AddressComponent').select();
+    await page.keyboard.press('j');
+    expect(await msg2).toContain('openComponent');
   });
 });
 
