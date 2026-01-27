@@ -1,5 +1,5 @@
-import type { EditorFileContent, FormActionArgs, FormContext, ValidationResult } from './data/form';
-import type { FormEditor, FormSaveData } from './data/form-data';
+import type { EditorFileContent, FormContext, ValidationResult } from './data/form';
+import type { FormActionArgs, FormEditor, FormSaveData } from './data/form-data';
 import type { FormMetaRequestTypes } from './form-protocol';
 
 export interface Event<T> {

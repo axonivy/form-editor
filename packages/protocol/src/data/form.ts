@@ -39,7 +39,6 @@ export interface Forms {
   executeCmsQuickActionRequest: ExecuteCmsQuickActionRequest;
   extractContext: ExtractContext;
   form: Form;
-  formActionArgs: FormActionArgs;
   formCmsMetaRequest: FormCmsMetaRequest;
   formContext: FormContext;
   formEditorData: FormEditorData;
@@ -49,7 +48,6 @@ export interface Forms {
   string: string;
   validationResult: ValidationResult[];
   variableInfo: VariableInfo;
-  void: Void;
   [k: string]: unknown;
 }
 export interface AttributesContext {
@@ -425,11 +423,6 @@ export interface ExtractContext {
   nameSpace: string;
   newComponentName: string;
 }
-export interface FormActionArgs {
-  actionId: "openComponent" | "openDataClass" | "openProcess" | "openUrl";
-  context: FormContext;
-  payload: string;
-}
 export interface FormCmsMetaRequest {
   context: FormContext;
   requiredProjects: boolean;
@@ -484,4 +477,3 @@ export interface Variable {
   simpleType: string;
   type: string;
 }
-export interface Void {}
