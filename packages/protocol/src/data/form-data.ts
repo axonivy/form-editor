@@ -7,6 +7,7 @@ import type {
   Dialog,
   Fieldset,
   Form,
+  FormContext,
   FormEditorData,
   FormExpression,
   FormSaveDataArgs,
@@ -139,3 +140,9 @@ export type VisibleProps = { visible: FormExpression };
 export type DisableProps = VisibleProps & { disabled: string };
 export type UpdateProps = DisableProps & { updateOnChange: boolean; listener: string };
 export type RequireProps = UpdateProps & { required: string; requiredMessage: string };
+
+export interface FormActionArgs {
+  actionId: 'openComponent' | 'openDataClass' | 'openProcess' | 'openUrl';
+  context: FormContext;
+  payload: string;
+}

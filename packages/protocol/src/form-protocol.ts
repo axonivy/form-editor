@@ -10,7 +10,6 @@ import type {
   EditorFileContent,
   ExecuteCmsQuickActionRequest,
   ExtractContext,
-  FormActionArgs,
   FormCmsMetaRequest,
   FormContext,
   LogicInfo,
@@ -18,7 +17,7 @@ import type {
   ValidationResult,
   VariableInfo
 } from './data/form';
-import type { FormEditor, FormSaveData } from './data/form-data';
+import type { FormActionArgs, FormEditor, FormSaveData } from './data/form-data';
 
 export interface FormMetaRequestTypes {
   'meta/data/attributes': [AttributesContext, VariableInfo];
