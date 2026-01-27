@@ -8,7 +8,7 @@
       "name": "Launch Standalone (Chrome)",
       "type": "chrome",
       "request": "launch",
-      "url": "http://localhost:3000/?server=localhost:8081&app=designer&pmv=form-test-project&file=src_hd/form/test/project/test/test.f.json&directSave",
+      "url": "http://localhost:3000/?server=localhost:8080/~Developer-form-test-project&app=Developer-form-test-project&pmv=form-test-project&file=src_hd/form/test/project/test/test.f.json&directSave",
       "presentation": {
         "group": "4. Standalone",
         "order": 1

@@ -4,11 +4,10 @@ import { Canvas } from './canvas';
 import { Inscription } from './inscription';
 import { Toolbar } from './toolbar';
 
-export const testForm = 'src_hd/form/test/project/test/test';
-export const server = process.env.BASE_URL ?? 'http://localhost:8081';
+export const server = process.env.BASE_URL ?? 'http://localhost:8080/~Developer-form-test-project';
 export const user = 'Developer';
 const ws = process.env.TEST_WS ?? '';
-const app = process.env.TEST_APP ?? 'designer';
+const app = process.env.TEST_APP ?? 'Developer-form-test-project';
 const pmv = 'form-test-project';
 
 export class FormEditor {
@@ -25,9 +24,12 @@ export class FormEditor {
     return new FormEditor(page);
   }
 
-  static async openForm(page: Page, file = testForm, options?: { readonly?: boolean; theme?: string }) {
+  static async openForm(page: Page, options?: { file?: string; readonly?: boolean; theme?: string }) {
     const serverUrl = server.replace(/^https?:\/\//, '');
-    let url = `?server=${serverUrl}${ws}&app=${app}&pmv=${pmv}&file=${file}.f.json`;
+    let url = `?server=${serverUrl}${ws}&app=${app}&pmv=${pmv}`;
+    if (options?.file === undefined) {
+      url += '&file=src_hd/form/test/project/test/test.f.json';
+    }
     if (options) {
       url += Object.entries(options)
         .map(([key, value]) => `&${key}=${value}`)
@@ -51,7 +53,7 @@ export class FormEditor {
     if (!result.ok) {
       console.log(`Failed to create form: ${result.status}`);
     }
-    const editor = await this.openForm(page, `src_hd/${namespace}/${name}/${name}`);
+    const editor = await this.openForm(page, { file: `src_hd/${namespace}/${name}/${name}.f.json` });
     if (options?.block) {
       await editor.createBlock(options.block);
     }

@@ -47,12 +47,4 @@ export class Toolbar {
   async toggleProperties() {
     await this.locator.getByRole('button', { name: 'Toggle Property View' }).click();
   }
-
-  private async openOptionsMenu() {
-    const dialog = this.page.getByRole('dialog');
-    await expect(dialog).toBeHidden();
-    await this.locator.getByRole('button', { name: 'Options' }).click();
-    await expect(dialog).toBeVisible();
-    return dialog;
-  }
 }
