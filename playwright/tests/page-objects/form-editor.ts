@@ -24,12 +24,12 @@ export class FormEditor {
     return new FormEditor(page);
   }
 
-  static async openForm(
-    page: Page,
-    options: { file?: string; readonly?: boolean; theme?: string } = { file: 'src_hd/form/test/project/test/test.f.json' }
-  ) {
+  static async openForm(page: Page, options?: { file?: string; readonly?: boolean; theme?: string }) {
     const serverUrl = server.replace(/^https?:\/\//, '');
     let url = `?server=${serverUrl}${ws}&app=${app}&pmv=${pmv}`;
+    if (options?.file === undefined) {
+      url += '&file=src_hd/form/test/project/test/test.f.json';
+    }
     if (options) {
       url += Object.entries(options)
         .map(([key, value]) => `&${key}=${value}`)
