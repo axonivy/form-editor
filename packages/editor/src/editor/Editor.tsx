@@ -116,7 +116,7 @@ export const Editor = ({ context, directSave }: FormEditorProps) => {
         setSelectedElement,
         ui,
         setUi,
-        context,
+        context: data.context,
         history,
         validations,
         helpUrl: data.helpUrl,
