@@ -87,7 +87,7 @@ const ExtractComponentDialogContent = ({ data }: { data: Component | ComponentDa
     {
       onSuccess: componentName => {
         toast.info(t('dialog.extractComponent.success', { componentName }));
-        queryClient.invalidateQueries({ queryKey: genQueryKey('data', context) });
+        queryClient.invalidateQueries({ queryKey: genQueryKey('data') });
       },
       onError: error => {
         toast.error(t('dialog.extractComponent.errorMessage'), {
