@@ -89,11 +89,11 @@ test('open preview', async ({ page }) => {
   const msg1 = consoleLog(page);
   const openPreviewBtn = editor.toolbar.locator.getByRole('button', { name: 'Open Preview' });
   await openPreviewBtn.click();
-  expect(await msg1).toContain('openUrl');
+  expect(await msg1).toContain('openPreview');
 
   const msg2 = consoleLog(page);
   await page.keyboard.press('x');
-  expect(await msg2).toContain('openUrl');
+  expect(await msg2).toContain('openPreview');
 
   await editor.toolbar.toggleProperties();
   await editor.inscription.section('Properties').collapsible('General').select({ label: 'Form Type' }).choose('Component');

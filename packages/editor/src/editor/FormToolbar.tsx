@@ -36,6 +36,7 @@ export const FormToolbar = ({ ref }: ComponentProps<'div'>) => {
   const openDataClass = useAction('openDataClass');
   const openProcess = useAction('openProcess');
   const openUrl = useAction('openUrl');
+  const openPreview = useAction('openPreview');
   const undo = () => history.undo(setUnhistoricisedData);
   const redo = () => history.redo(setUnhistoricisedData);
   const changeViewMode = () => setUi(old => ({ ...old, helpPaddings: !old.helpPaddings }));
@@ -43,7 +44,7 @@ export const FormToolbar = ({ ref }: ComponentProps<'div'>) => {
   useUndoHotkey(undo, { scopes: ['global'] });
   useRedoHotkey(redo, { scopes: ['global'] });
 
-  useHotkeys(hotkeys.openPreview.hotkey, () => openUrl(previewUrl), { scopes: ['global'] });
+  useHotkeys(hotkeys.openPreview.hotkey, () => openPreview(previewUrl), { scopes: ['global'] });
   useHotkeys(hotkeys.openDataClass.hotkey, () => openDataClass(), { scopes: ['global'] });
   useHotkeys(hotkeys.openProcess.hotkey, () => openProcess(), { scopes: ['global'] });
   useHotkeys(hotkeys.openHelp.hotkey, () => openUrl(helpUrl), { scopes: ['global'] });
@@ -145,7 +146,7 @@ export const FormToolbar = ({ ref }: ComponentProps<'div'>) => {
                 aria-label={hotkeys.openPreview.label}
                 icon={IvyIcons.Play}
                 size='large'
-                onClick={() => openUrl(previewUrl)}
+                onClick={() => openPreview(previewUrl)}
               />
             )}
             <Button
