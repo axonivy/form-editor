@@ -142,7 +142,7 @@ export type UpdateProps = DisableProps & { updateOnChange: boolean; listener: st
 export type RequireProps = UpdateProps & { required: string; requiredMessage: string };
 
 export interface FormActionArgs {
-  actionId: 'openComponent' | 'openDataClass' | 'openProcess' | 'openUrl';
+  actionId: 'openComponent' | 'openDataClass' | 'openProcess' | 'openUrl' | 'openPreview';
   context: FormContext;
   payload: string;
 }
