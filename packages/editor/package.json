@@ -54,8 +54,8 @@
   "main": "lib/editor.js",
   "scripts": {
     "clean": "rimraf lib *.tsbuildinfo",
-    "build": "tsc --build && tscp",
-    "package": "pnpm run clean && vite build && tsc -p tsconfig.production.json && tscp",
+    "build": "tsc --build",
+    "package": "pnpm run clean && vite build && tsc -p tsconfig.production.json",
     "build:clean": "pnpm run clean && pnpm run build",
     "type": "tsc --noEmit",
     "test": "vitest",

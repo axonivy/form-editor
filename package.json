@@ -11,7 +11,7 @@
     "preinstall": "npx only-allow pnpm",
     "ci": "pnpm install --no-frozen-lockfile && pnpm run package && pnpm run type && (pnpm run lint:ci || true) && pnpm run test:ci && pnpm run i18n:ci",
     "clean": "pnpm run -r clean",
-    "build": "tsc --build && tscp --build",
+    "build": "tsc --build",
     "package": "pnpm run -r package",
     "build:clean": "pnpm run -r build:clean",
     "type": "pnpm run -r type",
@@ -39,8 +39,7 @@
     "@lerna-lite/publish": "^4.0.0",
     "@lerna-lite/version": "^4.0.0",
     "rimraf": "^6.0.1",
-    "typescript": "^5.8.3",
-    "typescript-cp": "^0.1.9"
+    "typescript": "^5.8.3"
   },
   "prettier": "@axonivy/prettier-config"
 }
