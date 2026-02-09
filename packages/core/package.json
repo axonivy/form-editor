@@ -29,7 +29,7 @@
   "module": "lib/core.js",
   "scripts": {
     "clean": "rimraf lib tsconfig.tsbuildinfo",
-    "build": "tsc --build && tscp",
+    "build": "tsc --build",
     "package": "pnpm run clean && vite build && pnpm run build",
     "build:clean": "pnpm run clean && pnpm run build",
     "type": "tsc --noEmit"
