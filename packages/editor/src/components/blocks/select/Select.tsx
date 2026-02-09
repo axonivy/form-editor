@@ -41,9 +41,9 @@ export const useSelectComponent = () => {
 };
 
 const UiBlock = ({ label, value, visible, required, disabled, updateOnChange }: UiComponentProps<SelectProps>) => (
-  <div className='block-input'>
+  <div className='block-select'>
     <UiBlockHeader visible={visible} label={label} required={required} disabled={disabled} updateOnChange={updateOnChange} />
-    <div className='block-input__input'>
+    <div className='block-select__select'>
       <UiBadge value={value} />
       <IvyIcon icon={IvyIcons.Chevron} rotate={90} />
     </div>

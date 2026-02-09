@@ -73,7 +73,7 @@ export const InputFieldWithBrowser = ({
             </DialogTrigger>
           </InputGroup>
         ) : (
-          <InputBadge value={value ?? ''} badgeProps={badgeProps} style={{ height: 15 }} />
+          <InputBadge value={value ?? ''} badgeProps={badgeProps} style={{ height: 37 }} />
         )}
       </BasicField>
       <DialogContent

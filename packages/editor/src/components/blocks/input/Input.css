@@ -6,12 +6,13 @@
 
 .block-input__input {
   flex: 1 0 auto;
+  min-height: 36px;
   padding: var(--size-2);
   height: 18px;
   color: var(--N900);
   border: var(--basic-border);
   background-color: var(--N25);
   outline: 0 none;
-  font-size: 1rem;
+  font-size: 12px;
   border-radius: var(--border-r2);
 }

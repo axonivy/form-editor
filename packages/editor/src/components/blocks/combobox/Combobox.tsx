@@ -70,9 +70,9 @@ export const useComboboxComponent = () => {
 };
 
 const UiBlock = ({ label, value, visible, required, disabled, updateOnChange }: UiComponentProps<ComboboxProps>) => (
-  <div className='block-input'>
+  <div className='block-combobox'>
     <UiBlockHeader visible={visible} label={label} required={required} disabled={disabled} updateOnChange={updateOnChange} />
-    <div className='block-input__input'>
+    <div className='block-combobox__combobox'>
       <UiBadge value={value} />
       <IvyIcon icon={IvyIcons.Chevron} rotate={90} />
     </div>

@@ -1,10 +1,10 @@
-.block-input {
+.block-datepicker {
   display: flex;
   flex-direction: column;
   gap: var(--size-2);
 }
 
-.block-input__input {
+.block-datepicker__datepicker {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
