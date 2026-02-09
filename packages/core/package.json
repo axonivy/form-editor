@@ -28,7 +28,7 @@
   "module": "lib/core.js",
   "scripts": {
     "clean": "rimraf lib tsconfig.tsbuildinfo",
-    "build": "tsc --build && tscp",
+    "build": "tsc --build",
     "package": "npm run clean && vite build && npm run build",
     "build:clean": "npm clean && npm build",
     "type": "tsc --noEmit"
