@@ -74,9 +74,9 @@ const UiBlock = ({
   disabled,
   updateOnChange
 }: UiComponentProps<DatePickerProps>) => (
-  <div className='block-input'>
+  <div className='block-datepicker'>
     <UiBlockHeader visible={visible} label={label} required={required} disabled={disabled} updateOnChange={updateOnChange} />
-    <span className='block-input__input'>
+    <span className='block-datepicker__datepicker'>
       {value === '' ? showTime ? datePattern + ' ' + timePattern : datePattern : <UiBadge value={value} />}
       <svg width='17' height='17' viewBox='0 0 17 17' fill='none' xmlns='http://www.w3.org/2000/svg'>
         <g clipPath='url(#clip0_35_14)'>
