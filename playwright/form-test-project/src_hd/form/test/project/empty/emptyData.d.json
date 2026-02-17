@@ -1,23 +1,17 @@
 {
-  "$schema" : "https://json-schema.axonivy.com/data-class/12.0.0/data-class.json",
+  "$schema" : "https://json-schema.axonivy.com/14.0-dev/project/data-class.json",
   "simpleName" : "emptyData",
   "namespace" : "form.test.project.empty",
-  "isBusinessCaseData" : false,
   "fields" : [ {
-    "name" : "name",
-    "type" : "String",
-    "modifiers" : [ "PERSISTENT" ]
+    "name" : "name"
   }, {
     "name" : "age",
-    "type" : "Number",
-    "modifiers" : [ "PERSISTENT" ]
+    "type" : "Number"
   }, {
     "name" : "address",
-    "type" : "form.test.project.Address",
-    "modifiers" : [ "PERSISTENT" ]
+    "type" : "form.test.project.Address"
   }, {
     "name" : "aproved",
-    "type" : "Boolean",
-    "modifiers" : [ "PERSISTENT" ]
+    "type" : "Boolean"
   } ]
 }
