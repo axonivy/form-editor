@@ -124,9 +124,19 @@ export const Editor = ({ context, directSave }: FormEditorProps) => {
         namespace: data.namespace
       }}
     >
-      <link rel='stylesheet' href={`${iconBaseUrl}dev-workflow-ui/webjars/font-awesome/6.1.0/css/all.min.css`} />
-      <link rel='stylesheet' href={`${iconBaseUrl}dev-workflow-ui/webjars/streamline-icons/StreamlineIcons.css`} />
-      <link rel='stylesheet' href={`${iconBaseUrl}dev-workflow-ui/faces/javax.faces.resource/primeicons/primeicons.css?ln=primefaces`} />
+      <link rel='stylesheet' href={`${iconBaseUrl}dev-workflow-ui/webjars/font-awesome/6.1.0/css/all.min.css`} crossOrigin='anonymous' />
+      <link rel='stylesheet' href={`${iconBaseUrl}dev-workflow-ui/webjars/streamline-icons/StreamlineIcons.css`} crossOrigin='anonymous' />
+      <link
+        rel='stylesheet'
+        href={`${iconBaseUrl}dev-workflow-ui/faces/javax.faces.resource/primeicons/primeicons.css?ln=primefaces`}
+        crossOrigin='anonymous'
+      />
+      <link rel='stylesheet' href={`${iconBaseUrl}dev-workflow-ui/webjars/tabler-icons/tabler-icons.min.css`} crossOrigin='anonymous' />
+      <link
+        rel='stylesheet'
+        href={`${iconBaseUrl}dev-workflow-ui/webjars/tabler-icons/tabler-icons-filled.min.css`}
+        crossOrigin='anonymous'
+      />
       <ComponentsProvider>
         <DndContext>
           <ResizableGroup orientation='horizontal' defaultLayout={defaultLayout} onLayoutChanged={onLayoutChanged}>
