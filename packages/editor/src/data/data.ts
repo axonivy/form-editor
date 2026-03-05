@@ -150,7 +150,7 @@ const addComponent = (data: Array<ComponentData>, component: ComponentData, id: 
       const saveButton = createComponentData(currentData, 'Button', {
         label: 'Save',
         value: 'saveEdit',
-        config: { type: 'DIALOGSAVE', icon: 'si si-check-1', variant: 'PRIMARY', confirmDialog: false }
+        config: { type: 'DIALOGSAVE', icon: 'ti ti-check', variant: 'PRIMARY', confirmDialog: false }
       }) as ActionButtonComponent;
 
       component.config.buttons = [cancelButton, saveButton];

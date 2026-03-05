@@ -86,7 +86,7 @@
           "action" : "#{ivyWorkflowView.cancel()}",
           "variant" : "SECONDARY",
           "style" : "FLAT",
-          "icon" : "pi pi-times"
+          "icon" : "ti ti-x"
         }
       }, {
         "cid" : "Button12",
@@ -94,7 +94,7 @@
         "config" : {
           "name" : "Proceed",
           "action" : "#{logic.close}",
-          "icon" : "si si-check-1"
+          "icon" : "ti ti-check"
         }
       } ],
       "type" : "FLEX",

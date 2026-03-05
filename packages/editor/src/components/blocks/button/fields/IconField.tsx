@@ -24,6 +24,11 @@ export const IconField = ({ value, onChange, label }: GenericFieldProps) => {
         onChange={onChange}
         options={iconOptions}
         optionsLimit={50}
+        optionFilter={(option, input) =>
+          formatIconString(option.value)
+            .toLowerCase()
+            .startsWith(input?.toLowerCase() || '')
+        }
         itemRender={option => <ExtendedComboboxItem {...option} />}
       />
     </BasicField>

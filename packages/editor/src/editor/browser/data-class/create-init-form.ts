@@ -43,7 +43,7 @@ export const createInitForm = (
         create: {
           label: 'Proceed',
           value: '#{logic.close}',
-          config: { variant: 'PRIMARY', type: 'SUBMIT', icon: 'si si-check-1' }
+          config: { variant: 'PRIMARY', type: 'SUBMIT', icon: 'ti ti-check' }
         },
         targetId: layoutId
       }

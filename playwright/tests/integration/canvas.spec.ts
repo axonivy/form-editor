@@ -200,6 +200,6 @@ test.describe('quickbar', () => {
 
 test('icon fonts', async ({ page }) => {
   const { canvas } = await FormEditor.openForm(page);
-  await expect(canvas.locator.locator('.si.si-check-1').first()).toBeVisible();
-  await expect(canvas.locator.locator('.pi.pi-times').first()).toBeVisible();
+  await expect(canvas.locator.locator('.ti.ti-check').first()).toBeVisible();
+  await expect(canvas.locator.locator('.ti.ti-x').first()).toBeVisible();
 });
