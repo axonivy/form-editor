@@ -91,7 +91,7 @@ export const useEditableDataTableField = () => {
       componentName: 'Button',
       label: '',
       value: 'editRow', // just placeholder, will be set from backend
-      config: { type: 'EDIT', icon: 'pi pi-pencil', variant: 'PRIMARY', confirmDialog: false }
+      config: { type: 'EDIT', icon: 'ti ti-pencil', variant: 'PRIMARY', confirmDialog: false }
     },
     {
       componentName: 'Button',
@@ -99,7 +99,7 @@ export const useEditableDataTableField = () => {
       value: 'deleteRow', // just placeholder, will be set from backend
       config: {
         type: 'DELETE',
-        icon: 'pi pi-trash',
+        icon: 'ti ti-trash',
         variant: 'DANGER',
         confirmDialog: true,
         confirmMessage: t('components.button.confirm.confirmDialogMessage'),
