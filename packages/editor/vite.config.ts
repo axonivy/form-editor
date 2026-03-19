@@ -1,8 +1,8 @@
-import { resolve } from 'path';
-import { defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react';
+import { resolve } from 'path';
 import dts from 'vite-plugin-dts';
 import svgr from 'vite-plugin-svgr';
+import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
   plugins: [react(), dts({ tsconfigPath: './tsconfig.production.json' }), svgr()],
@@ -14,7 +14,7 @@ export default defineConfig({
       fileName: 'editor',
       formats: ['es']
     },
-    rollupOptions: {
+    rolldownOptions: {
       external: [
         '@axonivy/ui-components',
         '@axonivy/ui-icons',
