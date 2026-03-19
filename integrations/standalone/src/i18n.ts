@@ -9,7 +9,8 @@ export const initTranslation = () => {
     .use(initReactI18next)
     .use(LanguageDetector)
     .init({
-      debug: false,
+      debug: true,
+      showSupportNotice: false,
       supportedLngs: ['en', 'de'],
       fallbackLng: 'en',
       ns: ['form-editor'],
