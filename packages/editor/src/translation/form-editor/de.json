@@ -35,8 +35,8 @@
   },
   "common": {
     "hotkey": {
-      "focusInscription": "Fokus Inskription ({{hotkey}})",
-      "focusMain": "Fokus Main ({{hotkey}})",
+      "focusInscription": "Fokus Detailansicht ({{hotkey}})",
+      "focusMain": "Fokus Hauptansicht ({{hotkey}})",
       "focusToolbar": "Fokus Toolbar ({{hotkey}})",
       "help": "Hilfe öffnen ({{hotkey}})",
       "redo": "Wiederholen ({{hotkey}})",
