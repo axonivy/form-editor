@@ -38,7 +38,6 @@ type ContextHelperProps = {
 const initTranslation = () => {
   if (i18n.isInitializing || i18n.isInitialized) return;
   i18n.use(initReactI18next).init({
-    showSupportNotice: false,
     supportedLngs: ['en'],
     fallbackLng: 'en',
     ns: ['form-editor'],
