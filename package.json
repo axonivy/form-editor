@@ -25,7 +25,7 @@
     "test": "npm run -w @axonivy/form-editor test",
     "test:ci": "lerna run test:ci",
     "webtest": "lerna run webtest --",
-    "update:axonivy:next": "npx --yes npm-check-updates @axonivy* -ws -t semver -u",
+    "update:axonivy:next": "npx --yes npm-check-updates @axonivy* -w -c 0 -t semver -u",
     "publish:next": "lerna publish --exact --canary --preid next --tag-version-prefix beta --pre-dist-tag next --no-git-tag-version --no-push --ignore-scripts --yes"
   },
   "devDependencies": {
