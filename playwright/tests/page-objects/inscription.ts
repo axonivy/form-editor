@@ -9,15 +9,15 @@ export class Inscription {
 
   constructor(page: Page) {
     this.page = page;
-    this.view = page.locator('#properties');
+    this.view = page.locator('#form-editor-detail');
   }
 
   get header() {
-    return this.view.locator('.sidebar-header');
+    return this.view.locator('.ui-sidebar-header');
   }
 
   get messages() {
-    return this.view.locator('.properties > .ui-flex > .ui-message');
+    return this.view.locator('.ui-sidebar-messages .ui-message');
   }
 
   section(title: string) {
@@ -31,7 +31,7 @@ export class Inscription {
   }
 
   async expectHeader(title: string) {
-    await expect(this.view.locator('.sidebar-header')).toContainText(title);
+    await expect(this.header).toContainText(title);
   }
 }
 
@@ -147,7 +147,11 @@ export class Collapsible {
 export class ToggleGroup {
   readonly locator: Locator;
 
-  constructor(readonly page: Page, readonly parentLocator: Locator, options?: { label?: string; nth?: number }) {
+  constructor(
+    readonly page: Page,
+    readonly parentLocator: Locator,
+    options?: { label?: string; nth?: number }
+  ) {
     if (options?.label) {
       this.locator = parentLocator.getByRole('group', { name: options.label }).first();
     } else {
@@ -170,7 +174,11 @@ export class ToggleGroup {
 class Select {
   readonly locator: Locator;
 
-  constructor(readonly page: Page, readonly parentLocator: Locator, options?: { label?: string; nth?: number }) {
+  constructor(
+    readonly page: Page,
+    readonly parentLocator: Locator,
+    options?: { label?: string; nth?: number }
+  ) {
     if (options?.label) {
       this.locator = parentLocator.getByRole('combobox', { name: options.label }).first();
     } else {
@@ -206,7 +214,11 @@ export class Input {
   readonly outputLocator?: Locator;
   readonly inputLocator: Locator;
 
-  constructor(readonly page: Page, readonly parentLocator: Locator, options?: { label?: string; nth?: number; type?: 'text' | 'number' }) {
+  constructor(
+    readonly page: Page,
+    readonly parentLocator: Locator,
+    options?: { label?: string; nth?: number; type?: 'text' | 'number' }
+  ) {
     const role = options?.type === 'number' ? 'spinbutton' : 'textbox';
     const badgeLocator = parentLocator.locator('.badge-field');
     if (options?.type) {
@@ -303,7 +315,11 @@ export class Input {
 export class ListItem {
   public readonly locator: Locator;
 
-  constructor(readonly page: Page, readonly parentLocator: Locator, options?: { nth?: number; label?: string }) {
+  constructor(
+    readonly page: Page,
+    readonly parentLocator: Locator,
+    options?: { nth?: number; label?: string }
+  ) {
     if (options?.label) {
       this.locator = parentLocator
         .locator('.list-item-with-actions')
@@ -341,7 +357,11 @@ export class ListItem {
 export class Checkbox {
   readonly locator: Locator;
 
-  constructor(readonly page: Page, readonly parentLocator: Locator, options?: { label?: string; nth?: number }) {
+  constructor(
+    readonly page: Page,
+    readonly parentLocator: Locator,
+    options?: { label?: string; nth?: number }
+  ) {
     if (options?.label) {
       this.locator = parentLocator.getByRole('checkbox', { name: options.label }).first();
     } else {
@@ -373,7 +393,12 @@ export class Table {
   private readonly header: Locator;
   private readonly locator: Locator;
 
-  constructor(readonly page: Page, parentLocator: Locator, readonly columns: ColumnType[], label?: string) {
+  constructor(
+    readonly page: Page,
+    parentLocator: Locator,
+    readonly columns: ColumnType[],
+    label?: string
+  ) {
     if (label === undefined) {
       this.locator = parentLocator;
     } else {
@@ -419,7 +444,13 @@ export class Row {
   public readonly locator: Locator;
   public readonly header: Locator;
 
-  constructor(readonly page: Page, rowsLocator: Locator, headerLocator: Locator, row: number, readonly columns: ColumnType[]) {
+  constructor(
+    readonly page: Page,
+    rowsLocator: Locator,
+    headerLocator: Locator,
+    row: number,
+    readonly columns: ColumnType[]
+  ) {
     this.locator = rowsLocator.nth(row);
     this.header = headerLocator.nth(0);
   }
@@ -465,7 +496,12 @@ export class Cell {
   private readonly textbox: Locator;
   private readonly select: Select;
 
-  constructor(readonly page: Page, rowLocator: Locator, column: number, readonly columnType: ColumnType) {
+  constructor(
+    readonly page: Page,
+    rowLocator: Locator,
+    column: number,
+    readonly columnType: ColumnType
+  ) {
     this.locator = rowLocator.getByRole('cell').nth(column);
     this.textbox = this.locator.getByRole('textbox').first();
     this.select = new Select(page, this.locator);
