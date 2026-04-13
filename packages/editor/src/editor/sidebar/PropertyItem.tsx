@@ -1,5 +1,5 @@
 import type { PrimitiveValue, SelectItem } from '@axonivy/form-editor-protocol';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useValidation } from '../../context/useValidation';
 import { useData } from '../../data/data';
@@ -28,6 +28,11 @@ const toSelectItems = (primitive?: PrimitiveValue): Array<SelectItem> => (Array.
 export const PropertyItem = ({ value: initValue, onChange, field, fieldKey }: PropertyItemProps) => {
   const { t } = useTranslation();
   const [value, setValue] = useState<PrimitiveValue>(initValue);
+  const [prevValue, setPrevValue] = useState(initValue);
+  if (initValue !== undefined && initValue !== prevValue) {
+    setPrevValue(initValue);
+    setValue(initValue);
+  }
   const { element } = useData();
   const validationPath = `${element?.cid}.${fieldKey}`;
   const message = useValidation(validationPath);
@@ -35,10 +40,6 @@ export const PropertyItem = ({ value: initValue, onChange, field, fieldKey }: Pr
     setValue(newValue);
     onChange(newValue);
   };
-
-  useEffect(() => {
-    setValue(initValue);
-  }, [initValue]);
 
   const inputFor = (field: Field) => {
     const label = field.label ?? fieldKey;

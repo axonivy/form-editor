@@ -70,6 +70,7 @@ const DataClassDialogContent = ({
   ).data;
 
   useEffect(() => {
+    // eslint-disable-next-line @eslint-react/set-state-in-effect
     setTree(variableTreeData().of(dataClass));
   }, [dataClass]);
 
