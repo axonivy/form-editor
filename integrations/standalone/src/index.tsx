@@ -26,7 +26,7 @@ export async function start() {
   root.render(
     <React.StrictMode>
       <ThemeProvider defaultTheme={theme}>
-        <Flex style={{ height: '100%' }} justifyContent='center' alignItems='center'>
+        <Flex className='h-full' justifyContent='center' alignItems='center'>
           <Spinner size='large' />
         </Flex>
         <Toaster closeButton={true} position='bottom-left' />
