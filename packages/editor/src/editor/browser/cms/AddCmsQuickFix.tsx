@@ -74,9 +74,9 @@ export const AddCmsQuickFixPopover = ({ value, onChange, selection, inputRef }: 
       >
         <Flex direction='column' gap={2} alignItems='center'>
           {value.length > 0 &&
-            cmsQuickFixes?.map((fix, index) => (
+            cmsQuickFixes?.map(fix => (
               <Button
-                key={index}
+                key={`${fix.category}.${fix.coName}`}
                 icon={IvyIcons.Cms}
                 aria-label={t('cms.cmsQuickfixCat', { cat: fix.category })}
                 title={t('cms.createContentObj', {

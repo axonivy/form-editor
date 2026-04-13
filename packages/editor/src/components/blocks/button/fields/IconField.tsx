@@ -10,13 +10,6 @@ export const IconField = ({ value, onChange, label }: GenericFieldProps) => {
   const icons = useMemo(() => extractIcons(), []);
   const iconOptions = icons.map(icon => ({ value: icon }));
 
-  const ExtendedComboboxItem = ({ value }: ComboboxOption) => (
-    <Flex direction='row' alignItems='center' gap={2}>
-      <i className={value} />
-      <div style={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' }}>{formatIconString(value)}</div>
-    </Flex>
-  );
-
   return (
     <BasicField label={label}>
       <Combobox
@@ -34,6 +27,13 @@ export const IconField = ({ value, onChange, label }: GenericFieldProps) => {
     </BasicField>
   );
 };
+
+const ExtendedComboboxItem = ({ value }: ComboboxOption) => (
+  <Flex direction='row' alignItems='center' gap={2}>
+    <i className={value} />
+    <div style={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' }}>{formatIconString(value)}</div>
+  </Flex>
+);
 
 const extractIcons = (): string[] => {
   const iconDetails: string[] = [];

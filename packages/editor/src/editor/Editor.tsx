@@ -29,7 +29,7 @@ export const Editor = ({ context, directSave }: FormEditorProps) => {
   const { t } = useTranslation();
   const [selectedElement, setSelectedElement] = useState<string>();
   const { ui, setUi } = useUiState();
-  const [initialData, setInitalData] = useState<FormData | undefined>(undefined);
+  const [initialData, setInitialData] = useState<FormData | undefined>(undefined);
   const history = useHistoryData<FormData>();
   const { defaultLayout, onLayoutChanged } = useDefaultLayout({ groupId: 'form-editor-resize', storage: localStorage });
 
@@ -70,7 +70,7 @@ export const Editor = ({ context, directSave }: FormEditorProps) => {
   }, [client, context, queryClient, queryKeys]);
 
   if (data?.data !== undefined && initialData === undefined) {
-    setInitalData(data.data);
+    setInitialData(data.data);
     history.push(data.data);
   }
 

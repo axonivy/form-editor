@@ -10,7 +10,7 @@ import { FormToolbar } from './FormToolbar';
 export const MasterPart = () => {
   const { setSelectedElement, setUi } = useAppContext();
   const { data } = useData();
-  const toolbarDiv = useRef<HTMLDivElement>(null);
+  const toolbarRef = useRef<HTMLDivElement>(null);
 
   return (
     <ResizablePanel
@@ -19,14 +19,14 @@ export const MasterPart = () => {
       minSize='30%'
       className='panel'
       onClick={e => {
-        if (e.target !== e.currentTarget && !toolbarDiv.current?.contains(e.target as Node)) {
+        if (e.target !== e.currentTarget && !toolbarRef.current?.contains(e.target as Node)) {
           setSelectedElement(undefined);
           setUi(old => ({ ...old, properties: !old.properties }));
         }
       }}
     >
       <Flex direction='column' className='canvas-panel'>
-        <FormToolbar ref={toolbarDiv} />
+        <FormToolbar ref={toolbarRef} />
         <ErrorBoundary FallbackComponent={ErrorFallback} resetKeys={[data]}>
           <Canvas />
         </ErrorBoundary>

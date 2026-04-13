@@ -1,6 +1,6 @@
 import { EMPTY_FORM, type FormContext, type FormData, type ValidationResult } from '@axonivy/form-editor-protocol';
 import { useReadonly, type useHistoryData } from '@axonivy/ui-components';
-import { createContext, useContext, useState, type Dispatch, type SetStateAction } from 'react';
+import { createContext, use, useState, type Dispatch, type SetStateAction } from 'react';
 import type { UpdateConsumer } from '../types/types';
 
 export type UI = {
@@ -32,7 +32,7 @@ export type AppContext = {
   namespace: string;
 };
 
-export const appContext = createContext<AppContext>({
+export const AppContext = createContext<AppContext>({
   data: EMPTY_FORM,
   setData: data => data,
   setSelectedElement: () => {},
@@ -46,8 +46,8 @@ export const appContext = createContext<AppContext>({
   namespace: ''
 });
 
-export const AppProvider = appContext.Provider;
+export const AppProvider = AppContext.Provider;
 
 export const useAppContext = () => {
-  return useContext(appContext);
+  return use(AppContext);
 };

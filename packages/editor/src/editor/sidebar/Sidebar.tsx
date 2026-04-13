@@ -40,6 +40,7 @@ export const Sidebar = () => {
       {messages.length > 0 && (
         <SidebarMessages>
           {messages.map((msg, i) => (
+            // eslint-disable-next-line @eslint-react/no-array-index-key
             <Message key={i} {...msg} />
           ))}
         </SidebarMessages>

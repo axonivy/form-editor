@@ -10,8 +10,8 @@ export const CmsTooltip = ({ text }: { text: string }) => {
   const entries = findCmsEntries(text, cmsItems);
   entries.unshift(text);
 
-  return entries.map((entry, i) => (
-    <span key={i}>
+  return entries.map(entry => (
+    <span key={entry}>
       {entry}
       <br />
     </span>

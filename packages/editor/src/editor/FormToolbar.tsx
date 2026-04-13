@@ -61,8 +61,8 @@ export const FormToolbar = ({ ref }: ComponentProps<'div'>) => {
   }, [hotkeys.deviceMode.hotkey, setUi, ui.deviceMode, t]);
   useHotkeys(hotkeys.deviceMode.hotkey, deviceModeProps.onClick, { scopes: ['global'] });
 
-  const firstElement = useRef<HTMLButtonElement>(null);
-  useHotkeys(hotkeys.focusToolbar.hotkey, () => firstElement.current?.focus(), { scopes: ['global'] });
+  const firstElementRef = useRef<HTMLButtonElement>(null);
+  useHotkeys(hotkeys.focusToolbar.hotkey, () => firstElementRef.current?.focus(), { scopes: ['global'] });
   useHotkeys(hotkeys.focusMain.hotkey, () => document.querySelector<HTMLElement>('.draggable')?.focus(), { scopes: ['global'] });
   useHotkeys(
     hotkeys.focusInscription.hotkey,
@@ -78,7 +78,7 @@ export const FormToolbar = ({ ref }: ComponentProps<'div'>) => {
   return (
     <Toolbar ref={ref} className='toolbar'>
       <Flex gap={1}>
-        <Button ref={firstElement} {...deviceModeProps} />
+        <Button ref={firstElementRef} {...deviceModeProps} />
         {editable && (
           <>
             <Button

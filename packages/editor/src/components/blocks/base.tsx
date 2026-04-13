@@ -194,16 +194,6 @@ export const useBase = () => {
     };
   }, [t]);
 
-  const IdInput = ({ label, onChange, value, validationPath }: GenericFieldProps) => {
-    const { selectedElement } = useAppContext();
-    const message = useValidation(validationPath);
-    return (
-      <BasicField label={label} message={message}>
-        <Input value={value as string} onChange={e => onChange(e.target.value)} placeholder={selectedElement} />
-      </BasicField>
-    );
-  };
-
   return {
     categoryTranslations,
     baseComponentFields,
@@ -213,4 +203,14 @@ export const useBase = () => {
     behaviourComponentFields,
     selectItemsComponentFields
   };
+};
+
+const IdInput = ({ label, onChange, value, validationPath }: GenericFieldProps) => {
+  const { selectedElement } = useAppContext();
+  const message = useValidation(validationPath);
+  return (
+    <BasicField label={label} message={message}>
+      <Input value={value as string} onChange={e => onChange(e.target.value)} placeholder={selectedElement} />
+    </BasicField>
+  );
 };
