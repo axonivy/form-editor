@@ -87,7 +87,7 @@ test('responsive', async ({ page }) => {
 test('open preview', async ({ page }) => {
   const editor = await FormEditor.openMock(page);
   const msg1 = consoleLog(page);
-  const openPreviewBtn = editor.toolbar.locator.getByRole('button', { name: 'Open Preview' });
+  const openPreviewBtn = editor.toolbar.locator.getByRole('button', { name: 'Open Dialog Preview' });
   await openPreviewBtn.click();
   expect(await msg1).toContain('openPreview');
 
