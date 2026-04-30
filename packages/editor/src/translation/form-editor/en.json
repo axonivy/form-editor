@@ -238,7 +238,7 @@
     "createFormData": "Create from data ({{hotkey}})",
     "deviceMode": "Change device mode ({{hotkey}})",
     "openDataClass": "Open Data Class({{hotkey}})",
-    "openPreview": "Open Preview ({{hotkey}})",
+    "openPreview": "Open Dialog Preview ({{hotkey}})",
     "openProcess": "Open Process ({{hotkey}})",
     "viewMode": "View Mode ({{hotkey}})"
   },
