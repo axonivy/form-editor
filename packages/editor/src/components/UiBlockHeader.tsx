@@ -15,13 +15,13 @@ type UiBlockHeaderProps = {
 export const UiBlockHeader = ({ visible, label, required, disabled, additionalInfo, updateOnChange }: UiBlockHeaderProps) => {
   const { ui } = useAppContext();
   return (
-    <Flex direction='row' justifyContent='space-between' alignItems='center' className='header-block__label'>
+    <Flex direction='row' justifyContent='space-between' alignItems='center' className='w-full'>
       <Flex direction='row'>
         {label && <UiBadge value={label} />}
         {required && required !== 'false' ? (required === 'false' ? '' : ' *') : ''}
       </Flex>
-      <Flex alignItems='center' gap={1} className='header-block__indicators'>
-        {additionalInfo && additionalInfo.length === 0 ? null : <span style={{ color: 'var(--N600)' }}>{additionalInfo}</span>}
+      <Flex alignItems='center' gap={1}>
+        {additionalInfo && additionalInfo.length === 0 ? null : <span className='text-n600'>{additionalInfo}</span>}
         {!ui.helpPaddings && <UiBlockHeaderUpdateOnChangePart updateOnChange={updateOnChange} />}
         {!ui.helpPaddings && <UiBlockHeaderDisablePart disabled={disabled} />}
         {!ui.helpPaddings && <UiBlockHeaderVisiblePart visible={visible} />}
@@ -32,7 +32,7 @@ export const UiBlockHeader = ({ visible, label, required, disabled, additionalIn
 
 export const UiBlockHeaderVisiblePart = ({ visible }: { visible: string }) =>
   visible === 'true' || visible.length === 0 ? null : (
-    <svg width='10px' height='10px' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg' className='header-block__visible'>
+    <svg width='10px' height='10px' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
       <path
         fillRule='evenodd'
         clipRule='evenodd'
@@ -52,14 +52,7 @@ export const UiBlockHeaderVisiblePart = ({ visible }: { visible: string }) =>
 export const UiBlockHeaderDisablePart = ({ disabled }: { disabled: string | undefined }) =>
   disabled && disabled.length !== 0 ? (
     disabled === 'false' ? null : (
-      <svg
-        fill='#a3a3a3'
-        width='10px'
-        height='10px'
-        viewBox='0 0 24 24'
-        xmlns='http://www.w3.org/2000/svg'
-        className='header-block__disabled'
-      >
+      <svg fill='#a3a3a3' width='10px' height='10px' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
         <path d='M5,22H19a3,3,0,0,0,3-3V10a3,3,0,0,0-3-3H17V6A5,5,0,0,0,7,6V7H5a3,3,0,0,0-3,3v9A3,3,0,0,0,5,22ZM9,6a3,3,0,0,1,6,0V7H9ZM4,10A1,1,0,0,1,5,9H19a1,1,0,0,1,1,1v9a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1Zm6,4.5a2,2,0,1,1,2,2A2,2,0,0,1,10,14.5Z' />
       </svg>
     )
@@ -67,7 +60,7 @@ export const UiBlockHeaderDisablePart = ({ disabled }: { disabled: string | unde
 
 export const UiBlockHeaderUpdateOnChangePart = ({ updateOnChange }: { updateOnChange: boolean | undefined }) =>
   updateOnChange ? (
-    <svg width='10px' height='10px' viewBox='0 0 15 15' fill='none' xmlns='http://www.w3.org/2000/svg' className='header-block__update'>
+    <svg width='10px' height='10px' viewBox='0 0 15 15' fill='none' xmlns='http://www.w3.org/2000/svg'>
       <path
         fillRule='evenodd'
         clipRule='evenodd'
