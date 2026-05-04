@@ -126,7 +126,7 @@ export const TableField = <TData extends object>({
     <BasicField
       label={label}
       control={table.getSelectedRowModel().rows.length > 0 && <Button icon={IvyIcons.Trash} aria-label='Remove row' onClick={removeRow} />}
-      className='table-field'
+      className='ui-table-field'
     >
       <Table>
         <TableResizableHeader headerGroups={table.getHeaderGroups()} onClick={() => table.setRowSelection({})} />

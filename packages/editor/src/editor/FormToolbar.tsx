@@ -76,7 +76,7 @@ export const FormToolbar = ({ ref }: ComponentProps<'div'>) => {
   );
 
   return (
-    <Toolbar ref={ref} className='toolbar'>
+    <Toolbar ref={ref}>
       <Flex gap={1}>
         <Button ref={firstElementRef} {...deviceModeProps} />
         {editable && (
@@ -90,7 +90,7 @@ export const FormToolbar = ({ ref }: ComponentProps<'div'>) => {
             />
             <ToolbarContainer maxWidth={450}>
               <Flex>
-                <Separator orientation='vertical' style={{ height: '26px', marginInline: 'var(--size-2)' }} />
+                <Separator orientation='vertical' className='mx-2! h-6.5!' />
                 <Flex gap={1}>
                   <Button
                     title={hotkeys.undo.label}
@@ -115,7 +115,7 @@ export const FormToolbar = ({ ref }: ComponentProps<'div'>) => {
         )}
       </Flex>
       {editable && (
-        <Flex gap={3} className='palette-section'>
+        <Flex gap={3}>
           <PalettePopover label={t('label.allComponents')} icon={IvyIcons.Task}>
             <FormPalette sections={allComponentsByCategory()} />
           </PalettePopover>

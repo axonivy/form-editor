@@ -25,8 +25,8 @@ export const Sidebar = () => {
   const openUrl = useAction('openUrl');
   const { openHelp: shortcut } = useKnownHotkeys();
   return (
-    <Flex direction='column' className='properties' style={{ height: '100%' }}>
-      <SidebarHeader icon={IvyIcons.PenEdit} title={title} className='sidebar-header'>
+    <Flex direction='column' className='h-full'>
+      <SidebarHeader icon={IvyIcons.PenEdit} title={title}>
         <Switch
           size='large'
           icon={{ icon: IvyIcons.List }}
@@ -38,7 +38,7 @@ export const Sidebar = () => {
         <Button icon={IvyIcons.Help} onClick={() => openUrl(helpUrl)} aria-label={shortcut.label} title={shortcut.label} />
       </SidebarHeader>
       {messages.length > 0 && (
-        <SidebarMessages>
+        <SidebarMessages className='ui-sidebar-messages'>
           {messages.map((msg, i) => (
             // eslint-disable-next-line @eslint-react/no-array-index-key
             <Message key={i} {...msg} />
