@@ -3,21 +3,15 @@ import { useComponents } from '../../context/ComponentsContext';
 import { useData } from '../../data/data';
 import type { Subsection } from '../../types/config';
 
-export const usePropertySubSectionControl = () => {
+export const PropertySubSectionControl = ({ title, ...props }: CollapsibleControlProps & { title: string }) => {
   const { componentByName } = useComponents();
   const { element } = useData();
-  const PropertySubSectionControl = ({ title, ...props }: CollapsibleControlProps & { title: string }) => {
-    if (element === undefined) {
-      return null;
-    }
-    const config = componentByName(element.type);
-    if (config?.subSectionControls) {
-      return config.subSectionControls(props, title as Subsection);
-    }
+  if (element === undefined) {
     return null;
-  };
-
-  return {
-    PropertySubSectionControl
-  };
+  }
+  const config = componentByName(element.type);
+  if (config?.subSectionControls) {
+    return config.subSectionControls(props, title as Subsection);
+  }
+  return null;
 };
