@@ -22,7 +22,7 @@ import { InputFieldWithBrowser } from './fields/InputFieldWithBrowser';
 import { SelectField } from './fields/SelectField';
 import { groupFieldsBySubsection, visibleFields, visibleSections, type VisibleFields } from './property';
 import { PropertyItem } from './PropertyItem';
-import { usePropertySubSectionControl } from './PropertySubSectionControl';
+import { PropertySubSectionControl } from './PropertySubSectionControl';
 
 export const Properties = () => {
   const { categoryTranslations: CategoryTranslations } = useBase();
@@ -58,7 +58,6 @@ export const Properties = () => {
 const PropertySubSection = ({ title, fields }: { title: string; fields: VisibleFields }) => {
   const { element, setElement } = useData();
   const { validations } = useAppContext();
-  const { PropertySubSectionControl } = usePropertySubSectionControl();
   if (element === undefined) {
     return null;
   }
