@@ -38,7 +38,7 @@ export const TextareaField = ({ label, value, onChange, message }: TextareaField
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <BasicField label={label} message={message} className='badge-field' {...focusWithinProps} tabIndex={0}>
+      <BasicField label={label} message={message} {...focusWithinProps} tabIndex={0}>
         {isFocusWithin || showQuickFix() ? (
           <Flex direction='row'>
             <Textarea

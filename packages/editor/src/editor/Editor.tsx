@@ -19,7 +19,6 @@ import { ComponentsProvider } from '../context/ComponentsContext';
 import { DndContext } from '../context/DndContext';
 import { genQueryKey } from '../query/query-client';
 import type { Unary } from '../types/types';
-import './Editor.css';
 import { MasterPart } from './MasterPart';
 import { Sidebar } from './sidebar/Sidebar';
 
@@ -144,7 +143,7 @@ export const Editor = ({ context, directSave }: FormEditorProps) => {
             {ui.properties && (
               <>
                 <ResizableHandle />
-                <ResizablePanel id='properties' defaultSize='25%' minSize='20%' className='panel'>
+                <ResizablePanel id='form-editor-detail' defaultSize='25%' minSize='20%' className='h-full'>
                   <Sidebar />
                 </ResizablePanel>
               </>

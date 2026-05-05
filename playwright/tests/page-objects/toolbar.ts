@@ -22,10 +22,6 @@ export class Toolbar {
     return this.locator.getByRole('button', { name: 'View Mode' });
   }
 
-  get palette() {
-    return this.locator.locator('.palette-section');
-  }
-
   get dataButton() {
     return this.locator.getByRole('button', { name: 'Create from data' });
   }
@@ -36,7 +32,7 @@ export class Toolbar {
 
   async openPalette(name: 'All Components' | 'Structures' | 'Elements' | 'Actions' | 'Composites') {
     await expect(async () => {
-      const paletteBtn = this.palette.getByRole('button', { name });
+      const paletteBtn = this.locator.getByRole('button', { name });
       await expect(paletteBtn).toHaveAttribute('data-state', 'closed');
       await paletteBtn.click();
       await expect(paletteBtn).toHaveAttribute('data-state', 'open');

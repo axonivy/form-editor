@@ -1,4 +1,4 @@
-.table-field {
+.ui-table-field {
   > .ui-fieldset-label .ui-label {
     line-height: 20px;
   }
@@ -11,7 +11,7 @@
         border: none;
         background-color: unset;
       }
-      .badge-field output {
+      .ui-input-badge {
         background-color: inherit;
         color: inherit;
         border: none;

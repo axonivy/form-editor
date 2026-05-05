@@ -14,10 +14,9 @@ export const MasterPart = () => {
 
   return (
     <ResizablePanel
-      id='canvas'
+      id='form-editor-main'
       defaultSize='50%'
       minSize='30%'
-      className='panel'
       onClick={e => {
         if (e.target !== e.currentTarget && !toolbarRef.current?.contains(e.target as Node)) {
           setSelectedElement(undefined);
@@ -25,7 +24,7 @@ export const MasterPart = () => {
         }
       }}
     >
-      <Flex direction='column' className='canvas-panel'>
+      <Flex direction='column' className='h-full bg-n75'>
         <FormToolbar ref={toolbarRef} />
         <ErrorBoundary FallbackComponent={ErrorFallback} resetKeys={[data]}>
           <Canvas />
