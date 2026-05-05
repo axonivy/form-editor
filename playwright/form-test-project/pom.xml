@@ -94,7 +94,7 @@
               <goal>copy-resources</goal>
             </goals>
             <configuration>
-              <outputDirectory>${engine.dir}/data/workspaces/Developer/${engine.test.ws}/form-test-project</outputDirectory>
+              <outputDirectory>${engine.dir}/data/default/workspaces/Developer/${engine.test.ws}/form-test-project</outputDirectory>
               <resources>
                 <resource>
                   <directory>.</directory>
