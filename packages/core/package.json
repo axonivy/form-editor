@@ -14,12 +14,13 @@
     "src"
   ],
   "dependencies": {
-    "@axonivy/form-editor-protocol": "~12.0.15-next"
+    "@axonivy/form-editor-protocol": "workspace:~12.0.15-next"
   },
   "peerDependencies": {
     "@axonivy/jsonrpc": "~12.0.15-next"
   },
   "devDependencies": {
+    "@axonivy/jsonrpc": "~12.0.15-next.750.0ac5589",
     "vite": "^7.0.0"
   },
   "type": "module",
@@ -29,8 +30,8 @@
   "scripts": {
     "clean": "rimraf lib tsconfig.tsbuildinfo",
     "build": "tsc --build",
-    "package": "npm run clean && vite build && npm run build",
-    "build:clean": "npm clean && npm build",
+    "package": "pnpm run clean && vite build && pnpm run build",
+    "build:clean": "pnpm run clean && pnpm run build",
     "type": "tsc --noEmit"
   }
 }

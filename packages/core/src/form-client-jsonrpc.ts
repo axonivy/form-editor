@@ -8,7 +8,8 @@ import type {
   FormSaveData,
   FormOnNotificationTypes,
   ValidationResult,
-  FormActionArgs
+  FormActionArgs,
+  Event
 } from '@axonivy/form-editor-protocol';
 import {
   BaseRpcClient,
@@ -24,9 +25,9 @@ export class FormClientJsonRpc extends BaseRpcClient implements FormClient {
   protected onDataChangedEmitter = new Emitter<void>();
   protected onValidaitonChangedEmitter = new Emitter<void>();
   protected onSelectElementEmitter = new Emitter<string>();
-  onDataChanged = this.onDataChangedEmitter.event;
-  onValidationChanged = this.onValidaitonChangedEmitter.event;
-  onSelectElement = this.onSelectElementEmitter.event;
+  onDataChanged: Event<void> = this.onDataChangedEmitter.event;
+  onValidationChanged: Event<void> = this.onValidaitonChangedEmitter.event;
+  onSelectElement: Event<string> = this.onSelectElementEmitter.event;
 
   protected override setupConnection(): void {
     super.setupConnection();

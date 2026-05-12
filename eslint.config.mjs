@@ -1,8 +1,8 @@
-import tseslint from 'typescript-eslint';
+import { defineConfig } from 'eslint/config';
 import config from '@axonivy/eslint-config';
 import i18next from 'eslint-plugin-i18next';
 
-export default tseslint.config(
+export default defineConfig(
   ...config.base,
   // TypeScript recommended configs
   {
@@ -16,12 +16,10 @@ export default tseslint.config(
     }
   },
   {
-    name: 'form/rules',
-    files: ['**/*.{ts,tsx,js,jsx}'],
-    ignores: ['**/*.test.{ts,tsx,js,jsx}'],
-    plugins: {
-      i18next
-    },
+    name: 'eslint-plugin-i18next',
+    plugins: { i18next },
+    files: ['**/*.{ts,tsx}'],
+    ignores: ['**/*.{test,spec}.{ts,tsx}'],
     rules: {
       'i18next/no-literal-string': [
         'warn',
@@ -38,5 +36,9 @@ export default tseslint.config(
     rules: {
       '@typescript-eslint/no-explicit-any': 'off'
     }
+  },
+  {
+    name: 'ignore-files',
+    ignores: ['**/i18next.config.*']
   }
 );
