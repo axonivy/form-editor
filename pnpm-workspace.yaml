@@ -1,0 +1,15 @@
+packages:
+  - packages/*
+  - integrations/*
+  - playwright
+allowBuilds:
+  '@swc/core': false
+  esbuild: false
+minimumReleaseAgeExclude:
+  - '@axonivy/*'
+preferWorkspacePackages: true
+publicHoistPattern:
+  - eslint
+trustPolicy: no-downgrade
+trustPolicyIgnoreAfter: 43200 # minutes (30 days)
+verifyDepsBeforeRun: warn

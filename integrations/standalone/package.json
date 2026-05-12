@@ -9,11 +9,12 @@
     "url": "https://github.com/axonivy/form-editor"
   },
   "dependencies": {
-    "@axonivy/form-editor": "~12.0.15-next",
-    "@axonivy/form-editor-core": "~12.0.15-next",
-    "@axonivy/jsonrpc": "~12.0.15-next.736.41cf02f",
-    "@axonivy/ui-components": "~12.0.15-next.736.41cf02f",
-    "@axonivy/ui-icons": "~12.0.15-next.736.41cf02f",
+    "@axonivy/form-editor": "workspace:~12.0.15-next",
+    "@axonivy/form-editor-core": "workspace:~12.0.15-next",
+    "@axonivy/form-editor-protocol": "workspace:~12.0.15-next",
+    "@axonivy/jsonrpc": "~12.0.15-next.750.0ac5589",
+    "@axonivy/ui-components": "~12.0.15-next.750.0ac5589",
+    "@axonivy/ui-icons": "~12.0.15-next.750.0ac5589",
     "@tanstack/react-query": "^5.64",
     "@tanstack/react-query-devtools": "^5.64",
     "path-browserify": "^1.0.1",
@@ -24,12 +25,13 @@
     "@types/react": "^18.3.4",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.4.0",
-    "vite": "^7.0.0"
+    "vite": "^7.0.0",
+    "vite-plugin-svgr": "^4.3.0"
   },
   "scripts": {
     "clean": "rimraf build",
     "build": "tsc --build",
-    "build:clean": "npm run clean && npm run build",
+    "build:clean": "pnpm run clean && pnpm run build",
     "package": "vite build",
     "type": "tsc --noEmit",
     "dev": "vite",

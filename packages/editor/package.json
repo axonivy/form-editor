@@ -14,12 +14,12 @@
     "src"
   ],
   "dependencies": {
-    "@axonivy/form-editor-protocol": "~12.0.15-next",
+    "@axonivy/form-editor-protocol": "workspace:~12.0.15-next",
     "@dnd-kit/core": "^6.3.1",
-    "i18next": "^24.2.3",
+    "i18next": "^26.0.0",
     "react-aria": "^3.38.0",
     "react-error-boundary": "^4.1.2",
-    "react-i18next": "^15.4.1"
+    "react-i18next": "^17.0.0"
   },
   "peerDependencies": {
     "@axonivy/ui-components": "~12.0.15-next",
@@ -29,6 +29,9 @@
     "react": "^18.2 || ^19.0"
   },
   "devDependencies": {
+    "@axonivy/ui-components": "~12.0.15-next.750.0ac5589",
+    "@axonivy/ui-icons": "~12.0.15-next.750.0ac5589",
+    "@tanstack/react-table": "^8.21.3",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
@@ -36,11 +39,12 @@
     "@types/react": "^18.3.3",
     "@vanilla-extract/recipes": "^0.5.5",
     "@vitejs/plugin-react": "^4.4.0",
-    "i18next-parser": "^9.3.0",
+    "i18next-cli": "^1.21.1",
     "jsdom": "^25.0.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "rollup-plugin-visualizer": "^5.12.0",
+    "vite": "^7.0.0",
     "vite-plugin-dts": "^4.3.0",
     "vite-plugin-svgr": "^4.3.0",
     "vitest": "^3.2.0"
@@ -52,12 +56,12 @@
   "scripts": {
     "clean": "rimraf lib *.tsbuildinfo",
     "build": "tsc --build",
-    "package": "npm run clean && vite build && tsc -p tsconfig.production.json",
-    "build:clean": "npm run clean && npm run build",
+    "package": "pnpm run clean && vite build && tsc -p tsconfig.production.json",
+    "build:clean": "pnpm run clean && pnpm run build",
     "type": "tsc --noEmit",
     "test": "vitest",
     "test:ci": "vitest --watch=false",
-    "i18n:extract": "i18next",
-    "i18n:ci": "i18next --fail-on-update"
+    "i18n": "i18next-cli extract",
+    "i18n:ci": "i18next-cli extract --ci --dry-run"
   }
 }
