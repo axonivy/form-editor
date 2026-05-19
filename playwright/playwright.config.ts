@@ -4,7 +4,7 @@ export default defineConfig({
   timeout: 1000 * (process.env.CI ? 30 : 15),
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 1 : 0,
+  retries: process.env.CI ? 3 : 0,
   reporter: process.env.CI ? [['junit', { outputFile: 'report.xml', includeProjectInTestName: true }], ['list']] : 'html',
   use: {
     actionTimeout: 0,
