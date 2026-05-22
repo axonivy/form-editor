@@ -88,7 +88,8 @@
     "options": "オプション",
     "bypassValidation": "検証なしでアクションを実行",
     "changeComponentType": "コンポーネントタイプの変更",
-    "validationMessage": "検証メッセージ"
+    "validationMessage": "検証メッセージ",
+    "allComponentsInsert": "新規コンポーネントを追加(N)"
   },
   "category": {
     "actions": "アクション",
