@@ -14,10 +14,10 @@
     "src"
   ],
   "dependencies": {
-    "@axonivy/form-editor-protocol": "workspace:~14.0.0-next",
+    "@axonivy/form-editor-protocol": "workspace:~",
     "@dnd-kit/core": "^6.3.1",
-    "react-aria": "^3.38.0",
-    "react-error-boundary": "^6.1.0"
+    "react-aria": "^3.49.0",
+    "react-error-boundary": "^6.1.2"
   },
   "peerDependencies": {
     "@axonivy/ui-components": "~14.0.0-next",
@@ -29,24 +29,24 @@
     "react-i18next": "^16.0.0 || ^17.0.0"
   },
   "devDependencies": {
-    "@axonivy/ui-components": "~14.0.0-next.1144.cdb22cb",
-    "@axonivy/ui-icons": "~14.0.0-next.1144.cdb22cb",
+    "@axonivy/ui-components": "14.0.0-next.1144.cdb22cb",
+    "@axonivy/ui-icons": "14.0.0-next.1144.cdb22cb",
     "@tanstack/react-table": "^8.21.3",
-    "@testing-library/dom": "^10.4.0",
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.2.0",
-    "@testing-library/user-event": "^14.6.0",
-    "@types/react": "^19.0.7",
-    "@vanilla-extract/recipes": "^0.5.5",
-    "@vitejs/plugin-react": "^6.0.0",
-    "i18next-cli": "^1.21.1",
-    "jsdom": "^29.0.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "vite": "^8.0.0",
-    "vite-plugin-dts": "^5.0.0",
-    "vite-plugin-svgr": "^5.0.0",
-    "vitest": "^4.0.0"
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/react": "^19.2.15",
+    "@vanilla-extract/recipes": "^0.5.7",
+    "@vitejs/plugin-react": "^6.0.2",
+    "i18next-cli": "^1.58.1",
+    "jsdom": "^29.1.1",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "vite": "^8.0.14",
+    "vite-plugin-dts": "^5.0.1",
+    "vite-plugin-svgr": "^5.2.0",
+    "vitest": "^4.1.7"
   },
   "type": "module",
   "module": "lib/editor.js",

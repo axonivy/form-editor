@@ -9,111 +9,111 @@ importers:
   .:
     devDependencies:
       '@axonivy/eslint-config':
-        specifier: ~14.0.0-next.1144.cdb22cb
+        specifier: 14.0.0-next.1144.cdb22cb
         version: 14.0.0-next.1144.cdb22cb(jiti@2.7.0)(tailwindcss@4.2.2)(typescript@6.0.3)
       '@axonivy/prettier-config':
-        specifier: ~14.0.0-next.1144.cdb22cb
+        specifier: 14.0.0-next.1144.cdb22cb
         version: 14.0.0-next.1144.cdb22cb
       '@axonivy/ts-config':
-        specifier: ~14.0.0-next.1144.cdb22cb
+        specifier: 14.0.0-next.1144.cdb22cb
         version: 14.0.0-next.1144.cdb22cb
       '@lerna-lite/cli':
-        specifier: ^5.0.0
+        specifier: ^5.2.2
         version: 5.2.2(@lerna-lite/publish@5.2.2(@types/node@24.12.4)(conventional-commits-filter@5.0.0))(@lerna-lite/version@5.2.2(@lerna-lite/publish@5.2.2(@types/node@24.12.4)(conventional-commits-filter@5.0.0))(@types/node@24.12.4)(conventional-commits-filter@5.0.0))(@types/node@24.12.4)
       '@lerna-lite/publish':
-        specifier: ^5.0.0
+        specifier: ^5.2.2
         version: 5.2.2(@types/node@24.12.4)(conventional-commits-filter@5.0.0)
       '@lerna-lite/version':
-        specifier: ^5.0.0
+        specifier: ^5.2.2
         version: 5.2.2(@lerna-lite/publish@5.2.2(@types/node@24.12.4)(conventional-commits-filter@5.0.0))(@types/node@24.12.4)(conventional-commits-filter@5.0.0)
       '@types/node':
-        specifier: ^24.0.0
+        specifier: ^24.12.4
         version: 24.12.4
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
       typescript:
-        specifier: ^6.0.0
+        specifier: ^6.0.3
         version: 6.0.3
 
   integrations/standalone:
     dependencies:
       '@axonivy/form-editor':
-        specifier: workspace:~14.0.0-next
+        specifier: workspace:~
         version: link:../../packages/editor
       '@axonivy/form-editor-core':
-        specifier: workspace:~14.0.0-next
+        specifier: workspace:~
         version: link:../../packages/core
       '@axonivy/form-editor-protocol':
-        specifier: workspace:~14.0.0-next
+        specifier: workspace:~
         version: link:../../packages/protocol
       '@axonivy/jsonrpc':
-        specifier: ~14.0.0-next.1144.cdb22cb
+        specifier: 14.0.0-next.1144.cdb22cb
         version: 14.0.0-next.1144.cdb22cb
       '@axonivy/ui-components':
-        specifier: ~14.0.0-next.1144.cdb22cb
+        specifier: 14.0.0-next.1144.cdb22cb
         version: 14.0.0-next.1144.cdb22cb(@axonivy/ui-icons@14.0.0-next.1144.cdb22cb)(@types/react-dom@19.2.3(@types/react@19.2.15))(@types/react@19.2.15)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@axonivy/ui-icons':
-        specifier: ~14.0.0-next.1144.cdb22cb
+        specifier: 14.0.0-next.1144.cdb22cb
         version: 14.0.0-next.1144.cdb22cb
       '@tanstack/react-query':
-        specifier: ^5.64
+        specifier: ^5.100.14
         version: 5.100.14(react@19.2.6)
       '@tanstack/react-query-devtools':
-        specifier: ^5.64
+        specifier: ^5.100.14
         version: 5.100.14(@tanstack/react-query@5.100.14(react@19.2.6))(react@19.2.6)
       i18next:
-        specifier: ^26.0.0
+        specifier: ^26.3.0
         version: 26.3.0(typescript@6.0.3)
       i18next-browser-languagedetector:
-        specifier: ^8.0.4
+        specifier: ^8.2.1
         version: 8.2.1
       path-browserify:
         specifier: ^1.0.1
         version: 1.0.1
       react:
-        specifier: ^19.0.0
+        specifier: ^19.2.6
         version: 19.2.6
       react-dom:
-        specifier: ^19.0.0
+        specifier: ^19.2.6
         version: 19.2.6(react@19.2.6)
       react-i18next:
-        specifier: ^17.0.0
+        specifier: ^17.0.8
         version: 17.0.8(i18next@26.3.0(typescript@6.0.3))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(typescript@6.0.3)
     devDependencies:
       '@types/react':
-        specifier: ^19.0.7
+        specifier: ^19.2.15
         version: 19.2.15
       '@types/react-dom':
-        specifier: ^19.0.3
+        specifier: ^19.2.3
         version: 19.2.3(@types/react@19.2.15)
       '@vitejs/plugin-react':
-        specifier: ^6.0.0
+        specifier: ^6.0.2
         version: 6.0.2(vite@8.0.14(@types/node@24.12.4)(jiti@2.7.0)(yaml@2.9.0))
       vite:
-        specifier: ^8.0.0
+        specifier: ^8.0.14
         version: 8.0.14(@types/node@24.12.4)(jiti@2.7.0)(yaml@2.9.0)
       vite-plugin-svgr:
-        specifier: ^5.0.0
+        specifier: ^5.2.0
         version: 5.2.0(typescript@6.0.3)(vite@8.0.14(@types/node@24.12.4)(jiti@2.7.0)(yaml@2.9.0))
 
   packages/core:
     dependencies:
       '@axonivy/form-editor-protocol':
-        specifier: workspace:~14.0.0-next
+        specifier: workspace:~
         version: link:../protocol
     devDependencies:
       '@axonivy/jsonrpc':
-        specifier: ~14.0.0-next.1144.cdb22cb
+        specifier: 14.0.0-next.1144.cdb22cb
         version: 14.0.0-next.1144.cdb22cb
       vite:
-        specifier: ^8.0.0
+        specifier: ^8.0.14
         version: 8.0.14(@types/node@24.12.4)(jiti@2.7.0)(yaml@2.9.0)
 
   packages/editor:
     dependencies:
       '@axonivy/form-editor-protocol':
-        specifier: workspace:~14.0.0-next
+        specifier: workspace:~
         version: link:../protocol
       '@dnd-kit/core':
         specifier: ^6.3.1
@@ -128,68 +128,68 @@ importers:
         specifier: ^25.0.0 || ^26.0.0
         version: 26.3.0(typescript@6.0.3)
       react-aria:
-        specifier: ^3.38.0
+        specifier: ^3.49.0
         version: 3.49.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       react-error-boundary:
-        specifier: ^6.1.0
+        specifier: ^6.1.2
         version: 6.1.2(react@19.2.6)
       react-i18next:
         specifier: ^16.0.0 || ^17.0.0
         version: 17.0.8(i18next@26.3.0(typescript@6.0.3))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(typescript@6.0.3)
     devDependencies:
       '@axonivy/ui-components':
-        specifier: ~14.0.0-next.1144.cdb22cb
+        specifier: 14.0.0-next.1144.cdb22cb
         version: 14.0.0-next.1144.cdb22cb(@axonivy/ui-icons@14.0.0-next.1144.cdb22cb)(@types/react-dom@19.2.3(@types/react@19.2.15))(@types/react@19.2.15)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@axonivy/ui-icons':
-        specifier: ~14.0.0-next.1144.cdb22cb
+        specifier: 14.0.0-next.1144.cdb22cb
         version: 14.0.0-next.1144.cdb22cb
       '@tanstack/react-table':
         specifier: ^8.21.3
         version: 8.21.3(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@testing-library/dom':
-        specifier: ^10.4.0
+        specifier: ^10.4.1
         version: 10.4.1
       '@testing-library/jest-dom':
-        specifier: ^6.6.3
+        specifier: ^6.9.1
         version: 6.9.1
       '@testing-library/react':
-        specifier: ^16.2.0
+        specifier: ^16.3.2
         version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@19.2.3(@types/react@19.2.15))(@types/react@19.2.15)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@testing-library/user-event':
-        specifier: ^14.6.0
+        specifier: ^14.6.1
         version: 14.6.1(@testing-library/dom@10.4.1)
       '@types/react':
-        specifier: ^19.0.7
+        specifier: ^19.2.15
         version: 19.2.15
       '@vanilla-extract/recipes':
-        specifier: ^0.5.5
+        specifier: ^0.5.7
         version: 0.5.7(@vanilla-extract/css@1.20.1)
       '@vitejs/plugin-react':
-        specifier: ^6.0.0
+        specifier: ^6.0.2
         version: 6.0.2(vite@8.0.14(@types/node@24.12.4)(jiti@2.7.0)(yaml@2.9.0))
       i18next-cli:
-        specifier: ^1.21.1
+        specifier: ^1.58.1
         version: 1.58.1(@swc/helpers@0.5.23)(@types/node@24.12.4)(i18next@26.3.0(typescript@6.0.3))(react-dom@19.2.6(react@19.2.6))(typescript@6.0.3)
       jsdom:
-        specifier: ^29.0.0
+        specifier: ^29.1.1
         version: 29.1.1
       react:
-        specifier: ^19.0.0
+        specifier: ^19.2.6
         version: 19.2.6
       react-dom:
-        specifier: ^19.0.0
+        specifier: ^19.2.6
         version: 19.2.6(react@19.2.6)
       vite:
-        specifier: ^8.0.0
+        specifier: ^8.0.14
         version: 8.0.14(@types/node@24.12.4)(jiti@2.7.0)(yaml@2.9.0)
       vite-plugin-dts:
-        specifier: ^5.0.0
+        specifier: ^5.0.1
         version: 5.0.1(rolldown@1.0.2)(typescript@6.0.3)(vite@8.0.14(@types/node@24.12.4)(jiti@2.7.0)(yaml@2.9.0))
       vite-plugin-svgr:
-        specifier: ^5.0.0
+        specifier: ^5.2.0
         version: 5.2.0(typescript@6.0.3)(vite@8.0.14(@types/node@24.12.4)(jiti@2.7.0)(yaml@2.9.0))
       vitest:
-        specifier: ^4.0.0
+        specifier: ^4.1.7
         version: 4.1.7(@types/node@24.12.4)(jsdom@29.1.1)(vite@8.0.14(@types/node@24.12.4)(jiti@2.7.0)(yaml@2.9.0))
 
   packages/protocol:
