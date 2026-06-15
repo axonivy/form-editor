@@ -2,7 +2,7 @@
   "private": true,
   "name": "@axonivy/form-editor-root",
   "engines": {
-    "node": ">=20.19.0"
+    "node": ">=24.11"
   },
   "scripts": {
     "preinstall": "npx only-allow pnpm",
