@@ -23,14 +23,14 @@
     "test": "pnpm run --filter @axonivy/form-editor test",
     "test:ci": "pnpm run -r test:ci",
     "webtest": "pnpm run -r webtest",
-    "update:axonivy:next": "npx --yes npm-check-updates @axonivy* -w -c 0 -t semver -u",
+    "update:axonivy:next": "pnpm update -r @axonivy",
     "raise:version": "lerna version --no-git-tag-version --no-push --ignore-scripts --exact --yes",
-    "publish:next": "lerna publish --exact --canary --preid next --tag-version-prefix beta --pre-dist-tag next --no-git-tag-version --no-push --ignore-scripts --yes"
+    "publish:next": "lerna publish --exact --canary --preid next --tag-version-prefix beta --pre-dist-tag next-14.0.0 --no-git-tag-version --no-push --ignore-scripts --yes"
   },
   "devDependencies": {
-    "@axonivy/eslint-config": "~14.0.0-next.1144.cdb22cb",
-    "@axonivy/prettier-config": "~14.0.0-next.1144.cdb22cb",
-    "@axonivy/ts-config": "~14.0.0-next.1144.cdb22cb",
+    "@axonivy/eslint-config": "next-14.0.0",
+    "@axonivy/prettier-config": "next-14.0.0",
+    "@axonivy/ts-config": "next-14.0.0",
     "@types/node": "^24.0.0",
     "@lerna-lite/cli": "^5.0.0",
     "@lerna-lite/publish": "^5.0.0",
