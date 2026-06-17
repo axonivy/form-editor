@@ -2,6 +2,8 @@ packages:
   - packages/*
   - integrations/*
   - playwright
+registries:
+  '@axonivy': https://npmjs-registry.ivyteam.ch/
 allowBuilds:
   '@swc/core': false
 minimumReleaseAgeExclude:
