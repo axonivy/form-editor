@@ -14,14 +14,14 @@
     "src"
   ],
   "dependencies": {
-    "@axonivy/form-editor-protocol": "workspace:~14.0.0-next"
+    "@axonivy/form-editor-protocol": "workspace:~"
   },
   "peerDependencies": {
     "@axonivy/jsonrpc": "~14.0.0-next"
   },
   "devDependencies": {
     "@axonivy/jsonrpc": "next-14.0.0",
-    "vite": "^8.0.0"
+    "vite": "^8.0.16"
   },
   "type": "module",
   "types": "lib/index.d.ts",
