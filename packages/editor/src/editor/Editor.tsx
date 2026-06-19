@@ -128,7 +128,7 @@ export const Editor = ({ context, directSave }: FormEditorProps) => {
       <link rel='stylesheet' href={`${iconBaseUrl}dev-workflow-ui/webjars/streamline-icons/StreamlineIcons.css`} crossOrigin='anonymous' />
       <link
         rel='stylesheet'
-        href={`${iconBaseUrl}dev-workflow-ui/faces/javax.faces.resource/primeicons/primeicons.css?ln=primefaces`}
+        href={`${iconBaseUrl}dev-workflow-ui/faces/jakarta.faces.resource/primeicons/primeicons.css?ln=primefaces`}
         crossOrigin='anonymous'
       />
       <link rel='stylesheet' href={`${iconBaseUrl}dev-workflow-ui/webjars/tabler-icons/tabler-icons.min.css`} crossOrigin='anonymous' />
