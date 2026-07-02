@@ -25,7 +25,7 @@
     "webtest": "pnpm run -r webtest --",
     "update:axonivy:next": "pnpm update -r @axonivy",
     "raise:version": "lerna version --no-git-tag-version --no-push --ignore-scripts --exact --yes",
-    "publish:next": "lerna publish --exact --canary --preid next --tag-version-prefix beta --pre-dist-tag next-12.0.16 --no-git-tag-version --no-push --ignore-scripts --yes"
+    "publish:next": "lerna publish --exact --canary --preid next --tag-version-prefix beta --pre-dist-tag next-12.0.17 --no-git-tag-version --no-push --ignore-scripts --yes"
   },
   "devDependencies": {
     "@axonivy/eslint-config": "next-12.0.16",
