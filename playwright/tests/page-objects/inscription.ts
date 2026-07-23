@@ -129,9 +129,9 @@ export class ToggleGroup {
     options?: { label?: string; nth?: number }
   ) {
     if (options?.label) {
-      this.locator = parentLocator.getByRole('group', { name: options.label }).first();
+      this.locator = parentLocator.getByRole('radiogroup', { name: options.label }).first();
     } else {
-      this.locator = parentLocator.getByRole('group').nth(options?.nth ?? 0);
+      this.locator = parentLocator.getByRole('radiogroup').nth(options?.nth ?? 0);
     }
   }
 
