@@ -22,15 +22,15 @@
     "react-i18next": "^17.0.8"
   },
   "peerDependencies": {
-    "@axonivy/ui-components": "~12.0.16-next",
-    "@axonivy/ui-icons": "~12.0.16-next",
+    "@axonivy/ui-components": "~12.0.17-next",
+    "@axonivy/ui-icons": "~12.0.17-next",
     "@tanstack/react-query": "^5.32",
     "@tanstack/react-query-devtools": "^5.32",
     "react": "^18.2 || ^19.0"
   },
   "devDependencies": {
-    "@axonivy/ui-components": "next-12.0.16",
-    "@axonivy/ui-icons": "next-12.0.16",
+    "@axonivy/ui-components": "next-12.0.17",
+    "@axonivy/ui-icons": "next-12.0.17",
     "@tanstack/react-table": "^8.21.3",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
