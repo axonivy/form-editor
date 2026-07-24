@@ -25,7 +25,7 @@ export function start() {
           <QueryProvider client={queryClient}>
             <ReadonlyProvider readonly={readonly}>
               <HotkeysProvider initiallyActiveScopes={['global']}>
-                <App context={{ app: '', pmv: '', file: '' }} />
+                <App context={{ app: '', project: '', file: '' }} />
               </HotkeysProvider>
             </ReadonlyProvider>
           </QueryProvider>

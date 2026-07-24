@@ -19,7 +19,7 @@ export class FormClientMock implements FormClient {
   private formData: FormEditor;
   constructor(datatable: boolean = false) {
     this.formData = {
-      context: { app: 'mock', pmv: 'mock', file: 'mock.f.json' },
+      context: { app: 'mock', project: 'mock', file: 'mock.f.json' },
       readonly: false,
       defaults: {},
       data: (datatable ? dataDataTable : data) as FormData,

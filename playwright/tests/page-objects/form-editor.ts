@@ -8,7 +8,7 @@ export const server = process.env.BASE_URL ?? 'http://localhost:8080/~Developer-
 export const user = 'Developer';
 const ws = process.env.TEST_WS ?? '';
 const app = process.env.TEST_APP ?? 'Developer-form-test-project';
-const pmv = 'form-test-project';
+const project = 'form-test-project';
 
 export class FormEditor {
   readonly page: Page;
@@ -26,7 +26,7 @@ export class FormEditor {
 
   static async openForm(page: Page, options?: { file?: string; readonly?: boolean; theme?: string }) {
     const serverUrl = server.replace(/^https?:\/\//, '');
-    let url = `?server=${serverUrl}${ws}&app=${app}&pmv=${pmv}`;
+    let url = `?server=${serverUrl}${ws}&app=${app}&project=${project}`;
     if (options?.file === undefined) {
       url += '&file=src_hd/form/test/project/test/test.f.json';
     }
@@ -48,7 +48,7 @@ export class FormEditor {
         'Content-Type': 'application/json',
         Authorization: 'Basic ' + Buffer.from(user + ':' + user).toString('base64')
       },
-      body: JSON.stringify({ namespace, name, type: 'Form', project: { app, pmv } })
+      body: JSON.stringify({ namespace, name, type: 'Form', project: { app, project } })
     });
     if (!result.ok) {
       console.log(`Failed to create form: ${result.status}`);
