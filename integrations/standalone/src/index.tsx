@@ -6,12 +6,12 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { initTranslation } from './i18n';
 import './index.css';
-import { appParam, directSaveParam, fileParam, pmvParam, readonlyParam, themeParam, webSocketBase } from './url-helper';
+import { appParam, directSaveParam, fileParam, projectParam, readonlyParam, themeParam, webSocketBase } from './url-helper';
 
 export async function start() {
   const server = webSocketBase();
   const app = appParam();
-  const pmv = pmvParam();
+  const project = projectParam();
   const file = fileParam();
   const directSave = directSaveParam();
   const theme = themeParam();
@@ -36,7 +36,7 @@ export async function start() {
 
   const initialize = async (connection: Connection) => {
     const client = await FormClientJsonRpc.startClient(connection);
-    client.initialize({ app, pmv, file });
+    client.initialize({ app, project, file });
     root.render(
       <React.StrictMode>
         <ThemeProvider defaultTheme={theme}>
@@ -44,7 +44,7 @@ export async function start() {
             <QueryProvider client={queryClient}>
               <ReadonlyProvider readonly={readonly}>
                 <HotkeysProvider initiallyActiveScopes={['global']}>
-                  <App context={{ app, pmv, file }} directSave={directSave} />
+                  <App context={{ app, project, file }} directSave={directSave} />
                 </HotkeysProvider>
               </ReadonlyProvider>
             </QueryProvider>

@@ -7,8 +7,8 @@ export function appParam(): string {
   return parameter('app') ?? '';
 }
 
-export function pmvParam(): string {
-  return parameter('pmv') ?? '';
+export function projectParam(): string {
+  return parameter('project') ?? '';
 }
 
 export function fileParam(): string {
