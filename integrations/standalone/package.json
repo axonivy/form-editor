@@ -15,22 +15,22 @@
     "@axonivy/jsonrpc": "next-14.0.0",
     "@axonivy/ui-components": "next-14.0.0",
     "@axonivy/ui-icons": "next-14.0.0",
-    "@tanstack/react-query": "^5.101.0",
-    "@tanstack/react-query-devtools": "^5.101.0",
-    "i18next": "^26.3.1",
+    "@tanstack/react-query": "^5.101.4",
+    "@tanstack/react-query-devtools": "^5.101.4",
+    "i18next": "^26.3.6",
     "i18next-browser-languagedetector": "^8.2.1",
     "path-browserify": "^1.0.1",
-    "react": "^19.2.7",
-    "react-dom": "^19.2.7",
-    "react-i18next": "^17.0.8"
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "react-i18next": "^17.0.11"
   },
   "devDependencies": {
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "@typescript/native": "npm:typescript@^7.0.2",
-    "@vitejs/plugin-react": "^6.0.2",
+    "@vitejs/plugin-react": "^6.0.4",
     "typescript": "npm:@typescript/typescript6@^6.0.2",
-    "vite": "^8.0.16",
+    "vite": "^8.1.5",
     "vite-plugin-svgr": "^5.2.0"
   },
   "scripts": {
