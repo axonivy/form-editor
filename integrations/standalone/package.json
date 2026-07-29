@@ -15,8 +15,8 @@
     "@axonivy/jsonrpc": "next-12.0.17",
     "@axonivy/ui-components": "next-12.0.17",
     "@axonivy/ui-icons": "next-12.0.17",
-    "@tanstack/react-query": "^5.101.0",
-    "@tanstack/react-query-devtools": "^5.101.0",
+    "@tanstack/react-query": "^5.101.4",
+    "@tanstack/react-query-devtools": "^5.101.4",
     "path-browserify": "^1.0.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
@@ -25,7 +25,7 @@
     "@types/react": "^18.3.31",
     "@types/react-dom": "^18.3.7",
     "@vitejs/plugin-react": "^4.7.0",
-    "vite": "^7.3.5",
+    "vite": "^7.3.6",
     "vite-plugin-svgr": "^4.5.0"
   },
   "scripts": {
