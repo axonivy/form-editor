@@ -20,7 +20,7 @@ pipeline {
             }
           }
           archiveArtifacts artifacts: '**/integrations/standalone/build/**', allowEmptyArchive: true
-          currentBuild.description = "<a href=${BUILD_URL}artifact/integrations/standalone/build/index.html?server=localhost:8081&secure=false&app=designer&project=form-test-project&file=src_hd/form/test/project/test/test.f.json>&raquo; Form Editor</a><br>" + 
+          currentBuild.description = "<a href=${BUILD_URL}artifact/integrations/standalone/build/index.html?server=localhost:8081&secure=false&app=designer&project=form-test-project&file=dialog/form/test/project/test/test.f.json>&raquo; Form Editor</a><br>" + 
             "<a href=${BUILD_URL}artifact/integrations/standalone/build/mock.html>&raquo; Form Editor Mock</a>"
 
           withChecks('ESLint') {
