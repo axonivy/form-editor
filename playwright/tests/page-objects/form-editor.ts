@@ -28,7 +28,7 @@ export class FormEditor {
     const serverUrl = server.replace(/^https?:\/\//, '');
     let url = `?server=${serverUrl}${ws}&app=${app}&project=${project}`;
     if (options?.file === undefined) {
-      url += '&file=src_hd/form/test/project/test/test.f.json';
+      url += '&file=dialog/form/test/project/test/test.f.json';
     }
     if (options) {
       url += Object.entries(options)
@@ -53,7 +53,7 @@ export class FormEditor {
     if (!result.ok) {
       console.log(`Failed to create form: ${result.status}`);
     }
-    const editor = await this.openForm(page, { file: `src_hd/${namespace}/${name}/${name}.f.json` });
+    const editor = await this.openForm(page, { file: `dialog/${namespace}/${name}/${name}.f.json` });
     if (options?.block) {
       await editor.createBlock(options.block);
     }
