@@ -18,20 +18,14 @@ import { initTranslation } from '../translation/i18n';
 
 export type FormEditorProps = { context: FormContext; directSave?: boolean };
 
-export const Editor = (props: FormEditorProps) => {
+export const Editor = ({ context, directSave }: FormEditorProps) => {
   initTranslation();
   const { t } = useTranslation();
   const components = useComponentsInit();
   const { componentByName } = components;
-  const [context, setContext] = useState(props.context);
-  const [directSave, setDirectSave] = useState(props.directSave);
   const [selectedElement, setSelectedElement] = useState<string>();
-  useEffect(() => {
-    setContext(props.context);
-    setDirectSave(props.directSave);
-  }, [props]);
   const { ui, setUi } = useUiState();
-  const [initialData, setInitalData] = useState<FormData | undefined>(undefined);
+  const [initialData, setInitialData] = useState<FormData | undefined>(undefined);
   const history = useHistoryData<FormData>();
 
   const client = useClient();
@@ -69,12 +63,10 @@ export const Editor = (props: FormEditorProps) => {
     };
   }, [client, context, queryClient, queryKeys]);
 
-  useEffect(() => {
-    if (data?.data !== undefined && initialData === undefined) {
-      setInitalData(data.data);
-      history.push(data.data);
-    }
-  }, [data?.data, history, initialData]);
+  if (data?.data !== undefined && initialData === undefined) {
+    setInitialData(data.data);
+    history.push(data.data);
+  }
 
   const mutation = useMutation({
     mutationKey: queryKeys.saveData(context),
