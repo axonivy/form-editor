@@ -85,22 +85,22 @@ importers:
         version: 17.0.11(@typescript/typescript6@6.0.2)(i18next@26.3.6(@typescript/typescript6@6.0.2))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
     devDependencies:
       '@types/react':
-        specifier: ^19.2.17
+        specifier: ^19.2.18
         version: 19.2.18
       '@types/react-dom':
-        specifier: ^19.2.3
+        specifier: ^19.2.4
         version: 19.2.4(@types/react@19.2.18)
       '@typescript/native':
         specifier: npm:typescript@^7.0.2
         version: typescript@7.0.2
       '@vitejs/plugin-react':
-        specifier: ^6.0.4
+        specifier: ^6.0.5
         version: 6.0.5(vite@8.2.0(@types/node@24.13.3)(jiti@2.7.0)(yaml@2.9.0))
       typescript:
         specifier: npm:@typescript/typescript6@^6.0.2
         version: '@typescript/typescript6@6.0.2'
       vite:
-        specifier: ^8.1.5
+        specifier: ^8.2.0
         version: 8.2.0(@types/node@24.13.3)(jiti@2.7.0)(yaml@2.9.0)
       vite-plugin-svgr:
         specifier: ^5.2.0
@@ -116,7 +116,7 @@ importers:
         specifier: next-14.0.0
         version: 14.0.0-next.1222.a75c2ea
       vite:
-        specifier: ^8.1.5
+        specifier: ^8.2.0
         version: 8.2.0(@types/node@24.13.3)(jiti@2.7.0)(yaml@2.9.0)
 
   packages/editor:
@@ -168,19 +168,19 @@ importers:
         specifier: ^14.6.1
         version: 14.6.1(@testing-library/dom@10.4.1)
       '@types/react':
-        specifier: ^19.2.17
+        specifier: ^19.2.18
         version: 19.2.18
       '@vanilla-extract/recipes':
         specifier: ^0.5.7
         version: 0.5.7(@vanilla-extract/css@1.20.1)
       '@vitejs/plugin-react':
-        specifier: ^6.0.4
+        specifier: ^6.0.5
         version: 6.0.5(vite@8.2.0(@types/node@24.13.3)(jiti@2.7.0)(yaml@2.9.0))
       i18next-cli:
-        specifier: ^1.66.2
+        specifier: ^1.67.3
         version: 1.67.3(@swc/helpers@0.5.23)(@types/node@24.13.3)(@typescript/typescript6@6.0.2)(react-dom@19.2.8(react@19.2.8))
       jsdom:
-        specifier: ^30.0.0
+        specifier: ^30.0.1
         version: 30.0.1
       react:
         specifier: ^19.2.8
@@ -189,7 +189,7 @@ importers:
         specifier: ^19.2.8
         version: 19.2.8(react@19.2.8)
       vite:
-        specifier: ^8.1.5
+        specifier: ^8.2.0
         version: 8.2.0(@types/node@24.13.3)(jiti@2.7.0)(yaml@2.9.0)
       vite-plugin-dts:
         specifier: ^5.0.3
@@ -2098,6 +2098,11 @@ packages:
 
   '@volar/typescript@2.4.28':
     resolution: {integrity: sha512-Ja6yvWrbis2QtN4ClAKreeUZPVYMARDYZl9LMEv1iQ1QdepB6wn0jTRxA9MftYmYa4DQ4k/DaSZpFPUfxl8giw==}
+    peerDependencies:
+      typescript: '*'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
 
   abbrev@4.0.0:
     resolution: {integrity: sha512-a1wflyaL0tHtJSmLSOVybYhy22vRih4eduhhrkcjgrWGnRfrZtovJ2FRjxuTtkkj47O/baf0R86QU5OuYpz8fA==}
@@ -2870,8 +2875,8 @@ packages:
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
 
-  js-yaml@4.3.0:
-    resolution: {integrity: sha512-1td788aAnnZ5qs7V2QIRl1owjtYpbKt749Y3xauqQgwIIGF/xXWz1wMTEBx5O3LK3lXLVuqXPdPxj2BoFHaW9Q==}
+  js-yaml@4.3.1:
+    resolution: {integrity: sha512-CY6crGq313MX8GkwvB7tzgp99vjQxY1++5y10/BKN/GUfHqWaOGQMNZkBvqSzsZKWk/ijwHlWzzkLulsGHhjWQ==}
     hasBin: true
 
   jsdom@30.0.1:
@@ -4114,7 +4119,7 @@ snapshots:
     dependencies:
       '@jsdevtools/ono': 7.1.3
       '@types/json-schema': 7.0.15
-      js-yaml: 4.3.0
+      js-yaml: 4.3.1
 
   '@asamuzakjp/css-color@6.0.5':
     dependencies:
@@ -6122,11 +6127,13 @@ snapshots:
 
   '@volar/source-map@2.4.28': {}
 
-  '@volar/typescript@2.4.28':
+  '@volar/typescript@2.4.28(@typescript/typescript6@6.0.2)':
     dependencies:
       '@volar/language-core': 2.4.28
       path-browserify: 1.0.1
       vscode-uri: 3.1.0
+    optionalDependencies:
+      typescript: '@typescript/typescript6@6.0.2'
 
   abbrev@4.0.0: {}
 
@@ -6334,7 +6341,7 @@ snapshots:
   cosmiconfig@8.3.6(@typescript/typescript6@6.0.2):
     dependencies:
       import-fresh: 3.3.1
-      js-yaml: 4.3.0
+      js-yaml: 4.3.1
       parse-json: 5.2.0
       path-type: 4.0.0
     optionalDependencies:
@@ -6914,7 +6921,7 @@ snapshots:
 
   js-tokens@4.0.0: {}
 
-  js-yaml@4.3.0:
+  js-yaml@4.3.1:
     dependencies:
       argparse: 2.0.1
 
@@ -6958,7 +6965,7 @@ snapshots:
       '@types/json-schema': 7.0.15
       '@types/lodash': 4.17.24
       is-glob: 4.0.3
-      js-yaml: 4.3.0
+      js-yaml: 4.3.1
       lodash: 4.18.1
       minimist: 1.2.8
       prettier: 3.9.6
@@ -7859,7 +7866,7 @@ snapshots:
   unplugin-dts@1.0.3(@typescript/typescript6@6.0.2)(rolldown@1.2.1)(supports-color@7.2.0)(vite@8.2.0(@types/node@24.13.3)(jiti@2.7.0)(yaml@2.9.0)):
     dependencies:
       '@rollup/pluginutils': 5.4.0
-      '@volar/typescript': 2.4.28
+      '@volar/typescript': 2.4.28(@typescript/typescript6@6.0.2)
       compare-versions: 6.1.1
       debug: 4.4.3(supports-color@7.2.0)
       kolorist: 1.8.0
