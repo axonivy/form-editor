@@ -10,7 +10,7 @@ export default defineConfig({
     outDir: 'lib',
     sourcemap: true,
     lib: {
-      entry: resolve(__dirname, 'src/index.ts'),
+      entry: resolve(import.meta.dirname, 'src/index.ts'),
       fileName: 'editor',
       formats: ['es']
     },
@@ -34,8 +34,8 @@ export default defineConfig({
     dir: 'src',
     include: ['**/*.test.ts?(x)'],
     alias: {
-      'test-utils': resolve(__dirname, 'src/test-utils/test-utils.tsx'),
-      '@axonivy/form-editor-protocol': resolve(__dirname, '../../packages/protocol/src')
+      'test-utils': resolve(import.meta.dirname, 'src/test-utils/test-utils.tsx'),
+      '@axonivy/form-editor-protocol': resolve(import.meta.dirname, '../../packages/protocol/src')
     },
     globals: true,
     environment: 'jsdom',
