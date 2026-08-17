@@ -3,11 +3,10 @@ import {
   BasicCheckbox,
   BasicDialogContent,
   Button,
+  dataTreeHelper,
   Dialog,
   DialogContent,
   DialogTrigger,
-  dataTableFeatures,
-  dataTableHelper,
   ExpandableCell,
   MessageRow,
   SelectRow,
@@ -16,8 +15,8 @@ import {
   TableCell,
   useDialogHotkeys,
   useHotkeys,
-  type DataTableFeatures,
-  type BrowserNode
+  type BrowserNode,
+  type DataTableFeatures
 } from '@axonivy/ui-components';
 import { IvyIcons } from '@axonivy/ui-icons';
 import { flexRender, useTable, type Row } from '@tanstack/react-table';
@@ -38,7 +37,7 @@ type DataClassDialogProps = {
   parentName?: string;
 };
 
-const { columnHelper } = dataTableHelper<BrowserNode>();
+const { columnHelper, tableOptions } = dataTreeHelper<BrowserNode>();
 
 export const DataClassDialog = ({ children, ...props }: DataClassDialogProps & { children: ReactNode }) => {
   const { open, onOpenChange } = useDialogHotkeys(['dataclassDialog']);
@@ -96,11 +95,11 @@ const DataClassDialogContent = ({
     })
   ]);
   const table = useTable({
-    features: dataTableFeatures,
-    enableMultiRowSelection: true,
-    enableSubRowSelection: true,
+    ...tableOptions,
     data: tree,
     columns,
+    enableMultiRowSelection: true,
+    enableSubRowSelection: true,
     initialState: { expanded: { '0': true } }
   });
   const createForm = () => {
