@@ -2,6 +2,7 @@ import {
   arraymove,
   BasicField,
   Button,
+  dataTableFeatures,
   deepEqual,
   MessageRow,
   ReorderRow,
@@ -10,23 +11,23 @@ import {
   TableBody,
   TableCell,
   TableResizableHeader,
-  useTableSelect
+  type DataTableFeatures
 } from '@axonivy/ui-components';
 import { IvyIcons } from '@axonivy/ui-icons';
-import { flexRender, getCoreRowModel, useReactTable, type ColumnDef, type Row } from '@tanstack/react-table';
+import { flexRender, useTable, type ColumnDef, type Row, type RowData } from '@tanstack/react-table';
 import { useCallback, useState } from 'react';
 import { useValidation } from '../../../../context/useValidation';
 
-export type TableFieldProps<TData extends object> = {
+export type TableFieldProps<TData extends RowData> = {
   label: string;
   data: TData[];
   onChange: (change: TData[]) => void;
-  columns: ColumnDef<TData, string>[];
+  columns: ReadonlyArray<ColumnDef<DataTableFeatures, TData, unknown>>;
   emptyDataObject: TData;
   validationPath: string;
 };
 
-export const TableField = <TData extends object>({
+export const TableField = <TData extends RowData>({
   label,
   data,
   onChange,
@@ -60,7 +61,7 @@ export const TableField = <TData extends object>({
     const newData = [...tableData];
     newData.push(emptyDataObject);
     changeData(newData);
-    tableSelection.options.onRowSelectionChange({ [`${newData.length - 1}`]: true });
+    table.setRowSelection({ [`${newData.length - 1}`]: true });
   };
 
   const removeRow = () => {
@@ -71,9 +72,9 @@ export const TableField = <TData extends object>({
     const newData = [...tableData];
     newData.splice(selectedRowIndex, 1);
     if (newData.length === 0) {
-      tableSelection.options.onRowSelectionChange({});
+      table.setRowSelection({});
     } else if (selectedRowIndex === tableData.length - 1) {
-      tableSelection.options.onRowSelectionChange({ [`${newData.length - 1}`]: true });
+      table.setRowSelection({ [`${newData.length - 1}`]: true });
     }
     changeData(newData);
   };
@@ -95,18 +96,13 @@ export const TableField = <TData extends object>({
     updateDataArray(Number(moveId), Number(targetId), tableData);
   };
 
-  const tableSelection = useTableSelect<TData>();
-  const table = useReactTable({
-    ...tableSelection.options,
+  const table = useTable({
+    features: dataTableFeatures,
     data: tableData,
     columns,
     columnResizeMode: 'onChange',
-    getCoreRowModel: getCoreRowModel(),
-    state: {
-      ...tableSelection.tableState
-    },
     meta: {
-      updateData: (rowId: string, columnId: string, value: string) => {
+      updateData: (rowId: string, columnId: string, value: unknown) => {
         const rowIndex = parseInt(rowId);
         const updatedData = tableData.map((row, index) => {
           if (index === rowIndex) {
@@ -141,12 +137,12 @@ export const TableField = <TData extends object>({
   );
 };
 
-const ValidationRow = <TData,>({
+const ValidationRow = <TData extends RowData>({
   row,
   validationPath,
   updateOrder
 }: {
-  row: Row<TData>;
+  row: Row<DataTableFeatures, TData>;
   validationPath: string;
   updateOrder: (moveId: string, targetId: string) => void;
 }) => {

@@ -6,6 +6,8 @@ import {
   Dialog,
   DialogContent,
   DialogTrigger,
+  dataTableFeatures,
+  dataTableHelper,
   ExpandableCell,
   MessageRow,
   SelectRow,
@@ -14,12 +16,11 @@ import {
   TableCell,
   useDialogHotkeys,
   useHotkeys,
-  useTableExpand,
-  useTableSelect,
+  type DataTableFeatures,
   type BrowserNode
 } from '@axonivy/ui-components';
 import { IvyIcons } from '@axonivy/ui-icons';
-import { flexRender, getCoreRowModel, getFilteredRowModel, useReactTable, type ColumnDef, type Row } from '@tanstack/react-table';
+import { flexRender, useTable, type Row } from '@tanstack/react-table';
 import { useCallback, useEffect, useState, type ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAppContext } from '../../../context/AppContext';
@@ -36,6 +37,8 @@ type DataClassDialogProps = {
   onlyAttributs?: string;
   parentName?: string;
 };
+
+const { columnHelper } = dataTableHelper<BrowserNode>();
 
 export const DataClassDialog = ({ children, ...props }: DataClassDialogProps & { children: ReactNode }) => {
   const { open, onOpenChange } = useDialogHotkeys(['dataclassDialog']);
@@ -74,13 +77,12 @@ const DataClassDialogContent = ({
     setTree(variableTreeData().of(dataClass));
   }, [dataClass]);
 
-  const loadChildren = useCallback<(row: Row<BrowserNode>) => void>(
+  const loadChildren = useCallback<(row: Row<DataTableFeatures, BrowserNode>) => void>(
     row => setTree(tree => variableTreeData().loadChildrenFor(dataClass, row.original.info, tree)),
     [dataClass, setTree]
   );
-  const columns: ColumnDef<BrowserNode, string>[] = [
-    {
-      accessorKey: 'value',
+  const columns = columnHelper.columns([
+    columnHelper.accessor('value', {
       cell: cell => (
         <ExpandableCell
           cell={cell}
@@ -91,26 +93,15 @@ const DataClassDialogContent = ({
           <span style={{ color: 'var(--N500)' }}>{cell.row.original.info}</span>
         </ExpandableCell>
       )
-    }
-  ];
-  const [filter, setFilter] = useState('');
-  const expanded = useTableExpand<BrowserNode>({ '0': true });
-  const select = useTableSelect<BrowserNode>();
-  const table = useReactTable({
-    ...expanded.options,
-    ...select.options,
+    })
+  ]);
+  const table = useTable({
+    features: dataTableFeatures,
     enableMultiRowSelection: true,
     enableSubRowSelection: true,
     data: tree,
     columns,
-    getCoreRowModel: getCoreRowModel(),
-    onGlobalFilterChange: setFilter,
-    getFilteredRowModel: getFilteredRowModel(),
-    state: {
-      globalFilter: filter,
-      ...expanded.tableState,
-      ...select.tableState
-    }
+    initialState: { expanded: { '0': true } }
   });
   const createForm = () => {
     setData(data => {

@@ -1,5 +1,5 @@
 import type { ComponentType, Variable, VariableInfo } from '@axonivy/form-editor-protocol';
-import { labelText, type BrowserNode } from '@axonivy/ui-components';
+import { labelText, type BrowserNode, type DataTableFeatures } from '@axonivy/ui-components';
 import { IvyIcons } from '@axonivy/ui-icons';
 import type { Row } from '@tanstack/react-table';
 import { componentForDataType, type CreateData } from '../../../components/component-factory';
@@ -74,7 +74,7 @@ export const flattenBrowserNodes = (nodes: BrowserNode<Variable>[], parent?: str
   return result;
 };
 
-export const fullVariablePath = (row: Row<BrowserNode>, showRootNode: boolean = true): string => {
+export const fullVariablePath = (row: Row<DataTableFeatures, BrowserNode>, showRootNode: boolean = true): string => {
   const parentRows = row.getParentRows();
   const isFlatStructure = parentRows.length === 0;
   const relevantParents = showRootNode || isFlatStructure ? parentRows : parentRows.slice(1);
@@ -87,7 +87,7 @@ export const fullVariablePath = (row: Row<BrowserNode>, showRootNode: boolean = 
   return parentPath ? `${parentPath}.${row.original.value}` : row.original.value;
 };
 
-export const rowToCreateData = (row: Row<BrowserNode>): { type: ComponentType; config: CreateData } | undefined => {
+export const rowToCreateData = (row: Row<DataTableFeatures, BrowserNode>): { type: ComponentType; config: CreateData } | undefined => {
   const node = row.original;
   const { type, config } = componentForDataType(node.info);
   if (type === undefined) {
