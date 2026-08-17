@@ -1,5 +1,5 @@
 import type { DeepPartial, Variable, VariableInfo } from '@axonivy/form-editor-protocol';
-import type { BrowserNode } from '@axonivy/ui-components';
+import type { BrowserNode, DataTableFeatures } from '@axonivy/ui-components';
 import type { Row } from '@tanstack/react-table';
 import { collectNodesWithChildren, fullVariablePath, rowToCreateData, variableTreeData } from './variable-tree-data';
 
@@ -123,7 +123,7 @@ describe('variableTreeData', () => {
 const row = {
   original: { value: 'country', info: 'String' },
   getParentRows: () => [{ original: { value: 'data' } }, { original: { value: 'address' } }, { original: { value: 'location' } }]
-} as Row<BrowserNode>;
+} as Row<DataTableFeatures, BrowserNode>;
 
 test('fullVariablePath', () => {
   expect(fullVariablePath(row)).toEqual('data.address.location.country');
@@ -134,7 +134,7 @@ test('fullVariablePath dontShowRootNode', () => {
 });
 
 test('rowToCreateData', () => {
-  expect(rowToCreateData({ original: { value: 'country', info: 'java.util.List' } } as Row<BrowserNode>)).toEqual(undefined);
+  expect(rowToCreateData({ original: { value: 'country', info: 'java.util.List' } } as Row<DataTableFeatures, BrowserNode>)).toEqual(undefined);
   expect(rowToCreateData(row)).toEqual({
     type: 'Input',
     config: {
