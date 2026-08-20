@@ -1,14 +1,14 @@
 import type { DeepPartial, Variable } from '@axonivy/form-editor-protocol';
-import type { BrowserNode } from '@axonivy/ui-components';
+import type { BrowserNode, DataTableFeatures } from '@axonivy/ui-components';
 import type { Row } from '@tanstack/react-table';
 import { expect } from 'vitest';
 import { filterNodesWithChildren, getApplyModifierValue } from './useAttributeBrowser';
 
 const row = {
   original: { value: 'country', info: 'String' },
-  getParentRow: () => ({ original: { value: 'data' } }) as Row<BrowserNode>,
+  getParentRow: () => ({ original: { value: 'data' } }) as Row<DataTableFeatures, BrowserNode>,
   getParentRows: () => [{ original: { value: 'data' } }, { original: { value: 'address' } }, { original: { value: 'location' } }]
-} as Row<BrowserNode>;
+} as Row<DataTableFeatures, BrowserNode>;
 
 test('return empty value when row is undefined', () => {
   const result = getApplyModifierValue(undefined);
@@ -25,7 +25,7 @@ test('returns rootonly prefix when row has no parents and componentInDialog is t
     original: { value: 'currentRow', info: 'String' },
     getParentRow: () => undefined,
     getParentRows: () => []
-  } as unknown as Row<BrowserNode>);
+  } as unknown as Row<DataTableFeatures, BrowserNode>);
   expect(result).toEqual({ value: 'currentRow' });
 });
 
@@ -34,7 +34,7 @@ test('returns only row value when onlyAttributes is COLUMN and row has no parent
     original: { value: 'data', info: 'String' },
     getParentRow: () => undefined,
     getParentRows: () => []
-  } as unknown as Row<BrowserNode>);
+  } as unknown as Row<DataTableFeatures, BrowserNode>);
   expect(result).toEqual({ value: 'data' });
 });
 
