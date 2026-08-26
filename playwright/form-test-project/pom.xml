@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>com.axonivy.ivy.api</groupId>
@@ -17,6 +19,8 @@
     <engine.test.ws>form-test-project</engine.test.ws>
     <engine.dir>${project.build.directory}/ivyEngine</engine.dir>
     <engine.page.url>https://product.ivyteam.io/</engine.page.url>
+    <engine.ws.dir>
+      ${engine.dir}/data/default/workspaces/Developer/${engine.test.ws}/${project.artifactId}</engine.ws.dir>
     <webtest.cmd>webtest</webtest.cmd>
   </properties>
   <dependencies>
@@ -94,7 +98,7 @@
               <goal>copy-resources</goal>
             </goals>
             <configuration>
-              <outputDirectory>${engine.dir}/data/default/workspaces/Developer/${engine.test.ws}/form-test-project</outputDirectory>
+              <outputDirectory>${engine.ws.dir}</outputDirectory>
               <resources>
                 <resource>
                   <directory>.</directory>
@@ -162,6 +166,7 @@
                 <BASE_URL>${test.engine.url}</BASE_URL>
                 <TEST_WS>~Developer-${engine.test.ws}</TEST_WS>
                 <TEST_APP>${engine.test.app}</TEST_APP>
+                <ENGINE_WS_DIR>${engine.ws.dir}</ENGINE_WS_DIR>
                 <SCREENSHOT_DIR>${project.build.directory}</SCREENSHOT_DIR>
               </environmentVariables>
               <successCodes>

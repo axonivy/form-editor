@@ -1,14 +1,16 @@
 import type { Locator, Page } from '@playwright/test';
 import { randomUUID } from 'crypto';
+import { resolve } from 'path';
 import { Canvas } from './canvas';
 import { Inscription } from './inscription';
 import { Toolbar } from './toolbar';
 
-export const server = process.env.BASE_URL ?? 'http://localhost:8080/~Developer-form-test-project';
+export const server = process.env.BASE_URL ?? 'http://localhost:8080/';
 export const user = 'Developer';
-const ws = process.env.TEST_WS ?? '';
+const ws = process.env.TEST_WS ?? '~Developer-form-test-project';
 const app = process.env.TEST_APP ?? 'Developer-form-test-project';
 const project = 'form-test-project';
+const engineWsDir = process.env.ENGINE_WS_DIR ?? resolve(import.meta.dirname, '../../', project);
 
 export class FormEditor {
   readonly page: Page;
@@ -41,14 +43,14 @@ export class FormEditor {
   static async openNewForm(page: Page, options?: { block?: string }) {
     const name = `tmp${randomUUID().replaceAll('-', '')}`;
     const namespace = 'temp';
-    const result = await fetch(`${server}${ws}/api/web-ide/hd`, {
+    const result = await fetch(`${server}designer/api/web-ide/hd`, {
       method: 'POST',
       headers: {
         'X-Requested-By': 'form-editor-tests',
         'Content-Type': 'application/json',
         Authorization: 'Basic ' + Buffer.from(user + ':' + user).toString('base64')
       },
-      body: JSON.stringify({ namespace, name, type: 'Form', project: { app, project } })
+      body: JSON.stringify({ namespace, name, type: 'Form', workspaceId: project, projectDir: engineWsDir })
     });
     if (!result.ok) {
       console.log(`Failed to create form: ${result.status}`);
