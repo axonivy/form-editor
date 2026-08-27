@@ -1,11 +1,11 @@
-import { useEditCell, type InputProps } from '@axonivy/ui-components';
-import { type CellContext } from '@tanstack/react-table';
+import { useEditCell, type DataTableFeatures, type InputProps } from '@axonivy/ui-components';
+import { type CellContext, type RowData } from '@tanstack/react-table';
 import { InputFieldWithBrowser } from '../InputFieldWithBrowser';
 import './TableField.css';
 
-type InputCellProps<TData> = InputProps & { cell: CellContext<TData, string> };
+type InputCellProps<TData extends RowData> = InputProps & { cell: CellContext<DataTableFeatures, TData, string> };
 
-export const InputCellWithBrowser = <TData,>({ cell }: InputCellProps<TData>) => {
+export const InputCellWithBrowser = <TData extends RowData>({ cell }: InputCellProps<TData>) => {
   const { value, setValue, onBlur, updateValue } = useEditCell(cell);
 
   return (

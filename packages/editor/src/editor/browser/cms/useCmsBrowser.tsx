@@ -1,4 +1,4 @@
-import { BasicCheckbox, useBrowser, type Browser, type BrowserNode } from '@axonivy/ui-components';
+import { BasicCheckbox, useBrowser, type Browser, type BrowserNode, type DataTableFeatures } from '@axonivy/ui-components';
 import type { Row } from '@tanstack/react-table';
 
 import type { ContentObject } from '@axonivy/form-editor-protocol';
@@ -34,7 +34,7 @@ export const useCmsBrowser = (): Browser => {
   };
 };
 
-const CmsInfoProvider = ({ row }: { row?: Row<BrowserNode> }) => {
+const CmsInfoProvider = ({ row }: { row?: Row<DataTableFeatures, BrowserNode> }) => {
   if (row?.original.data === undefined) {
     return;
   }

@@ -7,7 +7,7 @@ import {
   type SelectItemsProps,
   type Variable
 } from '@axonivy/form-editor-protocol';
-import { Message, useBrowser, type Browser, type BrowserNode } from '@axonivy/ui-components';
+import { Message, useBrowser, type Browser, type BrowserNode, type DataTableFeatures } from '@axonivy/ui-components';
 import { IvyIcons } from '@axonivy/ui-icons';
 import type { Row } from '@tanstack/react-table';
 import { useCallback, useEffect, useState } from 'react';
@@ -57,7 +57,7 @@ export const useAttributeBrowser = (options?: BrowserOptions): Browser => {
   };
 };
 
-export const getApplyModifierValue = (row: Row<BrowserNode<unknown>> | undefined): { value: string } => {
+export const getApplyModifierValue = (row: Row<DataTableFeatures, BrowserNode<unknown>> | undefined): { value: string } => {
   return { value: !row ? '' : fullVariablePath(row) };
 };
 export const filterNodesWithChildren = (nodes: Array<BrowserNode<Variable>>): Array<BrowserNode<Variable>> => {
