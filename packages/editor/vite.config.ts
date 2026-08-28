@@ -18,6 +18,7 @@ export default defineConfig({
       external: [
         '@axonivy/ui-components',
         '@axonivy/ui-icons',
+        /@tanstack\/react-table/,
         '@dnd-kit/core',
         '@tanstack/react-query',
         '@tanstack/react-query-devtools',
