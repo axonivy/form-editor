@@ -133,8 +133,11 @@ importers:
       '@tanstack/react-query-devtools':
         specifier: ^5.64
         version: 5.102.8(@tanstack/react-query@5.102.8(react@19.2.8))(react@19.2.8)
+      '@tanstack/react-table':
+        specifier: ^9.1
+        version: 9.2.3(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       i18next:
-        specifier: ^25.0.0 || ^26.0.0
+        specifier: ^26.0.0
         version: 26.4.0(@typescript/typescript6@6.0.2)
       react-aria:
         specifier: ^3.50.0
@@ -143,7 +146,7 @@ importers:
         specifier: ^6.1.2
         version: 6.1.3(@types/react@19.2.18)(react@19.2.8)
       react-i18next:
-        specifier: ^16.0.0 || ^17.0.0
+        specifier: ^17.0.0
         version: 17.0.12(@typescript/typescript6@6.0.2)(i18next@26.4.0(@typescript/typescript6@6.0.2))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
     devDependencies:
       '@axonivy/ui-components':
@@ -152,9 +155,6 @@ importers:
       '@axonivy/ui-icons':
         specifier: next-14.0.0
         version: 14.0.0-next.1238.10a41e2
-      '@tanstack/react-table':
-        specifier: ^9.0.0
-        version: 9.2.3(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@testing-library/dom':
         specifier: ^10.4.1
         version: 10.4.1
