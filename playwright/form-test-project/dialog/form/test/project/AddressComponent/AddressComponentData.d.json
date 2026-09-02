@@ -4,6 +4,7 @@
   "namespace" : "form.test.project.AddressComponent",
   "fields" : [ {
     "name" : "address",
-    "type" : "form.test.project.Address"
+    "type" : "form.test.project.Address",
+    "modifiers" : [ ]
   } ]
 }
