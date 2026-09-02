@@ -4,6 +4,7 @@
   "namespace" : "form.test.project.PersonComponent",
   "fields" : [ {
     "name" : "person",
-    "type" : "form.test.project.Person"
+    "type" : "form.test.project.Person",
+    "modifiers" : [ ]
   } ]
 }

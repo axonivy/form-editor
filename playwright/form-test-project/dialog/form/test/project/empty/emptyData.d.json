@@ -3,15 +3,19 @@
   "simpleName" : "emptyData",
   "namespace" : "form.test.project.empty",
   "fields" : [ {
-    "name" : "name"
+    "name" : "name",
+    "modifiers" : [ ]
   }, {
     "name" : "age",
-    "type" : "Number"
+    "type" : "Number",
+    "modifiers" : [ ]
   }, {
     "name" : "address",
-    "type" : "form.test.project.Address"
+    "type" : "form.test.project.Address",
+    "modifiers" : [ ]
   }, {
     "name" : "aproved",
-    "type" : "Boolean"
+    "type" : "Boolean",
+    "modifiers" : [ ]
   } ]
 }

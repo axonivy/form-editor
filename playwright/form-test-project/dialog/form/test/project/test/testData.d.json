@@ -3,15 +3,19 @@
   "simpleName" : "testData",
   "namespace" : "form.test.project.test",
   "fields" : [ {
-    "name" : "name"
+    "name" : "name",
+    "modifiers" : [ ]
   }, {
     "name" : "age",
-    "type" : "Number"
+    "type" : "Number",
+    "modifiers" : [ ]
   }, {
     "name" : "address",
-    "type" : "form.test.project.Address"
+    "type" : "form.test.project.Address",
+    "modifiers" : [ ]
   }, {
     "name" : "person",
-    "type" : "form.test.project.Person"
+    "type" : "form.test.project.Person",
+    "modifiers" : [ ]
   } ]
 }
