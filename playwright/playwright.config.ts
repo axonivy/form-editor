@@ -17,6 +17,7 @@ export default defineConfig({
     url: process.env.CI ? 'http://localhost:4173' : 'http://localhost:3000',
     reuseExistingServer: !process.env.CI
   },
+  globalSetup: './tests/global.setup',
   globalTeardown: './tests/global.teardown',
   projects: [
     { name: 'integration-chrome', use: { ...devices['Desktop Chrome'] }, testDir: './tests/integration' },
