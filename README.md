@@ -20,4 +20,4 @@ Simply start the `Start Standalone` launch config to get debug and breakpoint su
 
 #### Run tests
 
-To run tests you can ether start a script above or start Playwright or Vitest with the recommended workspace extensions.
+To run tests you can either start the standalone script above or start Playwright or Vitest with the recommended workspace extensions.
