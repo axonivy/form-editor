@@ -1,8 +1,9 @@
 FROM mcr.microsoft.com/playwright:v1.63.0
 
-ENV PNPM_HOME="/pnpm"
+RUN wget -qO- https://get.pnpm.io/install.sh | bash -
+
+ENV PNPM_HOME="/root/.local/share/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-RUN wget -qO- https://get.pnpm.io/install.sh | env ENV="$HOME/.shrc" SHELL="$(which sh)" sh -
 
 RUN apt-get update &&\
   apt-get install software-properties-common -y &&\
