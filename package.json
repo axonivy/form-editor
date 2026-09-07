@@ -4,6 +4,7 @@
   "engines": {
     "node": ">=24.11"
   },
+  "packageManager": "pnpm@12.3.2",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "check": "pnpm run type && pnpm run lint:ci && pnpm run test:ci && pnpm run i18n:ci",
