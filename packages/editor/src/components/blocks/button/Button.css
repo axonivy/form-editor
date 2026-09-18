@@ -21,28 +21,59 @@
   background-color: color-mix(in srgb, var(--button-bg), transparent 10%);
 }
 .block-button[data-variant='primary'] {
-  --button-bg: var(--P300);
+  --button-bg: #006f94;
+  --button-color: var(--background);
+}
+.block-button[data-variant='secondary'] {
+  --button-bg: #607d8b;
   --button-color: var(--background);
 }
 .block-button[data-variant='success'] {
-  --button-bg: var(--success-color);
+  --button-bg: #689f38;
   --button-color: var(--background);
 }
 .block-button[data-variant='danger'] {
-  --button-bg: var(--error-color);
+  --button-bg: #d32f2f;
   --button-color: var(--background);
 }
 .block-button[data-variant='warning'] {
-  --button-bg: var(--warning-color);
-  --button-color: var(--background);
+  --button-bg: #fbc02d;
+  --button-color: var(--body);
 }
 .block-button[data-variant='info'] {
-  --button-bg: var(--P75);
+  --button-bg: #0288d1;
   --button-color: var(--background);
 }
 .block-button[data-variant='help'] {
-  --button-bg: var(--P500);
+  --button-bg: #9c27b0;
   --button-color: var(--background);
+}
+
+.dark .block-button[data-variant='primary'],
+.dark .block-button[data-variant='secondary'] {
+  --button-color: var(--body);
+}
+.dark .block-button[data-variant='primary'] {
+  --button-bg: #006f94;
+}
+.dark .block-button[data-variant='secondary'] {
+  --button-bg: #78909c;
+}
+.dark .block-button[data-variant='success'] {
+  --button-bg: #c5e1a5;
+}
+.dark .block-button[data-variant='danger'] {
+  --button-bg: #f48fb1;
+}
+.dark .block-button[data-variant='warning'] {
+  --button-bg: #ffe082;
+  --button-color: var(--background);
+}
+.dark .block-button[data-variant='info'] {
+  --button-bg: #81d4fa;
+}
+.dark .block-button[data-variant='help'] {
+  --button-bg: #ce93d8;
 }
 .block-button[data-style='solid'] {
   border: none;
