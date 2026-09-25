@@ -28,9 +28,9 @@
     "publish:next": "lerna publish --exact --canary --preid next --tag-version-prefix beta --pre-dist-tag next-14.0.1 --no-git-tag-version --no-push --ignore-scripts --yes"
   },
   "devDependencies": {
-    "@axonivy/eslint-config": "next-14.0.0",
-    "@axonivy/prettier-config": "next-14.0.0",
-    "@axonivy/ts-config": "next-14.0.0",
+    "@axonivy/eslint-config": "next-14.0.1",
+    "@axonivy/prettier-config": "next-14.0.1",
+    "@axonivy/ts-config": "next-14.0.1",
     "@lerna-lite/cli": "^5.6.1",
     "@lerna-lite/publish": "^5.6.1",
     "@lerna-lite/version": "^5.6.1",
