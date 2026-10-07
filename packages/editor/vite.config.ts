@@ -21,7 +21,6 @@ export default defineConfig({
         /@tanstack\/react-table/,
         '@dnd-kit/core',
         '@tanstack/react-query',
-        '@tanstack/react-query-devtools',
         'i18next',
         'react-i18next',
         'react',

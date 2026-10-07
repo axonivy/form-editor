@@ -1,4 +1,6 @@
-import { App, ClientContextProvider, initQueryClient, QueryProvider } from '@axonivy/form-editor';
+import { App, ClientContextProvider, initQueryClient } from '@axonivy/form-editor';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { FormClientJsonRpc } from '@axonivy/form-editor-core';
 import { webSocketConnection, type Connection } from '@axonivy/jsonrpc';
 import { Flex, HotkeysProvider, ReadonlyProvider, Spinner, ThemeProvider, toast, Toaster } from '@axonivy/ui-components';
@@ -41,13 +43,14 @@ export async function start() {
       <React.StrictMode>
         <ThemeProvider defaultTheme={theme}>
           <ClientContextProvider client={client}>
-            <QueryProvider client={queryClient}>
+            <QueryClientProvider client={queryClient}>
               <ReadonlyProvider readonly={readonly}>
                 <HotkeysProvider initiallyActiveScopes={['global']}>
                   <App context={{ app, project, file }} directSave={directSave} />
                 </HotkeysProvider>
               </ReadonlyProvider>
-            </QueryProvider>
+              <ReactQueryDevtools initialIsOpen={false} buttonPosition={'bottom-left'} />
+            </QueryClientProvider>
           </ClientContextProvider>
           <Toaster closeButton={true} position='bottom-left' />
         </ThemeProvider>
