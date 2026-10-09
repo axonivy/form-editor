@@ -1,5 +1,7 @@
 import './index.css';
-import { App, ClientContextProvider, QueryProvider, initQueryClient } from '@axonivy/form-editor';
+import { App, ClientContextProvider, initQueryClient } from '@axonivy/form-editor';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { HotkeysProvider, ReadonlyProvider, ThemeProvider } from '@axonivy/ui-components';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
@@ -20,13 +22,14 @@ export function start() {
     <React.StrictMode>
       <ThemeProvider defaultTheme='light'>
         <ClientContextProvider client={formClient}>
-          <QueryProvider client={queryClient}>
+          <QueryClientProvider client={queryClient}>
             <ReadonlyProvider readonly={readonly}>
               <HotkeysProvider initiallyActiveScopes={['global']}>
                 <App context={{ app: '', pmv: '', file: '' }} />
               </HotkeysProvider>
             </ReadonlyProvider>
-          </QueryProvider>
+            <ReactQueryDevtools initialIsOpen={false} buttonPosition={'bottom-left'} />
+          </QueryClientProvider>
         </ClientContextProvider>
       </ThemeProvider>
     </React.StrictMode>

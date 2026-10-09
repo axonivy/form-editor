@@ -1,5 +1,7 @@
 import './index.css';
-import { App, ClientContextProvider, QueryProvider, initQueryClient } from '@axonivy/form-editor';
+import { App, ClientContextProvider, initQueryClient } from '@axonivy/form-editor';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { FormClientJsonRpc } from '@axonivy/form-editor-core';
 import { ThemeProvider, ReadonlyProvider, toast, Toaster, Spinner, Flex, HotkeysProvider } from '@axonivy/ui-components';
 import { webSocketConnection, type Connection } from '@axonivy/jsonrpc';
@@ -39,13 +41,14 @@ export async function start(): Promise<void> {
       <React.StrictMode>
         <ThemeProvider defaultTheme={theme}>
           <ClientContextProvider client={client}>
-            <QueryProvider client={queryClient}>
+            <QueryClientProvider client={queryClient}>
               <ReadonlyProvider readonly={readonly}>
                 <HotkeysProvider initiallyActiveScopes={['global']}>
                   <App context={{ app, pmv, file }} directSave={directSave} />
                 </HotkeysProvider>
               </ReadonlyProvider>
-            </QueryProvider>
+              <ReactQueryDevtools initialIsOpen={false} buttonPosition={'bottom-left'} />
+            </QueryClientProvider>
           </ClientContextProvider>
           <Toaster closeButton={true} position='bottom-left' />
         </ThemeProvider>
