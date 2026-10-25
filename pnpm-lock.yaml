@@ -10,16 +10,16 @@ importers:
     devDependencies:
       '@axonivy/eslint-config':
         specifier: next-12.0.19
-        version: 12.0.19-next.838.f199ec2(jiti@2.7.0)(supports-color@8.1.1)(typescript@5.9.3)
+        version: 12.0.19-next.840.1dbf258(jiti@2.7.0)(supports-color@8.1.1)(typescript@5.9.3)
       '@lerna-lite/cli':
         specifier: ^5.6.3
-        version: 5.6.3(@lerna-lite/publish@5.6.3(@types/node@24.19.2)(conventional-commits-filter@6.0.1)(supports-color@8.1.1))(@lerna-lite/version@5.6.3(@lerna-lite/publish@5.6.3(@types/node@24.19.2)(conventional-commits-filter@6.0.1)(supports-color@8.1.1))(@types/node@24.19.2)(conventional-commits-filter@6.0.1))(@types/node@24.19.2)
+        version: 5.6.4(@lerna-lite/publish@5.6.4(@types/node@24.19.2)(conventional-commits-filter@6.0.1)(supports-color@8.1.1))(@lerna-lite/version@5.6.4(@lerna-lite/publish@5.6.4(@types/node@24.19.2)(conventional-commits-filter@6.0.1)(supports-color@8.1.1))(@types/node@24.19.2)(conventional-commits-filter@6.0.1))(@types/node@24.19.2)
       '@lerna-lite/publish':
         specifier: ^5.6.3
-        version: 5.6.3(@types/node@24.19.2)(conventional-commits-filter@6.0.1)(supports-color@8.1.1)
+        version: 5.6.4(@types/node@24.19.2)(conventional-commits-filter@6.0.1)(supports-color@8.1.1)
       '@lerna-lite/version':
         specifier: ^5.6.3
-        version: 5.6.3(@lerna-lite/publish@5.6.3(@types/node@24.19.2)(conventional-commits-filter@6.0.1)(supports-color@8.1.1))(@types/node@24.19.2)(conventional-commits-filter@6.0.1)
+        version: 5.6.4(@lerna-lite/publish@5.6.4(@types/node@24.19.2)(conventional-commits-filter@6.0.1)(supports-color@8.1.1))(@types/node@24.19.2)(conventional-commits-filter@6.0.1)
       '@types/node':
         specifier: ^24.19.2
         version: 24.19.2
@@ -46,16 +46,16 @@ importers:
         version: link:../../packages/protocol
       '@axonivy/jsonrpc':
         specifier: next-12.0.19
-        version: 12.0.19-next.838.f199ec2
+        version: 12.0.19-next.840.1dbf258
       '@axonivy/ui-components':
         specifier: next-12.0.19
-        version: 12.0.19-next.838.f199ec2(@axonivy/ui-icons@12.0.19-next.838.f199ec2)(@types/react-dom@18.3.7(@types/react@18.3.31))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 12.0.19-next.840.1dbf258(@axonivy/ui-icons@12.0.19-next.840.1dbf258)(@types/react-dom@18.3.7(@types/react@18.3.31))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@axonivy/ui-icons':
         specifier: next-12.0.19
-        version: 12.0.19-next.838.f199ec2
+        version: 12.0.19-next.840.1dbf258
       '@tanstack/react-query':
         specifier: ^5.101.4
-        version: 5.104.3(react@18.3.1)
+        version: 5.104.5(@types/react@18.3.31)(react@18.3.1)
       path-browserify:
         specifier: ^1.0.1
         version: 1.0.1
@@ -68,7 +68,7 @@ importers:
     devDependencies:
       '@tanstack/react-query-devtools':
         specifier: ^5.101.4
-        version: 5.104.5(@tanstack/react-query@5.104.3(react@18.3.1))(@types/react@18.3.31)(csstype@3.2.3)(react@18.3.1)
+        version: 5.104.5(@tanstack/react-query@5.104.5(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(csstype@3.2.3)(react@18.3.1)
       '@types/react':
         specifier: ^18.3.31
         version: 18.3.31
@@ -93,7 +93,7 @@ importers:
     devDependencies:
       '@axonivy/jsonrpc':
         specifier: next-12.0.19
-        version: 12.0.19-next.838.f199ec2
+        version: 12.0.19-next.840.1dbf258
       vite:
         specifier: ^7.3.6
         version: 7.3.7(@types/node@24.19.2)(jiti@2.7.0)(yaml@2.9.1)
@@ -108,10 +108,10 @@ importers:
         version: 6.3.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@tanstack/react-query':
         specifier: ^5.32
-        version: 5.104.3(react@18.3.1)
+        version: 5.104.5(@types/react@18.3.31)(react@18.3.1)
       i18next:
         specifier: ^26.3.6
-        version: 26.4.6(typescript@5.9.3)
+        version: 26.5.6(typescript@5.9.3)
       react-aria:
         specifier: ^3.50.0
         version: 3.53.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -120,14 +120,14 @@ importers:
         version: 4.1.2(react@18.3.1)
       react-i18next:
         specifier: ^17.0.11
-        version: 17.0.18(i18next@26.4.6(typescript@5.9.3))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
+        version: 17.1.3(i18next@26.5.6(typescript@5.9.3))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
     devDependencies:
       '@axonivy/ui-components':
         specifier: next-12.0.19
-        version: 12.0.19-next.838.f199ec2(@axonivy/ui-icons@12.0.19-next.838.f199ec2)(@types/react-dom@18.3.7(@types/react@18.3.31))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 12.0.19-next.840.1dbf258(@axonivy/ui-icons@12.0.19-next.840.1dbf258)(@types/react-dom@18.3.7(@types/react@18.3.31))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@axonivy/ui-icons':
         specifier: next-12.0.19
-        version: 12.0.19-next.838.f199ec2
+        version: 12.0.19-next.840.1dbf258
       '@tanstack/react-table':
         specifier: ^8.21.3
         version: 8.21.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -154,7 +154,7 @@ importers:
         version: 4.7.0(supports-color@8.1.1)(vite@7.3.7(@types/node@24.19.2)(jiti@2.7.0)(yaml@2.9.1))
       i18next-cli:
         specifier: ^1.67.3
-        version: 1.75.3(@swc/helpers@0.5.23)(@types/node@24.19.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
+        version: 1.80.0(@swc/helpers@0.5.23)(@types/node@24.19.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
       jsdom:
         specifier: ^25.0.1
         version: 25.0.1(supports-color@8.1.1)
@@ -204,20 +204,20 @@ packages:
   '@asamuzakjp/css-color@3.2.0':
     resolution: {integrity: sha512-K1A6z8tS3XsmCMM86xoWdn7Fkdn9m6RSVtocUrJYIwZnFVkng/PvkEoWtOWmP+Scc6saYWHWZYbndEEXxl24jw==}
 
-  '@axonivy/eslint-config@12.0.19-next.838.f199ec2':
-    resolution: {integrity: sha512-VAb2SMEKPbWKX/xwRzMy2MFm5ASpnTRc7orpwI7qaOYjZG4pb3RtTJ6z3OKXwS7jhLFbAyln5RyjtPBhp0pyVw==}
+  '@axonivy/eslint-config@12.0.19-next.840.1dbf258':
+    resolution: {integrity: sha512-j/45LbgXee6sHWUr5fxh3B/yzPS0HZFJPyx9/kAhMZyLM68QZLlj7Etf+38oxBI9SX77VcmeUd16iuTiP44sSw==}
 
-  '@axonivy/jsonrpc@12.0.19-next.838.f199ec2':
-    resolution: {integrity: sha512-tssCk2IJgkAJxxyccPd4ZreCNfzPKVDvwy0QIpLGC/zBiSjck0wfs/ZmMrRJVTow70Pux/ccJXFXJtHgqtvFBQ==}
+  '@axonivy/jsonrpc@12.0.19-next.840.1dbf258':
+    resolution: {integrity: sha512-HZRfLdHFHSV+0Ler7zfilfIM+236XKqd3TZlXrTrE38E4BG81/SmE9rBOA6m8IU9A+pNhas2IwXGpG856VN8sg==}
 
-  '@axonivy/ui-components@12.0.19-next.838.f199ec2':
-    resolution: {integrity: sha512-v5DwPAUA/5o3oPTwqEnA725VhDP79tZcmikCaS8uxuukRH14jGfdv3PRsfFWjIPkgT0cQf7jHP8vm3IT4ZsvEg==}
+  '@axonivy/ui-components@12.0.19-next.840.1dbf258':
+    resolution: {integrity: sha512-6LBmpaq/n040pE7bNqiGPDc7SIVgGM/nGrTDrMDy98zbx0a5+OP1VWuDdaSKvL2vLwCMUJNfyq69SyoT4PdDPg==}
     peerDependencies:
       '@axonivy/ui-icons': ~12.0.19-next
       react: ^18.2 || ^19.0
 
-  '@axonivy/ui-icons@12.0.19-next.838.f199ec2':
-    resolution: {integrity: sha512-dKqeGZQAGq8umnR4QshF/w6wobIGKBVq5swRgiPzyXyjdR2MuO3seZI7pZe2mUrluO4Eunz0jrlxa7vOxIg0+A==}
+  '@axonivy/ui-icons@12.0.19-next.840.1dbf258':
+    resolution: {integrity: sha512-HOOc+altGUqwkHvcesZFiAXUtNAyKuv93ofM6SojdZWcYwSTajHiKjeX2Jt6xLqN7gCxjcTXdnIWNFCTW00luA==}
 
   '@babel/code-frame@7.29.7':
     resolution: {integrity: sha512-Aup7aUOfpbAUg2ROOJN6Iw5f9DMBlzu0mIkm/malLQFN/YQgO48wCj0Kxa3sEHJvPVFg7siR+qRInwXd2qhQKw==}
@@ -589,6 +589,12 @@ packages:
   '@floating-ui/utils@0.2.12':
     resolution: {integrity: sha512-HpCo8tmWzLVad5s2d19EhAz5zqrrQ6s69qd6moPMQvkOuSwDT1YgRfWSVuc4ennqrgv3OHppiOGMQ7oC13yIww==}
 
+  '@formatjs/icu-messageformat-parser@3.5.22':
+    resolution: {integrity: sha512-YuwN+dDKgssfuYwtOyGQD0CSn7K46g9cv1Fp0VgKpjZDDFvv8b8crzP990IcJhRPWHhKzCGsbUSJVIguyyFA5A==}
+
+  '@formatjs/icu-skeleton-parser@2.1.12':
+    resolution: {integrity: sha512-ca7tZMLpfHX3sUD7hP6gE/qr6Iq89EDd3ZLeRhbsB7r0UD55DGJq+tmFLzrGrnx5StahUevQmQQVtbDRHsfDHA==}
+
   '@gar/promise-retry@1.0.3':
     resolution: {integrity: sha512-GmzA9ckNokPypTg10pgpeHNQe7ph+iIKKmhKu3Ob9ANkswreCx7R3cKmY781K8QK3AqVL3xVh9A42JvIAbkkSA==}
     engines: {node: ^20.17.0 || >=22.9.0}
@@ -801,8 +807,8 @@ packages:
     peerDependencies:
       solid-js: ^1.8.8
 
-  '@lerna-lite/cli@5.6.3':
-    resolution: {integrity: sha512-DL79xF5lGeT/7JflVm9L9Gz3z5EJW1zsc/UbUi7dCXMNGKgeD0HSO976GVQi5hSNQDBwYEApWKtEdZOntdn9+A==}
+  '@lerna-lite/cli@5.6.4':
+    resolution: {integrity: sha512-Oyh/ReScWByM9KxcPHVkeatDeygGuCZtEZgf+o4gZo9KPvG0Xy3WxTlpyzYs4LG869orBi1Ru+G73oCq5+G8bQ==}
     engines: {node: ^22.17.0 || >=24.0.0}
     hasBin: true
     peerDependencies:
@@ -826,24 +832,24 @@ packages:
       '@lerna-lite/watch':
         optional: true
 
-  '@lerna-lite/core@5.6.3':
-    resolution: {integrity: sha512-33QjLOI+Nsgio2+BAhepCala8H0gaRiOoAEz2T/eGm+vUx2gxEaL/rXRBSCJSRE3LVGGYTat8NMyIQ5F3CxVVg==}
+  '@lerna-lite/core@5.6.4':
+    resolution: {integrity: sha512-QvCoTbJ67q0v0ZwL/C6yRDj38PeNBJGeIig8w8Y/9LVQ6ufuvwOj9Z+Ag10YE0UfVSrXLCMlgWlfrGs1J0zC6g==}
     engines: {node: ^22.17.0 || >=24.0.0}
 
-  '@lerna-lite/init@5.6.3':
-    resolution: {integrity: sha512-Ad1J0tdkF9oMiLXth7Y00QYW9ZSeRd0kAeLQNGVOJknpVEwPhaOG+T4R062FPpKOx58EIVJvvVOm8HNTlUqV5w==}
+  '@lerna-lite/init@5.6.4':
+    resolution: {integrity: sha512-B5I+2VOKjr7cmxt2DDDQoxnL+eergZQ82+8h61IJBb9yt5D60f8R8chkuARJcTTErwhco0RzRSZ/5N16yJeGMg==}
     engines: {node: ^22.17.0 || >=24.0.0}
 
   '@lerna-lite/npmlog@5.4.1':
     resolution: {integrity: sha512-APylzmp9eDWsM5ZLnTUwV6uwTshtWAbKIF4sA0/SgBsdbgfJUVoz5VTviBnyODCKRzpjcR1MAlRTcjUmKXSbKA==}
     engines: {node: ^22.17.0 || >=24.0.0}
 
-  '@lerna-lite/publish@5.6.3':
-    resolution: {integrity: sha512-sw45Ld5XKwlQ3R5k2I8GhOJ0bcy2RUvWTOcoz0JizEJxP0qO5uAwaEq1x1UnUmlSvH8DTYNVnf2sSQolLkrGFA==}
+  '@lerna-lite/publish@5.6.4':
+    resolution: {integrity: sha512-kpAWEdt2TBjF2tM7eOEKx/XyL0ukvzqY1QTyfYiiLl6al3K0j7lfQnG1XS8deOekFxgGj2xcUo94K+xwARtWHQ==}
     engines: {node: ^22.17.0 || >=24.0.0}
 
-  '@lerna-lite/version@5.6.3':
-    resolution: {integrity: sha512-aPzu2FOL5UW1GcfgXg92KVWDjgl6z4LLjzeDZ6kcYfftJAWsiGDNtZo8boRUq5QUJcU7eY3+leTPte8NfbOtPQ==}
+  '@lerna-lite/version@5.6.4':
+    resolution: {integrity: sha512-K02p93Q3M2Sjqd4PfLsf3aRGG+3W1P5heiQwX4AisE3ffsdbmWNm05O37NF9ifB+PGEfiR+9Ntzrfeu8vtluuA==}
     engines: {node: ^22.17.0 || >=24.0.0}
 
   '@microsoft/api-extractor-model@7.33.14':
@@ -1942,9 +1948,6 @@ packages:
     resolution: {integrity: sha512-DIpUSOhPfQ7u/qfUi/Wgm0wBO56MyBYXGvnlI0NcauDRPqdBUlAZZjW2Dxm92m+k1UWVhKw8YJ4f47+75Aujyw==}
     engines: {node: '>=20'}
 
-  '@tanstack/query-core@5.104.3':
-    resolution: {integrity: sha512-DZY9TuJAOgU3UyHUhXb4CcTYEHNZszlwkPg4VViIwTxOKzLprPUU+rbaPZQd3srqkGOtpaDdKpW972UV/LKlcg==}
-
   '@tanstack/query-core@5.104.5':
     resolution: {integrity: sha512-Q94gI8Opd+CbdVNOdj8ZCyV8WqLYitrDq1t96Xc8WZT6lY0r5iRnJLXYDxMex7EEf2v+mXvn4FcjaBKSxXZQ9A==}
 
@@ -1961,10 +1964,14 @@ packages:
       '@types/react':
         optional: true
 
-  '@tanstack/react-query@5.104.3':
-    resolution: {integrity: sha512-5Ts1ImwJKqoJgPkLxl9WrPQy1JEoEmti3MaaODCfBamHUGFk57IFrc+AIksPq+BAm10EsroX56qm398Z42LG7w==}
+  '@tanstack/react-query@5.104.5':
+    resolution: {integrity: sha512-RORgFe052U+93weaNuqg7qHq7vNVNzXN/VrXqD4bbAuQCWUqOl2lV5Ui9flWk5CVvMyL/Bh27QWhzwH0aaOx9g==}
     peerDependencies:
+      '@types/react': ^18 || ^19
       react: ^18 || ^19
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
 
   '@tanstack/react-table@8.21.3':
     resolution: {integrity: sha512-5nNMTSETP4ykGegmVkhjcS8tTLW6Vl4axfEGQN3v0zdHYbK4UfoqfPChclTrJ4EoK9QynqAu9oUf8VEmrpZ5Ww==}
@@ -2231,6 +2238,11 @@ packages:
 
   ajv-formats@3.0.1:
     resolution: {integrity: sha512-8iUql50EUR+uUcdRQ3HDqa6EVyo3docL8g5WJ3FNcWmu62IbkGUue/pEyLBW8VGKKucTPgqeks4fIU1DA4yowQ==}
+    peerDependencies:
+      ajv: ^8.0.0
+    peerDependenciesMeta:
+      ajv:
+        optional: true
 
   ajv@6.15.0:
     resolution: {integrity: sha512-fgFx7Hfoq60ytK2c7DhnF8jIvzYgOMxfugjLOSMHjLIPgenqa7S7oaagATUq99mV6IYvN2tRmC0wnTYX6iPbMw==}
@@ -3072,8 +3084,8 @@ packages:
     resolution: {integrity: sha512-eKCa6bwnJhvxj14kZk5NCPc6Hb6BdsU9DZcOnmQKSnO1VKrfV0zCvtttPZUsBvjmNDn8rpcJfpwSYnHBjc95MQ==}
     engines: {node: '>=18.18.0'}
 
-  i18next-cli@1.75.3:
-    resolution: {integrity: sha512-JsQ9i0nVD2YhZEYpVcHAJuZ/jUjfiX5iD8JbIwb8OnzMNWeXySv1TKvTigsGBrfJ4Q6AVh1pNVOMrwTXHAUzaw==}
+  i18next-cli@1.80.0:
+    resolution: {integrity: sha512-MA4OtqhNvLiETR6AANaYnqd1k52JZo/7fY6coIFRYK9GZ8dcNqRiLZ87BoqARolL5//AG/mLvjib0yX8JZ47Gg==}
     engines: {node: '>=22'}
     hasBin: true
 
@@ -3081,8 +3093,8 @@ packages:
     resolution: {integrity: sha512-Xhz8S8dtNIPawzeWdmssnsII1JYsbvPWOLmstJakNcgKSFLCneA+xN7qajj/zlk5nf9sx1KGDTx8RNZ73h68tw==}
     hasBin: true
 
-  i18next@26.4.6:
-    resolution: {integrity: sha512-f/QHPNtH3XmBjL3sCRCrp5+jycwgV0W9fr1Vsy5msg1mR5grgaHc8eIbZhU7ASFwiGtF9PHVRQDqQ8Nf6iDTFA==}
+  i18next@26.5.6:
+    resolution: {integrity: sha512-GFWrDwGmYhOQS3bKvjA2Ir2ob9ScEdyY1UbeQJ10jyVACGQ6XxmDYqC/lxEj/IPEJlPQYNRnYffDET6TM8mnFg==}
     peerDependencies:
       typescript: ^5 || ^6 || ^7
     peerDependenciesMeta:
@@ -3469,6 +3481,10 @@ packages:
 
   media-query-parser@2.0.2:
     resolution: {integrity: sha512-1N4qp+jE0pL5Xv4uEcwVUhIkwdUO3S/9gML90nqKA7v7FcOS5vUtatfzok9S9U1EJU8dHWlcv95WLnKmmxZI9w==}
+
+  messageformat@4.1.0:
+    resolution: {integrity: sha512-ZLId0BYfsNhC6/MRwVFw1yTLgG9cbJwfTsjYSS2C59PdfJWVRsX7hthADvsXefBtTg2FKso0VAJmMJJOtnJ75w==}
+    engines: {node: ^20.19 || ^22.12 || >=24}
 
   mime-db@1.52.0:
     resolution: {integrity: sha512-sPU4uV7dYlvtWJxwwxHD0PuihVNiE7TyAbQ5SWxDCB9mUYvOgroQOwYQQOKPJ8CIbE+1ETVlOoK1UC2nU3gYvg==}
@@ -3867,8 +3883,8 @@ packages:
       react: '>=16.8.1'
       react-dom: '>=16.8.1'
 
-  react-i18next@17.0.18:
-    resolution: {integrity: sha512-WC8i9i2QOom9q3v/aBzrGwUSbEBlvUylk2VV3k3kgUhMaAUyDZJ934PHfYJ2RUApzhG7cZCV0LlTVnVTLRjqcQ==}
+  react-i18next@17.1.3:
+    resolution: {integrity: sha512-XfaTqU09NPuBDuADQ8TEPbE0Goc2Gh6FHu0qvdFWfOWCdGQWRxRY2Uo5tDPtGBdzu4COXp0LQCkQIYa0IhJXlA==}
     peerDependencies:
       i18next: '>= 26.2.0'
       react: '>= 16.8.0'
@@ -4723,7 +4739,7 @@ snapshots:
       '@csstools/css-tokenizer': 3.0.4
       lru-cache: 10.4.3
 
-  '@axonivy/eslint-config@12.0.19-next.838.f199ec2(jiti@2.7.0)(supports-color@8.1.1)(typescript@5.9.3)':
+  '@axonivy/eslint-config@12.0.19-next.840.1dbf258(jiti@2.7.0)(supports-color@8.1.1)(typescript@5.9.3)':
     dependencies:
       '@eslint/js': 9.39.5
       '@tanstack/eslint-plugin-query': 5.104.3(eslint@9.39.5(jiti@2.7.0)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@5.9.3)
@@ -4742,13 +4758,13 @@ snapshots:
       - supports-color
       - typescript
 
-  '@axonivy/jsonrpc@12.0.19-next.838.f199ec2':
+  '@axonivy/jsonrpc@12.0.19-next.840.1dbf258':
     dependencies:
       vscode-jsonrpc: 8.2.1
 
-  '@axonivy/ui-components@12.0.19-next.838.f199ec2(@axonivy/ui-icons@12.0.19-next.838.f199ec2)(@types/react-dom@18.3.7(@types/react@18.3.31))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@axonivy/ui-components@12.0.19-next.840.1dbf258(@axonivy/ui-icons@12.0.19-next.840.1dbf258)(@types/react-dom@18.3.7(@types/react@18.3.31))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@axonivy/ui-icons': 12.0.19-next.838.f199ec2
+      '@axonivy/ui-icons': 12.0.19-next.840.1dbf258
       '@radix-ui/react-accordion': 1.3.1(@types/react-dom@18.3.7(@types/react@18.3.31))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-checkbox': 1.4.1(@types/react-dom@18.3.7(@types/react@18.3.31))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-collapsible': 1.2.1(@types/react-dom@18.3.7(@types/react@18.3.31))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -4776,7 +4792,7 @@ snapshots:
       - '@types/react-dom'
       - react-dom
 
-  '@axonivy/ui-icons@12.0.19-next.838.f199ec2': {}
+  '@axonivy/ui-icons@12.0.19-next.840.1dbf258': {}
 
   '@babel/code-frame@7.29.7':
     dependencies:
@@ -5095,6 +5111,12 @@ snapshots:
 
   '@floating-ui/utils@0.2.12': {}
 
+  '@formatjs/icu-messageformat-parser@3.5.22':
+    dependencies:
+      '@formatjs/icu-skeleton-parser': 2.1.12
+
+  '@formatjs/icu-skeleton-parser@2.1.12': {}
+
   '@gar/promise-retry@1.0.3': {}
 
   '@humanfs/core@0.19.2':
@@ -5297,21 +5319,21 @@ snapshots:
       '@solid-primitives/utils': 6.4.1(solid-js@1.9.17)
       solid-js: 1.9.17
 
-  '@lerna-lite/cli@5.6.3(@lerna-lite/publish@5.6.3(@types/node@24.19.2)(conventional-commits-filter@6.0.1)(supports-color@8.1.1))(@lerna-lite/version@5.6.3(@lerna-lite/publish@5.6.3(@types/node@24.19.2)(conventional-commits-filter@6.0.1)(supports-color@8.1.1))(@types/node@24.19.2)(conventional-commits-filter@6.0.1))(@types/node@24.19.2)':
+  '@lerna-lite/cli@5.6.4(@lerna-lite/publish@5.6.4(@types/node@24.19.2)(conventional-commits-filter@6.0.1)(supports-color@8.1.1))(@lerna-lite/version@5.6.4(@lerna-lite/publish@5.6.4(@types/node@24.19.2)(conventional-commits-filter@6.0.1)(supports-color@8.1.1))(@types/node@24.19.2)(conventional-commits-filter@6.0.1))(@types/node@24.19.2)':
     dependencies:
-      '@lerna-lite/core': 5.6.3(@types/node@24.19.2)
-      '@lerna-lite/init': 5.6.3(@types/node@24.19.2)
+      '@lerna-lite/core': 5.6.4(@types/node@24.19.2)
+      '@lerna-lite/init': 5.6.4(@types/node@24.19.2)
       '@lerna-lite/npmlog': 5.4.1
       dotenv: 18.0.8
       import-local: 3.2.0
       yargs: 18.2.0
     optionalDependencies:
-      '@lerna-lite/publish': 5.6.3(@types/node@24.19.2)(conventional-commits-filter@6.0.1)(supports-color@8.1.1)
-      '@lerna-lite/version': 5.6.3(@lerna-lite/publish@5.6.3(@types/node@24.19.2)(conventional-commits-filter@6.0.1)(supports-color@8.1.1))(@types/node@24.19.2)(conventional-commits-filter@6.0.1)
+      '@lerna-lite/publish': 5.6.4(@types/node@24.19.2)(conventional-commits-filter@6.0.1)(supports-color@8.1.1)
+      '@lerna-lite/version': 5.6.4(@lerna-lite/publish@5.6.4(@types/node@24.19.2)(conventional-commits-filter@6.0.1)(supports-color@8.1.1))(@types/node@24.19.2)(conventional-commits-filter@6.0.1)
     transitivePeerDependencies:
       - '@types/node'
 
-  '@lerna-lite/core@5.6.3(@types/node@24.19.2)':
+  '@lerna-lite/core@5.6.4(@types/node@24.19.2)':
     dependencies:
       '@inquirer/expand': 5.1.6(@types/node@24.19.2)
       '@inquirer/input': 5.1.7(@types/node@24.19.2)
@@ -5331,9 +5353,9 @@ snapshots:
     transitivePeerDependencies:
       - '@types/node'
 
-  '@lerna-lite/init@5.6.3(@types/node@24.19.2)':
+  '@lerna-lite/init@5.6.4(@types/node@24.19.2)':
     dependencies:
-      '@lerna-lite/core': 5.6.3(@types/node@24.19.2)
+      '@lerna-lite/core': 5.6.4(@types/node@24.19.2)
       write-json-file: 7.0.0
     transitivePeerDependencies:
       - '@types/node'
@@ -5343,12 +5365,12 @@ snapshots:
       fast-string-width: 3.0.2
       signal-exit: 4.1.0
 
-  '@lerna-lite/publish@5.6.3(@types/node@24.19.2)(conventional-commits-filter@6.0.1)(supports-color@8.1.1)':
+  '@lerna-lite/publish@5.6.4(@types/node@24.19.2)(conventional-commits-filter@6.0.1)(supports-color@8.1.1)':
     dependencies:
-      '@lerna-lite/cli': 5.6.3(@lerna-lite/publish@5.6.3(@types/node@24.19.2)(conventional-commits-filter@6.0.1)(supports-color@8.1.1))(@lerna-lite/version@5.6.3(@lerna-lite/publish@5.6.3(@types/node@24.19.2)(conventional-commits-filter@6.0.1)(supports-color@8.1.1))(@types/node@24.19.2)(conventional-commits-filter@6.0.1))(@types/node@24.19.2)
-      '@lerna-lite/core': 5.6.3(@types/node@24.19.2)
+      '@lerna-lite/cli': 5.6.4(@lerna-lite/publish@5.6.4(@types/node@24.19.2)(conventional-commits-filter@6.0.1)(supports-color@8.1.1))(@lerna-lite/version@5.6.4(@lerna-lite/publish@5.6.4(@types/node@24.19.2)(conventional-commits-filter@6.0.1)(supports-color@8.1.1))(@types/node@24.19.2)(conventional-commits-filter@6.0.1))(@types/node@24.19.2)
+      '@lerna-lite/core': 5.6.4(@types/node@24.19.2)
       '@lerna-lite/npmlog': 5.4.1
-      '@lerna-lite/version': 5.6.3(@lerna-lite/publish@5.6.3(@types/node@24.19.2)(conventional-commits-filter@6.0.1)(supports-color@8.1.1))(@types/node@24.19.2)(conventional-commits-filter@6.0.1)
+      '@lerna-lite/version': 5.6.4(@lerna-lite/publish@5.6.4(@types/node@24.19.2)(conventional-commits-filter@6.0.1)(supports-color@8.1.1))(@types/node@24.19.2)(conventional-commits-filter@6.0.1)
       '@npmcli/arborist': 9.9.2(supports-color@8.1.1)
       '@npmcli/package-json': 7.0.5
       ci-info: 4.4.0
@@ -5370,12 +5392,12 @@ snapshots:
       - conventional-commits-filter
       - supports-color
 
-  '@lerna-lite/version@5.6.3(@lerna-lite/publish@5.6.3(@types/node@24.19.2)(conventional-commits-filter@6.0.1)(supports-color@8.1.1))(@types/node@24.19.2)(conventional-commits-filter@6.0.1)':
+  '@lerna-lite/version@5.6.4(@lerna-lite/publish@5.6.4(@types/node@24.19.2)(conventional-commits-filter@6.0.1)(supports-color@8.1.1))(@types/node@24.19.2)(conventional-commits-filter@6.0.1)':
     dependencies:
       '@conventional-changelog/git-client': 3.2.0(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.3)
       '@conventional-changelog/template': 1.4.0
-      '@lerna-lite/cli': 5.6.3(@lerna-lite/publish@5.6.3(@types/node@24.19.2)(conventional-commits-filter@6.0.1)(supports-color@8.1.1))(@lerna-lite/version@5.6.3(@lerna-lite/publish@5.6.3(@types/node@24.19.2)(conventional-commits-filter@6.0.1)(supports-color@8.1.1))(@types/node@24.19.2)(conventional-commits-filter@6.0.1))(@types/node@24.19.2)
-      '@lerna-lite/core': 5.6.3(@types/node@24.19.2)
+      '@lerna-lite/cli': 5.6.4(@lerna-lite/publish@5.6.4(@types/node@24.19.2)(conventional-commits-filter@6.0.1)(supports-color@8.1.1))(@lerna-lite/version@5.6.4(@lerna-lite/publish@5.6.4(@types/node@24.19.2)(conventional-commits-filter@6.0.1)(supports-color@8.1.1))(@types/node@24.19.2)(conventional-commits-filter@6.0.1))(@types/node@24.19.2)
+      '@lerna-lite/core': 5.6.4(@types/node@24.19.2)
       '@lerna-lite/npmlog': 5.4.1
       '@octokit/plugin-enterprise-rest': 6.0.1
       '@octokit/rest': 22.0.1
@@ -6524,8 +6546,6 @@ snapshots:
     dependencies:
       remove-accents: 0.5.0
 
-  '@tanstack/query-core@5.104.3': {}
-
   '@tanstack/query-core@5.104.5': {}
 
   '@tanstack/query-devtools@5.104.5(csstype@3.2.3)':
@@ -6544,20 +6564,22 @@ snapshots:
     transitivePeerDependencies:
       - csstype
 
-  '@tanstack/react-query-devtools@5.104.5(@tanstack/react-query@5.104.3(react@18.3.1))(@types/react@18.3.31)(csstype@3.2.3)(react@18.3.1)':
+  '@tanstack/react-query-devtools@5.104.5(@tanstack/react-query@5.104.5(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(csstype@3.2.3)(react@18.3.1)':
     dependencies:
       '@tanstack/query-devtools': 5.104.5(csstype@3.2.3)
-      '@tanstack/react-query': 5.104.3(react@18.3.1)
+      '@tanstack/react-query': 5.104.5(@types/react@18.3.31)(react@18.3.1)
       react: 18.3.1
     optionalDependencies:
       '@types/react': 18.3.31
     transitivePeerDependencies:
       - csstype
 
-  '@tanstack/react-query@5.104.3(react@18.3.1)':
+  '@tanstack/react-query@5.104.5(@types/react@18.3.31)(react@18.3.1)':
     dependencies:
-      '@tanstack/query-core': 5.104.3
+      '@tanstack/query-core': 5.104.5
       react: 18.3.1
+    optionalDependencies:
+      '@types/react': 18.3.31
 
   '@tanstack/react-table@8.21.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
@@ -7865,23 +7887,25 @@ snapshots:
 
   human-signals@8.0.1: {}
 
-  i18next-cli@1.75.3(@swc/helpers@0.5.23)(@types/node@24.19.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3):
+  i18next-cli@1.80.0(@swc/helpers@0.5.23)(@types/node@24.19.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3):
     dependencies:
       '@croct/json5-parser': 0.2.2
+      '@formatjs/icu-messageformat-parser': 3.5.22
       '@swc/core': 1.16.13(@swc/helpers@0.5.23)
       chokidar: 5.0.0
       commander: 15.0.0
       execa: 10.0.1
       glob: 13.0.6
-      i18next: 26.4.6(typescript@5.9.3)
+      i18next: 26.5.6(typescript@5.9.3)
       i18next-resources-for-ts: 2.1.1(@swc/helpers@0.5.23)
       inquirer: 14.2.2(@types/node@24.19.2)
       jiti: 2.7.0
       jsonc-parser: 3.3.1
       magic-string: 1.4.2
+      messageformat: 4.1.0
       minimatch: 10.2.6
       ora: 9.4.1
-      react-i18next: 17.0.18(i18next@26.4.6(typescript@5.9.3))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
+      react-i18next: 17.1.3(i18next@26.5.6(typescript@5.9.3))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3)
       yaml: 2.9.1
     transitivePeerDependencies:
       - '@swc/helpers'
@@ -7900,7 +7924,7 @@ snapshots:
     transitivePeerDependencies:
       - '@swc/helpers'
 
-  i18next@26.4.6(typescript@5.9.3):
+  i18next@26.5.6(typescript@5.9.3):
     optionalDependencies:
       typescript: 5.9.3
 
@@ -8303,6 +8327,8 @@ snapshots:
   media-query-parser@2.0.2:
     dependencies:
       '@babel/runtime': 7.29.7
+
+  messageformat@4.1.0: {}
 
   mime-db@1.52.0: {}
 
@@ -8744,11 +8770,11 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  react-i18next@17.0.18(i18next@26.4.6(typescript@5.9.3))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3):
+  react-i18next@17.1.3(i18next@26.5.6(typescript@5.9.3))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.3):
     dependencies:
       '@babel/runtime': 7.29.7
       html-parse-stringify: 4.0.1
-      i18next: 26.4.6(typescript@5.9.3)
+      i18next: 26.5.6(typescript@5.9.3)
       react: 18.3.1
       use-sync-external-store: 1.7.0(react@18.3.1)
     optionalDependencies:
