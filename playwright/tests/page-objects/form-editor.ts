@@ -58,6 +58,8 @@ export class FormEditor {
       console.log(`Failed to create form: ${result.status}`);
     }
     await promisify(execFile)('mvn', ['compile', '-f', resolve(engineWsDir, 'pom.xml')]);
+    // eslint-disable-next-line playwright/no-wait-for-timeout
+    await page.waitForTimeout(2_000);
     const editor = await this.openForm(page, { file: `dialog/${namespace}/${name}/${name}.f.json` });
     if (options?.block) {
       await editor.createBlock(options.block);
