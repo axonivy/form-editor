@@ -1,6 +1,8 @@
 import type { Locator, Page } from '@playwright/test';
+import { execFile } from 'child_process';
 import { randomUUID } from 'crypto';
 import { resolve } from 'path';
+import { promisify } from 'util';
 import { Canvas } from './canvas';
 import { Inscription } from './inscription';
 import { Toolbar } from './toolbar';
@@ -55,6 +57,7 @@ export class FormEditor {
     if (!result.ok) {
       console.log(`Failed to create form: ${result.status}`);
     }
+    await promisify(execFile)('mvn', ['compile', '-f', resolve(engineWsDir, 'pom.xml')]);
     const editor = await this.openForm(page, { file: `dialog/${namespace}/${name}/${name}.f.json` });
     if (options?.block) {
       await editor.createBlock(options.block);
