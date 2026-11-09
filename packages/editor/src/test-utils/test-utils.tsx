@@ -10,7 +10,7 @@ import { type useHistoryData } from '@axonivy/ui-components';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { renderHook, type RenderHookOptions } from '@testing-library/react';
 import i18n from 'i18next';
-import { type Dispatch, type ReactNode, type SetStateAction } from 'react';
+import { useState, type Dispatch, type ReactNode, type SetStateAction } from 'react';
 import { initReactI18next } from 'react-i18next';
 import { AppProvider, type UI } from '../context/AppContext';
 import { ClientContextProvider, type ClientContext } from '../context/ClientContext';
@@ -64,7 +64,7 @@ const ContextHelper = ({ appContext, meta, children }: ContextHelperProps & { ch
       }
     }
   };
-  const queryClient = new QueryClient();
+  const [queryClient] = useState(() => new QueryClient());
   initTranslation();
   return (
     <ClientContextProvider client={client.client}>
