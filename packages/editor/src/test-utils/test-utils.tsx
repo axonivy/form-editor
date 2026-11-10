@@ -6,7 +6,7 @@ import {
   type ValidationResult,
   type VariableInfo
 } from '@axonivy/form-editor-protocol';
-import { type SetStateAction, type Dispatch, type ReactNode } from 'react';
+import { type SetStateAction, type Dispatch, type ReactNode, useState } from 'react';
 import { type useHistoryData } from '@axonivy/ui-components';
 import { AppProvider, type UI } from '../context/AppContext';
 import { renderHook, type RenderHookOptions } from '@testing-library/react';
@@ -66,7 +66,7 @@ const ContextHelper = ({ appContext, meta, children }: ContextHelperProps & { ch
       }
     }
   };
-  const queryClient = new QueryClient();
+  const [queryClient] = useState(() => new QueryClient());
   initTranslation();
   return (
     <ClientContextProvider client={client.client}>
