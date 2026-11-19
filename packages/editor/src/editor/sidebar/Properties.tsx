@@ -15,6 +15,7 @@ import { useBase } from '../../components/blocks/base';
 import { addDefaults } from '../../components/component-factory';
 import { useAppContext } from '../../context/AppContext';
 import { useComponents } from '../../context/ComponentsContext';
+import { useAction } from '../../context/useAction';
 import { getTabState, validationsForPaths } from '../../context/useValidation';
 import { useData } from '../../data/data';
 import type { FieldOption } from '../../types/config';
@@ -29,6 +30,7 @@ export const Properties = () => {
   const { componentByElement } = useComponents();
   const { element, parent } = useData();
   const { validations } = useAppContext();
+  const openUrl = useAction('openUrl');
   const [value, setValue] = useState('Properties');
   if (element === undefined) {
     return <FormPropertySection />;
@@ -48,7 +50,8 @@ export const Properties = () => {
     state: getTabState(
       validationsForPaths(
         fields.map(field => `${element?.cid}.${field.key}`),
-        validations
+        validations,
+        openUrl
       )
     )
   }));
@@ -58,6 +61,7 @@ export const Properties = () => {
 const PropertySubSection = ({ title, fields }: { title: string; fields: VisibleFields }) => {
   const { element, setElement } = useData();
   const { validations } = useAppContext();
+  const openUrl = useAction('openUrl');
   if (element === undefined) {
     return null;
   }
@@ -70,7 +74,8 @@ const PropertySubSection = ({ title, fields }: { title: string; fields: VisibleF
           <CollapsibleState
             messages={validationsForPaths(
               fields.map(field => `${element?.cid}.${field.key}`),
-              validations
+              validations,
+              openUrl
             )}
           />
         }
