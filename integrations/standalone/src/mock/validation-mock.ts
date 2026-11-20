@@ -25,7 +25,8 @@ const validateDeep = (components: Array<ComponentData>, validations: Array<Valid
     if (c.type === 'Select') {
       const config = c.config as Select;
       if (config.value === undefined || (config.value as string).length === 0) {
-        validations.push({ path: `${c.cid}.value`, message: 'Value is required', severity: 'WARNING', code: 'form.select.value.required', url: '' });
+        const code = 'form.select.value.required';
+        validations.push({ path: `${c.cid}.value`, message: 'Value is required', severity: 'WARNING', code, url: validationUrl(code) });
       }
     }
   });

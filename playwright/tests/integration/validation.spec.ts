@@ -31,11 +31,3 @@ test('global sidebar', async ({ page }) => {
   await expect(inscription.messages).toHaveText('Global warning');
   await expect(inscription.messages.getByRole('button', { name: 'form.global.warning', exact: true })).toBeVisible();
 });
-
-test('validation without a URL has no reference button', async ({ page }) => {
-  const { canvas, inscription } = await FormEditor.openMock(page);
-  await canvas.blockByText('City').inscribe();
-  const field = inscription.section('Properties').collapsible('General').input({ label: 'Value' });
-  await expect(field.outputLocator!).toHaveAccessibleDescription(/Value is required/);
-  await expect(field.locator.getByRole('button', { name: 'form.select.value.required', exact: true })).toHaveCount(0);
-});

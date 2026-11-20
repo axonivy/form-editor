@@ -30,7 +30,7 @@ function toMessageData(validation: ValidationResult | undefined, openUrl: OpenUr
     return {
       message: validation.message,
       variant: validation.severity.toLocaleLowerCase() as Lowercase<Severity>,
-      reference: validation.url ? { tooltip: validation.code, openUrl: () => openUrl(validation.url) } : undefined
+      reference: { tooltip: validation.code, openUrl: () => openUrl(validation.url) }
     };
   }
   return undefined;
