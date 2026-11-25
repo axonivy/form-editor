@@ -7,24 +7,25 @@
  */
 
 export type CmsQuickactionCategory = ("global" | "local")
-export type FormType = 'FORM' | 'COMPONENT';
+export type FormType = "FORM" | "COMPONENT";
+export type ComponentId = string;
 export type FormExpression = string;
-export type LayoutAlignItems = 'START' | 'CENTER' | 'END';
-export type ConfirmDialogSeverity = 'INFO' | 'WARN' | 'ERROR' | 'SUCCESS';
-export type ButtonStyle = 'SOLID' | 'OUTLINED' | 'FLAT';
-export type ButtonType = 'SUBMIT' | 'BUTTON' | 'RESET' | 'EDIT' | 'DELETE' | 'DIALOGSAVE' | 'DIALOGCANCEL';
-export type ButtonVariant = 'PRIMARY' | 'SECONDARY' | 'DANGER' | 'SUCCESS' | 'INFO' | 'WARNING' | 'HELP';
-export type ActionButtonAlignment = 'START' | 'CENTER' | 'END';
-export type SymbolPosition = 'p' | 's';
-export type InputType = 'TEXT' | 'EMAIL' | 'PASSWORD' | 'NUMBER';
-export type LayoutGridVariant = 'GRID1' | 'GRID2' | 'GRID4' | 'FREE';
-export type LayoutJustifyContent = 'NORMAL' | 'SPACE_BETWEEN' | 'END';
-export type LayoutType = 'GRID' | 'FLEX';
-export type OrientationType = 'horizontal' | 'vertical';
-export type TextIconStyle = 'INLINE' | 'BLOCK';
-export type TextType = 'RAW' | 'MARKDOWN';
-export type ContentObjectType = 'STRING' | 'FILE' | 'FOLDER';
-export type Severity = 'INFO' | 'WARNING' | 'ERROR';
+export type LayoutAlignItems = "START" | "CENTER" | "END";
+export type ConfirmDialogSeverity = "INFO" | "WARN" | "ERROR" | "SUCCESS";
+export type ButtonStyle = "SOLID" | "OUTLINED" | "FLAT";
+export type ButtonType = "SUBMIT" | "BUTTON" | "RESET" | "EDIT" | "DELETE" | "DIALOGSAVE" | "DIALOGCANCEL";
+export type ButtonVariant = "PRIMARY" | "SECONDARY" | "DANGER" | "SUCCESS" | "INFO" | "WARNING" | "HELP";
+export type ActionButtonAlignment = "START" | "CENTER" | "END";
+export type SymbolPosition = "p" | "s";
+export type InputType = "TEXT" | "EMAIL" | "PASSWORD" | "NUMBER";
+export type LayoutGridVariant = "GRID1" | "GRID2" | "GRID4" | "FREE";
+export type LayoutJustifyContent = "NORMAL" | "SPACE_BETWEEN" | "END";
+export type LayoutType = "GRID" | "FLEX";
+export type OrientationType = "horizontal" | "vertical";
+export type TextIconStyle = "INLINE" | "BLOCK";
+export type TextType = "RAW" | "MARKDOWN";
+export type ContentObjectType = "STRING" | "FILE" | "FOLDER";
+export type Severity = "INFO" | "WARNING" | "ERROR";
 
 export interface Forms {
   attributesContext: AttributesContext;
@@ -83,30 +84,30 @@ export interface Form {
   components: Component[];
 }
 export interface FormConfig {
-  renderer: 'JSF';
+  renderer: "JSF";
   theme: string;
   title: string;
   type: FormType;
 }
 export interface Component {
-  cid: string;
+  cid: ComponentId;
   type:
-    | 'Button'
-    | 'Checkbox'
-    | 'Combobox'
-    | 'Composite'
-    | 'DataTable'
-    | 'DatePicker'
-    | 'Dialog'
-    | 'Fieldset'
-    | 'Input'
-    | 'Layout'
-    | 'Link'
-    | 'Panel'
-    | 'Radio'
-    | 'Select'
-    | 'Text'
-    | 'Textarea';
+    | "Button"
+    | "Checkbox"
+    | "Combobox"
+    | "Composite"
+    | "DataTable"
+    | "DatePicker"
+    | "Dialog"
+    | "Fieldset"
+    | "Input"
+    | "Layout"
+    | "Link"
+    | "Panel"
+    | "Radio"
+    | "Select"
+    | "Text"
+    | "Textarea";
   config:
     | Button
     | Checkbox
@@ -208,8 +209,8 @@ export interface DataTable {
   visible: FormExpression;
 }
 export interface TableComponent {
-  cid: string;
-  type: 'DataTableColumn';
+  cid: ComponentId;
+  type: "DataTableColumn";
   config: DataTableColumn;
 }
 export interface DataTableColumn {
@@ -225,8 +226,8 @@ export interface DataTableColumn {
   width: string;
 }
 export interface ActionButtonComponent {
-  cid: string;
-  type: 'Button';
+  cid: ComponentId;
+  type: "Button";
   config: Button;
 }
 export interface DatePicker {
@@ -460,10 +461,10 @@ export interface Parameter {
   type: string;
 }
 export interface ValidationResult {
+  code: string;
   message: string;
   path: string;
   severity: Severity;
-  code: string;
   url: string;
 }
 export interface VariableInfo {
