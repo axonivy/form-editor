@@ -50,6 +50,55 @@ function loadJson(uri) {
   return download;
 }
 
+const schemaMapKeywords = new Set(['$defs', 'definitions', 'properties']);
+const referenceAnnotations = ['default', 'title', 'examples', 'deprecated'];
+
+function normalizeOneOfToEnum(schema) {
+  if (Array.isArray(schema)) {
+    schema.forEach(normalizeOneOfToEnum);
+  } else if (schema !== null && typeof schema === 'object') {
+    if (
+      !Array.isArray(schema.enum) &&
+      Array.isArray(schema.oneOf) &&
+      schema.oneOf.length > 0 &&
+      schema.oneOf.every(
+        option =>
+          option !== null && typeof option === 'object' && !Array.isArray(option) && Object.prototype.hasOwnProperty.call(option, 'const')
+      )
+    ) {
+      schema.enum = schema.oneOf.map(option => option.const);
+      delete schema.oneOf;
+    }
+    Object.entries(schema).forEach(([key, child]) => {
+      if (schemaMapKeywords.has(key) && child !== null && typeof child === 'object') {
+        Object.values(child).forEach(normalizeOneOfToEnum);
+      } else if (key !== 'enum' && Array.isArray(child)) {
+        child.forEach(normalizeOneOfToEnum);
+      }
+    });
+  }
+  return schema;
+}
+
+function stripSchemaAnnotations(schema) {
+  if (Array.isArray(schema)) {
+    schema.forEach(stripSchemaAnnotations);
+  } else if (schema !== null && typeof schema === 'object') {
+    delete schema.description;
+    if (typeof schema.$ref === 'string') {
+      referenceAnnotations.forEach(annotation => delete schema[annotation]);
+    }
+    Object.entries(schema).forEach(([key, child]) => {
+      if (schemaMapKeywords.has(key) && child !== null && typeof child === 'object') {
+        Object.values(child).forEach(stripSchemaAnnotations);
+      } else if (key !== 'enum' && Array.isArray(child)) {
+        child.forEach(stripSchemaAnnotations);
+      }
+    });
+  }
+  return schema;
+}
+
 function writeSrc(ts) {
   let nonNullTs = ts.replace(/\?:/g, ':');
   nonNullTs = nonNullTs.replace(/:(.*) \| null/g, '?:$1');
@@ -58,9 +107,11 @@ function writeSrc(ts) {
 }
 
 if (schemaUri.startsWith('http')) {
-  loadJson(schemaUri)
-    .then(schema => tsGen.compile(schema, 'forms'))
-    .then(ts => writeSrc(ts));
+  loadJson(schemaUri).then(schema => {
+    const enumNormalizedSchema = normalizeOneOfToEnum(schema);
+    const cleanedSchema = stripSchemaAnnotations(enumNormalizedSchema);
+    return tsGen.compile(cleanedSchema, 'forms').then(writeSrc);
+  });
 } else {
   tsGen.compileFromFile(schemaUri).then(ts => writeSrc(ts));
 }
