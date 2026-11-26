@@ -18,7 +18,7 @@ tsGen.DEFAULT_OPTIONS.bannerComment = `
 
 const tsOut = path.resolve('./src/data/form.ts');
 var schemaUri =
-  'https://jenkins.ivyteam.io/job/core_json-schema/job/master/lastSuccessfulBuild/artifact/build/schema/target/editor-ts/14.0/form-tsgen.json';
+  'https://jenkins.ivyteam.io/job/core_json-schema/job/release%252F14.0/lastSuccessfulBuild/artifact/build/schema/target/editor-ts/14.0/form-tsgen.json';
 
 const args = process.argv.slice(2);
 if (args.length > 0) {
@@ -106,12 +106,14 @@ function writeSrc(ts) {
   console.log(`generated ${tsOut}`);
 }
 
+function compileSchema(schema) {
+  const enumNormalizedSchema = normalizeOneOfToEnum(schema);
+  const cleanedSchema = stripSchemaAnnotations(enumNormalizedSchema);
+  return tsGen.compile(cleanedSchema, 'forms').then(writeSrc);
+}
+
 if (schemaUri.startsWith('http')) {
-  loadJson(schemaUri).then(schema => {
-    const enumNormalizedSchema = normalizeOneOfToEnum(schema);
-    const cleanedSchema = stripSchemaAnnotations(enumNormalizedSchema);
-    return tsGen.compile(cleanedSchema, 'forms').then(writeSrc);
-  });
+  loadJson(schemaUri).then(compileSchema);
 } else {
-  tsGen.compileFromFile(schemaUri).then(ts => writeSrc(ts));
+  compileSchema(JSON.parse(fs.readFileSync(schemaUri, 'utf8')));
 }
