@@ -17,10 +17,10 @@
     "@axonivy/form-editor-protocol": "workspace:~"
   },
   "peerDependencies": {
-    "@axonivy/jsonrpc": "~12.0.20-next"
+    "@axonivy/jsonrpc": "~12.0.21-next"
   },
   "devDependencies": {
-    "@axonivy/jsonrpc": "next-12.0.20",
+    "@axonivy/jsonrpc": "next-12.0.21",
     "vite": "^7.3.6"
   },
   "type": "module",
